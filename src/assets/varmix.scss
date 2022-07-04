@@ -7,15 +7,21 @@ $colorSmallLetterContentGray:#606276;  // Цвет контента блоков
 $colorWhite:#fff;
 
 $fontFamily400:'Gilroy-Regular';
+$fontFamily600:'Gilroy-Semibold';
 $fontFamily700:'Gilroy-Bold';
-
+$fontFamily800:'Gilroy-Black';
 
 
 //Миксины БУКВЫ
 
 
-@mixin letterBtnBlue {
+@mixin letterBtnBlueText {
     color: $colorMainBlue;
+    font-weight: 700;
+    font-family: $fontFamily700;
+    font-size: 1rem;
+    line-height: 0.9rem;
+    text-align: center;
 }
 
 
