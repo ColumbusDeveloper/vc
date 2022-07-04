@@ -7,7 +7,7 @@
 </template>
 
 
-<!-- @import './assets/index.scss'; -->
+@import './assets/fonts.scss';
 <style lang="scss">
 // @import './assets/variables';
 #app {
@@ -15,8 +15,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  font-family:'Gilroy-Regular';
-  color: $col;
+  // font-family:'Gilroy-Bold';
+  // color: $col;
   
 }
 
