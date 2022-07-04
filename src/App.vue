@@ -9,7 +9,7 @@
 
 <!-- @import './assets/index.scss'; -->
 <style lang="scss">
-@import './assets/variables';
+// @import './assets/variables';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
