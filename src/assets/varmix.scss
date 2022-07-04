@@ -22,7 +22,88 @@ $fontFamily800:'Gilroy-Black';
     font-size: 1rem;
     line-height: 0.9rem;
     text-align: center;
-}
+};
+
+@mixin letterBtnWhiteText {
+    color: $colorWhite;
+    font-weight: 700;
+    font-family: $fontFamily700;
+    font-size: 1rem;
+    line-height: 0.9rem;
+    text-align: center;
+};
+
+@mixin letterH1textWhite {
+    color: $colorWhite;
+    font-weight: 800;
+    font-family: $fontFamily800;
+    font-size: 3.75rem;
+    line-height: 4.07rem;
+    text-align: center;
+};
+
+@mixin letterLogoBlueText {
+    color: $colorMainBlue;
+    font-weight: 700;
+    font-family: $fontFamily700;
+    font-size: 1.75rem;
+    line-height: 1.9rem;
+    text-align: center;
+};
+
+@mixin letterH2textTitleDarkBlue {
+    color: $colorTitleBurgerBlueDark;
+    font-weight: 700;
+    font-family: $fontFamily700;
+    font-size: 2.81rem;
+    line-height: 3.95rem;
+    text-align: center;
+};
+
+@mixin letterH3textSubtitleBlue {
+    color: $colorMainBlue;
+    font-weight: 700;
+    font-family: $fontFamily700;
+    font-size: 1.875rem;
+    line-height: 2.62rem;
+    text-align: center;
+};
+
+@mixin letterContentSecondarySmallGray {
+    color: $colorSmallLetterContentGray;
+    font-weight: 400;
+    font-family: $fontFamily400;
+    font-size: 1rem;
+    line-height: 1.95rem;
+    text-align: center;
+};
+
+@mixin letterH4HeadingBurgerMenuTextNumbersDarkBlue {
+    color: $colorTitleBurgerBlueDark;
+    font-weight: 700;
+    font-family: $fontFamily700;
+    font-size: 1.56rem;
+    line-height: 2.19rem;
+    text-align: center;
+};
+
+@mixin letterSemiboldDarkBlue {
+    color: $colorTitleBurgerBlueDark;
+    font-weight: 600;
+    font-family: $fontFamily600;
+    font-size: 1.25rem;
+    line-height: 1.56rem;
+    text-align: center;
+};
+
+
+
+
+
+
+
+
+
 
 
 

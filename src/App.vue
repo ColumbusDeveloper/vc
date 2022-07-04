@@ -17,7 +17,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   font-family:'Gilroy-Bold';
-  @include letterBtnBlue;
+  @include letterH4HeadingBurgerMenuTextNumbersDarkBlue;
 }
 
 nav {
