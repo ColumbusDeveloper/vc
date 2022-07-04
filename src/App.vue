@@ -7,17 +7,17 @@
 </template>
 
 
-@import './assets/fonts.scss';
+
 <style lang="scss">
-// @import './assets/variables';
+@import './assets/varmix.scss';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  // font-family:'Gilroy-Bold';
-  // color: $col;
-  
+  font-family:'Gilroy-Bold';
+  color:$col;
 }
 
 nav {
