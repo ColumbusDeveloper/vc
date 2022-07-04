@@ -1,1 +1,39 @@
-$col:red;
+
+//Переменные
+
+$colorMainBlue:#7481FF; //Основной цвет сайта
+$colorTitleBurgerBlueDark:#41456B; // Цвет заголовков и бургер меню
+$colorSmallLetterContentGray:#606276;  // Цвет контента блоков 
+$colorWhite:#fff;
+
+$fontFamily400:'Gilroy-Regular';
+$fontFamily700:'Gilroy-Bold';
+
+
+
+//Миксины БУКВЫ
+
+
+@mixin letterBtnBlue {
+    color: $colorMainBlue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
