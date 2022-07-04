@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'header-one',
+  name: 'Header-one',
   
 }
 </script>
