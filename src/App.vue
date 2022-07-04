@@ -6,14 +6,18 @@
   <router-view/>
 </template>
 
-<style>
+
+<!-- @import './assets/index.scss'; -->
+<style lang="scss">
+@import './assets/variables';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  /* font-family: 'Gilroy-Regular'; */
+  font-family:'Gilroy-Regular';
+  color: $col;
+  
 }
 
 nav {
