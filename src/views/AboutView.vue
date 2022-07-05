@@ -1,20 +1,25 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <maincontainer>
+      
+    </maincontainer>
+    
   </div>
 </template>
 
 
+
 <script>
 
+
+
+import maincontainer from '@/components/MainContainer.vue'
+
+
 export default {
+  name: 'AboutView',
   components: {
-    
+    maincontainer,
   }
 }
-
-
-
-
-
 </script>
