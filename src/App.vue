@@ -1,24 +1,24 @@
 <template>
 
   <div>
-    <headerone/>
+    <Headerone/>
       <main>
         <router-view/>
       </main>
-    <footer/>
+    <Footer/>
   </div>
   
 </template>
 
 <script>
 
-import headerone from '@/components/Header.vue'
-import footer from '@/components/Footer.vue'
+import Headerone from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   components:{
-    headerone,
-    footer,
+    Headerone,
+    Footer,
   }
 }
 
