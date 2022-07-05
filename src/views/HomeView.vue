@@ -1,18 +1,25 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <header></header>
+  <div>
+    <maincontainer>
+      
+    </maincontainer>
+    
   </div>
 </template>
 
+
+
 <script>
-// @ is an alias to /src
-import header from '@/components/Header.vue'
+
+
+
+import maincontainer from '@/components/MainContainer.vue'
+
 
 export default {
   name: 'HomeView',
   components: {
-    header,
+    maincontainer,
   }
 }
 </script>
