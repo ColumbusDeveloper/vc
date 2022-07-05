@@ -1,8 +1,8 @@
 <template>
 
-  <div>
+  <div class="d-flex flex-column min-vh-100">
     <Headerone/>
-      <main>
+      <main class="flex-fill">
         <router-view/>
       </main>
     <Footer/>
