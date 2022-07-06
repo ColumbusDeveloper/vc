@@ -1,7 +1,30 @@
 <template>
-  <div class="container mycontainer">
-    <burgerbtn v-bind:class="{burgerCross:isCross}"  v-on:click="isCross=!isCross"  />
-    <menulist ref="tex"/>
+  <div class="container ">
+    <div class="row">
+      <div class="col mycontainer">
+        <div class="topLine">
+          <div class="topLineNavBar">
+             <button>NAVBAR</button>
+          </div>
+          <div class="topLineRightPart">
+            <button>One</button>
+            <button>Two</button>
+            <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"/>
+          </div>
+
+        </div>
+        
+        <div class="bigBlockContent">
+          <menulist v-bind:iscross="iscross"/>
+        </div>
+        
+      </div>
+
+    </div>
+    
+        
+        
+   
   </div>
 </template>
 
@@ -9,29 +32,26 @@
   
 import burgerbtn from './primitives/BurgerBtn.vue'
 import menulist from './primitives/BurgerCollapceList.vue'
+
+
   export default {
     name: 'Header-one',
     components:{
       burgerbtn,
       menulist,
+    
+   
     },
     data () {
         return {
           
-        isCross:false,
+        iscross:false,
+        
           
           
-        }},
-    watch: {
-      isCross:function (val) {
-          if(val) {
-            this.$refs.tex.style.display = 'none'
-          }
-          else {
-            this.$refs.tex.style.display = 'block'
-          }
-      }
-    },
+        }
+      },
+    
 
     
     
@@ -47,11 +67,25 @@ import menulist from './primitives/BurgerCollapceList.vue'
 <style lang="scss" scoped>
   @import '../assets/varmix.scss';
 
-  .mycontainer {
-    position: relative;
-    padding-top: 18px;
-    padding-bottom: 18px;
+  .topLineRightPart {
+    display: flex;
   }
+  .topLine {
+    display: flex;
+    justify-content: space-between;
+  }
+  .bigBlockContent {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    border-width:2px;
+    border-style: solid;
+    border-color: #000;
+  }
+
+
+
+  
 
   
   

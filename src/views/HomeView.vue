@@ -1,8 +1,13 @@
 <template>
-  <div>
-    <maincontainer>
+  <div >
+    
+     
+        <div class="col">
+            <h1>Hello Home!</h1>
+        </div>
       
-    </maincontainer>
+      
+   
     
   </div>
 </template>
@@ -13,13 +18,28 @@
 
 
 
-import maincontainer from '@/components/MainContainer.vue'
+
 
 
 export default {
   name: 'HomeView',
   components: {
-    maincontainer,
+    
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '../assets/varmix.scss';
+  .container {
+    padding: 0;
+  }
+  .main {
+    
+    border-width:2px;
+    border-style: solid;
+    border-color: #000;
+  }
+  
+
+</style>
