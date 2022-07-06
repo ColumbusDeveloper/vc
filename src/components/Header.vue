@@ -1,26 +1,27 @@
 <template>
   <div class="container mycontainer">
-    <h1 ref="tex">Header!</h1>
-    <burger v-bind:class="{burgerCross:isCross}"  v-on:click="isCross=!isCross"   />
+    <burgerbtn v-bind:class="{burgerCross:isCross}"  v-on:click="isCross=!isCross"  />
+    <menulist ref="tex"/>
   </div>
 </template>
 
 <script>
   
-import burger from './primitives/BurgerBtn.vue'
+import burgerbtn from './primitives/BurgerBtn.vue'
+import menulist from './primitives/BurgerCollapceList.vue'
   export default {
     name: 'Header-one',
     components:{
-      burger,
+      burgerbtn,
+      menulist,
     },
     data () {
-    return {
-      
-      isCross:false,
-      
-       
-    }},
-
+        return {
+          
+        isCross:false,
+          
+          
+        }},
     watch: {
       isCross:function (val) {
           if(val) {
@@ -30,7 +31,9 @@ import burger from './primitives/BurgerBtn.vue'
             this.$refs.tex.style.display = 'block'
           }
       }
-    }
+    },
+
+    
     
     
   }
@@ -50,12 +53,9 @@ import burger from './primitives/BurgerBtn.vue'
     padding-bottom: 18px;
   }
 
-  h1 {
-    position: absolute;
-    top:0;
-    left: 0;
-  }
+  
   
   
 
 </style>
+
