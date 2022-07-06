@@ -10,7 +10,7 @@
     </div>  
 
     <div class="botLine">
-
+    
     </div> 
 
   </div>
@@ -21,8 +21,11 @@
 export default {
   name: 'Burger-menu',
   
+  
   data () {
-
+      return {
+          
+      }
   }
   
 }

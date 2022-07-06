@@ -1,6 +1,6 @@
 <template>
   <div class="container mycontainer">
-    <burgerbtn v-bind:class="{burgerCross:isCross}"  v-on:click="isCross=!isCross"  />
+    <burgerbtn  v-bind:class="{burgerCross:isCross}"  v-on:click="isCross=!isCross"  />
     <menulist ref="tex"/>
   </div>
 </template>
@@ -21,7 +21,8 @@ import menulist from './primitives/BurgerCollapceList.vue'
         isCross:false,
           
           
-        }},
+        }
+      },
     watch: {
       isCross:function (val) {
           if(val) {
