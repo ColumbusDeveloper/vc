@@ -44,6 +44,8 @@ export default {
             width: $sizeBurgerLineWidthFullScreen;
             height: $sizeBurgerLineHeightFullScreen;
             background-color: $colorTitleBurgerBlueDark;
+            border: 1px solid $colorTitleBurgerBlueDark;
+            border-radius: 1px;
             top:0;
            
         }
@@ -55,6 +57,8 @@ export default {
             position: absolute;
             top:50%;
             transform: translateY(-50%);
+            border: 1px solid $colorTitleBurgerBlueDark;
+            border-radius: 1px;
         }   
         .botLine{
           
@@ -63,6 +67,8 @@ export default {
             height: $sizeBurgerLineHeightFullScreen;
             background-color: $colorTitleBurgerBlueDark;
             bottom: 0;
+            border: 1px solid $colorTitleBurgerBlueDark;
+            border-radius: 1px;
            
           }
     }
@@ -84,6 +90,8 @@ export default {
             top:50%;
             transform: translateY(-50%);
             transform: rotate(135deg);
+            border: 1px solid $colorTitleBurgerBlueDark;
+            border-radius: 1px;
            
         }
         .cntLine {
@@ -95,6 +103,8 @@ export default {
             top:50%;
             transform: translateY(-50%);
             opacity: 0;
+            border: 1px solid $colorTitleBurgerBlueDark;
+            border-radius: 1px;
         }   
         .botLine{
           
@@ -105,6 +115,8 @@ export default {
             top:50%;
             transform: translateY(-50%);
             transform: rotate(45deg);
+            border: 1px solid $colorTitleBurgerBlueDark;
+            border-radius: 1px;
            
           }
     }
