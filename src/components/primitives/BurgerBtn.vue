@@ -1,32 +1,44 @@
 <template>
-  <div class="burgerLines" >
+  <div>
+      <div class="burgerLines" v-bind:class="{burgerCross:iscross}">
 
-    <div class="topLine">
+      <div class="topLine">
 
-    </div> 
+      </div> 
 
-    <div class="cntLine">
+      <div class="cntLine">
 
-    </div>  
+      </div>  
 
-    <div class="botLine">
-    
-    </div> 
-
+      <div class="botLine">
+      
+      </div> 
+      
+    </div>
+   
   </div>
+      
+    
+ 
+  
 </template>
 
 <script>
 
 export default {
   name: 'Burger-menu',
+  components: {
   
+  },
+  props:['iscross'],
   
   data () {
       return {
-          
+       
       }
-  }
+  },
+
+  
   
 }
 </script>

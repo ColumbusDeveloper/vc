@@ -1,38 +1,50 @@
 <template>
   <div class="container mycontainer">
-    <burgerbtn  v-bind:class="{burgerCross:isCross}"  v-on:click="isCross=!isCross"  />
-    <menulist ref="tex"/>
+
+        <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"/>
+        <div class="menuListDisplayNone" v-bind:class="{menuListDisplay:iscross}">
+            <ul class="nav">
+              <li class="nav-item" v-for="(menuitem,id) in burgerMenuList" :key="id" >
+                  <router-link class="nav-link" :to="menuitem.path">
+                      {{menuitem.name}}
+                  </router-link>
+              </li>
+            </ul>
+        </div>
+   
   </div>
 </template>
 
 <script>
   
 import burgerbtn from './primitives/BurgerBtn.vue'
-import menulist from './primitives/BurgerCollapceList.vue'
+
+
   export default {
     name: 'Header-one',
     components:{
       burgerbtn,
-      menulist,
+    
+   
     },
     data () {
         return {
           
-        isCross:false,
+        iscross:false,
+        burgerMenuList: [
+            {name:'Home', path:'/'},
+            {name:'Contact us', path:'/contact'},
+            {name:'About VAC', path:'/about'},
+            {name:'Loan Rates', path:'/loan'},
+            {name:'Video', path:'/video'},
+            {name:'Blog', path:'/blog'},
+            {name:'Calculate', path:'/calculate'},
+        ],
           
           
         }
       },
-    watch: {
-      isCross:function (val) {
-          if(val) {
-            this.$refs.tex.style.display = 'none'
-          }
-          else {
-            this.$refs.tex.style.display = 'block'
-          }
-      }
-    },
+    
 
     
     
@@ -53,6 +65,46 @@ import menulist from './primitives/BurgerCollapceList.vue'
     padding-top: 18px;
     padding-bottom: 18px;
   }
+
+  .menuListDisplayNone {
+      opacity: 0;
+      margin-top: 100px;
+      border-width:2px;
+      border-style: solid;
+      border-color: #000;
+      position: absolute;
+      right: 0;
+      @media (max-width:576px) {
+        width: 100vw;
+      }
+          .nav {
+          flex-direction: column;
+          .nav-item {
+            width: 100%;
+          }
+        }
+
+
+    }
+
+    .menuListDisplay {
+      opacity: 1;
+      margin-top: 100px;
+      border-width:2px;
+      border-style: solid;
+      border-color: #000;
+      position: absolute;
+      right: 0;
+      @media (max-width:576px) {
+        width: 100vw;
+      }
+          .nav {
+          flex-direction: column;
+          .nav-item {
+            width: 100%;
+          }
+        }
+    }
 
   
   
