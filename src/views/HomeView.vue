@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div >
     
-      <div class="main row">
+     
         <div class="col">
-            <h1>Hello Hone!</h1>
+            <h1>Hello Home!</h1>
         </div>
-      </div>
+      
       
    
     
@@ -31,10 +31,11 @@ export default {
 
 <style lang="scss" scoped>
   @import '../assets/varmix.scss';
-
+  .container {
+    padding: 0;
+  }
   .main {
-    height: 100px;
-    width: 100px;
+    
     border-width:2px;
     border-style: solid;
     border-color: #000;

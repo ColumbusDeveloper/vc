@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div class="main row">
+  
         <div class="col">
-            <h1>Hello Hone!</h1>
+            <h1>Hello About!</h1>
         </div>
-      </div>  
-  </div>
+     
 </template>
 
 

@@ -1,16 +1,29 @@
 <template>
-  <div class="container mycontainer">
+  <div class="container ">
+    <div class="row">
+      <div class="col mycontainer">
+        <div class="topLine">
+          <div class="topLineNavBar">
+             <button>NAVBAR</button>
+          </div>
+          <div class="topLineRightPart">
+            <button>One</button>
+            <button>Two</button>
+            <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"/>
+          </div>
 
-        <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"/>
-        <div class="menuListDisplayNone" v-bind:class="{menuListDisplay:iscross}">
-            <ul class="nav">
-              <li class="nav-item" v-for="(menuitem,id) in burgerMenuList" :key="id" >
-                  <router-link class="nav-link" :to="menuitem.path">
-                      {{menuitem.name}}
-                  </router-link>
-              </li>
-            </ul>
         </div>
+        
+        <div class="bigBlockContent">
+          <menulist v-bind:iscross="iscross"/>
+        </div>
+        
+      </div>
+
+    </div>
+    
+        
+        
    
   </div>
 </template>
@@ -18,12 +31,14 @@
 <script>
   
 import burgerbtn from './primitives/BurgerBtn.vue'
+import menulist from './primitives/BurgerCollapceList.vue'
 
 
   export default {
     name: 'Header-one',
     components:{
       burgerbtn,
+      menulist,
     
    
     },
@@ -31,15 +46,7 @@ import burgerbtn from './primitives/BurgerBtn.vue'
         return {
           
         iscross:false,
-        burgerMenuList: [
-            {name:'Home', path:'/'},
-            {name:'Contact us', path:'/contact'},
-            {name:'About VAC', path:'/about'},
-            {name:'Loan Rates', path:'/loan'},
-            {name:'Video', path:'/video'},
-            {name:'Blog', path:'/blog'},
-            {name:'Calculate', path:'/calculate'},
-        ],
+        
           
           
         }
@@ -60,51 +67,25 @@ import burgerbtn from './primitives/BurgerBtn.vue'
 <style lang="scss" scoped>
   @import '../assets/varmix.scss';
 
-  .mycontainer {
+  .topLineRightPart {
+    display: flex;
+  }
+  .topLine {
+    display: flex;
+    justify-content: space-between;
+  }
+  .bigBlockContent {
     position: relative;
-    padding-top: 18px;
-    padding-bottom: 18px;
+    width: 100%;
+    height: 400px;
+    border-width:2px;
+    border-style: solid;
+    border-color: #000;
   }
 
-  .menuListDisplayNone {
-      opacity: 0;
-      margin-top: 100px;
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
-      position: absolute;
-      right: 0;
-      @media (max-width:576px) {
-        width: 100vw;
-      }
-          .nav {
-          flex-direction: column;
-          .nav-item {
-            width: 100%;
-          }
-        }
 
 
-    }
-
-    .menuListDisplay {
-      opacity: 1;
-      margin-top: 100px;
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
-      position: absolute;
-      right: 0;
-      @media (max-width:576px) {
-        width: 100vw;
-      }
-          .nav {
-          flex-direction: column;
-          .nav-item {
-            width: 100%;
-          }
-        }
-    }
+  
 
   
   

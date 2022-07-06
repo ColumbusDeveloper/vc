@@ -1,12 +1,19 @@
 <template>
-
-  <div class="d-flex flex-column min-vh-100">
-    <Headerone/>
-      <main class="flex-fill">
-        <router-view/>
-      </main>
-    <Footer/>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="d-flex flex-column min-vh-100">
+          <Headerone/>
+            <main class="flex-fill">
+              <router-view/>
+            </main>
+          <Footer/>
+        </div>
+      </div>
+    </div>
   </div>
+
+  
   
 </template>
 
@@ -28,6 +35,13 @@ export default {
 
 <style lang="scss">
 @import './assets/varmix.scss';
+
+  .container {
+    border-width:2px;
+    border-style: solid;
+    border-color: #000;
+    padding: 0;
+  }
 
 
 </style>

@@ -1,14 +1,15 @@
 <template>
-  <div class="menuListDisplayNone" v-bind:class="{menuListDisplay:iscross}">
-    <ul class="nav">
-      <li class="nav-item" v-for="(menuitem,id) in burgerMenuList" :key="id" >
-          <router-link class="nav-link" :to="menuitem.path">
-              {{menuitem.name}}
-          </router-link>
-      </li>
-    </ul>
-  </div>
   
+      <div class="menuListDisplayNone col" v-bind:class="{menuListDisplay:iscross}">
+        <ul class="nav">
+          <li class="nav-item" v-for="(menuitem,id) in burgerMenuList" :key="id" >
+              <router-link class="nav-link" :to="menuitem.path">
+                  {{menuitem.name}}
+              </router-link>
+          </li>
+        </ul>
+       </div>
+    
 </template>
 
 <script>
@@ -48,6 +49,10 @@
 
 <style lang="scss" scoped>
   @import '../../assets/varmix.scss';
+    
+    .container {
+      padding: 0;
+    }
 
     .menuListDisplayNone {
       opacity: 0;
@@ -56,7 +61,8 @@
       border-style: solid;
       border-color: #000;
       position: absolute;
-      right: 0;
+      right:-127px;
+      top:0;
       @media (max-width:576px) {
         width: 100vw;
       }
@@ -77,7 +83,9 @@
       border-style: solid;
       border-color: #000;
       position: absolute;
-      right: 0;
+      right: 45px;
+      top:0;
+      transition: 0.1s linear;
       @media (max-width:576px) {
         width: 100vw;
       }

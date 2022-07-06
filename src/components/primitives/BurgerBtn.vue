@@ -51,9 +51,7 @@ export default {
     position: relative;
     height: $sizeBurgerLineWidthFullScreen;
     width: $sizeBurgerLineWidthFullScreen;
-    position: absolute;
-    top:17px;
-    right: 0;
+    
         .topLine {
             position: absolute;
             width: $sizeBurgerLineWidthFullScreen;
@@ -94,9 +92,6 @@ export default {
       position: relative;
       height: $sizeBurgerLineWidthFullScreen;
       width: $sizeBurgerLineWidthFullScreen;
-      position: absolute;
-      top:17px;
-      right: 0;
         .topLine {
             position: absolute;
             width: $sizeBurgerLineWidthFullScreen;
