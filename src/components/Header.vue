@@ -1,5 +1,5 @@
 <template>
-  <div class="container ">
+  <div class="container mycontainer">
     <div class="row">
       <div class="col mycontainer">
         <div class="topLine">
@@ -75,13 +75,16 @@ import menulist from './primitives/BurgerCollapceList.vue'
     justify-content: space-between;
   }
   .bigBlockContent {
-    position: relative;
+  
     width: 100%;
     height: 400px;
     border-width:2px;
     border-style: solid;
     border-color: #000;
+   
   }
+
+  
 
 
 
