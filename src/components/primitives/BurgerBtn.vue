@@ -51,7 +51,7 @@ export default {
     position: relative;
     height: $sizeBurgerLineWidthFullScreen;
     width: $sizeBurgerLineWidthFullScreen;
-    
+    z-index: 10;
         .topLine {
             position: absolute;
             width: $sizeBurgerLineWidthFullScreen;
@@ -60,7 +60,7 @@ export default {
             border: 1px solid $colorTitleBurgerBlueDark;
             border-radius: 1px;
             top:0;
-           
+            
         }
         .cntLine {
             display: inline-block;
@@ -92,6 +92,7 @@ export default {
       position: relative;
       height: $sizeBurgerLineWidthFullScreen;
       width: $sizeBurgerLineWidthFullScreen;
+      z-index: 10;
         .topLine {
             position: absolute;
             width: $sizeBurgerLineWidthFullScreen;

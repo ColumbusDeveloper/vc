@@ -50,49 +50,52 @@
 <style lang="scss" scoped>
   @import '../../assets/varmix.scss';
     
-    .container {
-      padding: 0;
-    }
+    
 
     .menuListDisplayNone {
       opacity: 0;
-      margin-top: 100px;
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+      padding-top: 80px;
+      margin-top: -39px;
       position: absolute;
       right:-127px;
-      top:0;
-      @media (max-width:576px) {
-        width: 100vw;
-      }
+      background-color: #e0e0e0;
+      @include letterH4HeadingBurgerMenuTextNumbersDarkBlue;
           .nav {
           flex-direction: column;
           .nav-item {
-            width: 100%;
+            width: 30vw;
+          }
+          .nav-link {
+            color: #41456B; 
           }
         }
-
-
     }
 
     .menuListDisplay {
+      height: 815px;
       opacity: 1;
-      margin-top: 100px;
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+      padding-top: 80px;
+      margin-top: -39px;
+      box-shadow: inset 0px 0px 10px rgba(116, 129, 255, 0.3);
       position: absolute;
-      right: 45px;
-      top:0;
+      right: -4px;
       transition: 0.1s linear;
+      background-color: #e0e0e0;
+      @include letterH4HeadingBurgerMenuTextNumbersDarkBlue;
       @media (max-width:576px) {
         width: 100vw;
+        padding-left: 70px;
       }
           .nav {
           flex-direction: column;
           .nav-item {
-            width: 100%;
+            width: 30vw;
+          }
+          .nav-link {
+            color: #41456B;  
+            &:hover {
+              color: rgba(116, 129, 255, 0.3);
+            }
           }
         }
     }
