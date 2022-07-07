@@ -15,7 +15,7 @@
         </div>
         
         <div class="bigBlockContent">
-          <menulist v-if=""/>
+          <menulist/>
         </div>
         
       </div>
