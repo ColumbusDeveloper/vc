@@ -15,7 +15,7 @@
         </div>
         
         <div class="bigBlockContent">
-          <menulist v-bind:iscross="iscross"/>
+          <menulist/>
         </div>
         
       </div>
