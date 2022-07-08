@@ -1,22 +1,22 @@
 <template>
-  <div>
-      <div class="burgerLines" v-bind:class="{burgerCross:iscross}">
+              <div>
+                        <div class="burgerLines" v-bind:class="{burgerCross:iscross}">
 
-      <div class="topLine">
+                              <div class="topLine">
 
-      </div> 
+                              </div> 
 
-      <div class="cntLine">
+                              <div class="cntLine">
 
-      </div>  
+                              </div>  
 
-      <div class="botLine">
-      
-      </div> 
-      
-    </div>
+                              <div class="botLine">
+                              
+                              </div> 
+                        
+                      </div>
    
-  </div>
+              </div>
       
     
  

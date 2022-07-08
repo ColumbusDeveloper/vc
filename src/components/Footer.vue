@@ -1,6 +1,12 @@
 <template>
   <div class="container">
-         <h1>Footer</h1>
+    <div class="row">
+      <div class="col">
+        <h1>Footer</h1>
+      </div>
+
+    </div>
+         
     
   </div>
 </template>

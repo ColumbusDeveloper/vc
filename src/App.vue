@@ -1,17 +1,23 @@
 <template>
-  <div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+            <div class="d-flex flex-column min-vh-100">
+
+                      <Headerone class="center"/>
+
+                        <main class="flex-fill">
+                          <router-view/>
+                        </main>
+
+                      <Footer class="center" />
+
+            </div>
+      </div>
+
+    </div>
     
-        <div class="d-flex flex-column min-vh-100">
-
-          <Headerone class="center"/>
-
-            <main class="flex-fill">
-              <router-view/>
-            </main>
-
-          <Footer class="center" />
-
-        </div>
+        
      
   </div>
 
