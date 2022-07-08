@@ -1,28 +1,29 @@
 <template>
 
   
+      
          <div class="menuListDisplay">
-            <ul class="nav">
-              <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id">
-                <router-link :to="item.path" class="nav-link">
-                  {{item.name}}
-                </router-link>
-              </li>
-              
-            </ul>
-            <div class="socials">
-              <div class="socials__SingleBlock">
-                <a href="#" target="blank"><i class="fa-brands fa-instagram"></i></a>
-              </div>
-              <div class="socials__SingleBlock">
-                <a href="#" target="blank"><i class="fa-brands fa-facebook-f"></i></a>
-              </div>
-              <div class="socials__SingleBlock">
-                <a href="#" target="blank"><i class="fa-brands fa-youtube"></i></a>
-              </div>
-            </div>
+                  <ul class="nav">
+                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id">
+                      <router-link :to="item.path" class="nav-link">
+                        {{item.name}}
+                      </router-link>
+                    </li>
+                    
+                  </ul>
+                  <div class="socials">
+                    <div class="socials__SingleBlock">
+                      <a href="#" target="blank"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                    <div class="socials__SingleBlock">
+                      <a href="#" target="blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                    <div class="socials__SingleBlock">
+                      <a href="#" target="blank"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                  </div>
          </div>
- 
+     
 
 
 </template>
@@ -152,5 +153,7 @@
       }
     }
   }
+
+  
 
 </style>

@@ -1,12 +1,13 @@
-<template>
-  <div class="container">
-    <div class="row">
+<template  >
+
+  <div class="container-fluid ">
+    <div class="row ">
       <div class="col">
-            <div class="d-flex flex-column min-vh-100">
+            <div class="d-flex flex-column min-vh-100" >
+                  
+                      <Headerone class="center"  v-on:click="mainbackchange"  />
 
-                      <Headerone class="center"/>
-
-                        <main class="flex-fill">
+                        <main class="flex-fill" v-bind:class='{cover:mainback}'>
                           <router-view/>
                         </main>
 
@@ -34,7 +35,26 @@ export default {
   components:{
     Headerone,
     Footer,
-  }
+  },
+  data () {
+    return {
+      
+      mainback:false,
+    }
+  },
+
+  methods: {
+      mainbackchange () {
+        this.mainback = !this.mainback
+      }
+  },
+
+  
+  
+  
+
+
+
 }
 
 
@@ -57,6 +77,14 @@ export default {
   .header {
     margin: 0 auto;
   }
+
+  .cover {
+    background-color: #000;
+  }
+
+  
+
+  
 
 
 </style>
