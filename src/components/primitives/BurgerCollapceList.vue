@@ -31,7 +31,7 @@
 <script>
   export default {
     name: 'BurgerCollapce-list',
-   
+    
 
     data() {
       return {
@@ -84,7 +84,7 @@
 
 
   .menuListDisplay {
-
+    z-index: 9;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -93,7 +93,6 @@
     padding-bottom: 50px;
     margin-top: -39px;
     box-shadow: inset 0px 0px 10px rgba(116, 129, 255, 0.3);
-    position: absolute;
     right: 0;
     background-color: #e0e0e0;
     @include letterH4HeadingBurgerMenuTextNumbersDarkBlue;
