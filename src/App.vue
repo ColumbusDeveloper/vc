@@ -1,90 +1,96 @@
-<template  >
+<template>
 
   <div class="container-fluid ">
     <div class="row ">
       <div class="col">
-            <div class="d-flex flex-column min-vh-100" >
-                  
-                      <Headerone class="center"  v-on:click="mainbackchange"  />
-
-                        <main class="flex-fill" v-bind:class='{cover:mainback}'>
-                          <router-view/>
-                        </main>
-
-                      <Footer class="center" />
-
+        <div class="d-flex flex-column min-vh-100">
+          <div class=" container">
+            <div class="row">
+              <div class="col header">
+                <Headerone class="center" />
+                <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross" />
+                <transition name="menu">
+                  <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross" />
+                </transition>
+              </div>
             </div>
-      </div>
+          </div>
 
+          <main class="flex-fill">
+            <div class="cover" v-bind:class="{coverNone:!iscross}"></div>
+            <router-view />
+          </main>
+
+          <Footer class="center" />
+
+        </div>
+      </div>
     </div>
-    
-        
-     
   </div>
 
-  
-  
 </template>
 
 <script>
+  import Headerone from '@/components/Header.vue'
+  import Footer from '@/components/Footer.vue'
+  import burgerbtn from '@/components/primitives/BurgerBtn.vue'
+  import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
 
-import Headerone from '@/components/Header.vue'
-import Footer from '@/components/Footer.vue'
-
-export default {
-  components:{
-    Headerone,
-    Footer,
-  },
-  data () {
-    return {
-      
-      mainback:false,
-    }
-  },
-
-  methods: {
-      mainbackchange () {
-        this.mainback = !this.mainback
+  export default {
+    components: {
+      Headerone,
+      Footer,
+      burgerbtn,
+      burgerlist,
+    },
+    data() {
+      return {
+        iscross: false,
       }
-  },
-
-  
-  
-  
-
-
-
-}
-
-
+    },
+  }
 </script>
 
 
 <style lang="scss">
-@import './assets/varmix.scss';
+  @import './assets/varmix.scss';
 
   .wrapper {
     max-width: 2010px;
-    border-width:2px;
+    border-width: 2px;
     border-style: solid;
     border-color: #000;
     padding: 0;
-    border-width:2px;
+    border-width: 2px;
     border-style: solid;
     border-color: #000;
   }
   .header {
-    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
   }
-
+  .burgerlist {
+    position: absolute;
+  }
   .cover {
-    background-color: #000;
+    background-color:rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .coverNone {
+    display: none;
   }
 
-  
-
-  
-
-
+  .menu-enter-active,
+  .menu-leave-active {
+    transition: all .5s;
+  }
+  .menu-enter,
+  .menu-leave-to {
+    opacity: 0;
+    transform: translateY(70px);
+  }
 </style>
