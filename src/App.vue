@@ -1,21 +1,19 @@
 <template>
 
-  <div class="container-fluid ">
-    <div class="row ">
-      <div class="col">
+  
         <div class="d-flex flex-column min-vh-100">
-          <div class=" container">
+          <div class="container">
             <div class="row">
-              <div class="col header">
-                <Headerone class="center" />
-                <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross" />
-                <transition name="menu">
-                  <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross" />
-                </transition>
+                <div class="col header">
+                  <Headerone class="center" />
+                  <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
+                  <transition name="menu">
+                    <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross" />
+                  </transition>
               </div>
             </div>
           </div>
-
+              
           <main class="flex-fill">
             <div class="cover" v-bind:class="{coverNone:!iscross}"></div>
             <router-view />
@@ -24,9 +22,7 @@
           <Footer class="center" />
 
         </div>
-      </div>
-    </div>
-  </div>
+     
 
 </template>
 
@@ -79,6 +75,8 @@
     left: 0;
     right: 0;
     bottom: 0;
+    margin-top: 80px;
+    margin-bottom: 120px;
   }
   .coverNone {
     display: none;
@@ -93,4 +91,6 @@
     opacity: 0;
     transform: translateY(70px);
   }
+
+  
 </style>

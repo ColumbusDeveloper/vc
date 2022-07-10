@@ -52,6 +52,7 @@ export default {
     height: $sizeBurgerLineWidthFullScreen;
     width: $sizeBurgerLineWidthFullScreen;
     z-index: 10;
+    top:25px;
         .topLine {
             position: absolute;
             width: $sizeBurgerLineWidthFullScreen;
@@ -93,6 +94,14 @@ export default {
       height: $sizeBurgerLineWidthFullScreen;
       width: $sizeBurgerLineWidthFullScreen;
       z-index: 10;
+      
+      @media (max-width:992px) {
+
+        left:-30px
+        
+      }
+
+      left:-30px;
         .topLine {
             position: absolute;
             width: $sizeBurgerLineWidthFullScreen;
