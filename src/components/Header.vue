@@ -7,11 +7,10 @@
                   <div class="topLineNavBar">
                     <button>NAVBAR</button>
                   </div>
-                  <div class="topLineRightPart">
+                  <div class="topLineRightPart ">
                     <btnwhite/>
-                    <button>One</button>
-                    
-                    
+                    <btnblue/>
+                   
                   </div>
                 </div>
               </div>
@@ -30,7 +29,7 @@
 <script>
 
 import btnwhite from './primitives/btnWhite.vue'
- 
+import btnblue from './primitives/btnBlue.vue'
 
 export default {
   
@@ -38,6 +37,7 @@ export default {
   components: {
   
   btnwhite,
+  btnblue,
 
 
   },
@@ -68,11 +68,20 @@ export default {
 
   .topLineRightPart {
     display: flex;
+    max-width: 400px;
   }
 
   .topLine {
     display: flex;
     justify-content: space-between;
+  }
+
+  .placeforburger {
+    width: 70px;
+    height: 30px;
+    border-width:2px;
+    border-style: solid;
+    border-color: #000;
   }
 
   

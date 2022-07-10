@@ -1,13 +1,12 @@
 <template>
-    
+   
             <div class="col">
-                <div class="btnWhite">
-                    <span class="btnWhite__text">inventory</span>
+                <div class="btnBlue">
+                    <span class="btnBlue__text">Request a car</span>
 
                 </div>
             
             </div>
-        
        
   
 </template>
@@ -18,7 +17,7 @@
 
   export default {
     
-    name: 'Btn-white',
+    name: 'Btn-blue',
     
   }
 
@@ -28,21 +27,23 @@
 <style lang="scss" scoped>
   @import '../../assets/varmix.scss';
 
-  .btnWhite {
+  .btnBlue {
     position: relative;
     border-width:2px;
     border-style: solid;
-    @include letterBtnBlueText;
+    border-color: $colorMainBlue;
+    background-color:$colorMainBlue;
+    @include letterBtnWhiteText ;
     border-radius: 2px;
-    width: 137px;
+    width: 200px;
     height: 45px;
+    white-space: nowrap;
     &:hover {
-        background-color: aqua;
+        background-color: rgb(0, 162, 255);
     }
 
 		&__text {
             text-transform:uppercase ;
-         
             position:absolute;
             top: 50%;
             left: 50%;
