@@ -14,15 +14,12 @@
             </div>
           </div>
               
-            
-          
+          <main class="flex-fill">
+            <div class="cover" v-bind:class="{coverNone:!iscross}"></div>
+            <router-view />
+          </main>
 
-              <main class="flex-fill">
-                <div class="cover" v-bind:class="{coverNone:!iscross}"></div>
-                <router-view />
-              </main>
-
-              <Footer class="center" />
+          <Footer class="center" />
 
         </div>
      
