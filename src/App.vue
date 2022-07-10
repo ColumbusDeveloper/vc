@@ -76,6 +76,7 @@
     right: 0;
     bottom: 0;
     margin-top: 80px;
+    margin-bottom: 120px;
   }
   .coverNone {
     display: none;

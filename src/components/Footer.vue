@@ -1,10 +1,11 @@
 <template>
-  <div class="container ">
+  <div class="container-fluid footercontainer">
+    <div class="container ">
     <div class="row">
       <div class="col footerContainer">
-
-        <navbarwhite class="navbarwhite" v-on:click="$router.push('/')"/>
-
+        <div>
+          <navbarwhite  v-on:click="$router.push('/')"/>
+        </div>
         <div class="termsPrivacy">
           <span class="termsPrivacy__firstItem">Terms</span>
           <span>Privacy</span>
@@ -21,28 +22,23 @@
           </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-        <!-- <div class="created">
-
+         <div class="created">
+            <span class="created__text">Created by</span>
+            <img src="../assets/images/Subtract.png" class="created__img" alt="id">
         </div>
-        <div class="copyright">
 
-        </div> -->
+
+        <div class="copyright">
+          <span class="copyright__text">©Copyright, 2020. Vehicle Approval</span>
+        </div>
       </div>
 
     </div>
          
     
   </div>
+  </div>
+  
 </template>
 
 <script>
@@ -61,9 +57,13 @@ export default {
 <style lang="scss" scoped>
   @import '../assets/varmix.scss';
 
+  .footercontainer {
+    background-color: $colorMainBlue;
+  }
+
   .footerContainer {
     background-color: $colorMainBlue;
-    height: 120px;
+    height: $heightFooter;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -80,6 +80,9 @@ export default {
     font-size: 1rem;
     line-height: 1rem;
     color: #FFFFFF;
+    @media (max-width:768px) {
+      display: none;
+    }
 		&__firstItem {
       margin-right: 10px;
 		}
@@ -130,6 +133,36 @@ export default {
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+.created {
+
+		&__text {
+      margin-right: 10px;
+      font-weight: 600;
+      font-family: $fontFamily600;
+      font-size: 1rem;
+      line-height: 1rem;
+      color: #FFFFFF;
+		}
+
+		
+}
+
+.copyright {
+  @media (max-width:768px) {
+      display: none;
+    }
+
+		&__text {
+      font-weight: 400;
+      font-family: $fontFamily400;
+      font-size: 0.9rem;
+      line-height: 1.3rem;
+      color: #FFFFFF;
+		}
+}
+
+
 
 
 
