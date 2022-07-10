@@ -8,7 +8,7 @@
                     <button>NAVBAR</button>
                   </div>
                   <div class="topLineRightPart">
-                    <button>One</button>
+                    <btnWhite/>
                     <button>Two</button>
                     
                   </div>
@@ -28,13 +28,14 @@
 
 <script>
 
-  import btnWhite from './'
+  import btnWhite from './primitives/WhiteBt.vue'
 
   export default {
     
     name: 'Header-one',
     components: {
     
+    btnWhite,
 
 
     },
