@@ -28,7 +28,7 @@
 
 <script>
 
-  import btnWhite from './'
+ 
 
   export default {
     
