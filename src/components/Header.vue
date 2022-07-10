@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  
           <div class="container mycontainer">
             <div class="row">
               <div class="col mycontainer">
@@ -8,7 +8,7 @@
                     <button>NAVBAR</button>
                   </div>
                   <div class="topLineRightPart ">
-                    <btnwhite/>
+                    <btnwhite class="btnFirstLeft"/>
                     <btnblue/>
                    
                   </div>
@@ -22,7 +22,7 @@
           
           
 
-  </div>
+ 
   
 </template>
 
@@ -82,6 +82,10 @@ export default {
     border-width:2px;
     border-style: solid;
     border-color: #000;
+  }
+
+  .btnFirstLeft {
+    margin-right: 15px;
   }
 
   
