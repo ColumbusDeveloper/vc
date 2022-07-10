@@ -4,11 +4,11 @@
     <div class="row">
       <div class="col footerContainer">
         <div>
-          <navbarwhite  v-on:click="$router.push('/')"/>
+          <navbarwhite class="footerLogo" v-on:click="$router.push('/')"/>
         </div>
         <div class="termsPrivacy">
-          <span class="termsPrivacy__firstItem">Terms</span>
-          <span>Privacy</span>
+          <a href="#" target="blank" class="termsPrivacy__firstItem">Terms</a>
+          <a href="#" target="blank" class="termsPrivacy__secondItem">Privacy</a>
         </div>
         <div class="socials">
           <div class="socials__1">
@@ -57,36 +57,85 @@ export default {
 <style lang="scss" scoped>
   @import '../assets/varmix.scss';
 
-  .footercontainer {
-    background-color: $colorMainBlue;
-  }
+.footercontainer {
+  background-color: $colorMainBlue;
+}
 
-  .footerContainer {
-    background-color: $colorMainBlue;
-    height: $heightFooter;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
+.footerContainer {
+  background-color: $colorMainBlue;
+  height: $heightFooter;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 
+.footerLogo {
+    border-width:2px;
+    border-style: solid;
+    border-color: $colorMainBlue;
+    border-radius: 5px;
+    padding: 5px;
+    &:hover {
+    box-shadow:  0px 0px 15px white;
   
-  
-
-  .termsPrivacy {
+    }
+}
+.termsPrivacy {
     display: flex;
     justify-content: center;
     font-weight: 600;
     font-family: $fontFamily600;
     font-size: 1rem;
     line-height: 1rem;
-    color: #FFFFFF;
+    
     @media (max-width:768px) {
       display: none;
     }
 		&__firstItem {
+      color: #FFFFFF;
+      text-decoration: none;
+      border-width:2px;
+      border-style: solid;
+      border-color: $colorMainBlue;
+      border-radius: 5px;
       margin-right: 10px;
+      padding: 5px;
+      &:hover {
+      box-shadow:  0px 0px 10px white;
+    
+     }
+		}
+
+		&__secondItem {
+      color: #FFFFFF;
+      text-decoration: none;
+      border-width:2px;
+      border-style: solid;
+      border-color: $colorMainBlue;
+      border-radius: 5px;
+      padding: 5px;
+      &:hover {
+      box-shadow:  0px 0px 10px white;
+    }
 		}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .socials {
   
   
@@ -103,6 +152,9 @@ export default {
       border-width:2px;
       border-style: solid;
       border-color: #7481FF;
+      &:hover {
+      box-shadow:  0px 0px 10px white;
+    }
 		}
 
 		&__2 {
@@ -114,6 +166,9 @@ export default {
       border-width:2px;
       border-style: solid;
       border-color: #7481FF;
+      &:hover {
+      box-shadow:  0px 0px 10px white;
+    }
 		}
 
 		&__3 {
@@ -124,6 +179,9 @@ export default {
       border-width:2px;
       border-style: solid;
       border-color: #7481FF;
+      &:hover {
+      box-shadow:  0px 0px 10px white;
+    }
 		}
 }
 
@@ -153,12 +211,15 @@ export default {
       display: none;
     }
 
+    
+
 		&__text {
       font-weight: 400;
       font-family: $fontFamily400;
       font-size: 0.9rem;
       line-height: 1.3rem;
       color: #FFFFFF;
+      
 		}
 }
 

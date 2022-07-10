@@ -32,8 +32,18 @@
   .navBar {
     display: flex;
     align-items: center;
+    border-width:2px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    &:hover {
+    box-shadow:  0px 0px 15px $colorMainBlue;
+  
+    }
 		&__text {
             @include letterLogoBlueText;
+            
 		}
 }
 
