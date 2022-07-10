@@ -5,11 +5,11 @@
               <div class="col mycontainer">
                 <div class="topLine">
                   <div class="topLineNavBar">
-                    <button>NAVBAR</button>
+                    <navbar/>
                   </div>
                   <div class="topLineRightPart ">
                     <btnwhite class="btnFirstLeft"/>
-                    <btnblue/>
+                    <btnblue  class="btnRightEdge"/>
                    
                   </div>
                 </div>
@@ -30,6 +30,7 @@
 
 import btnwhite from './primitives/btnWhite.vue'
 import btnblue from './primitives/btnBlue.vue'
+import navbar from './primitives/navBar.vue'
 
 export default {
   
@@ -38,6 +39,7 @@ export default {
   
   btnwhite,
   btnblue,
+  navbar,
 
 
   },
@@ -74,6 +76,11 @@ export default {
   .topLine {
     display: flex;
     justify-content: space-between;
+    height: $heightHeader;
+    border-width:2px;
+    border-style: solid;
+    border-color: #000;
+    align-items: center;
   }
 
   .placeforburger {
@@ -86,6 +93,15 @@ export default {
 
   .btnFirstLeft {
     margin-right: 15px;
+    @media (max-width:768px) {
+      display: none;
+    }
+  }
+
+  .btnRightEdge {
+    @media (max-width:420px) {
+      display: none;
+    }
   }
 
   

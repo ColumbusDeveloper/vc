@@ -2,8 +2,8 @@
     
             <div class="col">
                 <div class="navBar">
-                    
-                    <span class="navBar__text">inventory</span>
+                    <img src="../../assets/images/logo_header.png" alt="logo">
+                    <span class="navBar__text">VAC</span>
 
                 </div>
             
@@ -29,7 +29,14 @@
 <style lang="scss" scoped>
   @import '../../assets/varmix.scss';
 
-  
+  .navBar {
+    display: flex;
+    align-items: center;
+		&__text {
+            @include letterLogoBlueText;
+		}
+}
+
 
 
   

@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col header">
                   <Headerone class="center" />
-                  <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross" />
+                  <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
                   <transition name="menu">
                     <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross" />
                   </transition>
@@ -92,4 +92,6 @@
     opacity: 0;
     transform: translateY(70px);
   }
+
+  
 </style>

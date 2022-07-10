@@ -89,7 +89,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 815px;
-    padding-top: 80px;
+    padding-top: 100px;
     padding-bottom: 50px;
     margin-top: -39px;
     box-shadow: inset 0px 0px 10px rgba(116, 129, 255, 0.3);
@@ -110,6 +110,7 @@
         
         a {
           color: $colorTitleBurgerBlueDark;
+          white-space: nowrap;
             &:hover {
             color: #7481FF;
           }
