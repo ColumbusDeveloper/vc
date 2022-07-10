@@ -8,8 +8,9 @@
                     <button>NAVBAR</button>
                   </div>
                   <div class="topLineRightPart">
+                    <btnwhite/>
                     <button>One</button>
-                    <button>Two</button>
+                    
                     
                   </div>
                 </div>
@@ -28,35 +29,37 @@
 
 <script>
 
+import btnwhite from './primitives/btnWhite.vue'
  
 
-  export default {
-    
-    name: 'Header-one',
-    components: {
-    
+export default {
+  
+  name: 'Header-one',
+  components: {
+  
+  btnwhite,
 
 
-    },
-    data() {
-      return {
+  },
+  data() {
+    return {
 
-        
-
-
-
-      }
-    },
-
-    methods:{
       
+
+
+
     }
+  },
 
-
-
-
-
+  methods:{
+    
   }
+
+
+
+
+
+}
 </script>
 
 
