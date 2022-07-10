@@ -5,7 +5,7 @@
               <div class="col mycontainer">
                 <div class="topLine">
                   <div class="topLineNavBar">
-                    <navbar/>
+                    <navbar v-on:click="$router.push('/')"/>
                   </div>
                   <div class="topLineRightPart ">
                     <btnwhite class="btnFirstLeft"/>
@@ -77,9 +77,6 @@ export default {
     display: flex;
     justify-content: space-between;
     height: $heightHeader;
-    border-width:2px;
-    border-style: solid;
-    border-color: #000;
     align-items: center;
   }
 

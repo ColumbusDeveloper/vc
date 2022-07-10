@@ -78,6 +78,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    margin-top: 80px;
   }
   .coverNone {
     display: none;
