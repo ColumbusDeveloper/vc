@@ -11,8 +11,15 @@
 
                       <div class="col-6 back__partLeft"  >
                         <div class="textBlock">
-                          <h1 class="textBlock__text">The easiest way to buy a car in Canada</h1>
-
+                          <div class="textBlock__text">
+                            <h1 >The easiest way to buy a car in Canada</h1>
+                          </div>
+                          <div class="textBlock__btn">
+                            <btnreqcar/>
+                          </div>
+                          
+                          
+                          
                         </div>
 
                       </div>
@@ -42,15 +49,16 @@
 
 
 
-
+import btnreqcar from '@/components/primitives/btnWhiteReqCar.vue'
 
 
 export default {
   name: 'HomeView',
   components: {
-    
-  }
+    btnreqcar,
+  },
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -85,6 +93,14 @@ export default {
       border-color: #000;
 		}
 }
+.textBlock {
+  display: flex;
+  flex-direction: column;
+		&__text {
+      @include letterH1textWhite;
+		}
+}
+
 
 
 
