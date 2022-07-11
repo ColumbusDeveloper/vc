@@ -52,14 +52,8 @@
   @import './assets/varmix.scss';
 
   .wrapper {
-    max-width: 2010px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #000;
-    padding: 0;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #000;
+    max-width: 1440px;
+    
   }
   .header {
     display: flex;
