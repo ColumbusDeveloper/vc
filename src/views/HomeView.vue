@@ -7,30 +7,36 @@
             <div class="col">
               <div class="container">
                 <div class="row">
-                  <div class="col back">
 
-                      <div class="col-6 back__partLeft"  >
-                        <div class="textBlock">
-                          <div class="textBlock__text">
-                            <h1 >The easiest way to buy a car in Canada</h1>
-                          </div>
-                          <div class="textBlock__btn">
-                            <btnreqcar/>
-                          </div>
-                          
-                          
-                          
-                        </div>
-
-                      </div>
+                            <div class="col back">
 
 
-                      <div class="col-6 back__partRight" >
+                                        <div class="col-6 back__partLeft"  >
+                                                <div class="textBlock">
 
-                      </div>
-                    
-                    </div>
-                </div>
+                                                      <div class="textBlock__text">
+                                                        <h1 >The easiest way to buy a car in Canada</h1>
+                                                      </div>
+
+                                                      <div class="textBlock__btn">
+                                                          <btnreqcar/>
+                                                      </div> 
+
+                                                </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-6 back__partRight" >
+                                            
+                                        </div>
+                                      
+                                      </div>
+
+
+                            </div>
+
             </div>
             </div>
             
@@ -84,6 +90,7 @@ export default {
       border-width:2px;
       border-style: solid;
       border-color: #000;
+      position: relative;
 		}
 
 		&__partRight {
@@ -96,6 +103,16 @@ export default {
 .textBlock {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 318px;
+  height: 315px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  @media (max-width:768px) {
+     
+  }
 		&__text {
       @include letterH1textWhite;
 		}
