@@ -157,11 +157,6 @@
   }
 }
 
-
-
-
-  
-
   .carousel-control-prev-icon {
     border: 4px solid white;
     border-radius: 50%;
