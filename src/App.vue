@@ -54,6 +54,7 @@
   .wrapper {
     max-width: 1440px;
     
+    
   }
   .header {
     display: flex;
