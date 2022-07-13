@@ -25,7 +25,7 @@
 
 
 <style lang="scss" scoped>
-  @import '../../assets/varmix.scss';
+  @import '../../../assets/varmix.scss';
 
   .btnBlue {
     position: relative;

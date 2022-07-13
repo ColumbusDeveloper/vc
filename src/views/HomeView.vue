@@ -29,7 +29,7 @@
                           <span class="carousel-control-next-icon" aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
                           <span class="visually-hidden">Next</span>
                         </button>
-                      </div>
+                  </div>
                 </div> 
               </div>
             </div>
