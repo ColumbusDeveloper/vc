@@ -15,7 +15,7 @@
           </div>
               
           <main class="flex-fill">
-            <div class="cover" v-bind:class="{coverNone:!iscross}"></div>
+          
             <router-view />
           </main>
 
@@ -62,19 +62,6 @@
   }
   .burgerlist {
     position: absolute;
-  }
-  .cover {
-    background-color:rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin-top: 80px;
-    margin-bottom: 120px;
-  }
-  .coverNone {
-    display: none;
   }
 
   .menu-enter-active,

@@ -6,7 +6,7 @@
           <div class="container">
             <div class="row">
               <div class="col back">
-                <div class="back__text"></div>
+                <div class="back__text">The easiest way to buy a car in Canada</div>
                 <div class="back__btn"><btnreqcar/></div>
                 <div class="back__carousel">
                   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -35,14 +35,31 @@
             </div>
           </div>
         </div>
+        
+      </div>
+      
+      
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+          <div class="howDoesPlusImg col">
+            <div class="howDoesPlusImg__leftPart">
+
+            </div>
+
+            <div class="howDoesPlusImg__rightPart">
+
+            </div>
+
+            <div class="howDoesPlusImg__central">
+
+            </div>
+
+          </div>
       </div>
     </div>
   </div>
   
-
-
-
-
 
 </template>
 
@@ -64,9 +81,7 @@
   @import '../assets/varmix.scss';
 
   .page {
-    border-width: 2px;
-    border-style: solid;
-    border-color: #000;
+    
     background: url(../../src/assets/images/bg_img.png) center center no-repeat,
       #7481FF url(../../src/assets/images/Road_bg_home.png) 35vw 12vh no-repeat;
       @media (max-width:992px) {
@@ -77,7 +92,7 @@
 
 
 .back {
-  
+ 
   display: grid;
   grid-template-columns: repeat(4,1fr);
   grid-template-rows: 300px 300px;
@@ -87,26 +102,23 @@
     "b b c c";
 
 		&__text {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
-      grid-area: a;
       
+      @include letterH1textWhite;
+      grid-area: a;
+      align-self: flex-end;
+      padding-bottom: 30px;
 		}
 
 		&__btn {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+      
       grid-area: b;
       justify-self: flex-start;
-      align-self: center;
+      align-self: flex-start;
+      padding-top: 60px;
 		}
 
 		&__carousel {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+      
       grid-area: c;
       padding-left: 50px;
       padding-right: 50px;
@@ -116,7 +128,7 @@
     @media (max-width:992px) {
       display: grid;
       grid-template-columns: repeat(4,1fr);
-      grid-template-rows: 150px 300px 150px;
+      grid-template-rows: 180px 300px 180px;
       grid-template-areas:
 
     "a a a a"
@@ -124,17 +136,14 @@
     "b b b b";
 
 		&__text {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+     
       grid-area: a;
-      
+      text-align: center;
+      align-self: flex-end;
 		}
 
 		&__btn {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+      
       grid-area: b;
       justify-self: center;
       align-self: flex-start;
@@ -142,18 +151,26 @@
 		}
 
 		&__carousel {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+      
       grid-area: c;
       
 		}
   }
   @media (max-width:768px) {
-     grid-template-rows: 100px 200px 100px;
+     grid-template-rows: 100px 200px 130px;
+     &__text {
+      font-size: 2rem;
+      line-height: 2.2rem;
+      padding-bottom: 20px;
+		}
   }
   @media (max-width:500px) {
-     grid-template-rows: 75px 150px 75px;
+     grid-template-rows: 75px 150px 130px;
+     &__text {
+      font-size: 1.7rem;
+      line-height: 1.7rem;
+      padding-bottom: 10px;
+		}
   }
 }
 
@@ -180,6 +197,48 @@
     position: absolute;
     right: -60px;
   }
+
+
+.howDoesPlusImg {
+  padding: 0;
+  width: 100%;
+  border-width:2px;
+  border-style: solid;
+  border-color: #000;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-auto-rows: minmax(100px, auto);
+		&__leftPart {
+      border-width:2px;
+      border-style: solid;
+      border-color: #000;
+      height: 35vw;
+		}
+
+		&__rightPart {
+      border-width:2px;
+      border-style: solid;
+      border-color: #000;
+      height: 35vw;
+		}
+
+
+
+		&__central {
+      border-width:2px;
+      border-style: solid;
+      border-color: #000;
+      height: 30vw;
+      width: 45vw;
+      position:absolute;
+      top: 10vw;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      background-color: white;
+      z-index: 8;
+		}
+}
 
   
 </style>

@@ -11,12 +11,15 @@ $fontFamily400:'Gilroy-Regular';
 $fontFamily600:'Gilroy-Semibold';
 $fontFamily700:'Gilroy-Bold';
 $fontFamily800:'Gilroy-Black';
+$fontFamily900:'Gilroy-Extrabold';
 
 $sizeBurgerLineWidthFullScreen:30px;
 $sizeBurgerLineHeightFullScreen:3px;
 
 $heightHeader:80px;
 $heightFooter:120px;
+$wrapperWidth:1440px;
+$screenMinWidth:375px;
 
 
 //Миксины БУКВЫ
@@ -43,7 +46,7 @@ $heightFooter:120px;
 @mixin letterH1textWhite {
     color: $colorWhite;
     font-weight: 800;
-    font-family: $fontFamily800;
+    font-family: $fontFamily900;
     font-size: 3.75rem;
     line-height: 4.07rem;
     
