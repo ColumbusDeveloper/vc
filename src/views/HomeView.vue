@@ -49,7 +49,7 @@
 
 
 <script>
-  import btnreqcar from '@/components/primitives/btnWhiteReqCar.vue'
+  import btnreqcar from '@/components/primitives/BTN/btnWhiteReqCar.vue'
 
 
   export default {

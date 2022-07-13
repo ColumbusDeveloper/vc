@@ -28,8 +28,8 @@
 
 <script>
 
-import btnwhite from './primitives/btnWhite.vue'
-import btnblue from './primitives/btnBlue.vue'
+import btnwhite from './primitives/BTN/btnWhite.vue'
+import btnblue from './primitives/BTN/btnBlue.vue'
 import navbar from './primitives/navBar.vue'
 
 export default {
