@@ -21,6 +21,16 @@ $heightFooter:120px;
 $wrapperWidth:1440px;
 $screenMinWidth:375px;
 
+$adaptiveLexusWidthHomePage:0.347;
+$adaptiveLexusHeightHomePage:0.177;
+$adaptiveHondaWidthHomePage:0.347;
+$adaptiveHondaHeightHomePage:0.149;
+
+$adaptive_howDoesPlusImg__headingBoxH2:0.032;
+$adaptive_howDoesPlusImg__headingBoxH3:0.021;
+$adaptive_howDoesPlusImg__contentBoxP:0.011;
+
+
 
 //Миксины БУКВЫ
 
@@ -65,8 +75,12 @@ $screenMinWidth:375px;
     color: $colorTitleBurgerBlueDark;
     font-weight: 700;
     font-family: $fontFamily700;
-    font-size: 2.81rem;
-    line-height: 3.95rem;
+    font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2});
+    line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4);
+    @media (max-width:992px) {
+        font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4);
+        line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4);
+    }
     
 };
 
@@ -74,8 +88,12 @@ $screenMinWidth:375px;
     color: $colorMainBlue;
     font-weight: 700;
     font-family: $fontFamily700;
-    font-size: 1.875rem;
-    line-height: 2.62rem;
+    font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3});
+    line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3} * 1.4);
+    @media (max-width:768px) {
+        font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3} * 1.4);
+        line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3} * 1.4);
+    }
    
 };
 

@@ -43,15 +43,34 @@
     <div class="container-fluid">
       <div class="row">
           <div class="howDoesPlusImg col">
+            
             <div class="howDoesPlusImg__leftPart">
-
+              <img src="../assets/images/Honda_Accord.png"  alt="honda">
             </div>
 
             <div class="howDoesPlusImg__rightPart">
-
+              <img src="../assets/images/Lexus.png"  alt="lexus">
             </div>
 
             <div class="howDoesPlusImg__central">
+
+              <div class="howDoesPlusImg__headingBox">
+                <h2 class="howDoesPlusImg__headingBoxH2">
+                  How does it work?
+                </h2>
+                <h3 class="howDoesPlusImg__headingBoxH3">
+                  From your Phone to your Home
+                </h3>
+              </div>
+
+              <div class="howDoesPlusImg__contentBox">
+                <p class="howDoesPlusImg__contentBoxP">
+                  We make it easy for you to buy your dream car from
+                  your phone without ever having to step into a dealership! 
+                  We deliver your vehicle to your home for you to test drive 
+                  before you sign anything.
+                </p>
+              </div>
 
             </div>
 
@@ -92,10 +111,10 @@
 
 
 .back {
- 
+  
   display: grid;
   grid-template-columns: repeat(4,1fr);
-  grid-template-rows: 300px 300px;
+  grid-template-rows: auto auto;
   grid-template-areas:
 
     "a a c c"
@@ -106,6 +125,7 @@
       @include letterH1textWhite;
       grid-area: a;
       align-self: flex-end;
+      padding-top: 60px;
       padding-bottom: 30px;
 		}
 
@@ -114,7 +134,8 @@
       grid-area: b;
       justify-self: flex-start;
       align-self: flex-start;
-      padding-top: 60px;
+      padding-top: 30px;
+      padding-bottom: 60px;
 		}
 
 		&__carousel {
@@ -123,12 +144,13 @@
       padding-left: 50px;
       padding-right: 50px;
       align-self: center; 
+      
 		}
 
     @media (max-width:992px) {
       display: grid;
       grid-template-columns: repeat(4,1fr);
-      grid-template-rows: 180px 300px 180px;
+      grid-template-rows: auto auto auto;
       grid-template-areas:
 
     "a a a a"
@@ -147,7 +169,7 @@
       grid-area: b;
       justify-self: center;
       align-self: flex-start;
-      padding-top: 20px;
+      
 		}
 
 		&__carousel {
@@ -157,7 +179,7 @@
 		}
   }
   @media (max-width:768px) {
-     grid-template-rows: 100px 200px 130px;
+     grid-template-rows: auto 300px auto;
      &__text {
       font-size: 2rem;
       line-height: 2.2rem;
@@ -202,25 +224,50 @@
 .howDoesPlusImg {
   padding: 0;
   width: 100%;
-  border-width:2px;
-  border-style: solid;
-  border-color: #000;
   position: relative;
   display: grid;
   grid-template-columns: repeat(2,1fr);
   grid-auto-rows: minmax(100px, auto);
 		&__leftPart {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
-      height: 35vw;
+      
+      height: 30vw;
+      position: relative;
+      @media (max-width:992px) {
+         height: 50vw;
+      }
+      @media (max-width:630px) {
+         height: 60vw;
+      }
+      img {
+        position: absolute;
+        bottom: 0;
+        width: calc(100vw * #{$adaptiveHondaWidthHomePage});
+        height: calc(100vw * #{$adaptiveHondaHeightHomePage});
+
+
+      }
 		}
 
 		&__rightPart {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
-      height: 35vw;
+  
+      height: 30vw;
+      position: relative;
+      @media (max-width:992px) {
+         height: 50vw;
+      }
+      @media (max-width:630px) {
+         height: 60vw;
+      }
+      img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: calc(100vw * #{$adaptiveLexusWidthHomePage});
+        height: calc(100vw * #{$adaptiveLexusHeightHomePage});
+        @media (max-width:992px) {
+          top: 140px;
+        }
+      }
 		}
 
 
@@ -228,17 +275,72 @@
 		&__central {
       border-width:2px;
       border-style: solid;
-      border-color: #000;
-      height: 30vw;
+      border-color: white;
+      border-radius: 5px;
+      height: auto;
       width: 45vw;
       position:absolute;
-      top: 10vw;
+      top: 30%;
       left: 50%;
       transform: translate(-50%,-50%);
       background-color: white;
       z-index: 8;
+      display: flex;
+      flex-direction: column;
+      @media (max-width:992px) {
+        width: 80vw;
+        top: 15%;
+      }
 		}
+
+    &__headingBox {
+      
+      height: 12vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 5px;
+      
+
+		}
+
+		&__contentBox {
+      
+      height: 14vw;
+     
+      
+		}
+
+    &__headingBoxH2 {
+      @include letterH2textTitleDarkBlue;
+      text-align: center;
+		}
+
+		&__headingBoxH3 {
+      @include letterH3textSubtitleBlue;
+      text-align: center;
+		}
+
+		
+
+		&__contentBoxP {
+      @include letterContentSecondarySmallGray;
+      text-align: center;
+      @media (max-width:545px) {
+         line-height: 1.6rem;
+      }
+
+		}
+
+    
 }
+
+
+
+		
+
+
+
 
   
 </style>
