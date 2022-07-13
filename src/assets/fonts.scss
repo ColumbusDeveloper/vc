@@ -29,3 +29,11 @@
 	font-weight: 600;
 	font-style: normal;
 };
+
+@font-face {
+	font-family: 'Gilroy-Extrabold';
+	font-display: swap;
+	src: url("fonts/gilroy-extrabold.woff2") format("woff2"), url("fonts/gilroy-extrabold.woff") format("woff");
+	font-weight: 900;
+	font-style: normal;
+};
