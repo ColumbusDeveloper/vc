@@ -114,10 +114,12 @@
   
   display: grid;
   grid-template-columns: repeat(4,1fr);
-  grid-template-rows: auto auto;
+  grid-template-rows: 150px 150px 150px 150px;
   grid-template-areas:
 
     "a a c c"
+    "a a c c"
+    "b b c c"
     "b b c c";
 
 		&__text {
@@ -125,8 +127,7 @@
       @include letterH1textWhite;
       grid-area: a;
       align-self: flex-end;
-      padding-top: 60px;
-      padding-bottom: 30px;
+     
 		}
 
 		&__btn {
@@ -134,8 +135,7 @@
       grid-area: b;
       justify-self: flex-start;
       align-self: flex-start;
-      padding-top: 30px;
-      padding-bottom: 60px;
+      padding-top: 60px;
 		}
 
 		&__carousel {
@@ -148,50 +148,45 @@
 		}
 
     @media (max-width:992px) {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      grid-template-rows: auto auto auto;
+      
       grid-template-areas:
 
     "a a a a"
+    "c c c c"
     "c c c c"
     "b b b b";
 
 		&__text {
      
-      grid-area: a;
+     
       text-align: center;
-      align-self: flex-end;
+      
 		}
 
 		&__btn {
       
-      grid-area: b;
+      
       justify-self: center;
-      align-self: flex-start;
+      padding: 0;
       
 		}
 
-		&__carousel {
-      
-      grid-area: c;
-      
-		}
+	
   }
   @media (max-width:768px) {
-     grid-template-rows: auto 300px auto;
+   
      &__text {
-      font-size: 2rem;
+      font-size: 1.7rem;
       line-height: 2.2rem;
-      padding-bottom: 20px;
+      
 		}
   }
   @media (max-width:500px) {
-     grid-template-rows: 75px 150px 130px;
+   
      &__text {
       font-size: 1.7rem;
       line-height: 1.7rem;
-      padding-bottom: 10px;
+      
 		}
   }
 }
@@ -228,49 +223,47 @@
   display: grid;
   grid-template-columns: repeat(2,1fr);
   grid-auto-rows: minmax(100px, auto);
-		&__leftPart {
-      
-      height: 30vw;
-      position: relative;
+  &__leftPart {
+    
+    height: 30vw;
+    position: relative;
+    @media (max-width:992px) {
+        height: 50vw;
+    }
+    @media (max-width:630px) {
+        height: 60vw;
+    }
+    img {
+      position: absolute;
+      bottom: 0;
+      width: calc(100vw * #{$adaptiveHondaWidthHomePage});
+      height: calc(100vw * #{$adaptiveHondaHeightHomePage});
+
+
+    }
+  }
+
+  &__rightPart {
+
+    height: 30vw;
+    position: relative;
+    @media (max-width:992px) {
+        height: 50vw;
+    }
+    @media (max-width:630px) {
+        height: 60vw;
+    }
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: calc(100vw * #{$adaptiveLexusWidthHomePage});
+      height: calc(100vw * #{$adaptiveLexusHeightHomePage});
       @media (max-width:992px) {
-         height: 50vw;
+        top: 140px;
       }
-      @media (max-width:630px) {
-         height: 60vw;
-      }
-      img {
-        position: absolute;
-        bottom: 0;
-        width: calc(100vw * #{$adaptiveHondaWidthHomePage});
-        height: calc(100vw * #{$adaptiveHondaHeightHomePage});
-
-
-      }
-		}
-
-		&__rightPart {
-  
-      height: 30vw;
-      position: relative;
-      @media (max-width:992px) {
-         height: 50vw;
-      }
-      @media (max-width:630px) {
-         height: 60vw;
-      }
-      img {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: calc(100vw * #{$adaptiveLexusWidthHomePage});
-        height: calc(100vw * #{$adaptiveLexusHeightHomePage});
-        @media (max-width:992px) {
-          top: 140px;
-        }
-      }
-		}
-
-
+    }
+  }
 
 		&__central {
       border-width:2px;
@@ -307,8 +300,7 @@
 		&__contentBox {
       
       height: 14vw;
-     
-      
+        
 		}
 
     &__headingBoxH2 {
@@ -320,8 +312,6 @@
       @include letterH3textSubtitleBlue;
       text-align: center;
 		}
-
-		
 
 		&__contentBoxP {
       @include letterContentSecondarySmallGray;
