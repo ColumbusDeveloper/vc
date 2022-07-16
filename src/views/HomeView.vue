@@ -42,39 +42,48 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-          <div class="howDoesPlusImg col">
-            
-            <div class="howDoesPlusImg__leftPart">
-              <img src="../assets/images/Honda_Accord.png"  alt="honda">
-            </div>
+                            <div class="howDoesPlusImg col">
+                              
+                              <div class="howDoesPlusImg__leftPart">
+                                <img src="../assets/images/Honda_Accord.png"  alt="honda">
+                              </div>
 
-            <div class="howDoesPlusImg__rightPart">
-              <img src="../assets/images/Lexus.png"  alt="lexus">
-            </div>
+                              <div class="howDoesPlusImg__rightPart">
+                                <img src="../assets/images/Lexus.png"  alt="lexus">
+                              </div>
 
-            <div class="howDoesPlusImg__central">
+                              <div class="howDoesPlusImg__central">
 
-              <div class="howDoesPlusImg__headingBox">
-                <h2 class="howDoesPlusImg__headingBoxH2">
-                  How does it work?
-                </h2>
-                <h3 class="howDoesPlusImg__headingBoxH3">
-                  From your Phone to your Home
-                </h3>
-              </div>
+                                <div class="howDoesPlusImg__headingBox">
+                                  <h2 class="howDoesPlusImg__headingBoxH2">
+                                    How does it work?
+                                  </h2>
+                                  <h3 class="howDoesPlusImg__headingBoxH3">
+                                    From your Phone to your Home
+                                  </h3>
+                                </div>
 
-              <div class="howDoesPlusImg__contentBox">
-                <p class="howDoesPlusImg__contentBoxP">
-                  We make it easy for you to buy your dream car from
-                  your phone without ever having to step into a dealership! 
-                  We deliver your vehicle to your home for you to test drive 
-                  before you sign anything.
-                </p>
-              </div>
+                                <div class="howDoesPlusImg__contentBox">
+                                  <p class="howDoesPlusImg__contentBoxP">
+                                    We make it easy for you to buy your dream car from
+                                    your phone without ever having to step into a dealership! 
+                                    We deliver your vehicle to your home for you to test drive 
+                                    before you sign anything.
+                                  </p>
+                                </div>
 
-            </div>
+                              </div>
 
+                            </div>
+                            
+      </div>
+      <div class="row ">
+        <div class="col perfCarBlok">
+          <div class="perfCar">
+            <h2darkblue>Your perfect car in 5 easy steps</h2darkblue>
           </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -86,12 +95,13 @@
 
 <script>
   import btnreqcar from '@/components/primitives/BTN/btnWhiteReqCar.vue'
-
+  import h2darkblue from '@/components/primitives/text/H2DarkBlue.vue'
 
   export default {
     name: 'HomeView',
     components: {
       btnreqcar,
+      h2darkblue
     },
   }
 </script>
@@ -113,6 +123,7 @@
 .back {
   
   display: grid;
+  height: 600px;
   grid-template-columns: repeat(4,1fr);
   grid-template-rows: 150px 150px 150px 150px;
   grid-template-areas:

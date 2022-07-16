@@ -73,12 +73,13 @@ $adaptive_howDoesPlusImg__contentBoxP:0.011;
 
 @mixin letterH2textTitleDarkBlue {
     color: $colorTitleBurgerBlueDark;
+    word-wrap: normal;
     font-weight: 700;
     font-family: $fontFamily700;
     font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2});
     line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4);
     @media (max-width:992px) {
-        font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4);
+        font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.6);
         line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4);
     }
     
