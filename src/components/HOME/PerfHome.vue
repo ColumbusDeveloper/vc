@@ -3,7 +3,9 @@
                     
                 <div class="perfCar">
                     <h2darkblue>Your perfect car in 5 easy steps</h2darkblue>
+                    <triangle>1</triangle>
                 </div>
+                
                     
 
                     
@@ -15,6 +17,7 @@
 
 <script>
     import h2darkblue from '@/components/primitives/text/H2DarkBlue.vue'
+    import triangle from '@/components/primitives/graphic/triangle.vue'
 
 
   export default {
@@ -22,6 +25,7 @@
     name: 'Perf-Home',
     components: {
         h2darkblue,
+        triangle
 
 
     },
