@@ -81,7 +81,11 @@
         <div class="col perfCarBlok">
           <perfcar/>
         </div>
-
+      </div>
+      <div class="row ">
+        <div class="col advantages">
+          <advantages/>
+        </div>
       </div>
     </div>
   </div>
@@ -94,12 +98,14 @@
 <script>
   import btnreqcar from '@/components/primitives/BTN/btnWhiteReqCar.vue'
   import perfcar from '@/components/HOME/PerfHome.vue'
+  import advantages from '@/components/HOME/Advantages.vue'
 
   export default {
     name: 'HomeView',
     components: {
       btnreqcar,
       perfcar,
+      advantages,
     },
   }
 </script>

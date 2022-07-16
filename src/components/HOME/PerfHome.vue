@@ -3,7 +3,7 @@
                     
                 <div class="perfCar">
                     <div class=" row">
-                        <div class="col-md-6 perfCar__centralHeading">
+                        <div class="col-sm-5 perfCar__centralHeading">
                             <h2darkblue>Your perfect car in 5 easy steps</h2darkblue>
                         </div>
                     </div>
@@ -62,14 +62,13 @@
                             </div>
 
                             <div class="perfCar__rightPart col-md-6">
-
+                                <logorootcard />
                             </div>
                         </div>
 
-                    </div>
-                    
-                    
+                    </div>               
                 </div>
+                
                 
                     
 
@@ -85,6 +84,7 @@
     import triangle from '@/components/primitives/graphic/triangle.vue'
     import titledark from '@/components/primitives/text/titleDark.vue'
     import textregular from '@/components/primitives/text/textRegular.vue'
+    import logorootcard from '@/components/primitives/graphic/rectangleLogo.vue'
 
   export default {
     
@@ -94,6 +94,7 @@
         triangle,
         titledark,
         textregular,
+        logorootcard,
 
 
     },
@@ -122,23 +123,18 @@
 <style lang="scss" scoped>
   @import '../../assets/varmix.scss';
     .perfCar {
-        border-width:2px;
-        border-style: solid;
-        border-color: #000;
+        
 
 		&__leftPart {
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+            
             height: 850px;
             
 		}
 
 		&__rightPart {
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+            
             height: 850px;
+            
           
 		}
         &__flexMain {
@@ -150,9 +146,7 @@
         &__itemLeftPart {
             display: flex;
             align-items: center;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+           
             height: 16.7%;
             
            
@@ -166,8 +160,20 @@
         &__centralHeading {
             padding-top: 60px;
             padding-bottom: 30px;
+            @media (max-width:576px) {
+               text-align: center;
+            }
 
         }
+        &__rightPart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @media (max-width:768px) {
+               height: auto;
+            }
+        }
+       
 }
 
   
