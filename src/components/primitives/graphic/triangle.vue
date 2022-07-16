@@ -1,6 +1,6 @@
 <template>
               <span class="h2DarkBlue">
-                <slot></slot>
+                <div class="triangle-top"></div>
               </span>
 </template>
 
@@ -27,8 +27,12 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../../assets/varmix.scss';
-   .h2DarkBlue {
-    @include letterH2textTitleDarkBlue;
-   }
+   .triangle-top {
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 200px solid #f95959;
+}
 
 </style>

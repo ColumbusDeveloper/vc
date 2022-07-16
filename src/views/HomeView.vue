@@ -79,9 +79,7 @@
       </div>
       <div class="row ">
         <div class="col perfCarBlok">
-          <div class="perfCar">
-            <h2darkblue>Your perfect car in 5 easy steps</h2darkblue>
-          </div>
+          <perfcar/>
         </div>
 
       </div>
@@ -95,13 +93,13 @@
 
 <script>
   import btnreqcar from '@/components/primitives/BTN/btnWhiteReqCar.vue'
-  import h2darkblue from '@/components/primitives/text/H2DarkBlue.vue'
+  import perfcar from '@/components/HOME/PerfHome.vue'
 
   export default {
     name: 'HomeView',
     components: {
       btnreqcar,
-      h2darkblue
+      perfcar,
     },
   }
 </script>
