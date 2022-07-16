@@ -2,7 +2,7 @@
     
             <div class="col">
                 <div class="btnWhite">
-                    <span class="btnWhite__text">inventory</span>
+                    <span class="btnWhite__text">Request a suv</span>
 
                 </div>
             
@@ -26,16 +26,19 @@
 
 
 <style lang="scss" scoped>
-  @import '../../assets/varmix.scss';
+  @import '../../../assets/varmix.scss';
 
   .btnWhite {
     position: relative;
     border-width:2px;
     border-style: solid;
+    border-color: $colorMainBlue;
     @include letterBtnBlueText;
     border-radius: 2px;
-    width: 137px;
+    width: 200px;
     height: 45px;
+    background-color: white;
+    white-space: nowrap;
     &:hover {
         background-color: aqua;
     }

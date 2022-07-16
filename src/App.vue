@@ -15,7 +15,7 @@
           </div>
               
           <main class="flex-fill">
-            <div class="cover" v-bind:class="{coverNone:!iscross}"></div>
+          
             <router-view />
           </main>
 
@@ -52,14 +52,9 @@
   @import './assets/varmix.scss';
 
   .wrapper {
-    max-width: 2010px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #000;
-    padding: 0;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #000;
+    max-width: 1440px;
+    
+    
   }
   .header {
     display: flex;
@@ -67,19 +62,6 @@
   }
   .burgerlist {
     position: absolute;
-  }
-  .cover {
-    background-color:rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin-top: 80px;
-    margin-bottom: 120px;
-  }
-  .coverNone {
-    display: none;
   }
 
   .menu-enter-active,

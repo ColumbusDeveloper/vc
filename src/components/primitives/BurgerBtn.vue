@@ -93,7 +93,7 @@ export default {
       position: relative;
       height: $sizeBurgerLineWidthFullScreen;
       width: $sizeBurgerLineWidthFullScreen;
-      z-index: 10;
+      z-index: 100;
       
       @media (max-width:992px) {
 

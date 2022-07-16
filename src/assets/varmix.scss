@@ -11,12 +11,34 @@ $fontFamily400:'Gilroy-Regular';
 $fontFamily600:'Gilroy-Semibold';
 $fontFamily700:'Gilroy-Bold';
 $fontFamily800:'Gilroy-Black';
+$fontFamily900:'Gilroy-Extrabold';
 
 $sizeBurgerLineWidthFullScreen:30px;
 $sizeBurgerLineHeightFullScreen:3px;
 
 $heightHeader:80px;
 $heightFooter:120px;
+$wrapperWidth:1440px;
+$screenMinWidth:375px;
+
+$adaptiveLexusWidthHomePage:0.347;
+$adaptiveLexusHeightHomePage:0.177;
+$adaptiveHondaWidthHomePage:0.347;
+$adaptiveHondaHeightHomePage:0.149;
+$adaptiveLogoCardWidth:0.178;
+$adaptiveLogoCardHeight:0.354;
+$adaptiveRootCardWidth:0.178;
+$adaptiveRootCardHeight:0.355;
+$adaptiveLogoCardWidthTablet:0.4272;
+$adaptiveLogoCardHeightTablet:0.84;
+$adaptiveRootCardWidthTablet:0.4272;
+$adaptiveRootCardHeightTablet:0.84;
+
+
+$adaptive_howDoesPlusImg__headingBoxH2:0.032;
+$adaptive_howDoesPlusImg__headingBoxH3:0.021;
+$adaptive_howDoesPlusImg__contentBoxP:0.011;
+
 
 
 //Миксины БУКВЫ
@@ -43,7 +65,7 @@ $heightFooter:120px;
 @mixin letterH1textWhite {
     color: $colorWhite;
     font-weight: 800;
-    font-family: $fontFamily800;
+    font-family: $fontFamily900;
     font-size: 3.75rem;
     line-height: 4.07rem;
     
@@ -60,10 +82,15 @@ $heightFooter:120px;
 
 @mixin letterH2textTitleDarkBlue {
     color: $colorTitleBurgerBlueDark;
+    word-wrap: normal;
     font-weight: 700;
     font-family: $fontFamily700;
-    font-size: 2.81rem;
-    line-height: 3.95rem;
+    font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2});
+    line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4);
+    @media (max-width:992px) {
+        font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.6);
+        line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4);
+    }
     
 };
 
@@ -71,8 +98,12 @@ $heightFooter:120px;
     color: $colorMainBlue;
     font-weight: 700;
     font-family: $fontFamily700;
-    font-size: 1.875rem;
-    line-height: 2.62rem;
+    font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3});
+    line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3} * 1.4);
+    @media (max-width:768px) {
+        font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3} * 1.4);
+        line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3} * 1.4);
+    }
    
 };
 

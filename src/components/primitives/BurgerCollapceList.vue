@@ -84,7 +84,7 @@
 
 
   .menuListDisplay {
-    z-index: 9;
+    z-index: 60;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
