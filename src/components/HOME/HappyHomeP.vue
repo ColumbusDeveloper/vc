@@ -5,6 +5,7 @@
                         <div class="col hap">
                             <div class="hap__headingH2 ">
                                 <h2darkblue>Happy customers</h2darkblue>
+                                <textregular>Since 2017, we have helped thousands of Canadians get their dream vehicles from the comfort of their homes. </textregular>
                             </div>
 
                             <div class="hap__headingH4 ">
@@ -24,7 +25,7 @@
 
 <script>
     import h2darkblue from '@/components/primitives/text/H2DarkBlue.vue'
-    // import textregular from '@/components/primitives/text/textRegular.vue'
+    import textregular from '@/components/primitives/text/textRegular.vue'
     // import btnbluetextwite100 from '@/components/primitives/BTN/btnBlueTextWhiteSlotMob100.vue'
     // import btnbluetextwite from '@/components/primitives/BTN/btnBlueTextWhiteSlot.vue'
 
@@ -33,7 +34,7 @@
     name: 'Advantages-Home',
     components: {
         h2darkblue,
-        // textregular,
+        textregular,
         // btnbluetextwite100,
         // btnbluetextwite,
 
@@ -94,6 +95,9 @@
 		&__headingH2 {
             grid-area: a;
             background-color: blue;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
 		}
 
 		&__headingH4 {
