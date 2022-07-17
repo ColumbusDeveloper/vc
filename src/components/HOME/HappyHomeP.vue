@@ -28,8 +28,14 @@
                                     
                                     <div class="hap__shadowBtn">
                                         <div class="hap__shadowBtnText">
-
+                                            <div class="hap__headingH2">
+                                                <h2darkblue>7,988+</h2darkblue>
+                                            </div>
+                                            <div class="hap__BtnTextSmall">
+                                                <textregular>Sold Cars</textregular>
+                                            </div>
                                         </div>
+                                        <img class="hap__img" src="../../assets/images/Rectangle24.png" alt="rec">
 
                                     </div>
                                 </div>
@@ -38,8 +44,14 @@
                                     
                                     <div class="hap__shadowBtn">
                                         <div class="hap__shadowBtnText">
-
+                                            <div class="hap__headingH2">
+                                                <h2darkblue>123</h2darkblue>
+                                            </div>
+                                            <div class="hap__BtnTextSmall">
+                                                <textregular>Experts Across Canada</textregular>
+                                            </div>
                                         </div>
+                                        <img class="hap__img" src="../../assets/images/Rectangle24.png" alt="rec">
 
                                     </div>
                                 </div>
@@ -48,8 +60,14 @@
                                    
                                     <div class="hap__shadowBtn">
                                         <div class="hap__shadowBtnText">
-
+                                            <div class="hap__headingH2">
+                                                <h2darkblue>16,974+</h2darkblue>
+                                            </div>
+                                            <div class="hap__BtnTextSmall">
+                                                <textregular>Vehicles To Choose From</textregular>
+                                            </div>
                                         </div>
+                                        <img class="hap__img" src="../../assets/images/Rectangle24.png" alt="rec">
 
                                     </div>
                                 </div>
@@ -230,6 +248,7 @@
             transform: translate(-50%,-50%);
             height: 10vw;
             width: 17vw;
+            
             @media (max-width:768px) {
                height: 8vw;
                width: 17vw;
@@ -244,6 +263,26 @@
 		&__shadowBtnText {
 
 		}
+
+        &__img {
+            width: 17vw;
+            height: 10vw;
+            @media (max-width:768px) {
+               height: 8vw;
+               width: 17vw;
+            }
+            @media (max-width:576px) {
+                   height: 60px;
+                   width: 100%;
+            }
+        }
+
+        &__shadowBtnText {
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
 
 
 
