@@ -20,7 +20,7 @@
                                     </div>
 
                                     <div class="choose__btn">
-                                        <btnbluetextwite class="choose__BtnComp">Inventory</btnbluetextwite>
+                                        <btnbluetextwite100 class="choose__BtnComp">Inventory</btnbluetextwite100>
                                     </div>
                                 </div>
 
@@ -39,7 +39,7 @@
 <script>
     import h2darkblue from '@/components/primitives/text/H2DarkBlue.vue'
     import textregular from '@/components/primitives/text/textRegular.vue'
-    import btnbluetextwite from '@/components/primitives/BTN/btnBlueTextWhiteSlot.vue'
+    import btnbluetextwite100 from '@/components/primitives/BTN/btnBlueTextWhiteSlotMob100.vue'
 
   export default {
     
@@ -47,7 +47,7 @@
     components: {
         h2darkblue,
         textregular,
-        btnbluetextwite,
+        btnbluetextwite100,
 
 
     },
@@ -85,13 +85,11 @@
 		&__carImgBox {
             height: 300px;
             width: 50%;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+            
             position: relative;
             @media (max-width:768px) {
                width: 100%;
-               height: 20vw;
+               height: 35vw;
                order:2;
             }
             &_imgCor{
@@ -122,11 +120,13 @@
 		}
 
 		&__textBox {
-           
+            
             width: 50%;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+
+            @media (max-width:992px) {
+               padding-left: 20px;
+            }
+            
             @media (max-width:768px) {
                width: 100%;
                display: flex;
@@ -154,7 +154,7 @@
                padding-right: 0px;
             }
             @media (max-width:992px) {
-               font-size: 2rem;
+               font-size: 1.8rem;
             }
             @media (max-width:420px) {
                font-size: 1.5rem;
@@ -162,13 +162,15 @@
             }
 		}
 
+        &__btn {
+            padding-top: 20px;
+            
+            
+        }
+
         
 
-		&__textRegular {
-		}
-
-		&__btn {
-		}
+		
 }
 
 

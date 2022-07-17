@@ -88,7 +88,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: calc(100vh - #{$heightFooter});
+    // height: calc(100vh - #{$heightFooter});
     padding-top: 100px;
     padding-bottom: 50px;
     margin-top: -39px;
