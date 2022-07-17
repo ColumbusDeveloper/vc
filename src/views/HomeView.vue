@@ -77,16 +77,28 @@
                             </div>
                             
       </div>
-      <div class="row ">
-        <div class="col perfCarBlok">
-          <perfcar/>
-        </div>
+
+      <div class="container">
+          <div class="row ">
+              <div class="col perfCarBlok">
+                <perfcar/>
+              </div>
+          </div>
       </div>
-      <div class="row ">
-        <div class="col advantages">
-          <advantages/>
-        </div>
-      </div>
+
+     <div class="container">
+          <div class="row ">
+              <div class="col advantages">
+                <advantages/>
+              </div>
+          </div>
+     </div> 
+
+     
+      
+
+
+
     </div>
   </div>
   
