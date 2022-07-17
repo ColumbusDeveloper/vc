@@ -1,13 +1,41 @@
 <template>
-                <div class="choose">
+                
+
+                    <div class="row">
+                        <div class="col choose">
+                            <div class="choose__carImgBox col-md-12 ">
+                                <img src="../../assets/images/Corola1.png" class="choose__carImgBox_imgCor"  alt="corola">
+                                <img src="../../assets/images/HondaCRV.png" class="choose__carImgBox_imgHon" alt="hondaCRV">
+                            </div>
+
+                            <div class="choose__textBox col-md-12">
+
+                                <div class="choose__heading">
+                                    <h2darkblue>Сhoose your dream vehicle in our catalog</h2darkblue>
+                                </div>
+
+                                <div class="choose__textRegular">
+                                    <textregular>In our catalogue there are many models of vehicles. Choose your car to your liking.</textregular>
+                                </div>
+
+                                <div class="choose__btn">
+                                    <btnbluetextwite>Inventory</btnbluetextwite>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
                     
 
-                </div>
+               
 </template>
 
 <script>
     import h2darkblue from '@/components/primitives/text/H2DarkBlue.vue'
     import textregular from '@/components/primitives/text/textRegular.vue'
+    import btnbluetextwite from '@/components/primitives/BTN/btnBlueTextWhiteSlot.vue'
 
   export default {
     
@@ -15,6 +43,7 @@
     components: {
         h2darkblue,
         textregular,
+        btnbluetextwite,
 
 
     },
@@ -43,118 +72,55 @@
 <style lang="scss" scoped>
   @import '../../assets/varmix.scss';
     
-
-.advantages {
-
-		&__centralHeading {
-            padding-top: 90px;
-            padding-bottom: 30px;
-		}
-}
-
-.advantagesFlex {
+.choose {
     display: flex;
-    @media (max-width:992px) {
+    @media (max-width:768px) {
        flex-direction: column;
     }
 
-		&__mainFlexPartItem1 {
-            position: relative;
-            
-            img {
-                width: 100%;
-                height: 100%;
+		&__carImgBox {
+            height: 300px;
+            width: 50%;
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+            &_imgCor{
+                margin-left:calc(100vw * #{$adaptiveMarLeftChoose});
+                width: calc(100vw * #{$adaptiveCorolaChooseWidth});
+                height: calc(100vw * #{$adaptiveCorolaChooseHeight});
                 object-fit: cover;
             }
-
-		}
-
-		&__mainFlexPartItem2 {
-            position: relative;
-       
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-		}
-
-		&__mainFlexPartItem3 {
-            position: relative;
-            
-            img {
-                width: 100%;
-                height: 100%;
+            &_imgHon{
+                margin-top:calc(100vw * #{$adaptiveMarTopChoose});
+                width: calc(100vw * #{$adaptiveHondaChooseWidth});
+                height: calc(100vw * #{$adaptiveHondaChooseHeight});
                 object-fit: cover;
             }
 		}
 
-        &__iconTextBlock1 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: absolute;
-            
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            z-index: 10;
-         
-            img {
-                height: 42.85px;
-                width: 54.72px;
-            }
-        }
-        &__iconTextBlock2 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: absolute;
-            
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            z-index: 10;
-            img {
-                height: 50px;
-                width: 39px;
-            }
-        }
-        &__iconTextBlock3 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            z-index: 10;
-            img {
-                height: 33px;
-                width: 66px;
-            }
-        }
-        &__regularText1 {
-            text-align: center;
-            width:320px ;
-            height: 116px;
-        }
-        &__regularText2 {
-            text-align: center;
-            width:204px ;
-            height: 174px;
-        }
-        &__regularText3 {
-            text-align: center;
-            width:275px ;
-            height: 116px;
-        }
-        &__title {
-            padding-top: 15px;
-            padding-bottom: 5px;
-        }
+		&__textBox {
+            height: 300px;
+            width: 50%;
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+		}
+
+		&__heading {
+		}
+
+		&__textRegular {
+		}
+
+		&__btn {
+		}
 }
+
+
+
+
+
+ 
 
 
 

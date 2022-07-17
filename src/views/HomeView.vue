@@ -94,7 +94,15 @@
           </div>
      </div> 
 
-     
+     <div class="container">
+          <div class="row ">
+              <div class="col choose">
+                <choose/>
+              </div>
+          </div>
+     </div> 
+
+
       
 
 
@@ -111,6 +119,7 @@
   import btnreqcar from '@/components/primitives/BTN/btnWhiteReqCar.vue'
   import perfcar from '@/components/HOME/PerfHome.vue'
   import advantages from '@/components/HOME/Advantages.vue'
+  import choose from '@/components/HOME/ChooseHomeP.vue'
 
   export default {
     name: 'HomeView',
@@ -118,6 +127,7 @@
       btnreqcar,
       perfcar,
       advantages,
+      choose,
     },
   }
 </script>
