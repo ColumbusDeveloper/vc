@@ -9,7 +9,8 @@
                             </div>
 
                             <div class="hap__headingH4 ">
-
+                                <h4darkblue>What are you waiting? Get started right now!</h4darkblue>
+                                <btnbluetextwite100>Request a Car</btnbluetextwite100>
                             </div>
 
                             <div class="hap__num ">
@@ -26,16 +27,17 @@
 <script>
     import h2darkblue from '@/components/primitives/text/H2DarkBlue.vue'
     import textregular from '@/components/primitives/text/textRegular.vue'
-    // import btnbluetextwite100 from '@/components/primitives/BTN/btnBlueTextWhiteSlotMob100.vue'
+    import btnbluetextwite100 from '@/components/primitives/BTN/btnBlueTextWhiteSlotMob100.vue'
     // import btnbluetextwite from '@/components/primitives/BTN/btnBlueTextWhiteSlot.vue'
-
+    import h4darkblue from '../../components/primitives/text/H4DarkBlue.vue'
   export default {
     
     name: 'Advantages-Home',
     components: {
         h2darkblue,
         textregular,
-        // btnbluetextwite100,
+        h4darkblue,
+        btnbluetextwite100,
         // btnbluetextwite,
 
     },
@@ -103,6 +105,9 @@
 		&__headingH4 {
             grid-area: b;
             background-color: yellow;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
 		}
 
 		&__num {
