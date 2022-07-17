@@ -102,6 +102,14 @@
           </div>
      </div> 
 
+     <div class="container">
+          <div class="row ">
+              <div class="col happy">
+               <happy/>
+              </div>
+          </div>
+     </div> 
+
 
       
 
@@ -120,6 +128,7 @@
   import perfcar from '@/components/HOME/PerfHome.vue'
   import advantages from '@/components/HOME/Advantages.vue'
   import choose from '@/components/HOME/ChooseHomeP.vue'
+  import happy from '@/components/HOME/HappyHomeP.vue'
 
   export default {
     name: 'HomeView',
@@ -128,6 +137,7 @@
       perfcar,
       advantages,
       choose,
+      happy,
     },
   }
 </script>
