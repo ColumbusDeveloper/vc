@@ -129,7 +129,8 @@
     
 
 .hap {
-    
+    padding-top: 30px;
+    padding-bottom: 30px;
     display: grid;
     grid-template-columns: repeat(6,1fr);
     grid-template-rows: $adaptiveHappyRow $adaptiveHappyRow $adaptiveHappyRow $adaptiveHappyRow $adaptiveHappyRow $adaptiveHappyRow;
