@@ -265,37 +265,40 @@
 
 .howDoesPlusImg {
   padding: 0;
-  width: 100%;
+  
   position: relative;
   display: grid;
   grid-template-columns: repeat(2,1fr);
   grid-auto-rows: minmax(100px, auto);
   &__leftPart {
     
-    height: 30vw;
+    height: 300px;
     position: relative;
     @media (max-width:992px) {
-        height: 50vw;
+        height: 355px;
     }
     @media (max-width:630px) {
-        height: 60vw;
+        height: 290px;
+    }
+    @media (max-width:500px) {
+        height: 260px;
     }
     img {
       position: absolute;
       bottom: 0;
-      width: calc(100vw * #{$adaptiveHondaWidthHomePage});
-      height: calc(100vw * #{$adaptiveHondaHeightHomePage});
+      width:Min(500px,calc(100vw * #{$adaptiveHondaWidthHomePage})) ;
+      height:Min(209.71px,calc(100vw * #{$adaptiveHondaHeightHomePage})) ;
 
 
     }
   }
 
   &__rightPart {
-
-    height: 30vw;
+    
+    
     position: relative;
     @media (max-width:992px) {
-        height: 50vw;
+        height: 200px;
     }
     @media (max-width:630px) {
         height: 60vw;
@@ -304,8 +307,8 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: calc(100vw * #{$adaptiveLexusWidthHomePage});
-      height: calc(100vw * #{$adaptiveLexusHeightHomePage});
+      width:Min(500px,calc(100vw * #{$adaptiveLexusWidthHomePage})) ;
+      height:Min(255.81px,calc(100vw * #{$adaptiveLexusHeightHomePage})) ;
       @media (max-width:992px) {
         top: 140px;
       }
@@ -317,25 +320,26 @@
       border-style: solid;
       border-color: white;
       border-radius: 5px;
-      height: auto;
-      width: 45vw;
+      max-height: 365px;
+      max-width: 605px;
       position:absolute;
-      top: 30%;
+      top: -40px;
       left: 50%;
-      transform: translate(-50%,-50%);
+      transform: translateX(-50%);
       background-color: white;
       z-index: 8;
       display: flex;
       flex-direction: column;
+    
       @media (max-width:992px) {
         width: 80vw;
-        top: 15%;
+        top: -40px;
       }
 		}
 
     &__headingBox {
       
-      height: 12vw;
+      height:100px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -363,11 +367,25 @@
 		&__contentBoxP {
       @include letterContentSecondarySmallGray;
       text-align: center;
-      @media (max-width:545px) {
+      max-width: 300px;
+      @media (max-width:752px) {
+         width: 250px;
+      }
+      @media (max-width:472px) {
+         width: 200px;
+      }
+      @media (width:545px) {
          line-height: 1.6rem;
       }
+          
 
 		}
+
+    &__contentBox {
+      padding-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
 
     
 }

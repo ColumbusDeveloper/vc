@@ -7,8 +7,8 @@
                                 <div class="hap__text">
                                     <h2darkblue  >Happy customers</h2darkblue>
                                 </div>
-                                <div class="hap__text">
-                                    <textregular  >Since 2017, we have helped thousands of Canadians get their dream vehicles from the comfort of their homes. </textregular>
+                                <div class="hap__text ">
+                                    <textregular class="hap__textRegular" >Since 2017, we have helped thousands of Canadians get their dream vehicles from the comfort of their homes. </textregular>
                                 </div>
                                 
                                 
@@ -28,11 +28,11 @@
                                     
                                     <div class="hap__shadowBtn">
                                         <div class="hap__shadowBtnText">
-                                            <div class="hap__headingH2">
-                                                <h2darkblue>7,988+</h2darkblue>
+                                            <div class="hap__headingH2 hap__padMob">
+                                                <h2darkblue class="hap__H2card">7,988+</h2darkblue>
                                             </div>
-                                            <div class="hap__BtnTextSmall">
-                                                <textregular>Sold Cars</textregular>
+                                            <div class="hap__BtnTextSmall hap__padMob">
+                                                <textregular class="hap__textRegularCard">Sold Cars</textregular>
                                             </div>
                                         </div>
                                         <img class="hap__img" src="../../assets/images/Rectangle24.png" alt="rec">
@@ -44,11 +44,11 @@
                                     
                                     <div class="hap__shadowBtn">
                                         <div class="hap__shadowBtnText">
-                                            <div class="hap__headingH2">
-                                                <h2darkblue>123</h2darkblue>
+                                            <div class="hap__headingH2 hap__padMob">
+                                                <h2darkblue class="hap__H2card">123</h2darkblue>
                                             </div>
-                                            <div class="hap__BtnTextSmall">
-                                                <textregular>Experts Across Canada</textregular>
+                                            <div class="hap__BtnTextSmall hap__padMob">
+                                                <textregular class="hap__textRegularCard">Experts Across Canada</textregular>
                                             </div>
                                         </div>
                                         <img class="hap__img" src="../../assets/images/Rectangle24.png" alt="rec">
@@ -60,11 +60,11 @@
                                    
                                     <div class="hap__shadowBtn">
                                         <div class="hap__shadowBtnText">
-                                            <div class="hap__headingH2">
-                                                <h2darkblue>16,974+</h2darkblue>
+                                            <div class="hap__headingH2 hap__padMob">
+                                                <h2darkblue class="hap__H2card">16,974+</h2darkblue>
                                             </div>
-                                            <div class="hap__BtnTextSmall">
-                                                <textregular>Vehicles To Choose From</textregular>
+                                            <div class="hap__BtnTextSmall hap__padMob">
+                                                <textregular class="hap__textRegularCard">Vehicles To Choose From</textregular>
                                             </div>
                                         </div>
                                         <img class="hap__img" src="../../assets/images/Rectangle24.png" alt="rec">
@@ -129,9 +129,7 @@
     
 
 .hap {
-    border-width:2px;
-    border-style: solid;
-    border-color: #000;
+    
     display: grid;
     grid-template-columns: repeat(6,1fr);
     grid-template-rows: $adaptiveHappyRow $adaptiveHappyRow $adaptiveHappyRow $adaptiveHappyRow $adaptiveHappyRow $adaptiveHappyRow;
@@ -198,34 +196,31 @@
 
         &__numItem1 {
             grid-area: f;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+           
             position: relative;
+            
             
         }
 
         &__numItem2 {
             grid-area: d;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+          
             position: relative;
+            
             
         }
 
         &__numItem3 {
             grid-area: t;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+          
             position: relative;
+            
             
         }
 
         &__numItemEmpty {
             grid-area: o;
-            background-color: gray;
+       
             
         }
 
@@ -239,20 +234,12 @@
         }
 
 		&__shadowBtn {
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+      
             position:absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
-            height: 10vw;
-            width: 17vw;
             
-            @media (max-width:768px) {
-               height: 8vw;
-               width: 17vw;
-            }
             @media (max-width:576px) {
                    height: 60px;
                    width: 100%;
@@ -260,28 +247,41 @@
 
 		}
 
-		&__shadowBtnText {
-
-		}
+		
 
         &__img {
-            width: 17vw;
-            height: 10vw;
-            @media (max-width:768px) {
-               height: 8vw;
-               width: 17vw;
-            }
-            @media (max-width:576px) {
-                   height: 60px;
-                   width: 100%;
-            }
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         &__shadowBtnText {
             position:absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        &__textRegular {
+            font-size: 1.2rem;
+        }
+        &__textRegularCard {
+            @media (max-width:992px) {
+               font-size: 0.5rem;
+               line-height: 0;
+            }
+            
+        }
+        &__H2card {
+            font-size: 1.5rem;
+        }
+
+        &__padMob {
+            @media (max-width:576px) {
+               padding-left: 30px;
+               padding-top: 5px;
+            }
         }
 
 
