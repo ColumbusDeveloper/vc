@@ -110,6 +110,14 @@
           </div>
      </div> 
 
+     <div class="container">
+          <div class="row ">
+              <div class="col what">
+               <what/>
+              </div>
+          </div>
+     </div> 
+
 
       
 
@@ -129,6 +137,7 @@
   import advantages from '@/components/HOME/Advantages.vue'
   import choose from '@/components/HOME/ChooseHomeP.vue'
   import happy from '@/components/HOME/HappyHomeP.vue'
+  import what from '@/components/HOME/WhatHomeP.vue'
 
   export default {
     name: 'HomeView',
@@ -138,6 +147,7 @@
       advantages,
       choose,
       happy,
+      what,
     },
   }
 </script>
