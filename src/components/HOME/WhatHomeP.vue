@@ -8,7 +8,7 @@
             <hdarkblue>What our client say about us!</hdarkblue>
 
         </div>
-        <div class="what__swiper">
+        <div class="what__c">
 
         </div>
  
