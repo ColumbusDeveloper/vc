@@ -71,7 +71,7 @@
   .menu-enter,
   .menu-leave-to {
     opacity: 0;
-    // transform: translateY(70px);
+   
   }
 
   
