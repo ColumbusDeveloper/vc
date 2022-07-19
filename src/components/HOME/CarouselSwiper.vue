@@ -1,8 +1,5 @@
 <template>
-                <div class="swiper">
-                    
-
-                </div>
+                
 </template>
 
 
@@ -12,11 +9,19 @@
 
 
 
-<script setup>
+<script >
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
 
+    export default {
+        components: {
+        Swiper,
+        SwiperSlide,
+        },
+    }
 
-
-    
 </script>
 
 
