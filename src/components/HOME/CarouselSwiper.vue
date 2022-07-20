@@ -2,14 +2,13 @@
     <div class="swiperBlock">
                 <swiper
                 :modules="modules"
-    :slides-per-view="1"
-    :space-between="50"
-     navigation
-    loop
-    :pagination="{ clickable: true }"
-    :scrollbar="{ draggable: true }"
-    @swiper="onSwiper"
-    @slideChange="onSlideChange"
+                :slides-per-view="1"
+                :space-between="50"
+                navigation
+                loop
+                
+                @swiper="onSwiper"
+                @slideChange="onSlideChange"
                 
               
               >
@@ -38,10 +37,10 @@
                     </div>
                     <div class="swiperBlock__itemSlideText">
                         <div class="swiperBlock__itemSlideTextTitle">
-
+                          <p>Laura Chaisson</p>
                         </div>
                         <div class="swiperBlock__itemSlideTextRegular">
-
+                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
                         </div>
                     </div>      
                   </div>
@@ -53,10 +52,10 @@
                     </div>
                     <div class="swiperBlock__itemSlideText">
                         <div class="swiperBlock__itemSlideTextTitle">
-
+                          <p>Laura Chaisson</p>
                         </div>
                         <div class="swiperBlock__itemSlideTextRegular">
-
+                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
                         </div>
                     </div>      
                   </div>
@@ -108,10 +107,12 @@
       const onSlideChange = () => {
         console.log('slide change');
       };
+      
       return {
         onSwiper,
         onSlideChange,
         modules: [Navigation, Pagination, Scrollbar, A11y],
+      
       };
     },
   };
@@ -181,20 +182,10 @@
     }
 }
 
-.swiper-button-prev:after, .swiper-button-next:after {
-    font-family: swiper-icons;
-    font-size: var(--swiper-navigation-size);
-    text-transform: none !important;
-    letter-spacing: 0;
-    font-variant: initial;
-    line-height: 1;
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
     display: none;
-}
-.swiper-button-prev, .swiper-rtl .swiper-button-next {
-    left: 10px;
-    right: auto;
-    display: none;
-}
+  } 
 
 
 
