@@ -11,7 +11,7 @@
         <div class="what__c">
           <carouselswiper/>
         </div>
- 
+        
     </div>
 
                
@@ -28,6 +28,7 @@
     // import btnbluetextwite from '@/components/primitives/BTN/btnBlueTextWhiteSlot.vue'
     // import h4darkblue from '../primitives/text/H4DarkBlue.vue'
     import carouselswiper from '@/components/HOME/CarouselSwiper.vue'
+
     
   export default {
     
@@ -35,6 +36,7 @@
     components: {
         hdarkblue,
         carouselswiper,
+     
         // textregular,
         // h4darkblue,
         // btnbluetextwite100,

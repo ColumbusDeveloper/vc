@@ -117,6 +117,9 @@
               </div>
           </div>
      </div> 
+     
+
+     
 
 
       
@@ -138,6 +141,7 @@
   import choose from '@/components/HOME/ChooseHomeP.vue'
   import happy from '@/components/HOME/HappyHomeP.vue'
   import what from '@/components/HOME/WhatHomeP.vue'
+ 
 
   export default {
     name: 'HomeView',
@@ -148,6 +152,7 @@
       choose,
       happy,
       what,
+  
     },
   }
 </script>
