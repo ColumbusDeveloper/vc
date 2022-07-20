@@ -185,16 +185,30 @@
             text-align: center;
             width:320px ;
             height: 116px;
+            padding-top: 30px;
+            @media (max-width:768px) {
+               width: 50vw;
+               padding-top: 30px;
+            }
         }
         &__regularText2 {
             text-align: center;
             width:204px ;
             height: 174px;
+            padding-top: 30px;
+            @media (max-width:768px) {
+               width: 30vw;
+            }
         }
         &__regularText3 {
             text-align: center;
             width:275px ;
             height: 116px;
+            padding-top: 30px;
+            @media (max-width:768px) {
+               padding-top: 30px;
+               width: 60vw;
+            }
         }
         &__title {
             padding-top: 15px;

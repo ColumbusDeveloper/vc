@@ -77,6 +77,7 @@
   @import '../../assets/varmix.scss';
     
 .choose {
+    padding-top: 50px;
     display: flex;
     @media (max-width:768px) {
        flex-direction: column;

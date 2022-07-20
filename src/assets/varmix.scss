@@ -45,6 +45,12 @@ $adaptiveCorolaChooseHeight:0.13;
 $adaptiveMarTopChoose: - 0.103;
 $adaptiveMarLeftChoose:0.18;
 
+$adaptiveHappyRow:80px;
+$adaptiveHappyRowMid:100px;
+
+$adaptiveTextRegularSize:0.01111;
+$adaptiveTextRegularLineHeight:0.02;
+
 //Миксины БУКВЫ
 
 
@@ -89,8 +95,8 @@ $adaptiveMarLeftChoose:0.18;
     word-wrap: normal;
     font-weight: 700;
     font-family: $fontFamily700;
-    font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2});
-    line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4);
+    font-size:Min(45px,calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2}));
+    line-height:Min(63px,calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4)) ;
     @media (max-width:992px) {
         font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.6);
         line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH2} * 1.4);
@@ -102,8 +108,8 @@ $adaptiveMarLeftChoose:0.18;
     color: $colorMainBlue;
     font-weight: 700;
     font-family: $fontFamily700;
-    font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3});
-    line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3} * 1.4);
+    font-size:Min(30px,calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3})) ;
+    line-height:Min(42px,calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3} * 1.4)) ;
     @media (max-width:768px) {
         font-size: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3} * 1.4);
         line-height: calc(100vw * #{$adaptive_howDoesPlusImg__headingBoxH3} * 1.4);
@@ -115,10 +121,16 @@ $adaptiveMarLeftChoose:0.18;
     color: $colorSmallLetterContentGray;
     font-weight: 400;
     font-family: $fontFamily400;
-    font-size: 1rem;
-    line-height: 1.95rem;
+    font-size:Min(16px,calc(100vw * #{$adaptiveTextRegularSize})) ;
+    line-height:Min(28.8px,calc(100vw * #{$adaptiveTextRegularLineHeight} * 1.4)) ;
+    @media (max-width:768px) {
+        font-size: calc(100vw * #{$adaptiveTextRegularSize} * 1.8);
+        line-height: calc(100vw * #{$adaptiveTextRegularLineHeight} * 1.3);
+    }
     
 };
+
+
 
 @mixin letterH4HeadingBurgerMenuTextNumbersDarkBlue {
     color: $colorTitleBurgerBlueDark;

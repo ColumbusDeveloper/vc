@@ -40,7 +40,9 @@ export default {
             
             
             width: calc(100vw * #{$adaptiveLogoCardWidth});
+            max-width: 255px;
             height: calc(100vw * #{$adaptiveLogoCardHeight});
+            max-height: 511px;
             @media (max-width:768px) {
                width: calc(100vw * #{$adaptiveLogoCardWidthTablet});
                height: calc(100vw * #{$adaptiveLogoCardHeightTablet});
@@ -55,7 +57,9 @@ export default {
             
             
             width: calc(100vw * #{$adaptiveRootCardWidth});
+            max-width: 255.81px;
             height: calc(100vw * #{$adaptiveRootCardHeight});
+            max-height: 512.08px;
             @media (max-width:768px) {
                width: calc(100vw * #{$adaptiveRootCardWidthTablet});
                height: calc(100vw * #{$adaptiveRootCardHeightTablet});
