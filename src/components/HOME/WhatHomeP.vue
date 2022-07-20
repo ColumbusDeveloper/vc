@@ -9,7 +9,7 @@
 
         </div>
         <div class="what__c">
-
+          <carouselswiper/>
         </div>
  
     </div>
@@ -27,12 +27,14 @@
     // import btnbluetextwite100 from '@/components/primitives/BTN/btnBlueTextWhiteSlotMob100.vue'
     // import btnbluetextwite from '@/components/primitives/BTN/btnBlueTextWhiteSlot.vue'
     // import h4darkblue from '../primitives/text/H4DarkBlue.vue'
+    import carouselswiper from '@/components/HOME/CarouselSwiper.vue'
     
   export default {
     
     name: 'Advantages-Home',
     components: {
         hdarkblue,
+        carouselswiper,
         // textregular,
         // h4darkblue,
         // btnbluetextwite100,
@@ -85,7 +87,7 @@
 		&__c {
             
             width: 100%;
-            height: 322px;
+        
             border-width:2px;
             border-style: solid;
             border-color: #000;
