@@ -383,14 +383,21 @@
       @include letterContentSecondarySmallGray;
       text-align: center;
       max-width: 300px;
-      @media (max-width:752px) {
-         width: 250px;
+      @media (max-width:768px) {
+         font-size: 1rem;
       }
-      @media (max-width:472px) {
+      @media (max-width:752px) {
          width: 200px;
+         
+      }
+      
+      @media (max-width:472px) {
+         width: 130px;
       }
       @media (width:545px) {
          line-height: 1.6rem;
+         font-size: 0.8rem;
+         width: 150px;
       }
           
 
@@ -414,3 +421,4 @@
 
   
 </style>
+

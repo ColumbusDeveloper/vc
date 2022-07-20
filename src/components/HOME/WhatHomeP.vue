@@ -69,9 +69,7 @@
   @import '../../assets/varmix.scss';
     .what {
         padding-bottom: 50px;
-        border-width:2px;
-        border-style: solid;
-        border-color: #000;
+    
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -80,9 +78,7 @@
 		&__heading {
             width: 100%;
             padding-bottom: 40px;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+        
             text-align: start;
 		}
 
@@ -90,9 +86,7 @@
             
             width: 100%;
         
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+        
 
 		}
 }

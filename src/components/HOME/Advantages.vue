@@ -26,7 +26,7 @@
                                         <img src="../../assets/images/IconBook.png" alt="icon">
                                         <titledark class="advantagesFlex__title">Auto Financing</titledark>
                                         <div class="advantagesFlex__regularText2">
-                                            <textregular class="advantagesFlex__regularText">We partner with the largest lenders in Canada to offer the strongest financing options in the industry—including rates as low as 4%</textregular>
+                                            <textregular class="advantagesFlex__regularText">We partner with the largest lenders in Canada to offer the strongest financing options in the industry including rates as low as 4%</textregular>
                                         </div>
                                         
                                     </div>
