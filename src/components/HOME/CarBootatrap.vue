@@ -15,7 +15,7 @@
 
   export default {
     
-    name: 'Advantages-Home',
+    name: 'Car-Bootstrap',
     components: {
         
 

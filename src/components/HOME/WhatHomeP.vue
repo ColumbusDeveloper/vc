@@ -31,7 +31,7 @@
     
   export default {
     
-    name: 'Advantages-Home',
+    name: 'What-Home',
     components: {
         hdarkblue,
         carouselswiper,
