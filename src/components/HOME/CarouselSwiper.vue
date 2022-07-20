@@ -165,8 +165,8 @@
   <swiper
     class="parallax-slider"
     :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
-    loop
-    
+   
+
  
     grabCursor
     @swiper="onSwiperInitialized"
