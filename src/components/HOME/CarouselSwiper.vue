@@ -1,4 +1,4 @@
-<!-- <template>
+<!-- 
               <div class="swiperBlock">
                 
                   <div class="swiperBlock__itemSlide">
@@ -54,40 +54,127 @@
               
   
               </div>
-  
+   -->
 
 
+
+
+
+
+
+<template>
+<div class="swiperBlock">
+  <swiper
+    class="parallax-slider"
+    :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
+    grabCursor
+    @swiper="onSwiperInitialized"
+  >
+    <div class="parallax-slider-navigation">
+      <div class="nav-indicator prevArrow">
+        <i class="fa-solid fa-chevron-left"></i>
+      </div>
+      <div class="nav-indicator nextArrow">
+       <i class="fa-solid fa-chevron-right"></i>
+      </div>
+    </div>
+
+    <swiper-slide  class="parallax-slide">
+      <div class="parallax-slide-image">
+       <div class="swiperBlock__itemSlide">
+                    <div class="swiperBlock__itemSlideImg">
+                      <img src="../../assets/images/SwiperImg.png" alt='img'>
+                    </div>
+                    <div class="swiperBlock__itemSlideText">
+                        <div class="swiperBlock__itemSlideTextTitle">
+                          <p>Laura Chaisson</p>
+                        </div>
+                        <div class="swiperBlock__itemSlideTextRegular">
+                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
+                        </div>
+                    </div>      
+                  </div>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide  class="parallax-slide">
+      <div class="parallax-slide-image">
+       <div class="swiperBlock__itemSlide">
+                    <div class="swiperBlock__itemSlideImg">
+                      <img src="../../assets/images/SwiperImg.png" alt='img'>
+                    </div>
+                    <div class="swiperBlock__itemSlideText">
+                        <div class="swiperBlock__itemSlideTextTitle">
+                          <p>Laura Chaisson</p>
+                        </div>
+                        <div class="swiperBlock__itemSlideTextRegular">
+                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
+                        </div>
+                    </div>      
+                  </div>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide  class="parallax-slide">
+      <div class="parallax-slide-image">
+       <div class="swiperBlock__itemSlide">
+                    <div class="swiperBlock__itemSlideImg">
+                      <img src="../../assets/images/SwiperImg.png" alt='img'>
+                    </div>
+                    <div class="swiperBlock__itemSlideText">
+                        <div class="swiperBlock__itemSlideTextTitle">
+                          <p>Laura Chaisson</p>
+                        </div>
+                        <div class="swiperBlock__itemSlideTextRegular">
+                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
+                        </div>
+                    </div>      
+                  </div>
+      </div>
+    </swiper-slide>
+
+  </swiper>
+</div>
 </template>
+
 <script>
-  
-  
+// swiper core
+import SwiperCore, { Navigation, Parallax } from "swiper";
+// swiper vue
+import { Swiper, SwiperSlide } from "swiper/vue";
+// import swiper css
+import "swiper/swiper.scss";
+// import css for components
+// navigation
+import "swiper/components/navigation/navigation.scss";
+// font awesome icons
 
-  
+SwiperCore.use([Navigation, Parallax]);
 
- 
-  export default {
-    components: {
-     
+export default {
+  data() {
+    return {
       
-    },
-    data () {
-      return {
- 
-      }
-    },
-    methods:{
-       
-    },
-    computed: {
-       
-    },
+    }
+  },
+  computed: {
+   
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
+   
+  },
+  methods: {
     
-  }
-
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-  @import '../../assets/varmix.scss';
+<style  lang="scss" scoped>
+
+
+ @import '../../assets/varmix.scss';
 
 
   
@@ -155,98 +242,30 @@
       @include letterSemiboldDarkBlue;
     }
 }
-
-  
-</style> -->
-
-
-
-<template>
-  <swiper
-    class="parallax-slider"
-    :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
-   
-
- 
-    grabCursor
-    @swiper="onSwiperInitialized"
-  >
-    <div class="parallax-slider-navigation">
-      <div class="nav-indicator prevArrow">
-        <i class="fa-solid fa-chevron-left"></i>
-      </div>
-      <div class="nav-indicator nextArrow">
-       <i class="fa-solid fa-chevron-right"></i>
-      </div>
-    </div>
-    <swiper-slide
-      class="parallax-slide"
-      v-for="image in images"
-      :key="image.id"
-    >
-      <div
-        class="parallax-slide-image"
-        
-      >
-        <img :src="image.imageUrl" />
-      </div>
-    </swiper-slide>
-  </swiper>
-</template>
-
-<script>
-// swiper core
-import SwiperCore, { Navigation, Parallax } from "swiper";
-// swiper vue
-import { Swiper, SwiperSlide } from "swiper/vue";
-// import swiper css
-import "swiper/swiper.scss";
-// import css for components
-// navigation
-import "swiper/components/navigation/navigation.scss";
-// font awesome icons
-
-SwiperCore.use([Navigation, Parallax]);
-
-export default {
-  data() {
-    return {
-      parallaxSwiperWidth: 0,
-      images: [
-        { id: 1, imageUrl: require("../../assets/images/HondaCRV.png") },
-        { id: 2, imageUrl: require("../../assets/images/HondaCRV.png") },
-        { id: 3, imageUrl: require("../../assets/images/HondaCRV.png") },
-      ],
-    };
-  },
-  computed: {
-    parallaxAmount() {
-      return this.parallaxSwiperWidth * 0.5;
-    },
-  },
-  components: {
-    Swiper,
-    SwiperSlide,
-   
-  },
-  methods: {
-    onSwiperInitialized(swiper) {
-      this.parallaxSwiperWidth = swiper.width;
-    },
-  },
-};
-</script>
-
-<style scoped>
 .parallax-slider {
   position: relative;
 }
 .parallax-slide {
-  height: 500px !important;
+  height: 550px !important;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  @media (max-width:1200px) {
+     height: 320px !important;
+  }
+  @media (max-width:768px) {
+     height: 592px !important;
+  }
+  @media (max-width:576px) {
+     height: 578px !important;
+  }
+  @media (max-width:450px) {
+     height: 543px !important;
+  }
+  @media (max-width:372px) {
+     height: 511px !important;
+  }
 }
 .parallax-slider-navigation {
   position: absolute;
@@ -258,6 +277,19 @@ export default {
   display: flex;
   justify-content: space-between;
   height: 0;
+  
+  @media (max-width:768px) {
+     top: 31%;
+  }
+  @media (max-width:576px) {
+     top: 31%;
+  }
+  @media (max-width:450px) {
+     top: 26%;
+  }
+  @media (max-width:372px) {
+     top: 22%;
+  }
 }
 .parallax-slide-image {
   height: 100%;
