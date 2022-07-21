@@ -117,6 +117,14 @@
               </div>
           </div>
      </div> 
+
+     <div class="container">
+          <div class="row ">
+              <div class="col progress">
+               <progress/>
+              </div>
+          </div>
+     </div> 
      
 
      
@@ -141,6 +149,7 @@
   import choose from '@/components/HOME/ChooseHomeP.vue'
   import happy from '@/components/HOME/HappyHomeP.vue'
   import what from '@/components/HOME/WhatHomeP.vue'
+  import progress from '@/components/HOME/Progress.vue'
  
 
   export default {
@@ -152,6 +161,7 @@
       choose,
       happy,
       what,
+      progress,
   
     },
   }
