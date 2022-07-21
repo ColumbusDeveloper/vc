@@ -1,72 +1,10 @@
-<!-- 
-              <div class="swiperBlock">
-                
-                  <div class="swiperBlock__itemSlide">
-                    <div class="swiperBlock__itemSlideImg">
-                      <img src="../../assets/images/SwiperImg.png" alt='img'>
-                    </div>
-                    <div class="swiperBlock__itemSlideText">
-                        <div class="swiperBlock__itemSlideTextTitle">
-                          <p>Laura Chaisson</p>
-                        </div>
-                        <div class="swiperBlock__itemSlideTextRegular">
-                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
-                        </div>
-                    </div>      
-                  </div>
-        
-
-  
-                  <div class="swiperBlock__itemSlide">
-                    <div class="swiperBlock__itemSlideImg">
-                      <img src="../../assets/images/SwiperImg.png" alt='img'>
-                    </div>
-                    <div class="swiperBlock__itemSlideText">
-                        <div class="swiperBlock__itemSlideTextTitle">
-                          <p>Laura Chaisson</p>
-                        </div>
-                        <div class="swiperBlock__itemSlideTextRegular">
-                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
-                        </div>
-                    </div>      
-                  </div>
-             
-          
-                  <div class="swiperBlock__itemSlide">
-                    <div class="swiperBlock__itemSlideImg">
-                      <img src="../../assets/images/SwiperImg.png" alt='img'>
-                    </div>
-                    <div class="swiperBlock__itemSlideText">
-                        <div class="swiperBlock__itemSlideTextTitle">
-                          <p>Laura Chaisson</p>
-                        </div>
-                        <div class="swiperBlock__itemSlideTextRegular">
-                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
-                        </div>
-                    </div>      
-                  </div>
-
-              
-             
-              
-                
-           
-              
-  
-              </div>
-   -->
-
-
-
-
-
-
 
 <template>
 <div class="swiperBlock">
   <swiper
     class="parallax-slider"
     :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
+ 
     grabCursor
     @swiper="onSwiperInitialized"
   >
