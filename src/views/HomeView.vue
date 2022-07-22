@@ -150,7 +150,7 @@
   import choose from '@/components/HOME/ChooseHomeP.vue'
   import happy from '@/components/HOME/HappyHomeP.vue'
   import what from '@/components/HOME/WhatHomeP.vue'
-  import prog from '@/components/HOME/Progress.vue'
+  import prog from '@/components/HOME/ProgressInput.vue'
  
 
   export default {
