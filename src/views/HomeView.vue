@@ -120,8 +120,9 @@
 
      <div class="container">
           <div class="row ">
-              <div class="col progress">
+              <div class="col progressH">
                 <prog/>
+   
               </div>
           </div>
      </div> 
@@ -420,6 +421,13 @@
     }
 
     
+}
+
+.progressH {
+  height: 300px;
+  border-width:2px;
+  border-style: solid;
+  border-color: #000;
 }
 
 
