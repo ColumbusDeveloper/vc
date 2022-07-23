@@ -179,11 +179,13 @@
     },
     data () {
       return {
+         
         
       }
     },
     methods:{
      
+
     }
   }
 </script>

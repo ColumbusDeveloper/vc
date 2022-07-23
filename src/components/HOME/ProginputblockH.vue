@@ -3,15 +3,15 @@
                     <div class="progressblock__inputblock">
                       <div class="progressblock__inputblock-btnblock">
                         <div class="progressblock__inputblock-btnblock-item">
-                          <btnblue class="progressblock__inputblock-btnblock-item_btn-blue">{{btnbltext}}</btnblue>
+                          <btnblue>{{btnbltext}}</btnblue>
                         </div>
 
                         <div class="progressblock__inputblock-btnblock-item">
-
+                          <btnwhite>{{btwhitetextaverage}}</btnwhite>
                         </div>
 
                         <div class="progressblock__inputblock-btnblock-item">
-
+                          <btnwhite>{{btnwhitegood}}</btnwhite>
                         </div>
 
 
@@ -22,7 +22,7 @@
                           <span class="progressblock__inputblock-inputprice-textnumblock_number"></span>
                         </div>
                         <div class="progressblock__inputblock-inputprice-sliderblock">
-
+                            {{issmb}}
                         </div>
                       </div>
                       <div class="progressblock__inputblock-inputmonth">
@@ -59,6 +59,7 @@
 <script>
 
   import btnblue from '@/components/primitives/BTN/btnBlueTextWhiteSlot112px.vue'
+  import btnwhite from '@/components/primitives/BTN/btnWhiteSlot112px.vue'
 
     // import proginputprise from '@/components/HOME/ProgressInputprice.vue'
 
@@ -69,11 +70,12 @@
 
    
 
-  export default {
+export default {
     
-    name: 'Perf-Home',
+    name: 'Progress-Home',
     components: {
       btnblue,
+      btnwhite,
         // proginputprise
 
 
@@ -83,27 +85,47 @@
 
         priceinput:0,
         btnbluetext:'poor',
-
+        btnwhitetextaverage:'Average',
+        btnwhitegood:'Good',
+        fullWidth:document.documentElement.clientWidth,
+        issmbtn:false,
       }
     },
+
+  
 
     methods:{
        priceinputset (val) {
         this.priceinput=val
+      },
+
+      checkwidth () {
+        console.log(this.fullWidth);
       }
+      
+
     },
 
     computed:{
       btnbltext () {
         return this.btnbluetext.toUpperCase()
-      }
-    },
+      },
+      btwhitetextaverage () {
+        return this.btnwhitetextaverage.toUpperCase()
+      },
+      btwhitegood () {
+        return this.btnwhitegood.toUpperCase()
+      },
+     
+
+
+    }
 
 
 
 
+}
 
-  }
 </script>
 
 
@@ -140,14 +162,11 @@
 		}
 
 		&__inputblock-btnblock-item {
-      height: 20px;
-      width: 35px;
+      
       border-width:5px;
       border-style: solid;
       border-color: red;
-      &_btn-blue {
-        max-width: 112px;
-      }
+      
 
 		}
 
