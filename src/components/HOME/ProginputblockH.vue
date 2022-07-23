@@ -58,7 +58,7 @@
 
 <script>
 
-  import btnblue from '@/components/primitives/BTN/btnBlueTextWhiteSlot.vue'
+  import btnblue from '@/components/primitives/BTN/btnBlueTextWhiteSlot112px.vue'
 
     // import proginputprise from '@/components/HOME/ProgressInputprice.vue'
 
