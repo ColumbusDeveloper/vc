@@ -2,8 +2,18 @@
   <div class="progress ">
     
       
-    <input  type="range" min="0" max="100" value="50" name="range" step="1"/>
+    <input  
 
+    type="range" 
+    min="0" 
+    max="450000" 
+    name="range" 
+    step="100"
+    v-model.number="price"
+    v-on:input="progbarchagedata"
+    
+    >
+  
 
     
   
@@ -24,20 +34,16 @@
     data() {
       return {
 
-        
-
-
-
+        price:0,
+          
       }
     },
 
     methods:{
-      
-    }
-
-
-
-
+      progbarchagedata () {
+        this.$emit ('progbarchagedata',this.price)
+      }
+    },
 
   }
 </script>

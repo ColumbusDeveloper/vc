@@ -121,8 +121,9 @@
      <div class="container">
           <div class="row ">
               <div class="col progressH">
-                <prog/>
-   
+                <prog />
+                
+                
               </div>
           </div>
      </div> 
@@ -150,7 +151,7 @@
   import choose from '@/components/HOME/ChooseHomeP.vue'
   import happy from '@/components/HOME/HappyHomeP.vue'
   import what from '@/components/HOME/WhatHomeP.vue'
-  import prog from '@/components/HOME/ProgressInput.vue'
+  import prog from '@/components/HOME/ProgressInputprice.vue'
  
 
   export default {
@@ -165,6 +166,14 @@
       prog,
   
     },
+    data () {
+      return {
+        
+      }
+    },
+    methods:{
+     
+    }
   }
 </script>
 
