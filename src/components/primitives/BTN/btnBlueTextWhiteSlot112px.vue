@@ -35,7 +35,7 @@
     background-color:$colorMainBlue;
     @include letterBtnWhiteText ;
     border-radius: 2px;
-    width: 200px;
+    width: 112px;
     height: 45px;
     white-space: nowrap;
     &:hover {
