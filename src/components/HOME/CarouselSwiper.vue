@@ -192,8 +192,8 @@ export default {
   @media (max-width:1200px) {
      height: 320px !important;
   }
-  @media (max-width:768px) {
-     height: 592px !important;
+  @media (max-width:769px) {
+     height: 650px !important;
   }
   @media (max-width:576px) {
      height: 578px !important;

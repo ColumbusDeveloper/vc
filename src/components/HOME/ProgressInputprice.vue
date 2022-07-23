@@ -53,7 +53,7 @@
   @import '../../assets/varmix.scss';
     
 .progress {
-
+  padding: 0;
   
   display: flex;
   align-items: center;

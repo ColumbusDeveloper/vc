@@ -120,6 +120,16 @@
 
      <div class="container">
           <div class="row ">
+              <div class="col letH">
+                <letblock />
+                
+                
+              </div>
+          </div>
+     </div> 
+
+     <div class="container">
+          <div class="row ">
               <div class="col progressH">
                 <progblock />
                 
@@ -152,6 +162,7 @@
   import happy from '@/components/HOME/HappyHomeP.vue'
   import what from '@/components/HOME/WhatHomeP.vue'
   import progblock from '@/components/HOME/ProginputblockH.vue'
+  import letblock from '@/components/HOME/LetP.vue'
  
 
   export default {
@@ -164,7 +175,7 @@
       happy,
       what,
       progblock,
-  
+      letblock,
     },
     data () {
       return {
@@ -432,12 +443,7 @@
     
 }
 
-.progressH {
-  height: 300px;
-  border-width:2px;
-  border-style: solid;
-  border-color: #000;
-}
+
 
 
 
