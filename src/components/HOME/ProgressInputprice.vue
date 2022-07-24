@@ -63,7 +63,7 @@
 
 
 input[type=range]  {
-width: 300px; //ширина самого слайдера
+width: 900px; //ширина самого слайдера
 -webkit-appearance: none; //сброс встроенных стилей 
 -moz-appearance: none;
 appearance: none;
@@ -84,8 +84,8 @@ input[type=range]::-webkit-slider-thumb {
   min-height: 15px; // размеры ползунка
   -webkit-appearance: none;
   margin-top: -5px; // ниже две тени, белая перекрывает голубую, получается узкая полоса
-  box-shadow:  -200px  -202px   0 190px  white,
-               -200px -193px   0 190px  #7481FF;           
+  box-shadow:  -900px  -902px   0 890px  white,
+               -900px -893px   0 890px  #7481FF;           
   border-width:1px;
   border-style: solid;
   border-color: white;
@@ -103,8 +103,8 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
   height: 5px; //стили для мозиллы
   border-radius:0px;
-  box-shadow:  -200px  -202px   0 190px  white,
-               -200px -193px   0 190px  #7481FF;
+  box-shadow:  -900px  -902px   0 890px  white,
+               -900px -893px   0 890px  #7481FF;
   padding: 0px;
   margin: 0px;
 }

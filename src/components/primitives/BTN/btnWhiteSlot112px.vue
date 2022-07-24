@@ -28,6 +28,7 @@
 <style lang="scss" scoped>
   @import '../../../assets/varmix.scss';
 
+  
   .btnWhite {
     position: relative;
     border-width:2px;
@@ -39,6 +40,9 @@
     height: 45px;
     background-color: white;
     white-space: nowrap;
+    @media (max-width:576px) {
+       width: 90px;
+    }
     &:hover {
         background-color: aqua;
     }

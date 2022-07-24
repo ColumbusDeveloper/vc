@@ -3,15 +3,15 @@
                     <div class="progressblock__inputblock">
                       <div class="progressblock__inputblock-btnblock">
                         <div class="progressblock__inputblock-btnblock-item">
-                          <btnblue>{{btnbltext}}</btnblue>
+                          <btnblue >{{btnbltext}}</btnblue>
                         </div>
 
                         <div class="progressblock__inputblock-btnblock-item">
-                          <btnwhite>{{btwhitetextaverage}}</btnwhite>
+                          <btnwhite >{{btwhitetextaverage}}</btnwhite>
                         </div>
 
                         <div class="progressblock__inputblock-btnblock-item">
-                          <btnwhite>{{btnwhitegood}}</btnwhite>
+                          <btnwhite >{{btnwhitegood}}</btnwhite>
                         </div>
 
 
@@ -22,7 +22,7 @@
                           <span class="progressblock__inputblock-inputprice-textnumblock_number"></span>
                         </div>
                         <div class="progressblock__inputblock-inputprice-sliderblock">
-                            {{issmb}}
+                            <proginputprise v-on:progbarchagedata="priceinputset"/>
                         </div>
                       </div>
                       <div class="progressblock__inputblock-inputmonth">
@@ -60,12 +60,11 @@
 
   import btnblue from '@/components/primitives/BTN/btnBlueTextWhiteSlot112px.vue'
   import btnwhite from '@/components/primitives/BTN/btnWhiteSlot112px.vue'
-
-    // import proginputprise from '@/components/HOME/ProgressInputprice.vue'
-
+  import proginputprise from '@/components/HOME/ProgressInputprice.vue'
 
 
-    // <proginputprise v-on:progbarchagedata="priceinputset"/>
+
+    <proginputprise v-on:progbarchagedata="priceinputset"/>
     // <span class="">{{priceinput}}</span>
 
    
@@ -76,7 +75,7 @@ export default {
     components: {
       btnblue,
       btnwhite,
-        // proginputprise
+      proginputprise,
 
 
     },
@@ -89,6 +88,7 @@ export default {
         btnwhitegood:'Good',
         fullWidth:document.documentElement.clientWidth,
         issmbtn:false,
+       
       }
     },
 
@@ -98,12 +98,20 @@ export default {
        priceinputset (val) {
         this.priceinput=val
       },
-
-      checkwidth () {
-        console.log(this.fullWidth);
-      }
+      
       
 
+      
+      
+
+      
+      
+
+    },
+
+    watch:{
+      
+      
     },
 
     computed:{
@@ -116,11 +124,18 @@ export default {
       btwhitegood () {
         return this.btnwhitegood.toUpperCase()
       },
+      isbtn80px(){
+          if(document.documentElement.clientWidth <= 576){
+            return true
+          }
+      else return this.issmbtn
+     },
+     
      
 
 
-    }
-
+    },
+    
 
 
 
@@ -155,17 +170,15 @@ export default {
       border-width:2px;
       border-style: solid;
       border-color: #000;
-      height: 25px;
       display: flex;
       padding-bottom: 50px;
+      justify-content: flex-start;
     
 		}
 
 		&__inputblock-btnblock-item {
       
-      border-width:5px;
-      border-style: solid;
-      border-color: red;
+      
       
 
 		}
