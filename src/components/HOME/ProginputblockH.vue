@@ -31,7 +31,8 @@
                           <span class="progressblock__inputblock-inputmonth-textnumblock_number"></span>
                         </div>
                         <div class="progressblock__inputblock-inputmonth-sliderblock">
-
+                            <proginputmonth v-on:progbarchangemonth="monthinputset"/>
+                            <span class="">{{priceinput}}</span>
                         </div>
                       </div>
 
@@ -61,10 +62,12 @@
   import btnblue from '@/components/primitives/BTN/btnBlueTextWhiteSlot112px.vue'
   import btnwhite from '@/components/primitives/BTN/btnWhiteSlot112px.vue'
   import proginputprise from '@/components/HOME/ProgressInputprice.vue'
+  import proginputmonth from '@/components/HOME/ProgressInputmonth.vue'
 
 
 
-    <proginputprise v-on:progbarchagedata="priceinputset"/>
+   
+    // <span class="">{{priceinput}}</span>
     // <span class="">{{priceinput}}</span>
 
    
@@ -76,6 +79,7 @@ export default {
       btnblue,
       btnwhite,
       proginputprise,
+      proginputmonth,
 
 
     },
@@ -83,6 +87,7 @@ export default {
       return {
 
         priceinput:0,
+        monthinput:0,
         btnbluetext:'poor',
         btnwhitetextaverage:'Average',
         btnwhitegood:'Good',
@@ -97,6 +102,10 @@ export default {
     methods:{
        priceinputset (val) {
         this.priceinput=val
+      },
+
+      monthinputset (val) {
+        this.monthinput=val
       },
       
       

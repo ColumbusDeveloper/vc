@@ -9,8 +9,8 @@
     max="450000" 
     name="range" 
     step="100"
-    v-model.number="price"
-    v-on:input="progbarchagedata"
+    v-model.number="month"
+    v-on:input="progbarchangemonth"
     
     >
   
@@ -34,14 +34,14 @@
     data() {
       return {
 
-        price:0,
+        month:0,
           
       }
     },
 
     methods:{
-      progbarchagedata () {
-        this.$emit ('progbarchagedata',this.price)
+      progbarchangemonth () {
+        this.$emit ('progbarchangemonth',this.month)
       }
     },
 
