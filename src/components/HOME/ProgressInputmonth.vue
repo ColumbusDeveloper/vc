@@ -6,9 +6,9 @@
 
     type="range" 
     min="0" 
-    max="450000" 
+    max="60" 
     name="range" 
-    step="100"
+    step="1"
     v-model.number="month"
     v-on:input="progbarchangemonth"
     
@@ -25,7 +25,7 @@
 
   export default {
     
-    name: 'Progress-bar',
+    name: 'Progressinputmonth-bar',
     components: {
       
 

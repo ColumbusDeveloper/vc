@@ -25,7 +25,7 @@
 
   export default {
     
-    name: 'Progress-bar',
+    name: 'Progressinputprice-bar',
     components: {
       
 

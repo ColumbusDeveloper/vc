@@ -32,7 +32,7 @@
                         </div>
                         <div class="progressblock__inputblock-inputmonth-sliderblock">
                             <proginputmonth v-on:progbarchangemonth="monthinputset"/>
-                            <span class="">{{priceinput}}</span>
+                            <span class="">{{monthinput}}</span>
                         </div>
                       </div>
 
@@ -68,7 +68,7 @@
 
    
     // <span class="">{{priceinput}}</span>
-    // <span class="">{{priceinput}}</span>
+    // <span class="">{{monthinput}}</span>
 
    
 
