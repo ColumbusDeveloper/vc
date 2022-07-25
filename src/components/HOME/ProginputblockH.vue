@@ -217,12 +217,7 @@ export default {
     
 		}
 
-		&__inputblock-btnblock-item {
-      
-      
-      
-
-		}
+		
 
 		&__inputblock-inputprice {
       
@@ -425,10 +420,7 @@ export default {
 
     
 
-		&__textnumblock-btnblock {
-    
-      
-		}
+		
 
     
 
