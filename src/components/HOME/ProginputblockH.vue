@@ -18,38 +18,53 @@
                       </div>
                       <div class="progressblock__inputblock-inputprice">
                         <div class="progressblock__inputblock-inputprice-textnumblock">
-                          <span class="progressblock__inputblock-inputprice-textnumblock_text"></span>
-                          <span class="progressblock__inputblock-inputprice-textnumblock_number"></span>
+                          <span class="progressblock__inputblock-inputprice-textnumblock_text">Loan Amount</span>
+                          <span class="progressblock__inputblock-inputprice-textnumblock_number">$  {{priceinput}}</span>
                         </div>
                         <div class="progressblock__inputblock-inputprice-sliderblock">
                             <proginputprise v-on:progbarchagedata="priceinputset"/>
+                           
                         </div>
                       </div>
                       <div class="progressblock__inputblock-inputmonth">
                         <div class="progressblock__inputblock-inputmonth-textnumblock">
-                          <span class="progressblock__inputblock-inputmonth-textnumblock_text"></span>
-                          <span class="progressblock__inputblock-inputmonth-textnumblock_number"></span>
+                          <span class="progressblock__inputblock-inputmonth-textnumblock_text">Loan Duration</span>
+                          <div class="progressblock__inputblock-inputmonth-textnumblock_number">
+                            <span class="progressblock__inputblock-inputmonth-textnumblock-number-text-var">{{monthinput}}</span>
+                            <p class="progressblock__inputblock-inputmonth-textnumblock-number-text">MONTH</p>
+                          </div>
+                          
                         </div>
                         <div class="progressblock__inputblock-inputmonth-sliderblock">
                             <proginputmonth v-on:progbarchangemonth="monthinputset"/>
-                            <span class="">{{monthinput}}</span>
+                          
                         </div>
                       </div>
 
                     </div>
                     <div class="progressblock__textnumblock">
-                      <div class="progressblock__textnumblock-innerflex">
-                          <div class="progressblock__textnumblock-innerflex-weeklyblue">
-
+                          <div class="progressblock__textnumblock-innerflex">
+                              <div class="progressblock__textnumblock-innerflex-weeklyblue">
+                                <div class="progressblock__textnumblock-innerflex-weeklyblue-column">
+                                  <span class="progressblock__textnumblock-innerflex-weeklyblue-column-text">Bi-Weekly Payment</span>
+                                  <span class="progressblock__textnumblock-innerflex-weeklyblue-column-num">${{biweek(priceinput,monthinput)}}</span>
+                                </div>
+                              </div>
+                              <div class="progressblock__textnumblock-innerflex-medweeklydurk">
+                                <div class="progressblock__textnumblock-innerflex-medweeklydurk-item">
+                                    <span class="progressblock__textnumblock-innerflex-medweeklydurk-item_text">Monthly Payment</span>
+                                    <span class="progressblock__textnumblock-innerflex-medweeklydurk-item_num">{{payMonth(priceinput,monthinput)}}</span>
+                                </div>
+                                <div class="progressblock__textnumblock-innerflex-medweeklydurk-item">
+                                    <span class="progressblock__textnumblock-innerflex-medweeklydurk-item_text">Weekly Payment</span>
+                                    <span class="progressblock__textnumblock-innerflex-medweeklydurk-item_num">{{payWeek(priceinput,monthinput)}}</span>
+                                </div>
+                              </div>
                           </div>
-                          <div class="progressblock__textnumblock-innerflex-medweeklydurk">
-
-                          </div>
-                      </div>
                       
-                      <div class="progressblock__textnumblock-btnblock">
-
-                      </div>
+                          <div class="progressblock__textnumblock-btnblock">
+                              <btnbluemob100>REQUEST A CAR</btnbluemob100>
+                          </div>
 
                     </div>
                 
@@ -63,6 +78,7 @@
   import btnwhite from '@/components/primitives/BTN/btnWhiteSlot112px.vue'
   import proginputprise from '@/components/HOME/ProgressInputprice.vue'
   import proginputmonth from '@/components/HOME/ProgressInputmonth.vue'
+  import btnbluemob100 from '@/components/primitives/BTN/btnBlueTextWhiteSlotMob100.vue'
 
 
 
@@ -80,14 +96,16 @@ export default {
       btnwhite,
       proginputprise,
       proginputmonth,
+      btnbluemob100,
+
 
 
     },
     data() {
       return {
 
-        priceinput:0,
-        monthinput:0,
+        priceinput:1,
+        monthinput:1,
         btnbluetext:'poor',
         btnwhitetextaverage:'Average',
         btnwhitegood:'Good',
@@ -107,6 +125,22 @@ export default {
       monthinputset (val) {
         this.monthinput=val
       },
+
+      biweek(valPr,valMon) {
+        return Math.trunc(valPr/valMon)/4*2
+      },
+
+      payMonth(valPr,valMon) {
+        return Math.trunc(valPr/valMon)
+      },
+
+      payWeek(valPr,valMon) {
+        return Math.trunc(valPr/valMon) / 4
+      },
+
+      
+
+
       
       
 
@@ -141,6 +175,7 @@ export default {
      },
      
      
+     
 
 
     },
@@ -158,27 +193,24 @@ export default {
     
 .progressblock {
   display: flex;
-  border-width:2px;
-  border-style: solid;
-  border-color: #000;
+  
   @media (max-width:768px) {
      flex-direction: column;
   }
 
 		&__inputblock {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
-      width: 67%;
+      
+      width: 75%;
+      @media (max-width:1050px) {
+         width: 67%;
+      }
       @media (max-width:768px) {
       width: 100%;
      }
 		}
 
 		&__inputblock-btnblock {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+      
       display: flex;
       padding-bottom: 50px;
       justify-content: flex-start;
@@ -193,89 +225,92 @@ export default {
 		}
 
 		&__inputblock-inputprice {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
-      height: 73px;
+      
+      
       display: flex;
       flex-direction: column;
       padding-bottom: 50px;
 		}
 
 		&__inputblock-inputprice-textnumblock {
-      border-width:5px;
-      border-style: solid;
-      border-color: blue;
-      width: 100%;
+      
+      
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      padding-bottom: 30px;
 
 			&_text {
-        width: 30px;
-        height: 20px;
-        border-width:2px;
-        border-style: solid;
-        border-color: yellow;
+        @include   letterSemiboldDarkBlue   ;
+        font-size: 1.25rem;
+        line-height: 1.56rem;
 			}
 
 			&_number {
-        width: 30px;
-        height: 20px;
-        border-width:2px;
-        border-style: solid;
-        border-color: yellow;
+        @include letterSemiboldDarkBlue;
+        width: 90px;
+        
+        text-align: end;
+
 			}
 		}
 
 		&__inputblock-inputprice-sliderblock {
      
       min-height: 25px;
-      border-width:5px;
-      border-style: solid;
-      border-color: green;
+      
 		}
 
 		&__inputblock-inputmonth {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
-      height: 73px;
+      
+      
       display: flex;
       flex-direction: column;
       padding-bottom: 50px;
 		}
 
 		&__inputblock-inputmonth-textnumblock {
-      border-width:5px;
-      border-style: solid;
-      border-color: blue;
-      width: 100%;
+      
+      
       display: flex;
       justify-content: space-between;
+      padding-bottom: 30px;
 
 			&_text {
-        width: 30px;
-        height: 20px;
-        border-width:2px;
-        border-style: solid;
-        border-color: yellow;
+        @include   letterSemiboldDarkBlue   ;
+        font-size: 1.25rem;
+        line-height: 1.56rem;
+        
 			}
 
 			&_number {
-        width: 30px;
-        height: 20px;
-        border-width:2px;
-        border-style: solid;
-        border-color: yellow;
+        
+        width: 90px;
+        
+        text-align: end;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 			}
 		}
+
+    &__inputblock-inputmonth-textnumblock-number-text-var {
+        @include letterSemiboldDarkBlue;
+    }
+
+    &__inputblock-inputmonth-textnumblock-number-text {
+       @include letterH4HeadingBurgerMenuTextNumbersDarkBlue     ;
+       font-size: 1rem;
+       line-height: 0.9rem;
+       margin-bottom: 0;
+       margin-top: 0;
+       
+    }
 
 		&__inputblock-inputmonth-sliderblock {
     
       min-height: 25px;
-      border-width:5px;
-      border-style: solid;
-      border-color: green;
+      
 		}
 
 
@@ -288,60 +323,125 @@ export default {
 
 
 		&__textnumblock {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
-      width: 33%;
+      
+      width: 25%;
+      height: 400px;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      padding-left: 70px;
+      @media (max-width:1050px) {
+         width: 33%;
+      }
       @media (max-width:768px) {
       width: 100%;
+      padding-left: 0;
+      height: 250px;
+     }
+     @media (max-width:576px) {
+        height: 270px;
      }
 		}
 
 		&__textnumblock-innerflex {
       display: flex;
       flex-direction: column;
-      border-width:5px;
-      border-style: solid;
-      border-color: #000;
+      
+      justify-content: space-between;
+      height: 330px;
       @media (max-width:768px) {
       flex-direction: row;
+      height: 168px;
       }
       @media (max-width:576px) {
          flex-direction: column;
+         height: 200px;
       }
       
 		}
 
 		&__textnumblock-innerflex-weeklyblue {
       height: 50px;
-      background-color: red;
+      
       @media (max-width:768px) {
       width: 50%;
       }
       @media (max-width:576px) {
          width: 100%;
       }
+		}
+
+    &__textnumblock-innerflex-weeklyblue-column {
+      display: flex;
+      flex-direction: column;
+      
+
+		}
+
+    &__textnumblock-innerflex-weeklyblue-column-text {
+      padding-bottom: 25px;
+      @include letterContentSecondarySmallGray     ;
+      font-size: 1rem;
+
+		}
+
+    &__textnumblock-innerflex-weeklyblue-column-num {
+      @include    letterH2textTitleDarkBlue  ;
+      font-size: 2.81rem;
+      color:#7481FF;
 		}
 
 		&__textnumblock-innerflex-medweeklydurk {
    
       min-height: 50px;
-      background-color: #000;
+      
       @media (max-width:768px) {
       width: 50%;
       }
       @media (max-width:576px) {
          width: 100%;
+         display: flex;
+         justify-content: space-between;
       }
 		}
 
+    &__textnumblock-innerflex-medweeklydurk-item {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 25px;
+      
+
+			&_text {
+        padding-bottom: 20px;
+        @include letterContentSecondarySmallGray     ;
+        font-size: 1rem;
+			}
+
+			&_num {
+        @include  letterH4HeadingBurgerMenuTextNumbersDarkBlue    ;
+        font-size: 1.56rem;
+			}
+		}
+
+    
+
 		&__textnumblock-btnblock {
     
-      height: 50px;
-      background-color: blue;
+      
 		}
+
+    
+
+		
+
+		
+
+		
+
+		
+
+		
+
 
     
 }
