@@ -31,11 +31,19 @@
 
 
     },
+    props:['proginputmonth'],
+    
+
     data() {
       return {
 
         month:0,
           
+      }
+    },
+    watch:{
+      proginputmonth (newVal) {
+        this.month = newVal
       }
     },
 

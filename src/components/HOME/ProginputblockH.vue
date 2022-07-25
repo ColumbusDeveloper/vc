@@ -46,7 +46,10 @@
                           
                         </div>
                         <div class="progressblock__inputblock-inputmonth-sliderblock">
-                            <proginputmonth v-on:progbarchangemonth="monthinputset"/>
+                            <proginputmonth 
+                            v-on:progbarchangemonth="monthinputset"
+                            v-bind:proginputmonth="monthinput"
+                            />
                           
                         </div>
                       </div>
@@ -153,7 +156,7 @@ export default {
         this.monthinput = 36
       },
       changeAvPr () {
-        this.priceinput = 50000
+        this.priceinput = 100000
       },
       changeAvMon () {
         this.monthinput = 24
