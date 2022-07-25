@@ -7,7 +7,12 @@
                         </div>
 
                         <div class="progressblock__inputblock-btnblock-item">
-                          <btnwhite >{{btwhitetextaverage}}</btnwhite>
+                          <btnwhite 
+                          v-bind:proginputprise="priceinput"
+                          v-bind:proginputmonth="monthinput"
+                          v-on:changeInpPr="changeAvPr"
+                          v-on:changeInpMon="changeAvMon"
+                          >{{btwhitetextaverage}}</btnwhite>
                         </div>
 
                         <div class="progressblock__inputblock-btnblock-item">
@@ -22,7 +27,12 @@
                           <span class="progressblock__inputblock-inputprice-textnumblock_number">$  {{priceinput}}</span>
                         </div>
                         <div class="progressblock__inputblock-inputprice-sliderblock">
-                            <proginputprise v-on:progbarchagedata="priceinputset"/>
+                            <proginputprise 
+                            v-on:progbarchagedata="priceinputset"
+                            v-bind:proginputprise="priceinput"
+                            
+                            
+                            />
                            
                         </div>
                       </div>
@@ -111,6 +121,7 @@ export default {
         btnwhitegood:'Good',
         fullWidth:document.documentElement.clientWidth,
         issmbtn:false,
+        
        
       }
     },
@@ -137,6 +148,21 @@ export default {
       payWeek(valPr,valMon) {
         return Math.trunc(valPr/valMon) / 4
       },
+      poor () {
+        this.priceinput = 10000
+        this.monthinput = 36
+      },
+      changeAvPr () {
+        this.priceinput = 50000
+      },
+      changeAvMon () {
+        this.monthinput = 24
+      },
+      good () {
+        this.priceinput = 150000
+        this.monthinput = 36
+      }
+
 
       
 

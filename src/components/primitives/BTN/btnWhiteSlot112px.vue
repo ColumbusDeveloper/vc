@@ -2,7 +2,11 @@
     
             <div class="col">
                 <div class="btnWhite">
-                    <span class="btnWhite__text"><slot></slot></span>
+                    <span class="btnWhite__text"
+                    v-on:click="this.$emit('changeInpPr',this.inpprice),this.$emit('changeInpMon',this.inpmonth) "
+                    
+                    
+                    ><slot></slot></span>
 
                 </div>
             
@@ -17,9 +21,36 @@
 
 
   export default {
-    
-    name: 'Btn-white',
-    
+  name: 'Btn-white',
+  components: {
+  
+  },
+  props:['proginputprise,proginputmonth'],
+  
+  data () {
+      return {
+        inpprice:0,
+        inpmonth:0,
+       
+      }
+  },
+  watch:{
+    proginputprise (newVal) {
+      this.inpprice = newVal
+    },
+    proginputmonth (newVal) {
+      this.inpmonth = newVal
+    },
+  },
+  methods: {
+    chenP () {
+      this.$emit('changeInpPr',this.inpprice)
+    },
+    chenM () {
+      this.$emit('changeInpMon',this.inpmonth)
+    }
+  }
+
   }
 
 </script>

@@ -2,7 +2,11 @@
    
             <div class="col">
                 <div class="btnBlue">
-                    <span class="btnBlue__text"><slot></slot></span>
+                    <span class="btnBlue__text"
+                    
+                    
+                    >
+                    <slot></slot></span>
 
                 </div>
             
@@ -12,14 +16,25 @@
 </template>
 
 <script>
-
+  
 
 
   export default {
-    
-    name: 'Btn-blue',
-    
-  }
+  name: 'Btn-blue',
+  components: {
+  
+  },
+  props:['proginputprise,proginputmonth'],
+  
+  data () {
+      return {
+       
+      }
+  },
+
+  
+  
+}
 
 </script>
 
