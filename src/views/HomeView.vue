@@ -117,6 +117,26 @@
               </div>
           </div>
      </div> 
+
+     <div class="container">
+          <div class="row ">
+              <div class="col letH">
+                <letblock />
+                
+                
+              </div>
+          </div>
+     </div> 
+
+     <div class="container">
+          <div class="row ">
+              <div class="col progressH">
+                <progblock />
+                
+                
+              </div>
+          </div>
+     </div> 
      
 
      
@@ -141,6 +161,8 @@
   import choose from '@/components/HOME/ChooseHomeP.vue'
   import happy from '@/components/HOME/HappyHomeP.vue'
   import what from '@/components/HOME/WhatHomeP.vue'
+  import progblock from '@/components/HOME/ProginputblockH.vue'
+  import letblock from '@/components/HOME/LetP.vue'
  
 
   export default {
@@ -152,8 +174,19 @@
       choose,
       happy,
       what,
-  
+      progblock,
+      letblock,
     },
+    data () {
+      return {
+         
+        
+      }
+    },
+    methods:{
+     
+
+    }
   }
 </script>
 
@@ -383,14 +416,21 @@
       @include letterContentSecondarySmallGray;
       text-align: center;
       max-width: 300px;
-      @media (max-width:752px) {
-         width: 250px;
+      @media (max-width:768px) {
+         font-size: 1rem;
       }
-      @media (max-width:472px) {
+      @media (max-width:752px) {
          width: 200px;
+         
+      }
+      
+      @media (max-width:472px) {
+         width: 130px;
       }
       @media (width:545px) {
          line-height: 1.6rem;
+         font-size: 0.8rem;
+         width: 150px;
       }
           
 
@@ -407,6 +447,8 @@
 
 
 
+
+
 		
 
 
@@ -414,3 +456,4 @@
 
   
 </style>
+
