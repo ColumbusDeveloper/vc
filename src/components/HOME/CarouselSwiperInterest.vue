@@ -1,78 +1,131 @@
 
 <template>
-<div class="swiperBlock">
-  <swiper
-    class="parallax-slider"
-    :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
- 
-    grabCursor
-    @swiper="onSwiperInitialized"
-  >
-    <div class="parallax-slider-navigation">
-      <div class="nav-indicator prevArrow">
-        <i class="fa-solid fa-chevron-left"></i>
-      </div>
-      <div class="nav-indicator nextArrow">
-       <i class="fa-solid fa-chevron-right"></i>
-      </div>
-    </div>
+<div >
+          
+          
+          <div class="swiperBlock2">
+            <swiper
+              class="parallax-slider"
+              :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
+              :slides-per-view="1"
+              
+          
+              grabCursor
+              @swiper="onSwiperInitialized"
+            >
+              <div class="parallax-slider-navigation">
+                <div class="nav-indicator prevArrow">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </div>
+                <div class="nav-indicator nextArrow">
+                <i class="fa-solid fa-chevron-right"></i>
+                </div>
+              </div>
 
-    <swiper-slide  class="parallax-slide">
-      <div class="parallax-slide-image">
-       <div class="swiperBlock__itemSlide">
-                    <div class="swiperBlock__itemSlideImg">
-                      <img src="../../assets/images/SwiperImg.png" alt='img'>
-                    </div>
-                    <div class="swiperBlock__itemSlideText">
-                        <div class="swiperBlock__itemSlideTextTitle">
-                          <p>Laura Chaisson</p>
-                        </div>
-                        <div class="swiperBlock__itemSlideTextRegular">
-                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
-                        </div>
-                    </div>      
-                  </div>
-      </div>
-    </swiper-slide>
+            
 
-    <swiper-slide  class="parallax-slide">
-      <div class="parallax-slide-image">
-       <div class="swiperBlock__itemSlide">
-                    <div class="swiperBlock__itemSlideImg">
-                      <img src="../../assets/images/SwiperImg.png" alt='img'>
-                    </div>
-                    <div class="swiperBlock__itemSlideText">
-                        <div class="swiperBlock__itemSlideTextTitle">
-                          <p>Laura Chaisson</p>
-                        </div>
-                        <div class="swiperBlock__itemSlideTextRegular">
-                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
-                        </div>
-                    </div>      
-                  </div>
-      </div>
-    </swiper-slide>
+              <swiper-slide  class="parallax-slide">
+                <div class="parallax-slide-image">
+                <div class="swiperBlock__itemSlide">
+                              <div class="swiperBlock__itemSlideImg">
+                                <img src="../../assets/images/swiper_bottom_home_1.png" alt='img'>
+                              </div>
+                              <div class="swiperBlock__itemSlideText">
+                                  <div class="swiperBlock__itemSlideTextTitle">
+                                    <p>10 May, 2020</p>
+                                  </div>
+                                  <div class="swiperBlock__itemSlideTextRegular">
+                                    <p>How to save on buying a car?</p> 
+                                    <p>Why is it better to buy from us</p>
+                                  </div>
+                              </div>      
+                            </div>
+                </div>
+              </swiper-slide>
 
-    <swiper-slide  class="parallax-slide">
-      <div class="parallax-slide-image">
-       <div class="swiperBlock__itemSlide">
-                    <div class="swiperBlock__itemSlideImg">
-                      <img src="../../assets/images/SwiperImg.png" alt='img'>
-                    </div>
-                    <div class="swiperBlock__itemSlideText">
-                        <div class="swiperBlock__itemSlideTextTitle">
-                          <p>Laura Chaisson</p>
-                        </div>
-                        <div class="swiperBlock__itemSlideTextRegular">
-                          <p>In irure et ipsum eiusmod adipisicing id elit cillum proident. Adipisicing ullamco nisi veniam occaecat id excepteur ad non. Sunt occaecat elit ullamco commodo exercitation. Anim mollit irure Lorem proident veniam excepteur non irure Lorem. Lorem esse sint in nisi id esse.</p>
-                        </div>
-                    </div>      
-                  </div>
-      </div>
-    </swiper-slide>
+              
 
-  </swiper>
+              <swiper-slide  class="parallax-slide">
+                <div class="parallax-slide-image">
+                            <div class="swiperBlock__itemSlide">
+                              <div class="swiperBlock__itemSlideImg">
+                                <img src="../../assets/images/swiper_bottom_home_2.png" alt='img'>
+                              </div>
+                              <div class="swiperBlock__itemSlideText">
+                                  <div class="swiperBlock__itemSlideTextTitle">
+                                    <p>10 May, 2020</p>
+                                  </div>
+                                  <div class="swiperBlock__itemSlideTextRegular">
+                                    <p>How to save on buying a car?</p> 
+                                    <p>Why is it better to buy from us</p>
+                                  </div>
+                              </div>      
+                            </div>
+                </div>
+              </swiper-slide>
+
+              <swiper-slide  class="parallax-slide">
+                <div class="parallax-slide-image">
+                <div class="swiperBlock__itemSlide">
+                              <div class="swiperBlock__itemSlideImg">
+                                <img src="../../assets/images/swiper_bottom_home_3.png" alt='img'>
+                              </div>
+                              <div class="swiperBlock__itemSlideText">
+                                  <div class="swiperBlock__itemSlideTextTitle">
+                                    <p>10 May, 2020</p>
+                                  </div>
+                                  <div class="swiperBlock__itemSlideTextRegular">
+                                    <p>How to save on buying a car?</p> 
+                                    <p>Why is it better to buy from us</p>
+                                  </div>
+                              </div>      
+                            </div>
+                </div>
+              </swiper-slide>
+              <swiper-slide  class="parallax-slide">
+                <div class="parallax-slide-image">
+                <div class="swiperBlock__itemSlide">
+                              <div class="swiperBlock__itemSlideImg">
+                                <img src="../../assets/images/swiper_bottom_home_1.png" alt='img'>
+                              </div>
+                              <div class="swiperBlock__itemSlideText">
+                                  <div class="swiperBlock__itemSlideTextTitle">
+                                    <p>10 May, 2020</p>
+                                  </div>
+                                  <div class="swiperBlock__itemSlideTextRegular">
+                                    <p>How to save on buying a car?</p> 
+                                    <p>Why is it better to buy from us</p>
+                                  </div>
+                              </div>      
+                            </div>
+                </div>
+              </swiper-slide>
+
+              
+
+              <swiper-slide  class="parallax-slide">
+                <div class="parallax-slide-image">
+                <div class="swiperBlock__itemSlide">
+                              <div class="swiperBlock__itemSlideImg">
+                                <img src="../../assets/images/swiper_bottom_home_3.png" alt='img'>
+                              </div>
+                              <div class="swiperBlock__itemSlideText">
+                                  <div class="swiperBlock__itemSlideTextTitle">
+                                    <p>10 May, 2020</p>
+                                  </div>
+                                  <div class="swiperBlock__itemSlideTextRegular">
+                                    <p>How to save on buying a car?</p> 
+                                    <p>Why is it better to buy from us</p>
+                                  </div>
+                              </div>      
+                            </div>
+                </div>
+              </swiper-slide>
+
+            </swiper>
+          </div>
 </div>
+
 </template>
 
 <script>
@@ -89,12 +142,15 @@ import "swiper/components/navigation/navigation.scss";
 
 SwiperCore.use([Navigation, Parallax]);
 
+
+
 export default {
   data() {
     return {
       
     }
   },
+  
   computed: {
    
   },
@@ -104,7 +160,7 @@ export default {
    
   },
   methods: {
-    
+   
   },
 };
 </script>
@@ -115,28 +171,40 @@ export default {
  @import '../../assets/varmix.scss';
 
 
-  
 
+
+
+
+
+
+.swiperBlock1 .parallax-slider-navigation {
+  display: none;
+}
 
 .swiperBlock {
+  border-width:3px;
+  border-style: solid;
+  border-color: #000;
+  @media (max-width:768px) {
+     display: none;
+  }
       
 
   
 		&__itemSlide {
       display: flex;
-      @media (max-width:768px) {
-         flex-direction: column;
-      }
+      flex-direction: column;
+      border-width:3px;
+      border-style: solid;
+      border-color: red;
+      
       
 		}
 
    
 
 		&__itemSlideImg {
-      width: 40%;
-          @media (max-width:768px) {
-          width: 100%;
-        }
+      
    
       img {
         width: 100%;
@@ -146,9 +214,8 @@ export default {
 		}
 
 		&__itemSlideText {
-       padding-left: 15px;
-       padding-right: 50px;
-       width: 60%;
+       
+      
        display: flex;
        flex-direction: column;
        align-items: flex-start;
@@ -158,9 +225,7 @@ export default {
           width: 100%;
           padding-left: 0px;
           padding-right: 0px;
-          p {
-            padding-top:20px;
-          }
+          
        }
  
 
@@ -175,35 +240,31 @@ export default {
     }
 
     &__itemSlideTextRegular {
+      display: flex;
+      flex-direction: column;
+      
      
       width: 100%;
       @include letterSemiboldDarkBlue;
+      p {
+        line-height: 0.9rem;
+      }
     }
 }
 .parallax-slider {
   position: relative;
 }
 .parallax-slide {
-  height: 550px !important;
+  height: fit-content !important;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   @media (max-width:1200px) {
-     height: 320px !important;
+     height: 450px !important;
   }
-  @media (max-width:769px) {
-     height: 650px !important;
-  }
-  @media (max-width:576px) {
-     height: 578px !important;
-  }
-  @media (max-width:450px) {
-     height: 543px !important;
-  }
-  @media (max-width:372px) {
-     height: 511px !important;
-  }
+  
+  
 }
 .parallax-slider-navigation {
   position: absolute;
@@ -220,13 +281,13 @@ export default {
      top: 31%;
   }
   @media (max-width:576px) {
-     top: 31%;
+     top: 45%;
   }
   @media (max-width:450px) {
-     top: 26%;
+     top: 50%;
   }
   @media (max-width:372px) {
-     top: 22%;
+     top: 50%;
   }
 }
 .parallax-slide-image {
