@@ -42,7 +42,7 @@
 
 		&__text {
             text-transform:uppercase ;
-         
+            word-spacing: 5px;
             position:absolute;
             top: 50%;
             left: 50%;

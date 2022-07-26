@@ -77,7 +77,7 @@
 		&__text {
             text-transform:uppercase ;
             position:absolute;
-           
+            word-spacing: 5px;
 
 
             top: 50%;

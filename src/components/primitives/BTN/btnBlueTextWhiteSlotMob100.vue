@@ -46,6 +46,7 @@
     }
 
 		&__text {
+            word-spacing: 5px;
             text-transform:uppercase ;
             position:absolute;
             top: 50%;
