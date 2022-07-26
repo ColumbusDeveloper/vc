@@ -137,6 +137,16 @@
               </div>
           </div>
      </div> 
+
+     <div class="container">
+          <div class="row ">
+              <div class="col interestH">
+                <interest />
+                
+                
+              </div>
+          </div>
+     </div> 
      
 
      
@@ -163,7 +173,7 @@
   import what from '@/components/HOME/WhatHomeP.vue'
   import progblock from '@/components/HOME/ProginputblockH.vue'
   import letblock from '@/components/HOME/LetP.vue'
- 
+  import interest from '@/components/HOME/InterestHome.vue'
 
   export default {
     name: 'HomeView',
@@ -176,6 +186,7 @@
       what,
       progblock,
       letblock,
+      interest
     },
     data () {
       return {

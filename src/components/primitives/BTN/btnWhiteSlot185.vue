@@ -1,29 +1,31 @@
 <template>
-   
+    
             <div class="col">
-                <div class="btnBlue"
-                v-on:click="this.$emit('changeInpPrBtnBlue',this.inpprice),this.$emit('changeInpMonBtnBlue',this.inpmonth) "
+                <div class="btnWhite"
+                v-on:click="this.$emit('changeInpPr',this.inpprice),this.$emit('changeInpMon',this.inpmonth), this.$emit('changeInpPrG',this.inpprice),this.$emit('changeInpMonG',this.inpmonth)"
+                
                 
                 >
-                    <span class="btnBlue__text"
+                    <span class="btnWhite__text"
                     
                     
-                    >
-                    <slot></slot></span>
+                    
+                    ><slot></slot></span>
 
                 </div>
             
             </div>
+        
        
   
 </template>
 
 <script>
-  
+
 
 
   export default {
-  name: 'Btn-blue',
+  name: 'Btn-white',
   components: {
   
   },
@@ -31,8 +33,9 @@
   
   data () {
       return {
-       inpprice:0,
-       inpmonth:0,
+        inpprice:0,
+        inpmonth:0,
+       
       }
   },
   watch:{
@@ -43,10 +46,16 @@
       this.inpmonth = newVal
     },
   },
+  methods: {
+    chenP () {
+      this.$emit('changeInpPr',this.inpprice)
+    },
+    chenM () {
+      this.$emit('changeInpMon',this.inpmonth)
+    }
+  }
 
-  
-  
-}
+  }
 
 </script>
 
@@ -55,38 +64,29 @@
   @import '../../../assets/varmix.scss';
 
   
-
-  .btnBlue {
+  .btnWhite {
     position: relative;
     border-width:2px;
     border-style: solid;
     border-color: $colorMainBlue;
-    background-color:$colorMainBlue;
-    @include letterBtnWhiteText ;
+    @include letterBtnBlueText;
     border-radius: 2px;
-    width: 112px;
+    width: 185px;
     height: 45px;
+    background-color: white;
     white-space: nowrap;
-    @media (max-width:992px) {
-       width: 160px;
-    }
-    @media (max-width:576px) {
-       width: 90px;
-    }
+    
     &:hover {
-        background-color: rgb(0, 162, 255);
+        background-color: aqua;
     }
 
 		&__text {
             text-transform:uppercase ;
-            position:absolute;
             word-spacing: 5px;
-
-
+            position:absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
-            
 		}
 }
 
