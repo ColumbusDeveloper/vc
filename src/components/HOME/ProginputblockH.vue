@@ -3,7 +3,15 @@
                     <div class="progressblock__inputblock">
                       <div class="progressblock__inputblock-btnblock">
                         <div class="progressblock__inputblock-btnblock-item">
-                          <btnblue >{{btnbltext}}</btnblue>
+                          <btnblue 
+
+                       
+                          v-bind:proginputprise="priceinput"
+                          v-bind:proginputmonth="monthinput"
+                          v-on:changeInpPrBtnBlue="changePoPr"
+                          v-on:changeInpMonBtnBlue="changePoMon"
+                          
+                          >{{btnbltext}}</btnblue>
                         </div>
 
                         <div class="progressblock__inputblock-btnblock-item">
@@ -16,7 +24,14 @@
                         </div>
 
                         <div class="progressblock__inputblock-btnblock-item">
-                          <btnwhite >{{btnwhitegood}}</btnwhite>
+                          <btnwhite 
+                          v-bind:proginputprise="priceinput"
+                          v-bind:proginputmonth="monthinput"
+                          v-on:changeInpPrG="changeGoPr"
+                          v-on:changeInpMonG="changeGoMon"
+                          
+                          
+                          >{{btnwhitegood}}</btnwhite>
                         </div>
 
 
@@ -96,8 +111,7 @@
 
 
    
-    // <span class="">{{priceinput}}</span>
-    // <span class="">{{monthinput}}</span>
+    
 
    
 
@@ -117,7 +131,7 @@ export default {
     data() {
       return {
 
-        priceinput:1,
+        priceinput:0,
         monthinput:1,
         btnbluetext:'poor',
         btnwhitetextaverage:'Average',
@@ -151,9 +165,13 @@ export default {
       payWeek(valPr,valMon) {
         return Math.trunc(valPr/valMon) / 4
       },
-      poor () {
-        this.priceinput = 10000
-        this.monthinput = 36
+      changePoPr () {
+        this.priceinput = 50000
+    
+      },
+      changePoMon () {
+      
+        this.monthinput = 48
       },
       changeAvPr () {
         this.priceinput = 100000
@@ -161,10 +179,12 @@ export default {
       changeAvMon () {
         this.monthinput = 24
       },
-      good () {
-        this.priceinput = 150000
-        this.monthinput = 36
-      }
+      changeGoPr () {
+        this.priceinput = 300000
+      },
+      changeGoMon () {
+        this.monthinput = 12
+      },
 
 
       

@@ -1,7 +1,10 @@
 <template>
    
             <div class="col">
-                <div class="btnBlue">
+                <div class="btnBlue"
+                v-on:click="this.$emit('changeInpPrBtnBlue',this.inpprice),this.$emit('changeInpMonBtnBlue',this.inpmonth) "
+                
+                >
                     <span class="btnBlue__text"
                     
                     
@@ -28,8 +31,17 @@
   
   data () {
       return {
-       
+       inpprice:0,
+       inpmonth:0,
       }
+  },
+  watch:{
+    proginputprise (newVal) {
+      this.inpprice = newVal
+    },
+    proginputmonth (newVal) {
+      this.inpmonth = newVal
+    },
   },
 
   
@@ -65,9 +77,13 @@
 		&__text {
             text-transform:uppercase ;
             position:absolute;
+           
+
+
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
+            
 		}
 }
 

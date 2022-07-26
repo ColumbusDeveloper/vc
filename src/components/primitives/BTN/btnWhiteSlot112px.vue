@@ -1,9 +1,13 @@
 <template>
     
             <div class="col">
-                <div class="btnWhite">
+                <div class="btnWhite"
+                v-on:click="this.$emit('changeInpPr',this.inpprice),this.$emit('changeInpMon',this.inpmonth), this.$emit('changeInpPrG',this.inpprice),this.$emit('changeInpMonG',this.inpmonth)"
+                
+                
+                >
                     <span class="btnWhite__text"
-                    v-on:click="this.$emit('changeInpPr',this.inpprice),this.$emit('changeInpMon',this.inpmonth) "
+                    
                     
                     
                     ><slot></slot></span>
