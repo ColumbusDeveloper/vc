@@ -67,6 +67,9 @@
     width: 112px;
     height: 45px;
     white-space: nowrap;
+    @media (max-width:992px) {
+       width: 160px;
+    }
     @media (max-width:576px) {
        width: 90px;
     }
