@@ -122,9 +122,7 @@
 .interest {
   
   height: 560px;
-  border-width:2px;
-  border-style: solid;
-  border-color: #000;
+  
   padding-top: 60px;
    
     &__item-none {
@@ -148,9 +146,7 @@
 		}
 
 		&__heading-text-block {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+     
       @media (max-width:576px) {
          width: 100%;
       }
@@ -196,12 +192,10 @@
 		&__disappear-med-part {
       display: flex;
       justify-content: space-between;
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+      
       padding-top: 60px;
       @media (max-width:768px) {
-         justify-content: space-around;
+         justify-content: space-between;
       }
       
     
@@ -211,12 +205,12 @@
 		}
 
 		&__disappear-med-part-item {
-      border-width:2px;
-      border-style: solid;
-      border-color: #000;
+  
       width: 30%;
       @media (max-width:768px) {
          width: 50%;
+         margin-left: 5px;
+         margin-right: 5px;
       }
      
 		}
@@ -229,13 +223,16 @@
       }
 		}
 
-		&__disappear-med-part-item-text-box {
-		}
+		
 
 		&__disappear-med-part-item-text-box-data {
+      @include    letterContentSecondarySmallGray  ;
+      
 		}
 
 		&__disappear-med-part-item-text-box-content {
+      @include   letterSemiboldDarkBlue   ;
+      
 		}
 }
 

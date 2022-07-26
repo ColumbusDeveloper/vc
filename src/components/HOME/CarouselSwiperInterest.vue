@@ -194,9 +194,7 @@ export default {
 		&__itemSlide {
       display: flex;
       flex-direction: column;
-      border-width:3px;
-      border-style: solid;
-      border-color: red;
+     
       
       
 		}
