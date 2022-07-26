@@ -3,15 +3,35 @@
                     <div class="progressblock__inputblock">
                       <div class="progressblock__inputblock-btnblock">
                         <div class="progressblock__inputblock-btnblock-item">
-                          <btnblue >{{btnbltext}}</btnblue>
+                          <btnblue 
+
+                       
+                          v-bind:proginputprise="priceinput"
+                          v-bind:proginputmonth="monthinput"
+                          v-on:changeInpPrBtnBlue="changePoPr"
+                          v-on:changeInpMonBtnBlue="changePoMon"
+                          
+                          >{{btnbltext}}</btnblue>
                         </div>
 
                         <div class="progressblock__inputblock-btnblock-item">
-                          <btnwhite >{{btwhitetextaverage}}</btnwhite>
+                          <btnwhite 
+                          v-bind:proginputprise="priceinput"
+                          v-bind:proginputmonth="monthinput"
+                          v-on:changeInpPr="changeAvPr"
+                          v-on:changeInpMon="changeAvMon"
+                          >{{btwhitetextaverage}}</btnwhite>
                         </div>
 
                         <div class="progressblock__inputblock-btnblock-item">
-                          <btnwhite >{{btnwhitegood}}</btnwhite>
+                          <btnwhite 
+                          v-bind:proginputprise="priceinput"
+                          v-bind:proginputmonth="monthinput"
+                          v-on:changeInpPrG="changeGoPr"
+                          v-on:changeInpMonG="changeGoMon"
+                          
+                          
+                          >{{btnwhitegood}}</btnwhite>
                         </div>
 
 
@@ -22,7 +42,12 @@
                           <span class="progressblock__inputblock-inputprice-textnumblock_number">$  {{priceinput}}</span>
                         </div>
                         <div class="progressblock__inputblock-inputprice-sliderblock">
-                            <proginputprise v-on:progbarchagedata="priceinputset"/>
+                            <proginputprise 
+                            v-on:progbarchagedata="priceinputset"
+                            v-bind:proginputprise="priceinput"
+                            
+                            
+                            />
                            
                         </div>
                       </div>
@@ -36,7 +61,10 @@
                           
                         </div>
                         <div class="progressblock__inputblock-inputmonth-sliderblock">
-                            <proginputmonth v-on:progbarchangemonth="monthinputset"/>
+                            <proginputmonth 
+                            v-on:progbarchangemonth="monthinputset"
+                            v-bind:proginputmonth="monthinput"
+                            />
                           
                         </div>
                       </div>
@@ -83,8 +111,7 @@
 
 
    
-    // <span class="">{{priceinput}}</span>
-    // <span class="">{{monthinput}}</span>
+    
 
    
 
@@ -104,13 +131,14 @@ export default {
     data() {
       return {
 
-        priceinput:1,
+        priceinput:0,
         monthinput:1,
         btnbluetext:'poor',
         btnwhitetextaverage:'Average',
         btnwhitegood:'Good',
         fullWidth:document.documentElement.clientWidth,
         issmbtn:false,
+        
        
       }
     },
@@ -137,6 +165,27 @@ export default {
       payWeek(valPr,valMon) {
         return Math.trunc(valPr/valMon) / 4
       },
+      changePoPr () {
+        this.priceinput = 50000
+    
+      },
+      changePoMon () {
+      
+        this.monthinput = 48
+      },
+      changeAvPr () {
+        this.priceinput = 100000
+      },
+      changeAvMon () {
+        this.monthinput = 24
+      },
+      changeGoPr () {
+        this.priceinput = 300000
+      },
+      changeGoMon () {
+        this.monthinput = 12
+      },
+
 
       
 

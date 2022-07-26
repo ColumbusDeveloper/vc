@@ -11,7 +11,10 @@
     step="100"
     v-model.number="price"
     v-on:input="progbarchagedata"
+   
     
+
+
     >
   
 
@@ -31,18 +34,26 @@
 
 
     },
+    props:['proginputprise'],
     data() {
       return {
 
         price:0,
+        
           
+      }
+    },
+    watch:{
+      proginputprise (newVal) {
+        this.price = newVal
       }
     },
 
     methods:{
       progbarchagedata () {
         this.$emit ('progbarchagedata',this.price)
-      }
+      },
+      
     },
 
   }

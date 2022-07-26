@@ -1,8 +1,15 @@
 <template>
    
             <div class="col">
-                <div class="btnBlue">
-                    <span class="btnBlue__text"><slot></slot></span>
+                <div class="btnBlue"
+                v-on:click="this.$emit('changeInpPrBtnBlue',this.inpprice),this.$emit('changeInpMonBtnBlue',this.inpmonth) "
+                
+                >
+                    <span class="btnBlue__text"
+                    
+                    
+                    >
+                    <slot></slot></span>
 
                 </div>
             
@@ -12,14 +19,34 @@
 </template>
 
 <script>
-
+  
 
 
   export default {
-    
-    name: 'Btn-blue',
-    
-  }
+  name: 'Btn-blue',
+  components: {
+  
+  },
+  props:['proginputprise,proginputmonth'],
+  
+  data () {
+      return {
+       inpprice:0,
+       inpmonth:0,
+      }
+  },
+  watch:{
+    proginputprise (newVal) {
+      this.inpprice = newVal
+    },
+    proginputmonth (newVal) {
+      this.inpmonth = newVal
+    },
+  },
+
+  
+  
+}
 
 </script>
 
@@ -50,9 +77,13 @@
 		&__text {
             text-transform:uppercase ;
             position:absolute;
+           
+
+
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
+            
 		}
 }
 
