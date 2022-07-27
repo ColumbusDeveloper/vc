@@ -39,6 +39,9 @@ import navbar from './primitives/navBar.vue'
 export default {
   
   name: 'Header-one',
+
+  
+
   components: {
   
   btnwhite,
@@ -47,10 +50,11 @@ export default {
 
 
   },
+  props:['btninventory'],
   data() {
     return {
 
-      btnwhiteState:false,
+      btnwhiteState:this.btninventory,
 
 
 
@@ -59,7 +63,14 @@ export default {
 
   methods:{
     
-  }
+  },
+  watch:{
+    btninventory (newVal) {
+      this.btnwhiteState = newVal
+    }
+  },
+
+
 
 
 

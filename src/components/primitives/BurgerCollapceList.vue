@@ -4,8 +4,8 @@
       
          <div class="menuListDisplay">
                   <ul class="nav">
-                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id">
-                      <router-link :to="item.path" class="nav-link">
+                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id" v-on:click="this.$emit('inventorynone')">
+                      <router-link :to="item.path" class="nav-link"  >
                         {{item.name}}
                       </router-link>
                     </li>
@@ -21,8 +21,9 @@
                     <div class="socials__SingleBlock">
                       <a href="#" target="blank"><i class="fa-brands fa-youtube"></i></a>
                     </div>
+                    
                   </div>
-                  <header class="menuListDisplay__header"/>
+                  
          </div>
      
 
@@ -30,17 +31,19 @@
 </template>
 
 <script>
-  import header from '@/components/Header.vue'
+  
   export default {
     name: 'BurgerCollapce-list',
 
     components: {
-      header,
+     
     },
     
 
     data() {
       return {
+
+        
 
         burgerMenuList: [
           {
@@ -106,6 +109,10 @@
     @media (max-width:576px) {
       width: 100vw;
       padding-left: 70px;
+    }
+
+    &__invisible {
+      width: 0;
     }
 
     .nav {

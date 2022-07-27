@@ -5,10 +5,10 @@
           <div class="container">
             <div class="row">
                 <div class="col header">
-                  <Headerone class="center" />
+                  <Headerone v-bind:btninventory="inventorystatus" class="center" />
                   <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
                   <transition name="menu">
-                    <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross" />
+                    <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross" v-on:inventorynone="inventorystatus=!inventorystatus"  />
                   </transition>
               </div>
             </div>
@@ -42,7 +42,12 @@
     data() {
       return {
         iscross: false,
+        inventorystatus:false,
+
       }
+    },
+    methods: {
+      
     },
   }
 </script>
