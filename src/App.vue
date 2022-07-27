@@ -8,7 +8,7 @@
                   <Headerone v-bind:btninventory="inventorystatus" class="center" />
                   <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
                   <transition name="menu">
-                    <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross" v-on:inventorynone="inventorystatus=!inventorystatus"  />
+                    <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross"  />
                   </transition>
               </div>
             </div>
@@ -42,6 +42,7 @@
     data() {
       return {
         iscross: false,
+        
         inventorystatus:false,
 
       }
@@ -49,6 +50,15 @@
     methods: {
       
     },
+    watch: {
+      iscross (newVal) {
+        this.inventorystatus = newVal
+      }
+    },
+
+    computed: {
+      
+    }
   }
 </script>
 

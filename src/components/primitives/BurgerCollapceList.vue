@@ -4,7 +4,12 @@
       
          <div class="menuListDisplay">
                   <ul class="nav">
-                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id" v-on:click="this.$emit('inventorynone')">
+                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id" >
+                      <router-link :to="item.path" class="nav-link"  >
+                        {{item.name}}
+                      </router-link>
+                    </li>
+                    <li class="nav-item1" v-for="(item,id) in burgerMenuList1" :key="id" >
                       <router-link :to="item.path" class="nav-link"  >
                         {{item.name}}
                       </router-link>
@@ -73,6 +78,41 @@
           {
             name: 'Calculate',
             path: '/calculate'
+          },
+          
+        ],
+        burgerMenuList1: [
+          {
+            name: 'Home',
+            path: '/'
+          },
+          {
+            name: 'Contact us',
+            path: '/contact'
+          },
+          {
+            name: 'About VAC',
+            path: '/about'
+          },
+          {
+            name: 'Loan Rates',
+            path: '/loan'
+          },
+          {
+            name: 'Video',
+            path: '/video'
+          },
+          {
+            name: 'Blog',
+            path: '/blog'
+          },
+          {
+            name: 'Calculate',
+            path: '/calculate'
+          },
+          {
+            name: 'Inventory',
+            path: '/catalog'
           }
         ],
 
@@ -120,6 +160,25 @@
 
       .nav-item {
         width: 30vw;
+        @media (max-width:768px) {
+           display: none;
+        }
+        
+        a {
+          color: $colorTitleBurgerBlueDark;
+          white-space: nowrap;
+            &:hover {
+            color: #7481FF;
+          }
+        }
+
+      }
+      .nav-item1 {
+        display: none;
+        width: 30vw;
+        @media (max-width:768px) {
+           display: block;
+        }
         
         a {
           color: $colorTitleBurgerBlueDark;

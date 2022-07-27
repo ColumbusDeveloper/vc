@@ -6,12 +6,12 @@
                 <div class="topLine">
                   <div class="topLineNavBar">
                     <navbar v-on:click="$router.push('/')"/>
-                    <div class="header-btnwhite-substitute" v-bind:class="{visible:btnwhiteState}">
+                    <div class="header-btnwhite-substitute" v-bind:class="{visible:btnwhiteState1,isOnV:btnwhiteState}">
                       <span class="header-btnwhite-substitute__text">Inventory</span>
                     </div>
                   </div>
                   <div class="topLineRightPart ">
-                    <btnwhite v-bind:class="{isClicked:btnwhiteState}" v-on:click="btnwhiteState=!btnwhiteState" class="btnFirstLeft"/>
+                    <btnwhite v-on:click="$router.push('/catalog'),btnwhiteState1=!btnwhiteState1" v-bind:class="{isClicked:btnwhiteState1,isOn:btnwhiteState}" class="btnFirstLeft"/>
                     
                     <btnblue  class="btnRightEdge"/>
                    
@@ -51,9 +51,11 @@ export default {
 
   },
   props:['btninventory'],
+
   data() {
     return {
-
+      btnwhiteState1:false,
+      btnwhiteState2:false,
       btnwhiteState:this.btninventory,
 
 
@@ -67,8 +69,24 @@ export default {
   watch:{
     btninventory (newVal) {
       this.btnwhiteState = newVal
-    }
+      if (this.btnwhiteState) {
+        this.btnwhiteState1 = false
+       
+      }
+    },
+    btnwhiteState1 (newVal) {
+      this.btnwhiteState1 = newVal
+      if (this.btnwhiteState1) {
+        this.btnwhiteState = false
+        
+      }
+
+    },
+    
+
   },
+
+  
 
 
 
@@ -94,7 +112,10 @@ export default {
     
     width: 115px;
     height: 35px;
-    padding-top: 8px;
+    padding-top: 7px;
+    @media (max-width:530px) {
+       display: none;
+    }
     
 
     &__text {
@@ -108,9 +129,22 @@ export default {
     display: block;
   }
 
+  
+
+  
+
+  .isOnV {
+    display: none;
+  }
+
 
   .isClicked {
     display: none;
+  }
+
+  
+  .isOn {
+    display: block;
   }
 
   .topLineRightPart {
