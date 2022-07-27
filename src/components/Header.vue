@@ -6,9 +6,13 @@
                 <div class="topLine">
                   <div class="topLineNavBar">
                     <navbar v-on:click="$router.push('/')"/>
+                    <div class="header-btnwhite-substitute" v-bind:class="{visible:btnwhiteState}">
+                      <span class="header-btnwhite-substitute__text">Inventory</span>
+                    </div>
                   </div>
                   <div class="topLineRightPart ">
-                    <btnwhite class="btnFirstLeft"/>
+                    <btnwhite v-bind:class="{isClicked:btnwhiteState}" v-on:click="btnwhiteState=!btnwhiteState" class="btnFirstLeft"/>
+                    
                     <btnblue  class="btnRightEdge"/>
                    
                   </div>
@@ -46,7 +50,7 @@ export default {
   data() {
     return {
 
-      
+      btnwhiteState:false,
 
 
 
@@ -67,6 +71,36 @@ export default {
 
 <style lang="scss" scoped>
   @import '../assets/varmix.scss';
+
+  .topLineNavBar {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-btnwhite-substitute {
+    display: none;
+
+    
+    width: 115px;
+    height: 35px;
+    padding-top: 8px;
+    
+
+    &__text {
+      @include   letterH4HeadingBurgerMenuTextNumbersDarkBlue    ;
+      font-size: 1.56rem;
+      line-height: 0.1rem;
+    }
+  }
+
+  .visible {
+    display: block;
+  }
+
+
+  .isClicked {
+    display: none;
+  }
 
   .topLineRightPart {
     display: flex;

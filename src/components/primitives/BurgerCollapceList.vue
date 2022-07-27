@@ -22,6 +22,7 @@
                       <a href="#" target="blank"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                   </div>
+                  <header class="menuListDisplay__header"/>
          </div>
      
 
@@ -29,8 +30,13 @@
 </template>
 
 <script>
+  import header from '@/components/Header.vue'
   export default {
     name: 'BurgerCollapce-list',
+
+    components: {
+      header,
+    },
     
 
     data() {
