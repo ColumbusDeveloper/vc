@@ -4,7 +4,7 @@
       
          <div class="menuListDisplay">
                   <ul class="nav">
-                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id" >
+                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id"  v-on:click="this.$emit('navLiIsClicked')">
                       <router-link :to="item.path" class="nav-link"  >
                         {{item.name}}
                       </router-link>
@@ -39,6 +39,7 @@
   
   export default {
     name: 'BurgerCollapce-list',
+    
 
     components: {
      
@@ -48,7 +49,7 @@
     data() {
       return {
 
-        
+        listatus:this.liclick,
 
         burgerMenuList: [
           {
@@ -120,6 +121,9 @@
 
       }
     },
+    watch: {
+      
+    }
 
 
 

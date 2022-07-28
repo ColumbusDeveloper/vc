@@ -5,10 +5,10 @@
           <div class="container">
             <div class="row">
                 <div class="col header">
-                  <Headerone v-bind:btninventory="inventorystatus" class="center" />
+                  <Headerone v-bind:btninventory="inventorystatus" v-bind:listatusa="listatusb" class="center" />
                   <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
                   <transition name="menu">
-                    <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross"  />
+                    <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross"  v-on:navLiIsClicked="changeLiStatus" />
                   </transition>
               </div>
             </div>
@@ -45,12 +45,20 @@
         
         inventorystatus:false,
 
+        listatusa:false,
+        listatusb:false,
+
       }
     },
     methods: {
-      
+      changeLiStatus () {
+        this.listatusa = !this.listatusa
+      }
     },
     watch: {
+      listatusa (newVal) {
+        this.listatusb = newVal
+      },
       iscross (newVal) {
         this.inventorystatus = newVal
       }

@@ -6,7 +6,7 @@
                 <div class="topLine">
                   <div class="topLineNavBar">
                     <navbar v-on:click="$router.push('/')"/>
-                    <div class="header-btnwhite-substitute" v-bind:class="{visible:btnwhiteState1,isOnV:btnwhiteState}">
+                    <div class="header-btnwhite-substitute" v-bind:class="{On:this.btninventory,Off:btnwhiteState}">
                       <span class="header-btnwhite-substitute__text">Inventory</span>
                     </div>
                   </div>
@@ -50,14 +50,12 @@ export default {
 
 
   },
-  props:['btninventory'],
+  props:['btninventory,listatusa'],
 
   data() {
     return {
-      btnwhiteState1:false,
-      btnwhiteState2:false,
-      btnwhiteState:this.btninventory,
-
+      
+      listatusavar:this.listatusa,
 
 
     }
@@ -67,21 +65,10 @@ export default {
     
   },
   watch:{
-    btninventory (newVal) {
-      this.btnwhiteState = newVal
-      if (this.btnwhiteState) {
-        this.btnwhiteState1 = false
-       
-      }
-    },
-    btnwhiteState1 (newVal) {
-      this.btnwhiteState1 = newVal
-      if (this.btnwhiteState1) {
-        this.btnwhiteState = false
-        
-      }
 
-    },
+    listatusa(val) {
+      this.listatusavar = val
+    }
     
 
   },
@@ -125,7 +112,7 @@ export default {
     }
   }
 
-  .visible {
+  .On {
     display: block;
   }
 
@@ -133,7 +120,7 @@ export default {
 
   
 
-  .isOnV {
+  .Off {
     display: none;
   }
 
