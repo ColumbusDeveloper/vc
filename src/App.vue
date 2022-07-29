@@ -5,10 +5,10 @@
           <div class="container">
             <div class="row">
                 <div class="col header">
-                  <Headerone v-bind:btninventory="inventorystatus" v-bind:listatusa="listatusb" class="center" />
+                  <Headerone  class="center" :liclickedtextoff="navliclicktextoffstate"  />
                   <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
                   <transition name="menu">
-                    <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross"  v-on:navLiIsClicked="changeLiStatus" />
+                    <burgerlist v-if="iscross" class="burgerlist" :listate="navliclicktextoffstate" v-on:click="iscross=!iscross" v-on:navliclicktextoffevent="changenavliclicktextoffstate"  />
                   </transition>
               </div>
             </div>
@@ -42,25 +42,21 @@
     data() {
       return {
         iscross: false,
-        
-        inventorystatus:false,
+        navliclicktextoffstate:false,
 
-        listatusa:false,
-        listatusb:false,
+        
+        
 
       }
     },
     methods: {
-      changeLiStatus () {
-        this.listatusa = !this.listatusa
-      }
+     changenavliclicktextoffstate (newVal) {
+        this.navliclicktextoffstate = newVal
+     }
     },
     watch: {
-      listatusa (newVal) {
-        this.listatusb = newVal
-      },
       iscross (newVal) {
-        this.inventorystatus = newVal
+        this.navliclicktextoffstate = newVal 
       }
     },
 

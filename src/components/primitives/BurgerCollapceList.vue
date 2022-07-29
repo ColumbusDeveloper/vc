@@ -4,7 +4,7 @@
       
          <div class="menuListDisplay">
                   <ul class="nav">
-                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id"  v-on:click="this.$emit('navLiIsClicked')">
+                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id"  v-on:click="navliclicktextoff=!navliclicktextoff,this.$emit('navliclicktextoffevent',this.navliclicktextoff)"  >
                       <router-link :to="item.path" class="nav-link"  >
                         {{item.name}}
                       </router-link>
@@ -44,12 +44,14 @@
     components: {
      
     },
+
+    props:['listate'],
     
 
     data() {
       return {
 
-        listatus:this.liclick,
+        navliclicktextoff:this.listate,
 
         burgerMenuList: [
           {
@@ -122,7 +124,9 @@
       }
     },
     watch: {
-      
+      listate (newVal) {
+        this.navliclicktextoff = newVal
+      }
     }
 
 

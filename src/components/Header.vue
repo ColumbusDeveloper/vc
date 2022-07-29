@@ -6,13 +6,13 @@
                 <div class="topLine">
                   <div class="topLineNavBar">
                     <navbar v-on:click="$router.push('/')"/>
-                    <div class="header-btnwhite-substitute" v-bind:class="{On:this.btninventory,Off:btnwhiteState}">
+                    <div class="header-btnwhite-substitute" v-if="btnclicked">
                       <span class="header-btnwhite-substitute__text">Inventory</span>
                     </div>
                   </div>
                   <div class="topLineRightPart ">
-                    <btnwhite v-on:click="$router.push('/catalog'),btnwhiteState1=!btnwhiteState1" v-bind:class="{isClicked:btnwhiteState1,isOn:btnwhiteState}" class="btnFirstLeft"/>
-                    
+                    <btnwhite v-on:click="$router.push('/catalog'),btnclicked=!btnclicked" :class="{Off:btnclicked}" class="btnFirstLeft"/>
+                 
                     <btnblue  class="btnRightEdge"/>
                    
                   </div>
@@ -50,28 +50,52 @@ export default {
 
 
   },
-  props:['btninventory,listatusa'],
+
+  props:['liclickedtextoff'],
+
 
   data() {
     return {
       
-      listatusavar:this.listatusa,
-
+      liclicked:this.liclickedtextoff,
+      btnclicked:false,
+      is:false,
+      
 
     }
   },
 
-  methods:{
-    
-  },
+  
   watch:{
 
-    listatusa(val) {
-      this.listatusavar = val
-    }
+    liclickedtextoff (newVal) {
+      if(this.btnclicked)
+      this.btnclicked = newVal
+
+    },
+
+   
+
     
 
+
+
+    
+
+    
   },
+  methods:{
+    compositbtntrulitru () {
+      return this.is = this.liclicked * this.btnclicked
+    }
+  },
+
+  computed:{
+    
+  },
+
+
+  
 
   
 
@@ -94,7 +118,7 @@ export default {
   }
 
   .header-btnwhite-substitute {
-    display: none;
+    
 
     
     width: 115px;
@@ -121,6 +145,10 @@ export default {
   
 
   .Off {
+    display: none;
+  }
+
+  .Off1 {
     display: none;
   }
 
