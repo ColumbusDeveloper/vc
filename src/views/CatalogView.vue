@@ -4,6 +4,9 @@
           <div class="row">
             <div class="col">
               <h1>Catalog page!</h1>
+
+              
+
             </div>
           </div>   
         </div>
