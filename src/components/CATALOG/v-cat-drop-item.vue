@@ -1,9 +1,21 @@
 <template >
     <div>
-        <vcatsubitem
-      
         
-        />
+        <vcatsub
+        
+        :subitems="subitems"
+
+        
+        
+        >
+            
+
+        
+
+        
+            
+        </vcatsub>
+        
         
     </div>
 </template>
@@ -11,12 +23,13 @@
 
 <script>
 
-import vcatsubitem from './v-cat-sub-item.vue'
+import vcatsub from './v-cat-sub-item.vue'
 
 export default {
     name:'Drop-item',
+    props:['subitems'],
     components:{
-        vcatsubitem,
+        vcatsub,
     },
     data () {
         return {

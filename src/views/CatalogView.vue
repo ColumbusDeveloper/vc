@@ -5,7 +5,7 @@
             <div class="col">
               <h1>Catalog page!</h1>
 
-              
+              <catalog></catalog>
 
             </div>
           </div>   
@@ -17,12 +17,12 @@
 
 <script>
 
-
+import catalog from '../components/CATALOG/v-catalog'
 
 export default {
   name: 'CatalogView',
   components: {
-    
+    catalog,
   }
 }
 </script>

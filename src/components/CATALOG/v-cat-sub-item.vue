@@ -1,9 +1,9 @@
 <template >
     <div>
         
-        <div class="drop-sub__item-name">
+        <div class="drop-sub__item">
         
-        
+       
         </div>
        
     </div>
@@ -14,6 +14,7 @@
 
 export default {
     name:'Sub-drop',
+    props:['subitems'],
 
     
 }
