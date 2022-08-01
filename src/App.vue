@@ -5,10 +5,10 @@
           <div class="container">
             <div class="row">
                 <div class="col header">
-                  <Headerone class="center" />
+                  <Headerone  class="center" :liclickedtextoff="navliclicktextoffstate"  />
                   <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
                   <transition name="menu">
-                    <burgerlist v-if="iscross" class="burgerlist" v-on:click="iscross=!iscross" />
+                    <burgerlist v-if="iscross" class="burgerlist" :listate="navliclicktextoffstate" v-on:click="iscross=!iscross" v-on:navliclicktextoffevent="changenavliclicktextoffstate"  />
                   </transition>
               </div>
             </div>
@@ -42,8 +42,27 @@
     data() {
       return {
         iscross: false,
+        navliclicktextoffstate:false,
+
+        
+        
+
       }
     },
+    methods: {
+     changenavliclicktextoffstate (newVal) {
+        this.navliclicktextoffstate = newVal
+     }
+    },
+    watch: {
+      iscross (newVal) {
+        this.navliclicktextoffstate = newVal 
+      }
+    },
+
+    computed: {
+      
+    }
   }
 </script>
 

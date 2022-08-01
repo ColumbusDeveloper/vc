@@ -4,8 +4,13 @@
       
          <div class="menuListDisplay">
                   <ul class="nav">
-                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id">
-                      <router-link :to="item.path" class="nav-link">
+                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id"  v-on:click="navliclicktextoff=!navliclicktextoff,this.$emit('navliclicktextoffevent',this.navliclicktextoff)"  >
+                      <router-link :to="item.path" class="nav-link"  >
+                        {{item.name}}
+                      </router-link>
+                    </li>
+                    <li class="nav-item1" v-for="(item,id) in burgerMenuList1" :key="id" >
+                      <router-link :to="item.path" class="nav-link"  >
                         {{item.name}}
                       </router-link>
                     </li>
@@ -21,7 +26,9 @@
                     <div class="socials__SingleBlock">
                       <a href="#" target="blank"><i class="fa-brands fa-youtube"></i></a>
                     </div>
+                    
                   </div>
+                  
          </div>
      
 
@@ -29,12 +36,22 @@
 </template>
 
 <script>
+  
   export default {
     name: 'BurgerCollapce-list',
     
 
+    components: {
+     
+    },
+
+    props:['listate'],
+    
+
     data() {
       return {
+
+        navliclicktextoff:this.listate,
 
         burgerMenuList: [
           {
@@ -64,6 +81,41 @@
           {
             name: 'Calculate',
             path: '/calculate'
+          },
+          
+        ],
+        burgerMenuList1: [
+          {
+            name: 'Home',
+            path: '/'
+          },
+          {
+            name: 'Contact us',
+            path: '/contact'
+          },
+          {
+            name: 'About VAC',
+            path: '/about'
+          },
+          {
+            name: 'Loan Rates',
+            path: '/loan'
+          },
+          {
+            name: 'Video',
+            path: '/video'
+          },
+          {
+            name: 'Blog',
+            path: '/blog'
+          },
+          {
+            name: 'Calculate',
+            path: '/calculate'
+          },
+          {
+            name: 'Inventory',
+            path: '/catalog'
           }
         ],
 
@@ -71,6 +123,14 @@
 
       }
     },
+    watch: {
+      listate (newVal) {
+        this.navliclicktextoff = newVal
+      }
+    },
+    
+
+
 
 
 
@@ -102,11 +162,34 @@
       padding-left: 70px;
     }
 
+    &__invisible {
+      width: 0;
+    }
+
     .nav {
       flex-direction: column;
 
       .nav-item {
         width: 30vw;
+        @media (max-width:768px) {
+           display: none;
+        }
+        
+        a {
+          color: $colorTitleBurgerBlueDark;
+          white-space: nowrap;
+            &:hover {
+            color: #7481FF;
+          }
+        }
+
+      }
+      .nav-item1 {
+        display: none;
+        width: 30vw;
+        @media (max-width:768px) {
+           display: block;
+        }
         
         a {
           color: $colorTitleBurgerBlueDark;

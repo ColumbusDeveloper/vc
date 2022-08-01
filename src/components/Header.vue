@@ -6,9 +6,13 @@
                 <div class="topLine">
                   <div class="topLineNavBar">
                     <navbar v-on:click="$router.push('/')"/>
+                    <div class="header-btnwhite-substitute" v-if="btnclicked">
+                      <span class="header-btnwhite-substitute__text">Inventory</span>
+                    </div>
                   </div>
                   <div class="topLineRightPart ">
-                    <btnwhite class="btnFirstLeft"/>
+                    <btnwhite v-on:click="$router.push('/catalog'),btnclicked=!btnclicked" :class="{Off:btnclicked}" class="btnFirstLeft"/>
+                 
                     <btnblue  class="btnRightEdge"/>
                    
                   </div>
@@ -35,6 +39,9 @@ import navbar from './primitives/navBar.vue'
 export default {
   
   name: 'Header-one',
+
+  
+
   components: {
   
   btnwhite,
@@ -43,19 +50,56 @@ export default {
 
 
   },
+
+  props:['liclickedtextoff'],
+
+
   data() {
     return {
-
       
-
-
+      liclicked:this.liclickedtextoff,
+      btnclicked:false,
+      is:false,
+      
 
     }
   },
 
-  methods:{
+  
+  watch:{
+
+    liclickedtextoff (newVal) {
+      if(this.btnclicked)
+      this.btnclicked = newVal
+
+    },
+
+   
+
     
-  }
+
+
+
+    
+
+    
+  },
+  methods:{
+    compositbtntrulitru () {
+      return this.is = this.liclicked * this.btnclicked
+    }
+  },
+
+  computed:{
+    
+  },
+
+
+  
+
+  
+
+
 
 
 
@@ -67,6 +111,56 @@ export default {
 
 <style lang="scss" scoped>
   @import '../assets/varmix.scss';
+
+  .topLineNavBar {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-btnwhite-substitute {
+    
+
+    
+    width: 115px;
+    height: 35px;
+    padding-top: 7px;
+    @media (max-width:530px) {
+       display: none;
+    }
+    
+
+    &__text {
+      @include   letterH4HeadingBurgerMenuTextNumbersDarkBlue    ;
+      font-size: 1.56rem;
+      line-height: 0.1rem;
+    }
+  }
+
+  .On {
+    display: block;
+  }
+
+  
+
+  
+
+  .Off {
+    display: none;
+  }
+
+  .Off1 {
+    display: none;
+  }
+
+
+  .isClicked {
+    display: none;
+  }
+
+  
+  .isOn {
+    display: block;
+  }
 
   .topLineRightPart {
     display: flex;
