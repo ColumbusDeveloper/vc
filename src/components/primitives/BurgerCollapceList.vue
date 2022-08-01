@@ -127,7 +127,10 @@
       listate (newVal) {
         this.navliclicktextoff = newVal
       }
-    }
+    },
+    
+
+
 
 
 
