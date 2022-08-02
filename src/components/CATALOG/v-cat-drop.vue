@@ -1,47 +1,84 @@
 <template >
     <div>
      
-        <vcatdropitem
-
-        :subitems="subitems"
-        
-        >
-        </vcatdropitem>
+       
      
-        <ul>
-            <li
-            v-for="producer in producers" :key="producer"
+        
+
+
+        <div class="vcatdrop__category-name"
+        v-on:click="this.$emit('isCategoryItem')"
+        >
+       
+        </div>
+
+       
+
+
+        <div class="get-subitem-make"
+        v-for="(subitemslocal,index) in subitemslocals" :key="index"
+        v-on="subitemslocalArrAdd(subitemslocal.make)"
+        
+        v-on:click="this.$emit('addToSelected',index)"
+        >
+
+        {{subitemslocalNoRepeat}}
+
+        
+        
+        </div>
+        
+        
+            
 
             
             
-            >
-            {{producer}}
-            </li>
-        </ul>
+          
+       
     </div>
 </template>
 
 
 <script>
 
-import vcatdropitem from './v-cat-drop-item.vue'
+
 
 
 export default {
     name:'Drop-main',
-    props:['subitems','makes'],
+    props:['subitems','iscategoryitem'],
     components:{
-     vcatdropitem,
+     
     },
     data () {
         return {
-            producers:this.makes,
+            subitemslocals:this.subitems,
+            categoryClicked:this.iscategoryitem,
+            subitemslocalArr:[],
+           
             
         }
     },
     watch: {
-        makes (neVal) {
-            this.producers = neVal
+       
+        iscategoryitem (neVal) {
+            this.categoryClicked = neVal
+        },
+        subitems (neVal) {
+            this.subitemslocals = neVal
+        },
+
+
+    },
+    methods:{
+        subitemslocalArrAdd (newVal) {
+            this.subitemslocalArr.push(newVal)
+        }
+    },
+    computed:{
+        subitemslocalNoRepeat () {
+            const dell = subitemslocalArr.splice(6);
+            return [...new Set(dell)].join(' ')
         }
     }
     
@@ -51,5 +88,15 @@ export default {
 
 <style lang="scss">
 @import '@/assets/varmix.scss';
-    
+    .vcatdrop {
+
+		&__category {
+
+		}
+
+		&__category-name {
+            cursor: pointer;
+		}
+}
+
 </style>
