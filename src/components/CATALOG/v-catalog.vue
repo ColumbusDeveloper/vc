@@ -1,39 +1,44 @@
 <template >
-    <div>
+    <div class="catalog">
         
      
-       
-        <dropmain
-        :subitems="subitems"
-       
-        :iscategoryitem="isCategoryItemOn"
-        @isCategoryItem="changeCategoryItemState"
-        @addToSelected="addToSelected"
-     
-        >
-        
-    
-        
-        </dropmain>
+       <div class="catalog__title"><p>Make,Model</p></div>
+       <div class="catalog__select-wrapper">
+            <div class="catalog__select-wrapper-window"
+                
+            
+            >
 
-        <div
-        
-       
-        >
-        
-        </div>
-     
+            </div>
+            <div class="catalog__select-wrapper-arrow">
+
+            </div>
+
+       </div>
+
+   
+       <p><input type="text" v-model="str" /></p>
+        <ul>
+            <li v-for="item in FilteredList" :key="item">
+                <p>{{ item.make }} - {{ item.model }}</p>
+            </li>
+        </ul>
         
 
-        {{selectedValues}}
- 
+
+        
+
+        
+
+        
+
        
     </div>
 </template>
 
 
 <script>
-import dropmain from './v-cat-drop.vue'
+
 
 const car = (id,make,model,bodytype,transmission,price,year,kilometers,image)=>({id,make,model,bodytype,transmission,price,year,kilometers,image})
 const cars = [
@@ -48,37 +53,47 @@ const cars = [
 export default {
     name:'V-catalog',
     components: {
-        dropmain,
+     
     },
     data () {
         return {
+            cars:cars,
+            make:'',
+            model:'',
+            bodytype:'',
+            transmission:'',
+            price:'',
+            year:'',
+            kilometers:'',
+            str:'Porsche',
+
             
-            isCategoryItemOn:false,
-            subitems:cars,
-            selected:[],
         }
     
     },
     methods:{
-       changeCategoryItemState () {
-        this.isCategoryItemOn=!this.isCategoryItemOn
-       },
-       addToSelected(index) {
-        this.selected.push(this.subitems[index].model)
-       }
+       
     },
     
     computed:{
-        selectedValues () {
-            return [...new Set(this.selected)].join(' ')
-             
+        FilteredList(){
+            let a = this.str;
+            return this.cars.filter(function (elem) {
+                if(a==='') return true;
+                else return elem.make.indexOf(a) > -1;
+            })
         }
-    }
+    },
+    
+  
     
 }
 </script>
 
 <style lang="scss">
 @import '@/assets/varmix.scss';
+
+
+
     
 </style>
