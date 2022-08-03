@@ -2,13 +2,22 @@
     <div class="catalog">
         
      
-       <div class="catalog__title"><p>Make,Model</p></div>
-       <div class="catalog__select-wrapper">
-            <div class="catalog__select-wrapper-window"
-                
-            
-            >
-
+       <div class="catalog__title">
+       <p class="catalog__title-text"
+        v-on:click="isWrapperOpen=!isWrapperOpen"
+       >Make,Model</p></div>
+       <div class="catalog__select-wrapper"
+       v-if="isWrapperOpen"
+       >
+            <div class="catalog__select-wrapper-window">
+                <template v-for="uniqMakeName in uniqMakeNames" :key="uniqMakeName">
+                     <p
+                     v-on:click="addToVar(uniqMakeName)"
+                     >{{ uniqMakeName }}</p>
+                </template> 
+                <template v-for="item in FilteredList" :key="item" >
+                    <li  > {{item.model }}</li>
+                </template>
             </div>
             <div class="catalog__select-wrapper-arrow">
 
@@ -17,12 +26,13 @@
        </div>
 
    
-       <p><input type="text" v-model="str" /></p>
+       
         <ul>
-            <li v-for="item in FilteredList" :key="item">
-                <p>{{ item.make }} - {{ item.model }}</p>
-            </li>
+            
         </ul>
+
+      
+        
         
 
 
@@ -57,21 +67,27 @@ export default {
     },
     data () {
         return {
+            isWrapperOpen:false,
             cars:cars,
-            make:'',
-            model:'',
-            bodytype:'',
-            transmission:'',
-            price:'',
-            year:'',
-            kilometers:'',
+            make:' ',
+            model:[],
+            bodytype:' ',
+            transmission:' ',
+            price:' ',
+            year:' ',
+            kilometers:' ',
             str:'Porsche',
+            
 
             
         }
     
     },
     methods:{
+
+        addToVar(uniqMakeName) {
+            this.str = uniqMakeName
+        }
        
     },
     
@@ -82,7 +98,16 @@ export default {
                 if(a==='') return true;
                 else return elem.make.indexOf(a) > -1;
             })
+        },
+        uniqMakeNames () {
+            const a = []
+            for (let i = 0; i<cars.length; i++){
+                const b = cars[i].make
+                a.push(b)
+            }
+            return [... new Set(a)]
         }
+
     },
     
   
@@ -92,6 +117,28 @@ export default {
 
 <style lang="scss">
 @import '@/assets/varmix.scss';
+
+.catalog {
+
+		&__title {
+		}
+
+		&__title-text {
+            
+            display: inline-block;
+            background: aqua;
+		}
+
+		&__select-wrapper {
+		}
+
+		&__select-wrapper-window {
+		}
+
+		&__select-wrapper-arrow {
+		}
+}
+
 
 
 
