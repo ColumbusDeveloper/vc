@@ -18,8 +18,8 @@
                      >{{ uniqMakeName }}</p>
                 </template> 
                 <template v-for="item in FilteredList" :key="item" >
-                     <li  class="catalog__calc-li-none">{{FilteredModelListRo.push(item.model)}}</li>  
-                        <li  >{{item.model}}</li>
+                     <!-- <li  class="catalog__calc-li-none">{{FilteredModelListRo.push(item.model)}}</li>   -->
+                        <li @click="addToFilteredModelListRo(item.model)" >{{item.model}}</li>
                  
                     
                 </template>
@@ -113,6 +113,9 @@ export default {
             this.make=2
             this.isWrapperOpen=!this.isWrapperOpen
         },
+        addToFilteredModelListRo(val){
+            this.FilteredModelListRo.push(val)
+        }
        
        
 
