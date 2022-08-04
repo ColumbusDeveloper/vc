@@ -14,26 +14,31 @@
                 <template 
                 v-for="uniqMakeName in uniqMakeNames" :key="uniqMakeName">
                      <p
-                     v-on:click="addToVar(uniqMakeName),isModelOpen=!isModelOpen"
+                     v-on:click="addToVar(uniqMakeName)"
                      >{{ uniqMakeName }}</p>
                 </template> 
                 <template v-for="item in FilteredList" :key="item" >
-                    <li 
-                    v-if="isModelOpen" > 
-                    {{item.model }}</li>
+                     <li  class="catalog__calc-li-none">{{FilteredModelListRo.push(item.model)}}</li>  
+                        <li  >{{item.model}}</li>
+                 
+                    
                 </template>
             </div>
             <div class="catalog__select-wrapper-arrow">
 
             </div>
 
+            
+
        </div>
 
    
-       
-        <ul>
-            
-        </ul>
+       <div class="catalog__show-box">
+            <vcatalogshowbox 
+            :carmodel="UniqFilteredModelListRo"
+            />
+       </div>
+        
 
       
         
@@ -54,6 +59,7 @@
 <script>
 
 
+
 const car = (id,make,model,bodytype,transmission,price,year,kilometers,image)=>({id,make,model,bodytype,transmission,price,year,kilometers,image})
 const cars = [
     car(1,'Porsche','Panamera','Sedan','Automatic',50000,2012,30000,'../../assets/images/Panamera.jpg'),
@@ -64,10 +70,14 @@ const cars = [
     car(6,'Ford','Electra','Sedan','Automatic',15000,2017,40000,'../../assets/images/FordElectra.jpg')
 ]
 
+import vcatalogshowbox from './v-catalog-show-box.vue'
+
 export default {
     name:'V-catalog',
     components: {
-     
+     vcatalogshowbox,
+      
+
     },
     data () {
         return {
@@ -76,6 +86,7 @@ export default {
             cars:[],
             make:' ',
             model:[],
+            FilteredModelListRo:[],
             bodytype:' ',
             transmission:' ',
             price:' ',
@@ -101,7 +112,9 @@ export default {
         changeStr () {
             this.make=2
             this.isWrapperOpen=!this.isWrapperOpen
-        }
+        },
+       
+       
 
        
     },
@@ -120,6 +133,14 @@ export default {
             const a = []
             for (let i = 0; i<cars.length; i++){
                 const b = cars[i].make
+                a.push(b)
+            }
+            return [... new Set(a)]
+        },
+        UniqFilteredModelListRo () {
+            const a = []
+            for (let i = 0; i<this.FilteredModelListRo.length; i++){
+                const b = this.FilteredModelListRo[i]
                 a.push(b)
             }
             return [... new Set(a)]
@@ -154,6 +175,18 @@ export default {
 
 		&__select-wrapper-arrow {
 		}
+
+        &__calc-li-none {
+            display: none;
+        }
+
+        &__show-box {
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+            min-height: 100px;
+            display: flex;
+        }
 }
 
 
