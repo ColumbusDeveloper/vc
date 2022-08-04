@@ -2,21 +2,25 @@
     <div class="catalog">
         
      
-       <div class="catalog__title">
+       <div class="catalog__title" 
+       v-on:click="changeStr">
        <p class="catalog__title-text"
-        v-on:click="isWrapperOpen=!isWrapperOpen"
+        v-on:click="addToMainVarCars"
        >Make,Model</p></div>
        <div class="catalog__select-wrapper"
        v-if="isWrapperOpen"
        >
             <div class="catalog__select-wrapper-window">
-                <template v-for="uniqMakeName in uniqMakeNames" :key="uniqMakeName">
+                <template 
+                v-for="uniqMakeName in uniqMakeNames" :key="uniqMakeName">
                      <p
-                     v-on:click="addToVar(uniqMakeName)"
+                     v-on:click="addToVar(uniqMakeName),isModelOpen=!isModelOpen"
                      >{{ uniqMakeName }}</p>
                 </template> 
                 <template v-for="item in FilteredList" :key="item" >
-                    <li  > {{item.model }}</li>
+                    <li 
+                    v-if="isModelOpen" > 
+                    {{item.model }}</li>
                 </template>
             </div>
             <div class="catalog__select-wrapper-arrow">
@@ -67,8 +71,9 @@ export default {
     },
     data () {
         return {
+            isModelOpen:false,
             isWrapperOpen:false,
-            cars:cars,
+            cars:[],
             make:' ',
             model:[],
             bodytype:' ',
@@ -76,7 +81,7 @@ export default {
             price:' ',
             year:' ',
             kilometers:' ',
-            str:'Porsche',
+            
             
 
             
@@ -86,14 +91,26 @@ export default {
     methods:{
 
         addToVar(uniqMakeName) {
-            this.str = uniqMakeName
+            
+            this.make = uniqMakeName
+        },
+        addToMainVarCars () {
+            
+            this.cars=cars
+        },
+        changeStr () {
+            this.make=2
+            this.isWrapperOpen=!this.isWrapperOpen
         }
+
        
     },
+
+    
     
     computed:{
         FilteredList(){
-            let a = this.str;
+            let a = this.make;
             return this.cars.filter(function (elem) {
                 if(a==='') return true;
                 else return elem.make.indexOf(a) > -1;
