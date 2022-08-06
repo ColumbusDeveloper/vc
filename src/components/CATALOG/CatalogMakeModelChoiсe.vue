@@ -23,10 +23,35 @@
                     </div>
 
                     <div class="catalog__select-wrapper-window-make-model-box-model-part">
-                            <template v-for="item in FilteredList" :key="item" >
-                               <li 
-                               @click="addToFilteredModelListRo(item.model)" 
-                               >{{item.model}}</li>   
+                            <template v-for="(item,index) in FilteredList" :key="index" >
+                                <div class="catalog__model-cross-btn-block">
+                                    <button class="catalog__model-cross-btn-block-btn">
+                                        
+                                    
+                                        <i class="fa-solid fa-xmark "
+                                        v-if="isCross[0]===index"
+                                        
+                                        >
+                                        </i> 
+
+                                        <i class="fa-solid fa-xmark "
+                                        v-if="isCross[1]===index"
+                                        
+                                        >
+                                        </i> 
+                                       
+                                        
+                                        <!-- <i class="fa-solid fa-check " ></i> -->
+                                        
+                                      
+                                    </button>
+                                        
+                                    <span 
+                                    @click="addToFilteredModelListRo(item.model,index)" 
+                                    >{{item.model}}</span>
+
+                                </div>
+                                  
                             </template>
                     </div>
 
@@ -102,6 +127,8 @@ export default {
             price:' ',
             year:' ',
             kilometers:' ',
+            isbtnmodel:' ',
+            isCross:[],
             
             
 
@@ -114,6 +141,7 @@ export default {
         addToVar(uniqMakeName) {
             
             this.make = uniqMakeName
+            this.isCross=[]
         },
         addToMainVarCars () {
             
@@ -123,9 +151,15 @@ export default {
             this.make=2
             this.isWrapperOpen=!this.isWrapperOpen
         },
-        addToFilteredModelListRo(val){
+        addToFilteredModelListRo(val,value){
             this.FilteredModelListRo.push(val)
-        }
+            this.isbtnmodel = val
+            this.isCross.push(value) 
+            
+        },
+       
+       
+
        
        
 
@@ -157,7 +191,21 @@ export default {
                 a.push(b)
             }
             return [... new Set(a)]
-        }
+        },
+
+        indModelBtn () {
+            return this.cars.filter(elem => {
+                const b = elem.model.indexOf(this.isbtnmodel) >-1
+              
+                console.log(b);
+                return b
+            })
+        },
+       
+
+
+
+        
 
     },
     
@@ -221,10 +269,26 @@ export default {
             border-color: #000;
             width: 50%;
 		}
+        &__model-cross-btn-block {
+            display: flex;
+            align-items: center;
+        }
+        &__model-cross-btn-block-btn {
+            border: none;
+        }
 
 
 
 
+
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.visible {
+    opacity: 1;
 }
 
 

@@ -17,7 +17,7 @@
 
 <script>
 
-import catalog from '../components/CATALOG/v-catalog'
+import catalog from '../components/CATALOG/CatalogMakeModelChoiсe.vue'
 
 export default {
   name: 'CatalogView',
