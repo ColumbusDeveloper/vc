@@ -11,18 +11,28 @@
        v-if="isWrapperOpen"
        >
             <div class="catalog__select-wrapper-window">
-                <template 
-                v-for="uniqMakeName in uniqMakeNames" :key="uniqMakeName">
-                     <p
-                     v-on:click="addToVar(uniqMakeName)"
-                     >{{ uniqMakeName }}</p>
-                </template> 
-                <template v-for="item in FilteredList" :key="item" >
-                     <!-- <li  class="catalog__calc-li-none">{{FilteredModelListRo.push(item.model)}}</li>   -->
-                        <li @click="addToFilteredModelListRo(item.model)" >{{item.model}}</li>
-                 
-                    
-                </template>
+                <div class="col catalog__select-wrapper-window-make-model-box">
+
+                    <div class="catalog__select-wrapper-window-make-model-box-make-part">
+                            <template 
+                            v-for="uniqMakeName in uniqMakeNames" :key="uniqMakeName">
+                                <p
+                                v-on:click="addToVar(uniqMakeName)"
+                                >{{ uniqMakeName }}</p>
+                            </template> 
+                    </div>
+
+                    <div class="catalog__select-wrapper-window-make-model-box-model-part">
+                            <template v-for="item in FilteredList" :key="item" >
+                               <li 
+                               @click="addToFilteredModelListRo(item.model)" 
+                               >{{item.model}}</li>   
+                            </template>
+                    </div>
+
+                </div>
+                
+                
             </div>
             <div class="catalog__select-wrapper-arrow">
 
@@ -70,7 +80,7 @@ const cars = [
     car(6,'Ford','Electra','Sedan','Automatic',15000,2017,40000,'../../assets/images/FordElectra.jpg')
 ]
 
-import vcatalogshowbox from './v-catalog-show-box.vue'
+import vcatalogshowbox from './CatalogMakeModelChoiceItem.vue'
 
 export default {
     name:'V-catalog',
@@ -187,10 +197,38 @@ export default {
             border-width:2px;
             border-style: solid;
             border-color: #000;
-            min-height: 100px;
             display: flex;
+            flex-wrap: wrap;
         }
+
+        &__select-wrapper-window-make-model-box {
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+            display: flex;
+		}
+
+		&__select-wrapper-window-make-model-box-make-part {
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+            width: 50%;
+		}
+
+		&__select-wrapper-window-make-model-box-model-part {
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+            width: 50%;
+		}
+
+
+
+
 }
+
+
+
 
 
 
