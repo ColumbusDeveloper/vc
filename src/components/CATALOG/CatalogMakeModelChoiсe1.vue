@@ -80,10 +80,9 @@
        </div>
 
 
-       <div class="catalog__total-bottom-show-box"
-     
-       >
-
+       <div class=" col catalog__total-bottom-show-box">
+       <p v-for="item in uniqModelsBottom" :key="item"
+       >{{item.model}}  ,</p>
        </div>
 
    
@@ -150,11 +149,8 @@ export default {
         },
         funcPassDataToShowModelsBottom(val) {
             
-            let  a = []
-            let b = this.cars.filter(el=>el.id===val.id)
-            a.push(b)
-           
-            return this.modelsBottomTotal = a
+            this.modelsBottomTotal.push(this.cars.filter(el=>el.id===val.id)[0]) 
+          
         }
 
 
@@ -192,6 +188,10 @@ export default {
             c = [...new Set(a)]
             return c[0]
         },
+        uniqModelsBottom () {
+            return  [...new Set(this.modelsBottomTotal)] 
+        }
+       
         
 
 
@@ -273,6 +273,14 @@ export default {
         }
         &__model-cross-btn-block-btn {
             border: none;
+        }
+        &__total-bottom-show-box {
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
         }
 
 
