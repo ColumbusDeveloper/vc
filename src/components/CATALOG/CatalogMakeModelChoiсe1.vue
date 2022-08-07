@@ -3,36 +3,49 @@
         
      
        <div class="catalog__title" 
-       v-on:click="changeStr">
-       <p class="catalog__title-text"
-        v-on:click="addToMainVarCars"
-       >Make,Model</p>HELLO!</div>
-       <div class="catalog__select-wrapper"
-       v-if="isWrapperOpen"
+       @click="visible=!visible"
        >
+       
+                    <p class="catalog__title-text"
+                    
+                    >Make,Model</p>HELLO!
+       
+       </div>
+
+       <div class="catalog__select-wrapper"
+        v-if="visible"
+       >
+
             <div class="catalog__select-wrapper-window">
                 <div class="col catalog__select-wrapper-window-make-model-box">
 
                     <div class="catalog__select-wrapper-window-make-model-box-make-part">
                             <template 
-                            v-for="uniqMakeName in uniqMakeNames" :key="uniqMakeName">
+                            v-for="(item,index) in uniqMake" :key="index"
+                            
+                            >
                                 <p
-                                v-on:click="addToVar(uniqMakeName)"
-                                >{{ uniqMakeName }}</p>
+                                @click="addValToModelsRightPart(item)"
+                                >
+                                    {{item}}
+                                </p>
                             </template> 
                     </div>
 
                     <div class="catalog__select-wrapper-window-make-model-box-model-part">
-                            <template v-for="(item,index) in FilteredList" :key="index" >
+                            <template 
+                            v-for="item in uniqModelsRightPart" :key="item"
+                            
+                            >
                                 <div class="catalog__model-cross-btn-block">
                                     <button class="catalog__model-cross-btn-block-btn">
                                         
-                                        <span
-                                        v-if="isCross[0]===index"
-                                        @click="dellFromFilteredModelListRo(item.model)"
+                                        <div
+                                       
                                     
-                                        ><i class="fa-solid fa-xmark "></i>
-                                        </span>
+                                        >
+                                        <i class="fa-solid fa-xmark "></i>
+                                        </div>
                                          
 
                                         
@@ -43,9 +56,11 @@
                                       
                                     </button>
                                         
-                                    <span 
-                                    @click="addToFilteredModelListRo(item.model,index)" 
-                                    >{{item.model}}</span>
+                                    <div class="catalog__model-cross-btn-block-models"
+                                    @click="funcPassDataToShowModelsBottom(item)"
+                                    >
+                                    {{item.model}}
+                                    </div>
 
                                 </div>
                                   
@@ -57,10 +72,17 @@
                 
             </div>
             <div class="catalog__select-wrapper-arrow">
-                {{FilteredModelListRo}}
+              
             </div>
 
             
+
+       </div>
+
+
+       <div class="catalog__total-bottom-show-box"
+     
+       >
 
        </div>
 
@@ -91,11 +113,11 @@
 const car = (id,make,model,bodytype,transmission,price,year,kilometers,image)=>({id,make,model,bodytype,transmission,price,year,kilometers,image})
 const cars = [
     car(0,'Porsche','Panamera','Sedan','Automatic',50000,2012,30000,'../../assets/images/Panamera.jpg'),
-    car(0,'Audi','A3','Sedan','Automatic',30000,2010,10000,'../../assets/images/AudiA3.jpg'),
-    car(0,'Ford','Mondeo','Sedan','Automatic',20000,2013,19000,'../../assets/images/FordMondeo.jpg'),
-    car(0,'Porsche','Porsche-911','Sedan','Automatic',60000,2011,33000,'../../assets/images/Porsche911.jpg'),
-    car(0,'Audi','Q7','Hatchback','Automatic',52000,2018,15000,'../../assets/images/AudiQ7.jpg'),
-    car(0,'Ford','Electra','Sedan','Automatic',15000,2017,40000,'../../assets/images/FordElectra.jpg')
+    car(1,'Audi','A3','Sedan','Automatic',30000,2010,10000,'../../assets/images/AudiA3.jpg'),
+    car(2,'Ford','Mondeo','Sedan','Automatic',20000,2013,19000,'../../assets/images/FordMondeo.jpg'),
+    car(3,'Porsche','Porsche-911','Sedan','Automatic',60000,2011,33000,'../../assets/images/Porsche911.jpg'),
+    car(4,'Audi','Q7','Hatchback','Automatic',52000,2018,15000,'../../assets/images/AudiQ7.jpg'),
+    car(5,'Ford','Electra','Sedan','Automatic',15000,2017,40000,'../../assets/images/FordElectra.jpg')
 ]
 
 
@@ -109,20 +131,12 @@ export default {
     },
     data () {
         return {
-            isModelOpen:false,
-            isWrapperOpen:false,
-            cars:[],
-            make:' ',
-            model:[],
-            FilteredModelListRo:[],
-            bodytype:' ',
-            transmission:' ',
-            price:' ',
-            year:' ',
-            kilometers:' ',
-            isbtnmodel:' ',
-            isCross:[],
             
+            cars:cars,
+            modelsRightPart:' ',
+            visible:false,
+           
+            modelsBottomTotal:[]
             
 
             
@@ -131,39 +145,27 @@ export default {
     },
     methods:{
 
-        addToVar(uniqMakeName) {
-            
-            this.make = uniqMakeName
-            this.isCross=[]
+        addValToModelsRightPart(val) {
+            this.modelsRightPart = val
         },
-        addToMainVarCars () {
+        funcPassDataToShowModelsBottom(val) {
             
-            this.cars=cars
-        },
-        changeStr () {
-            this.make=2
-            this.isWrapperOpen=!this.isWrapperOpen
-        },
-        addToFilteredModelListRo(val,value){
-            let a = this.cars.filter(el=>el.model===val)
-            console.log(a);
-            this.FilteredModelListRo.push(a[0].model)
-            this.isCross.unshift(value)
-            this.FilteredModelListRo=[...new Set(this.FilteredModelListRo)]
-            
-        },
-        dellFromFilteredModelListRo(val){
-            let a = val
-            let b = this.FilteredModelListRo.findIndex(el=>el===a)
-            this.FilteredModelListRo.splice(b,1)
-            
-
+            let  a = []
+            let b = this.cars.filter(el=>el.id===val.id)
+            a.push(b)
+           
+            return this.modelsBottomTotal = a
         }
-       
-       
+
+
+        
+
+        
 
        
        
+       
+
 
        
     },
@@ -171,38 +173,32 @@ export default {
     
     
     computed:{
-        FilteredList(){
-            let a = this.make;
-            return this.cars.filter(function (elem) {
-                if(a==='') return true;
-                else return elem.make.indexOf(a) > -1;
-            })
-        },
-        uniqMakeNames () {
-            const a = []
-            for (let i = 0; i<cars.length; i++){
-                const b = cars[i].make
+        
+        uniqMake () {
+            let a = []
+            for (let i = 0; i<this.cars.length; i++) {
+                let b = this.cars[i].make
                 a.push(b)
             }
-            return [... new Set(a)]
+            let c = [...new Set(a)]
+            return c
+            
         },
-        UniqFilteredModelListRo () {
-            const a = []
-            for (let i = 0; i<this.FilteredModelListRo.length; i++){
-                const b = this.FilteredModelListRo[i]
-                a.push(b)
-            }
-            return [... new Set(a)]
+        uniqModelsRightPart () {
+            let  a = []
+            let b = this.cars.filter(el=>el.make===this.modelsRightPart)
+            a.push(b)
+            let c = []
+            c = [...new Set(a)]
+            return c[0]
         },
+        
 
-        indModelBtn () {
-            return this.cars.filter(elem => {
-                const b = elem.model.indexOf(this.isbtnmodel) >-1
-              
-               
-                return b
-            })
-        },
+
+
+
+
+        
        
 
 
