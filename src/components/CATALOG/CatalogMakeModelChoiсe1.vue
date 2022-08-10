@@ -15,12 +15,12 @@
                         <span class="catalog__title-arrow catalog__title-arrow-up"
                         v-if="arrowUpVisible"
                         @click="delItemsFromArrForUniqMakeComputed"
-                        ><i class="fa-solid fa-chevron-up"></i></span>
+                        ><i class="fa-solid fa-chevron-up catalog__arrows-up-down"></i></span>
 
                         <span class="catalog__title-arrow catalog__title-arrow-down"
                         v-if="arrowDownVisible"
                         @click="addItemsToArrForUniqMakeComputed"
-                        ><i class="fa-solid fa-chevron-down"></i></span>
+                        ><i class="fa-solid fa-chevron-down catalog__arrows-up-down"></i></span>
                     </div>
 
                     
@@ -48,7 +48,7 @@
                                     @click="delMake(item)"
                                     ></i>
 
-                                    <p
+                                    <p class="catalog__pointer"
                                     @click="addValToModelsRightPart(item)"
                                     >
                                         {{item}}
@@ -73,7 +73,7 @@
                                        
                                     
                                         >
-                                        <i class="fa-solid fa-xmark "
+                                        <i class="fa-solid fa-xmark catalog__icon-cross"
                                         @click="delItemsFromModelsBottomRight(item)"
                                         ></i>
                                         </div>
@@ -87,10 +87,10 @@
                                       
                                     </button>
                                         
-                                    <div class="catalog__model-cross-btn-block-models"
+                                    <div class="catalog__model-cross-btn-block-models catalog__pointer"
                                     @click="funcPassDataToShowModelsBottom(item)"
                                     >
-                                    {{item.model}}
+                                    {{item}}
                                     </div>
 
                                 </div>
@@ -112,12 +112,12 @@
 
 
        <div class=" col catalog__total-bottom-show-box">
-                <p v-for="(item,index) in modelsBottomTotal" :key="index"
-
+                <p class="catalog__pointer"
+                v-for="(item,index) in modelsBottomTotal" :key="index"
                 > <i class="fa-solid fa-xmark catalog__icon-cross"
                 @click="delFromUniqModelsBottomArr(index)"
                 >
-                </i>  {{item.model}},</p>
+                </i>  {{item.model}} year-{{item.year}} price-{{item.price}} ,</p>
        
        </div>
 
@@ -137,11 +137,13 @@ const cars = [
     car(2,'Ford','Mondeo','Sedan','Automatic',20000,2013,19000,'../../assets/images/FordMondeo.jpg'),
     car(3,'Porsche','Porsche-911','Sedan','Automatic',60000,2011,33000,'../../assets/images/Porsche911.jpg'),
     car(4,'Audi','Q7','Hatchback','Automatic',52000,2018,15000,'../../assets/images/AudiQ7.jpg'),
-    car(5,'Ford','Electra','Sedan','Automatic',15000,2017,40000,'../../assets/images/FordElectra.jpg')
+    car(5,'Ford','Electra','Sedan','Automatic',11000,2015,38000,'../../assets/images/FordElectra.jpg'),
+    car(6,'Ford','Electra','Sedan','Automatic',15000,2017,40000,'../../assets/images/FordElectra1.jpg'),
+    car(7,'Ford','Electra','Sedan','Automatic',12000,2016,45000,'../../assets/images/FordElectra2.jpg')
 ]
 
 export default {
-    name:'V-catalog',
+    name:'Makemodel-select',
     components: {
 
     },
@@ -172,7 +174,7 @@ export default {
         addValToModelsRightPart(val) {
            let a = this.cars.filter(el=>el.make===val)
            for (let i = 0; i<a.length; i++) {
-            this.modelsRightPartUniq.push(a[i])
+            this.modelsRightPartUniq.push(a[i].model)
             this.modelsRightPartUniq = [...new Set(this.modelsRightPartUniq)]
            }
            
@@ -185,10 +187,19 @@ export default {
             this.arrowUpVisible = false
         },
         funcPassDataToShowModelsBottom(val) {
-            this.modelsBottomTotal.push(this.cars.filter(el=>el.id===val.id)[0])  
-        },
-        delFromUniqModelsBottomArr(val) {
-            this.modelsBottomTotal.splice(val,1)
+            let b=[]
+            let a = this.cars.filter(el=>el.model===val)
+            for (let i = 0; i<a.length; i++){
+                let x = a[i].id
+                b.push(x)
+            }
+            let f = [...new Set(b)]
+            for (let i = 0;i<f.length; i++) {
+                let k = this.cars.filter(el=>el.id===f[i])
+                this.modelsBottomTotal.push(k[0]) 
+            }
+            this.modelsBottomTotal = [...new Set(this.modelsBottomTotal)]
+             
         },
         delMake(ItemOfUniqMake) {
             let a = []
@@ -196,42 +207,53 @@ export default {
             for(let i = 0; i<a.length; i++) {
                 let b = a[i].make
                 let c = this.arrForUniqMakeComputed.findIndex(el=>el.make===b)
-                this.arrForUniqMakeComputed.splice(c,1) 
-                   
+                this.arrForUniqMakeComputed.splice(c,1)       
             }
-            let aa = []
-            aa = this.modelsRightPartUniq.filter(el=>el.make===ItemOfUniqMake)
-            for(let i = 0; i<aa.length; i++) {
-                let bb = aa[i].make
-                let cc = this.modelsRightPartUniq.findIndex(el=>el.make===bb)
-                this.modelsRightPartUniq.splice(cc,1) 
-                   
+            
+            let f = this.cars.filter(el=>el.make===ItemOfUniqMake)
+            for (let i = 0; i<f.length; i++){
+                let b = f[i].model
+                let ind = this.modelsRightPartUniq.findIndex(el=>el===b)
+                this.modelsRightPartUniq.splice(ind,1)
             }
-            let aaa = []
-            aaa = this.modelsBottomTotal.filter(el=>el.make===ItemOfUniqMake)
-            for(let i = 0; i<aaa.length; i++) {
-                let bbb = aaa[i].make
-                let ccc = this.modelsBottomTotal.findIndex(el=>el.make===bbb)
-                this.modelsBottomTotal.splice(ccc,1) 
-                   
+                     
+            let m = this.modelsBottomTotal.filter(el=>el.make===ItemOfUniqMake)
+            for (let i = 0; i<m.length; i++){
+                let b = m[i].model            
+                let ind = this.modelsBottomTotal.findIndex(el=>el.model===b)
+                this.modelsBottomTotal.splice(ind,1)    
             }
+
             if (this.arrForUniqMakeComputed.length <= 0) {
                     this.arrowDownVisible = true
                     this.arrowUpVisible = false
             }
-            
+                   
+        },
+        delItemsFromModelsBottomRight(model) {
+
+            let m = this.modelsRightPartUniq.findIndex(el=>el===model)
+            this.modelsRightPartUniq.splice(m,1)
+
+            let n =[]
+            n = this.cars.filter(el=>el.model===model)
+            let p = []
+            for (let i = 0;  i<n.length; i++) {
+                let q = n[i].id
+                p.push(q)            
+            }
+
+            for (let i = 0;  i<p.length; i++) {
+                let s = p[i]  
+                let ind = this.modelsBottomTotal.findIndex(el=>el.id===s)
+                this.modelsBottomTotal.splice(ind,1)        
+            }
             
         },
-        delItemsFromModelsBottomRight(valItem) {
-            let a = this.modelsBottomTotal.findIndex(el=>el.model===valItem.model)
-            this.modelsBottomTotal.splice(a,1)
-            let b = this.modelsRightPartUniq.findIndex(el=>el.model===valItem.model)
-            this.modelsRightPartUniq.splice(b,1)
-        
+        delFromUniqModelsBottomArr(valIndex) {
+            this.modelsBottomTotal.splice(valIndex,1)
         }
-
-        
-        
+      
     },
 
        
@@ -369,6 +391,15 @@ export default {
             display: flex;
             align-items: center;
         }
+        &__arrows-up-down {
+            padding: 5px;
+            cursor: pointer;
+        }
+        &__pointer{
+            cursor: pointer;
+        }
+
+        
 
 
 
