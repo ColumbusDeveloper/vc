@@ -5,7 +5,7 @@
             <div class="col">
               <h1>Catalog page!</h1>
 
-              <catalog></catalog>
+              <makemodelselect></makemodelselect>
 
             </div>
           </div>   
@@ -17,12 +17,12 @@
 
 <script>
 
-import catalog from '../components/CATALOG/CatalogMakeModelChoiсe1.vue'
+import makemodelselect from '../components/CATALOG/CatalogMakeModelChoiсe1.vue'
 
 export default {
   name: 'CatalogView',
   components: {
-    catalog,
+    makemodelselect,
   }
 }
 </script>
