@@ -208,13 +208,19 @@ export default {
 
             // let ind = this.arrForUniqMakeComputed.findIndex(el=>el.make===ItemOfUniqMake)
             // this.arrForUniqMakeComputed.splice(ind,1)
-            
+            console.log(ItemOfUniqMake);
             let f = this.cars.filter(el=>el.make===ItemOfUniqMake)
             let a = []
             for (let i = 0; i<f.length; i++){
                 let b = f[i].model
                 a.push(b)
-                a = [...new Set(a)]          
+                a = [...new Set(a)]    
+
+
+
+
+                
+                      
             }
 
             for (let i = 0; i<a.length; i++) {
@@ -222,17 +228,8 @@ export default {
                 let ind = this.modelsRightPartUniq.findIndex(el=>el===k)
                 this.modelsRightPartUniq.splice(ind,1)
             }
-
-
-            // let f = this.cars.filter(el=>el.make===ItemOfUniqMake)
-            // for (let i = 0; i<f.length; i++){
-            //     let b = f[i].model
-            //     let ind = this.modelsRightPartUniq.findIndex(el=>el===b)
-            //     this.modelsRightPartUniq.splice(ind,1)
-            // }
-
-                     
-            let m = this.modelsBottomTotal.filter(el=>el.make===ItemOfUniqMake)
+                
+            let m = this.cars.filter(el=>el.make===ItemOfUniqMake)
             for (let i = 0; i<m.length; i++){
                 let b = m[i].model            
                 let ind = this.modelsBottomTotal.findIndex(el=>el.model===b)
