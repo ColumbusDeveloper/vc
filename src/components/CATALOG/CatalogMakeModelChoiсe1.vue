@@ -38,7 +38,7 @@
 
                     <div class="catalog__select-wrapper-window-make-model-box-make-part">
                             <template 
-                            v-for="(item,index) in uniqMake" :key="index"
+                            v-for="(item,index) in arrForUniqMakeComputed" :key="index"
                             
                             >
                                 
@@ -163,9 +163,12 @@ export default {
 
         addItemsToArrForUniqMakeComputed () {
             this.cars = cars
+            let a = []
             for(let i = 0; i<this.cars.length; i++) {
-                this.arrForUniqMakeComputed.push(this.cars[i])
+                a.push(this.cars[i].make)
+                a = [...new Set(a)]
             }
+            this.arrForUniqMakeComputed = a
             this.arrowDownVisible = false
             this.arrowUpVisible = true
              
@@ -202,20 +205,32 @@ export default {
              
         },
         delMake(ItemOfUniqMake) {
-            let a = []
-            a = this.arrForUniqMakeComputed.filter(el=>el.make===ItemOfUniqMake)
-            for(let i = 0; i<a.length; i++) {
-                let b = a[i].make
-                let c = this.arrForUniqMakeComputed.findIndex(el=>el.make===b)
-                this.arrForUniqMakeComputed.splice(c,1)       
-            }
+
+            // let ind = this.arrForUniqMakeComputed.findIndex(el=>el.make===ItemOfUniqMake)
+            // this.arrForUniqMakeComputed.splice(ind,1)
             
             let f = this.cars.filter(el=>el.make===ItemOfUniqMake)
+            let a = []
             for (let i = 0; i<f.length; i++){
                 let b = f[i].model
-                let ind = this.modelsRightPartUniq.findIndex(el=>el===b)
+                a.push(b)
+                a = [...new Set(a)]          
+            }
+
+            for (let i = 0; i<a.length; i++) {
+                let k = a[i]
+                let ind = this.modelsRightPartUniq.findIndex(el=>el===k)
                 this.modelsRightPartUniq.splice(ind,1)
             }
+
+
+            // let f = this.cars.filter(el=>el.make===ItemOfUniqMake)
+            // for (let i = 0; i<f.length; i++){
+            //     let b = f[i].model
+            //     let ind = this.modelsRightPartUniq.findIndex(el=>el===b)
+            //     this.modelsRightPartUniq.splice(ind,1)
+            // }
+
                      
             let m = this.modelsBottomTotal.filter(el=>el.make===ItemOfUniqMake)
             for (let i = 0; i<m.length; i++){
@@ -223,6 +238,8 @@ export default {
                 let ind = this.modelsBottomTotal.findIndex(el=>el.model===b)
                 this.modelsBottomTotal.splice(ind,1)    
             }
+
+
 
             if (this.arrForUniqMakeComputed.length <= 0) {
                     this.arrowDownVisible = true
@@ -259,16 +276,7 @@ export default {
        
     computed:{
         
-        uniqMake () {
-            let a = []
-            for (let i = 0; i<this.arrForUniqMakeComputed.length; i++) {
-                let b = this.arrForUniqMakeComputed[i].make
-                a.push(b)
-            }
-            let c = [...new Set(a)]
-            return c
-            
-        },
+        
        
         
     
