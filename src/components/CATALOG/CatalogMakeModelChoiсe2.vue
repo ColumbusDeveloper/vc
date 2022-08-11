@@ -8,19 +8,21 @@
        >
        
                     <p class="catalog__title-text"
-                    
+                    @click="showAutoMake"
+            
                     >Make, Model</p> 
 
                     <div class="catalog__arrow-box">
+
                         <span class="catalog__title-arrow catalog__title-arrow-up"
-                        v-if="arrowUpVisible"
-                        @click="delItemsFromArrForUniqMakeComputed"
+                        v-if="arrowRightPartUp"
                         ><i class="fa-solid fa-chevron-up catalog__arrows-up-down"></i></span>
 
                         <span class="catalog__title-arrow catalog__title-arrow-down"
-                        v-if="arrowDownVisible"
-                        @click="addItemsToArrForUniqMakeComputed"
+                        @click="showAutoMake"
+                        v-if="arrowRightPartDawn"
                         ><i class="fa-solid fa-chevron-down catalog__arrows-up-down"></i></span>
+
                     </div>
 
                     
@@ -37,46 +39,40 @@
                 <div class="col catalog__select-wrapper-window-make-model-box">
 
                     <div class="catalog__select-wrapper-window-make-model-box-make-part">
-                            <div 
-                            v-for="(item,index) in arrForUniqMakeComputed" :key="index"
-                            
+                            <template
+                            v-for="carMakeUniq in carsMakeUniqs" :key="carMakeUniq"
                             >
                                 
-                                <div class="catalog__uniqmake-models-box"
-                             
-                                >
+                                <div class="catalog__uniqmake-models-box"> 
 
                                     <i class="fa-solid fa-xmark catalog__icon-cross"
-                                    @click="delMake(item)"
+                                    @click="removeFromFinalCustomerChoice(carMakeUniq)"
                                     ></i>
 
                                     <p class="catalog__pointer"
-                                    @click="addValToModelsRightPart(item)"
-                                    >
-                                        {{item}}
-                                    </p>
-
+                                    @click="set(carMakeUniq)"
+                                    >{{carMakeUniq}}</p>
+                                    
 
                                 </div>
                               
                                 
-                            </div> 
+                            </template> 
                     </div>
 
                     <div class="catalog__select-wrapper-window-make-model-box-model-part">
                             <template 
-                            v-for="item in modelsRightPartUniq" :key="item"
                             
                             >
                                 <div class="catalog__model-cross-btn-block">
                                     <button class="catalog__model-cross-btn-block-btn">
                                         
                                         <div
-                                       
+                                        
                                     
                                         >
                                         <i class="fa-solid fa-xmark catalog__icon-cross"
-                                        @click="delItemsFromModelsBottomRight(item)"
+                       
                                         ></i>
                                         </div>
                                          
@@ -90,9 +86,9 @@
                                     </button>
                                         
                                     <div class="catalog__model-cross-btn-block-models catalog__pointer"
-                                    @click="funcPassDataToShowModelsBottom(item)"
+                 
                                     >
-                                    {{item}}
+                       
                                     </div>
 
                                 </div>
@@ -115,11 +111,13 @@
 
        <div class=" col catalog__total-bottom-show-box">
                 <p class="catalog__pointer"
-                v-for="(item,index) in modelsBottomTotal" :key="index"
-                > <i class="fa-solid fa-xmark catalog__icon-cross"
-                @click="delFromUniqModelsBottomArr(index)"
-                >
-                </i>  {{item.model}} year-{{item.year}} price-{{item.price}} ,</p>
+                v-for="(carsToShowAtFirst,index) in carsToShowAtFirsts" :key="index"
+                > 
+                <i class="fa-solid fa-xmark catalog__icon-cross"
+                
+                ></i>  
+                {{carsToShowAtFirst.make}} {{carsToShowAtFirst.model}} year - {{carsToShowAtFirst.year}} price - {{carsToShowAtFirst.price}}
+                </p>
        
        </div>
 
@@ -153,124 +151,47 @@ export default {
         return {
             
             cars:[],
-            arrForUniqMakeComputed:[],
-            modelsRightPartUniq:[],
-            arrowDownVisible:true,
-            arrowUpVisible:false,
-            modelsBottomTotal:[], 
+            carsToShowAtFirsts:[],
+            removeFromCustomerChoiceWithMake:[],
+            carsMakeUniqs:[],
+            arrowRightPartUp:false,
+            arrowRightPartDawn:true,
+            makeCustomerChoice:[],
+            
             
         }
     
     },
     methods:{
 
-        addItemsToArrForUniqMakeComputed () {
+        showAutoMake () {
             this.cars = cars
+            this.carsToShowAtFirsts = this.cars 
             let a = []
-            for(let i = 0; i<this.cars.length; i++) {
-                a.push(this.cars[i].make)
+            for (let i = 0; i<this.cars.length; i++) {
+                let b = this.cars[i].make
+                a.push(b)
                 a = [...new Set(a)]
             }
-            this.arrForUniqMakeComputed = a
-            this.arrowDownVisible = false
-            this.arrowUpVisible = true
-             
+            this.carsMakeUniqs = a   
         },
-
-        addValToModelsRightPart(val) {
-           let a = this.cars.filter(el=>el.make===val)
-           for (let i = 0; i<a.length; i++) {
-            this.modelsRightPartUniq.push(a[i].model)
-            this.modelsRightPartUniq = [...new Set(this.modelsRightPartUniq)]
-            
-           }
-           this.activeMakeClassIsOn = val
-           
-
-           
+        set(carMakeUniq) {
+            this.makeCustomerChoice.push(carMakeUniq)
+            this.makeCustomerChoice = [...new Set(this.makeCustomerChoice)]
+            this.carsToShowAtFirsts = this.allAutoAfterCustomerChoices
         },
-        delItemsFromArrForUniqMakeComputed () {
-            this.modelsBottomTotal = []
-            this.modelsRightPartUniq = []
-            this.arrForUniqMakeComputed = []
-            this.arrowDownVisible = true
-            this.arrowUpVisible = false
-        },
-        funcPassDataToShowModelsBottom(val) {
-            let b=[]
-            let a = this.cars.filter(el=>el.model===val)
-            for (let i = 0; i<a.length; i++){
-                let x = a[i].id
-                b.push(x)
-            }
-            let f = [...new Set(b)]
-            for (let i = 0;i<f.length; i++) {
-                let k = this.cars.filter(el=>el.id===f[i])
-                this.modelsBottomTotal.push(k[0]) 
-            }
-            this.modelsBottomTotal = [...new Set(this.modelsBottomTotal)]
-             
-        },
-        delMake(ItemOfUniqMake) {
-
-        
-            
-            let f = this.cars.filter(el=>el.make===ItemOfUniqMake)
-            let a = []
-            for (let i = 0; i<f.length; i++){
-                let b = f[i].model
-                a.push(b)
-                a = [...new Set(a)]                        
-            }
-
-            console.log(a);
-
-            for (let i = 0; i<a.length; i++) {
-                let k = a[i]
-                let ind = this.modelsRightPartUniq.findIndex(el=>el===k)
-                this.modelsRightPartUniq.splice(ind,1)
-            }
-
-
-                
-            let m = this.cars.filter(el=>el.make===ItemOfUniqMake)
-            for (let i = 0; i<m.length; i++){
-                let b = m[i].model            
-                let ind = this.modelsBottomTotal.findIndex(el=>el.model===b)
-                this.modelsBottomTotal.splice(ind,1)    
-            }
-
-
-
-            if (this.arrForUniqMakeComputed.length <= 0) {
-                    this.arrowDownVisible = true
-                    this.arrowUpVisible = false
-            }
-                   
-        },
-        delItemsFromModelsBottomRight(model) {
-
-            let m = this.modelsRightPartUniq.findIndex(el=>el===model)
-            this.modelsRightPartUniq.splice(m,1)
-
-            let n =[]
-            n = this.cars.filter(el=>el.model===model)
-            let p = []
-            for (let i = 0;  i<n.length; i++) {
-                let q = n[i].id
-                p.push(q)            
-            }
-
-            for (let i = 0;  i<p.length; i++) {
-                let s = p[i]  
-                let ind = this.modelsBottomTotal.findIndex(el=>el.id===s)
-                this.modelsBottomTotal.splice(ind,1)        
-            }
-            
-        },
-        delFromUniqModelsBottomArr(valIndex) {
-            this.modelsBottomTotal.splice(valIndex,1)
+        removeFromFinalCustomerChoice(value) {     
+            this.removeFromCustomerChoiceWithMake.push(value)
+            this.removeFromCustomerChoiceWithMake = [...new Set(this.removeFromCustomerChoiceWithMake)]
+            this.carsToShowAtFirsts = this.allAutoAfterCustomerChoices
         }
+        
+        
+        
+       
+       
+       
+       
       
     },
 
@@ -278,9 +199,30 @@ export default {
     computed:{
         
         
-        
-       
-        
+
+        allAutoAfterCustomerChoices () {
+            let f = []
+    
+            for (let i = 0; i<this.makeCustomerChoice.length; i++) {
+                let a = this.makeCustomerChoice[i]
+                let m = this.cars.filter(el=>el.make===a)
+                for (let i = 0; i<m.length; i++){
+                    let v = m[i]
+                    f.push(v)
+                }
+            }
+            for (let i = 0;  i<this.removeFromCustomerChoiceWithMake.length; i++) {
+      
+                let d = this.removeFromCustomerChoiceWithMake[i]
+                
+                let r = f.findIndex(el=>el.make===d)
+                f.splice(r,1)
+            }
+         
+            
+            return f     
+        }
+              
     
     },
     
