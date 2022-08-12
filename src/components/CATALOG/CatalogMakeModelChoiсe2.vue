@@ -8,20 +8,26 @@
        >
        
                     <p class="catalog__title-text"
-                    @click="showAutoMake"
+                    @click="showStartForm=!showStartForm,formAppearance()"
+                    
             
                     >Make, Model</p> 
 
                     <div class="catalog__arrow-box">
 
                         <span class="catalog__title-arrow catalog__title-arrow-up"
+                        
+                        ><i class="fa-solid fa-chevron-up catalog__arrows-up-down"
                         v-if="arrowRightPartUp"
-                        ><i class="fa-solid fa-chevron-up catalog__arrows-up-down"></i></span>
+                        @click="showStartForm=!showStartForm,formAppearance()"
+                        ></i></span>
 
                         <span class="catalog__title-arrow catalog__title-arrow-down"
-                        @click="showAutoMake"
+                        
+                        ><i class="fa-solid fa-chevron-down catalog__arrows-up-down"
+                        @click="showStartForm=!showStartForm,formAppearance()"
                         v-if="arrowRightPartDawn"
-                        ><i class="fa-solid fa-chevron-down catalog__arrows-up-down"></i></span>
+                        ></i></span>
 
                     </div>
 
@@ -40,57 +46,44 @@
 
                     <div class="catalog__select-wrapper-window-make-model-box-make-part">
                             <template
-                            v-for="carMakeUniq in carsMakeUniqs" :key="carMakeUniq"
+                            v-for="(itemMake,index) in makesList" :key="index"
                             >
                                 
-                                <div class="catalog__uniqmake-models-box"> 
-
-                                    <i class="fa-solid fa-xmark catalog__icon-cross"
-                                    @click="removeFromFinalCustomerChoice(carMakeUniq)"
-                                    ></i>
-
-                                    <p class="catalog__pointer"
-                                    @click="set(carMakeUniq)"
-                                    >{{carMakeUniq}}</p>
-                                    
-
+                                <div class="catalog__uniqmake-models-box"
+                                
+                                > 
+                                    <input type="checkbox" v-bind:value="itemMake" v-model="inputModels">
+                                    <label
+                                    @click="addToInputModelsArr(itemMake),changeModelsSource()"
+                                    >{{itemMake}}</label><br>
                                 </div>
                               
                                 
                             </template> 
                     </div>
 
-                    <div class="catalog__select-wrapper-window-make-model-box-model-part">
+                    <div class="catalog__select-wrapper-window-make-model-box-model-part modelsSource"
+                    v-if="showModelsSource"
+                    >
                             <template 
-                            
+                            v-for="itemModel in modelsList" :key="itemModel"
                             >
                                 <div class="catalog__model-cross-btn-block">
-                                    <button class="catalog__model-cross-btn-block-btn">
-                                        
-                                        <div
-                                        
-                                    
-                                        >
-                                        <i class="fa-solid fa-xmark catalog__icon-cross"
-                       
-                                        ></i>
-                                        </div>
-                                         
-
-                                        
-                                       
-                                        
-                                        <!-- <i class="fa-solid fa-check " ></i> -->
-                                        
-                                      
-                                    </button>
-                                        
-                                    <div class="catalog__model-cross-btn-block-models catalog__pointer"
-                 
-                                    >
-                       
-                                    </div>
-
+                                    <input type="checkbox" v-bind:value="itemModel" v-model="inputSelectedCars">
+                                    <label>{{itemModel}}</label><br>
+                                </div>
+                                  
+                            </template>
+                    </div>
+                    <div class="catalog__select-wrapper-window-make-model-box-model-part inputModelsList"
+                    v-if="showInputModelsSource"
+                    >
+                            <template 
+                            v-for="inputItemModel in inputModelsList" :key="inputItemModel"
+                            >
+                                <div class="catalog__model-cross-btn-block">
+                                    <input type="checkbox" v-bind:value="inputItemModel" v-model="inputSelectedCars">
+                                    <label>{{inputItemModel}}</label><br>
                                 </div>
                                   
                             </template>
@@ -111,12 +104,12 @@
 
        <div class=" col catalog__total-bottom-show-box">
                 <p class="catalog__pointer"
-                v-for="(carsToShowAtFirst,index) in carsToShowAtFirsts" :key="index"
+
                 > 
                 <i class="fa-solid fa-xmark catalog__icon-cross"
                 
                 ></i>  
-                {{carsToShowAtFirst.make}} {{carsToShowAtFirst.model}} year - {{carsToShowAtFirst.year}} price - {{carsToShowAtFirst.price}}
+
                 </p>
        
        </div>
@@ -150,78 +143,112 @@ export default {
     data () {
         return {
             
-            cars:[],
-            carsToShowAtFirsts:[],
-            removeFromCustomerChoiceWithMake:[],
-            carsMakeUniqs:[],
+            cars:cars,
+            makes:[],
+            models:[],
+            inputModels:[],
+            selectedCars:[],
+            inputSelectedCars:[],
             arrowRightPartUp:false,
             arrowRightPartDawn:true,
-            makeCustomerChoice:[],
+            showModelsSource:true,
+            showInputModelsSource:false,
+            
+            
+            
+            
+            
+
+            
             
             
         }
     
     },
     methods:{
-
-        showAutoMake () {
-            this.cars = cars
-            this.carsToShowAtFirsts = this.cars 
-            let a = []
-            for (let i = 0; i<this.cars.length; i++) {
-                let b = this.cars[i].make
-                a.push(b)
-                a = [...new Set(a)]
+        formAppearance () {
+            if (this.showStartForm) {
+                this.arrowRightPartUp = true
+                this.arrowRightPartDawn = false
+                this.makes = cars
+                this.models = cars
+                this.selectedCars = cars
+            } else {
+                this.arrowRightPartUp = false
+                this.arrowRightPartDawn = true
+                this.makes = []
+                this.models = []
+                this.selectedCars = []
+                this.showModelsSource = true
+                this.showInputModelsSource = false
+                this.inputModelsList = []
+                this.inputModels = []
             }
-            this.carsMakeUniqs = a   
+            
         },
-        set(carMakeUniq) {
-            this.makeCustomerChoice.push(carMakeUniq)
-            this.makeCustomerChoice = [...new Set(this.makeCustomerChoice)]
-            this.carsToShowAtFirsts = this.allAutoAfterCustomerChoices
+        changeModelsSource() {
+            if (this.inputModelsList.length !=0) {
+                this.showModelsSource = false
+                this.showInputModelsSource = true
+            } else {
+                this.showModelsSource = true
+                this.showInputModelsSource = false
+            }
         },
-        removeFromFinalCustomerChoice(value) {     
-            this.removeFromCustomerChoiceWithMake.push(value)
-            this.removeFromCustomerChoiceWithMake = [...new Set(this.removeFromCustomerChoiceWithMake)]
-            this.carsToShowAtFirsts = this.allAutoAfterCustomerChoices
+
+        addToInputModelsArr(itemMake) {
+            
+            this.inputModels.push(itemMake)
+
         }
         
+
         
+
         
-       
-       
-       
-       
-      
+
+        
     },
 
        
     computed:{
+        makesList () {
+            let a = []
+            for (let i = 0; i<this.makes.length; i++) {
+                let b = this.makes[i].make
+                a.push(b)
+                a = [...new Set(a)]
+            }
+            return a 
+        },
+        modelsList () {
+            let a = []
+            for (let i = 0; i<this.models.length; i++) {
+                let b = this.models[i].model
+                a.push(b)
+                a = [...new Set(a)]
+            }
+            return a 
+        },
+        inputModelsList () {
+            let a = []
+            let k = []
+            for (let i = 0; i<this.inputModels.length; i++) {
+                let b = this.inputModels[i]
+                k = this.cars.filter(el=>el.make===b)
+                for (let i = 0; i<k.length; i++) {
+                let s = k[i].model
+                a.push(s)
+                a = [...new Set(a)]
+                }
+            }
+            
+            return a 
+        }
         
         
 
-        allAutoAfterCustomerChoices () {
-            let f = []
-    
-            for (let i = 0; i<this.makeCustomerChoice.length; i++) {
-                let a = this.makeCustomerChoice[i]
-                let m = this.cars.filter(el=>el.make===a)
-                for (let i = 0; i<m.length; i++){
-                    let v = m[i]
-                    f.push(v)
-                }
-            }
-            for (let i = 0;  i<this.removeFromCustomerChoiceWithMake.length; i++) {
-      
-                let d = this.removeFromCustomerChoiceWithMake[i]
-                
-                let r = f.findIndex(el=>el.make===d)
-                f.splice(r,1)
-            }
-         
-            
-            return f     
-        }
+        
               
     
     },
