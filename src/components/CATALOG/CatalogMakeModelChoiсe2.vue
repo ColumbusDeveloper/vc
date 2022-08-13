@@ -46,48 +46,69 @@
 
                     <div class="catalog__select-wrapper-window-make-model-box-make-part">
                             <template
-                            v-for="(itemMake,index) in makesList" :key="index"
+                            v-for="(item) in makesInitialLeftPartComp" :key="item"
+                            
                             >
                                 
                                 <div class="catalog__uniqmake-models-box"
-                                
+                                v-if="showStartForm"
+                                @click="changeAppModelsToInput()"
                                 > 
-                                    <input type="checkbox" v-bind:value="itemMake" v-model="inputModels">
-                                    <label
-                                    @click="addToInputModelsArr(itemMake),changeModelsSource()"
-                                    >{{itemMake}}</label><br>
+                                    <input  type="checkbox" v-bind:value="item" v-model="inputMakes"
+                                    
+                                    >
+                                    <label 
+                                  
+                                    >{{item}}</label><br>
                                 </div>
                               
                                 
                             </template> 
                     </div>
 
-                    <div class="catalog__select-wrapper-window-make-model-box-model-part modelsSource"
-                    v-if="showModelsSource"
+                    <div class="catalog__right-part-models-box"
+                    v-if="showStartForm"
                     >
+                        <div class="catalog__select-wrapper-window-make-model-box-model-part modelsInitial"
+             
+                        >
                             <template 
-                            v-for="itemModel in modelsList" :key="itemModel"
+                            v-for="item in modelInitialsRightPartComp" :key="item"
                             >
-                                <div class="catalog__model-cross-btn-block">
-                                    <input type="checkbox" v-bind:value="itemModel" v-model="inputSelectedCars">
-                                    <label>{{itemModel}}</label><br>
+                                <div class="catalog__model-cross-btn-block"
+                                v-if="showInitialModels"
+                                >
+                                    <!-- <input type="checkbox" v-bind:value="" v-model=""> -->
+                                    <label
+                                    
+                                    >{{item}}</label><br>
                                 </div>
                                   
                             </template>
-                    </div>
-                    <div class="catalog__select-wrapper-window-make-model-box-model-part inputModelsList"
-                    v-if="showInputModelsSource"
-                    >
+                        </div>
+
+                        <div class="catalog__select-wrapper-window-make-model-box-model-part modelsAfterChoice"
+             
+                        >
                             <template 
-                            v-for="inputItemModel in inputModelsList" :key="inputItemModel"
+                            v-for="item in modelsAfterChoice" :key="item"
                             >
-                                <div class="catalog__model-cross-btn-block">
-                                    <input type="checkbox" v-bind:value="inputItemModel" v-model="inputSelectedCars">
-                                    <label>{{inputItemModel}}</label><br>
+                                <div class="catalog__model-cross-btn-block"
+                                v-if="showAfterChoiceModels"
+                                >
+                                    <!-- <input type="checkbox" v-bind:value="" v-model=""> -->
+                                    <label
+                                    >{{item}}</label><br>
                                 </div>
                                   
                             </template>
+                        </div>
+
                     </div>
+
+
+                    
+                    
 
                 </div>
                 
@@ -103,15 +124,19 @@
 
 
        <div class=" col catalog__total-bottom-show-box">
-                <p class="catalog__pointer"
 
-                > 
-                <i class="fa-solid fa-xmark catalog__icon-cross"
-                
-                ></i>  
+            <div class="catalog__total-bottom-show-box-selected"
+            
+            >
+            <p class="catalog__pointer"
+ 
+                > <i class="fa-solid fa-check catalog__icon-check"></i>
+          
+            </p>
+            </div>
 
-                </p>
-       
+            
+                      
        </div>
 
    
@@ -145,14 +170,13 @@ export default {
             
             cars:cars,
             makes:[],
-            models:[],
-            inputModels:[],
-            selectedCars:[],
-            inputSelectedCars:[],
+            inputMakes:[],
             arrowRightPartUp:false,
             arrowRightPartDawn:true,
-            showModelsSource:true,
-            showInputModelsSource:false,
+            showInitialModels:true,
+            showAfterChoiceModels:false,
+            showStartForm:false,
+         
             
             
             
@@ -170,88 +194,97 @@ export default {
             if (this.showStartForm) {
                 this.arrowRightPartUp = true
                 this.arrowRightPartDawn = false
+                this.showInitialModels=true
+                this.showAfterChoiceModels=false
                 this.makes = cars
-                this.models = cars
-                this.selectedCars = cars
+                this.inputMakes.splice(0)
+             
+               
+              
+              
             } else {
                 this.arrowRightPartUp = false
                 this.arrowRightPartDawn = true
                 this.makes = []
-                this.models = []
-                this.selectedCars = []
-                this.showModelsSource = true
-                this.showInputModelsSource = false
-                this.inputModelsList = []
-                this.inputModels = []
+             
+                          
             }
             
         },
-        changeModelsSource() {
-            if (this.inputModelsList.length !=0) {
-                this.showModelsSource = false
-                this.showInputModelsSource = true
-            } else {
-                this.showModelsSource = true
-                this.showInputModelsSource = false
-            }
+        changeAppModelsToInput() {
+          
+                this.showInitialModels=false
+                this.showAfterChoiceModels=true
+         
+               
         },
-
-        addToInputModelsArr(itemMake) {
-            
-            this.inputModels.push(itemMake)
-
-        }
+        
+  
+    
+    },
+    watch:{
+        
         
 
-        
 
-        
-
-        
     },
 
        
     computed:{
-        makesList () {
+        makesInitialLeftPartComp () {
             let a = []
-            for (let i = 0; i<this.makes.length; i++) {
+            for (let i = 0;i<this.makes.length; i++) {
                 let b = this.makes[i].make
                 a.push(b)
                 a = [...new Set(a)]
             }
-            return a 
+            return a
         },
-        modelsList () {
+        modelInitialsRightPartComp () {
             let a = []
-            for (let i = 0; i<this.models.length; i++) {
-                let b = this.models[i].model
+            for (let i = 0;i<this.makes.length; i++) {
+                let b = this.makes[i].model
                 a.push(b)
                 a = [...new Set(a)]
             }
-            return a 
+            return a
         },
-        inputModelsList () {
+        modelsAfterChoice () {
             let a = []
-            let k = []
-            for (let i = 0; i<this.inputModels.length; i++) {
-                let b = this.inputModels[i]
-                k = this.cars.filter(el=>el.make===b)
-                for (let i = 0; i<k.length; i++) {
-                let s = k[i].model
-                a.push(s)
-                a = [...new Set(a)]
+            for (let i = 0;i<this.inputMakes.length; i++) {
+                let b = this.inputMakes[i]
+                let c = this.makes.filter(el=>el.make===b)
+                for (let i = 0; i<c.length; i++) {
+                    let k = c[i].model
+                    a.push(k)
+                    a = [...new Set(a)]
                 }
+                
+                
             }
-            
-            return a 
+            return a
         }
+
+
+        
+
+            
+    
+    
+            
+       
+    }
+
+        
+       
+        
         
         
 
         
               
     
-    },
+    
     
   
     
@@ -319,7 +352,7 @@ export default {
             border-width:2px;
             border-style: solid;
             border-color: #000;
-            width: 50%;
+           
 		}
         &__model-cross-btn-block {
             display: flex;
@@ -342,13 +375,13 @@ export default {
                 align-items: center;
             }
         }
-        &__icon-cross{
-            padding-left: 5px;
-            padding-right: 5px;
+        &__icon-check{
+            padding-left: 7px;
+            padding-right: 2px;
             cursor: pointer;
             &:hover {
                 color: red;
-                font-size: 30px;
+              
             }
         }
         &__arrow-box {
@@ -376,6 +409,12 @@ export default {
         }
         &__pointer{
             cursor: pointer;
+        }
+        &__total-bottom-show-box-inputSelected {
+            background-color: red;
+        }
+        &__right-part-models-box {
+            width: 50%;
         }
 
         
