@@ -68,6 +68,7 @@
 
                     <div class="catalog__right-part-models-box"
                     v-if="showStartForm"
+                    
                     >
                         <div class="catalog__select-wrapper-window-make-model-box-model-part modelsInitial"
              
@@ -78,7 +79,9 @@
                                 <div class="catalog__model-cross-btn-block"
                                 v-if="showInitialModels"
                                 >
-                                    <!-- <input type="checkbox" v-bind:value="" v-model=""> -->
+                                    <input type="checkbox" v-bind:value="item" v-model="inputModels"
+                                    @click="changeAppTotalAfterChoice()"
+                                    >
                                     <label
                                     
                                     >{{item}}</label><br>
@@ -96,7 +99,9 @@
                                 <div class="catalog__model-cross-btn-block"
                                 v-if="showAfterChoiceModels"
                                 >
-                                    <!-- <input type="checkbox" v-bind:value="" v-model=""> -->
+                                    <input type="checkbox" v-bind:value="item" v-model="inputModels"
+                                    @click="changeAppTotalAfterChoice()"
+                                    >
                                     <label
                                     >{{item}}</label><br>
                                 </div>
@@ -123,21 +128,38 @@
        </div>
 
 
-       <div class=" col catalog__total-bottom-show-box">
+       <div class=" col catalog__total-bottom-show-box"
+       v-if="showStartForm"
+       >
+        <template
+        v-for="item in cars" :key="item"
+        >
+        <div class="catalog__total-bottom-show-box-selected finalTotalInitials"
+        v-if="finalTotalInitials"
+        >
+        <p><i class="fa-solid fa-check catalog__icon-check" ></i>{{item.make}} {{item.model}} year - {{item.year}} price - {{item.price}}</p>
+        
+        </div> 
 
-            <div class="catalog__total-bottom-show-box-selected"
-            
-            >
-            <p class="catalog__pointer"
- 
-                > <i class="fa-solid fa-check catalog__icon-check"></i>
-          
-            </p>
-            </div>
+        </template> 
+        
+
+
+        <template
+        v-for="item in finalChoiceBottomPart" :key="item"
+        >
+        <div class="catalog__total-bottom-show-box-selected finalTotalAfterChoice"
+        v-if="finalTotalAfterChoice"
+        >
+        <p><i class="fa-solid fa-check catalog__icon-check" ></i>{{item.make}} {{item.model}} year - {{item.year}} price - {{item.price}}</p>
+        
+        </div> 
+
+        </template>
 
             
                       
-       </div>
+       </div> 
 
    
     </div>
@@ -171,11 +193,14 @@ export default {
             cars:cars,
             makes:[],
             inputMakes:[],
+            inputModels:[],
             arrowRightPartUp:false,
             arrowRightPartDawn:true,
             showInitialModels:true,
             showAfterChoiceModels:false,
             showStartForm:false,
+            finalTotalInitials:true,
+            finalTotalAfterChoice:false,
          
             
             
@@ -206,6 +231,10 @@ export default {
                 this.arrowRightPartUp = false
                 this.arrowRightPartDawn = true
                 this.makes = []
+                this.inputModels.splice(0)
+                this.finalChoiceBottomPart.splice(0)
+                this.finalTotalInitials=true
+                this.finalTotalAfterChoice=false
              
                           
             }
@@ -215,9 +244,15 @@ export default {
           
                 this.showInitialModels=false
                 this.showAfterChoiceModels=true
+                this.finalChoiceBottomPart.splice(0)
+                this.inputModels.splice(0)
          
                
         },
+        changeAppTotalAfterChoice () {
+            this.finalTotalInitials = false
+            this.finalTotalAfterChoice = true
+        }
         
   
     
@@ -260,6 +295,20 @@ export default {
                     a = [...new Set(a)]
                 }
                 
+                
+            }
+            return a
+        },
+        finalChoiceBottomPart () {
+            let a = []
+            for (let i = 0; i<this.inputModels.length; i++) {
+                let b = this.inputModels[i]
+                let k = this.makes.filter(el=>el.model===b)
+                for (let i = 0; i<k.length; i++){
+                    let m = k[i]
+                    a.push(m)
+                    a = [...new Set(a)]
+                }
                 
             }
             return a
