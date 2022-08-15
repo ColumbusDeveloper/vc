@@ -70,6 +70,8 @@
                     v-if="showStartForm"
                     
                     >
+                        
+
                         <div class="catalog__select-wrapper-window-make-model-box-model-part modelsInitial"
              
                         >
