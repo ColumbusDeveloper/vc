@@ -12,38 +12,49 @@
         v-if="form" 
         >
             <div class="make-model__prev-make-model-box">
-                <template
-                v-for="item in inputCheck" :key="item"
-                >
-                    <div class="make-model__prev-make-model-box-checked">
-                        <input type="checkbox"
-                        v-bind:value="item"
-                        v-model="inputCheck"
-                        @click="addToUncheck(item)"
-                        >
-                        <label>{{item}}</label><br>
-                    </div>
+                <div class="make-model__prev-make-model-box-add">
+                    <template
+                    v-for="(itemAdd,index) in inputAdd" :key="index"
+                    >
+                        <div class="make-model__prev-make-model-box-checked">
+                            <input type="checkbox" 
+                            v-bind:value="itemAdd "
+                            @click="setItemAddToInputDelete(itemAdd,index)"
+                            v-model="checkboxAdd" 
+                            @change="getStatus()"
+                            >
+                            <label class="make-model__prev-make-model-box-checked-label">{{itemAdd}}</label><br>
+                            
+                           
+                        </div>
 
-                </template>
+                    </template>
+                </div>
 
-                <template
-                v-for="item in inputUNcheck" :key="item"
-                >
-                    <div class="make-model__prev-make-model-box-UNchecked">
-                        <input type="checkbox"
-                        v-bind:value="item"
-                        v-model="inputUNcheck"
-                        @click="addToCheck(item)"
-                        >
-                        <label>{{item}}</label><br>
-                    </div>
+                
+                <div class="make-model__prev-make-model-box-delete">
+                    <template
+                    v-for="itemDel in inputDelete" :key="itemDel"
+                    >
+                        <div class="make-model__prev-make-model-box-checked">
+                            <input type="checkbox" 
+                            v-bind:value="itemDel"
+                            v-model="inputDelete"
+                      
+                            >
+                            <label></label><br>
+                        </div>
 
-                </template>
+                    </template>
+                </div>
+                
+
+                 
 
 
             </div>
         
-
+                
 
                 
 
@@ -67,8 +78,8 @@
 
 
         </div>
-
-
+            
+                
 
 
 
@@ -101,6 +112,8 @@
         car(7, 'Ford', 'Electra', 'Sedan', 'Automatic', 12000, 2016, 45000, '../../assets/images/FordElectra2.jpg')
     ]
 
+    
+
     export default {
         name: 'Makemodel-select',
         components: {
@@ -111,39 +124,43 @@
 
                 cars: cars,
                 form: false,
-                inputCheck:[],
-                inputUNcheck:[],
+                inputAdd:[],
+                inputDelete:[],  
+                checkboxAdd: false,
+             
+
+                
+          
 
             }
 
         },
         methods: {
-            getID() {         
-                
+            
+           setItemAddToInputDelete(itemAdd,index) {
+                this.inputDelete.splice(index,0,itemAdd)
+                this.inputDelete = [...new Set(this.inputDelete)]    
+           },
+           setCheckboxAdd () {
+               return this.checkboxAdd = false
+           },
+            getStatus(){
+                this.checkboxAdd = false
+            }              
+        },
+        created(){
+           
                 for (let i = 0; i<this.cars.length; i++) {
-                let a = this.cars[i].id
-                this.inputCheck.push(a)
-                this.inputCheck = [...new Set(this.inputCheck)]
+                let a = this.cars[i].make
+                this.inputDelete.push(a)
+                this.inputDelete = [...new Set(this.inputDelete)]          
                 }
-                                    
-            },
-            addToUncheck(item) {
-                let a = item
-              
-                this.inputUNcheck = [...new Set(this.inputUNcheck)]
-                console.log(a);
-                
-            },
-            addToCheck(item) {
-                let a = item
-                this.inputCheck = [...new Set(this.inputCheck)]
-                console.log(a);
-            },
-            
-
-            
-            
-            
+                for (let i = 0; i<this.cars.length; i++) {
+                let a = this.cars[i].make
+                this.inputAdd.push(a)
+                this.inputAdd = [...new Set(this.inputAdd)] 
+                }
+               
         },
         watch: {
 
@@ -155,7 +172,7 @@
 
         computed: {
            
-
+            
 
         }
 
@@ -187,6 +204,18 @@
 
 		&__form {
 		}
+
+        &__prev-make-model-box {
+            display: flex;
+        }
+
+        &__prev-make-model-box-add {
+         
+        }
+
+        &__prev-make-model-box-delete {
+            
+        }
 }
 
 
