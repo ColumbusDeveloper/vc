@@ -28,15 +28,17 @@
                         </template>
                 </div>
 
+                
+
                 <div class="make-model__final-collection" 
                 v-for="(item) in finalMakeModels" :key="item.id"
                 >
                 <div class="make-model__final-collection-item-box"
                 >
-                    <input id="in" type="checkbox" checked="checked" 
+                    <input id="in" type="checkbox" 
                     v-bind:value="item"
                     v-model="finalMakeModels" 
-                    @click="setFinal(item.id)"
+                 
                     >                 
                     <label>{{item.make}} {{item.model}} year - {{item.year}} price - {{item.price}}</label><br>
                 </div>
@@ -131,13 +133,16 @@
                 this.varModels = valCar             
             },
 
-            setFinal(val) {
+            setFinal(val,event) {
+                if(event) {
+                    event.preventDefault()
+                }
                 let a = val     
                 let b = this.finalMakeModelsToServer.findIndex(el=>el.id===a)
                 console.log(a)
                 this.finalMakeModelsToServer.splice(b,1)
              
-                this.finalMakeModels.push(val) 
+                
                 
                                         
             },
