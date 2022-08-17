@@ -31,28 +31,47 @@
                     </template>
                 </div>
 
-                
-                <div class="make-model__prev-make-model-box-delete">
-                    <template
-                    v-for="itemDel in inputDelete" :key="itemDel"
+                <div class="exp">
+                    <div class="object"
+                    v-for="(value, name, index) in object" :key="index"
                     >
-                        <div class="make-model__prev-make-model-box-checked">
-                            <input type="checkbox" 
-                            v-bind:value="itemDel"
-                            v-model="inputDelete"
-                      
-                            >
-                            <label></label><br>
+                    
+                        <div class="object__value">
+                            <input type="checkbox" v-bind:value="value" v-model="inputDelete">
+                            <label>{{value}}</label>
                         </div>
+                
+                    </div>
 
-                    </template>
+                    <div class="object"
+                    v-for="(value, name, index) in object" :key="index"
+                    >
+                    
+                        <div class="object__value">
+                            <input type="checkbox" v-bind:value="value" v-model="inputDelete">
+                            <label>{{value}}</label>
+                        </div>
+                
+                    </div>
+
                 </div>
+                
+
+                
+                
+
+                
+
+
                 
 
                  
 
 
             </div>
+                
+
+
         
                 
 
@@ -60,20 +79,7 @@
 
                 
 
-                <!-- <div class="make-model__final-collection" 
-                v-for="(item) in finalMakeModels" :key="item.id"
-                >
-                <div class="make-model__final-collection-item-box"
-                >
-                    <input id="in" type="checkbox" checked="checked" 
-                    v-bind:value="item"
-                    v-model="finalMakeModels" 
-                    @click="setFinal(item.id,$event)"
-                    >                 
-                    <label>{{item.make}} {{item.model}} year - {{item.year}} price - {{item.price}}</label><br>
-                </div>
                 
-                </div> -->
                 
 
 
@@ -128,6 +134,11 @@
                 inputDelete:[],  
                 checkboxAdd: false,
              
+                object: {
+                Porsche: 'Porsche',
+                Audi: 'Audi',
+                Ford: 'Ford'
+                }
 
                 
           
@@ -146,7 +157,9 @@
            },
             getStatus(){
                 this.checkboxAdd = false
-            }              
+            },
+          
+                            
         },
         created(){
            
@@ -217,6 +230,22 @@
             
         }
 }
+
+.object {
+    display: flex;
+    flex-direction: column;
+
+		&__name {
+            display: flex;
+        
+		}
+
+		&__value {
+            display: flex;
+           
+		}
+}
+
 
 
 </style>

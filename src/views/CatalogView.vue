@@ -17,7 +17,7 @@
 
 <script>
 
-import makemodelselect from '../components/CATALOG/CatalogMakeModelChoiсe4.vue'
+import makemodelselect from '../components/CATALOG/CatalogMakeModelChoiсe5.vue'
 
 export default {
   name: 'CatalogView',
