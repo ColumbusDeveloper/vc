@@ -1,9 +1,6 @@
 <template>
     <div class="make-model">
-        <mediatorformakevardatalog class="make-model__card"
-        :carsfromcatalog="cars"
-        :modelsfromcatalog="models"
-        />
+        
 
         <div class="make-model__btn-arrow-box">
             <div class="make-model__nameBtn" @click="form=!form,getStarted()" >Make, Model</div>
@@ -12,6 +9,8 @@
                 <div class="make-model__arrow-Down"><i class="fa-solid fa-angle-down" v-if="form===false"></i></div>
             </div>
         </div>
+
+        
 
         <div class="make-model__form"
         v-if="form" 
@@ -55,14 +54,14 @@
 
 <script>
     
-    import mediatorformakevardatalog from '@/components/CATALOG/MediatorForMakeCardCatalog.vue'
+
     
 
     export default {
         name: 'Makemodel-select',
         props:['catalogpropscars'],
         components: {
-            mediatorformakevardatalog,
+       
         },
         data() {
             return {
@@ -101,7 +100,10 @@
                 this.originalMakes.push(a)
                 this.originalMakes = [...new Set(this.originalMakes)]        
                 }
+                this.$emit('changeovers', this.models)
             },
+
+           
 
            
            deleteAddItemFromMakes(val) {
@@ -124,6 +126,7 @@
                             }                    
                     }
                 }
+                this.$emit('changeovers', this.models)
             },
 
            deleteAddItemFromModels(make,model) {
@@ -139,6 +142,7 @@
                         this.originalMakes.splice(w,1)
                     }        
                 }
+                this.$emit('changeovers', this.models)
                                          
            },
 
@@ -213,6 +217,8 @@
 <style lang="scss">
     @import '@/assets/varmix.scss';
    .make-model {
+    display: flex;
+    flex-direction: column;
 
 		&__btn-arrow-box {
             display: flex;
@@ -247,9 +253,7 @@
             padding-left: 5px;
         }
 
-        &__card {
-            display: none;
-        }
+        
 }
 
 

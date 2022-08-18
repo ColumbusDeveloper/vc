@@ -1,8 +1,8 @@
 <template>
     <div class="card-catalog">
 
-        
-
+         <img :src="require('../../assets/images/'+ carproperties.image)" alt="img">
+        {{carproperties.model}}
         
             
 
@@ -18,14 +18,14 @@
 
     export default {
         name: 'cardmakemodel-catalog',
-        props:[''],
+        props:['car'],
         components: {
 
         },
         data() {
             return {
 
-            carproperties:this.carsfromcatalog,
+            carproperties:this.car,
            
               
 
@@ -46,12 +46,12 @@
         
         watch: {
 
-            carsfromcatalog (val) {
-                this.cars = val
+           
+
+            car (val) {
+                this.carproperties = val
             },
-            modelsfromcatalog (val) {
-                this.models = val
-            }
+           
 
 
         },

@@ -2,12 +2,23 @@
   
         <div class="container">
           <div class="row">
-            <div class="col">
-              <h1>Catalog page!</h1>
+            <div class="col catalog">
               
               <makemodelselect
               :catalogpropscars="cars"
+              @changeovers="models=$event"
               ></makemodelselect>
+
+              <mediatorformakemodelcard
+              :carsfromcatalogmain="cars"
+              :modelsfromcatalogmain="models"
+              >
+
+              </mediatorformakemodelcard>
+
+
+
+          
 
             </div>
           </div>   
@@ -42,17 +53,22 @@ const cars = [
 ]
 
 import makemodelselect from '../components/CATALOG/CatalogMakeModelChoiсe5.vue'
+import mediatorformakemodelcard from '../components/CATALOG/MediatorForMakeCardCatalog.vue'
 
 export default {
   name: 'CatalogView',
   data () {
     return {
       cars: cars,
+      models:[],
+  
     }
   },
   components: {
     makemodelselect,
-  }
+    mediatorformakemodelcard,
+  },
+ 
 }
 </script>
 
@@ -66,6 +82,11 @@ export default {
     border-style: solid;
     border-color: #000;
   }
+  .catalog{
+    display: flex;
+    justify-content: space-between;
+  }
+  
   
 
 </style>

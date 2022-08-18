@@ -1,7 +1,14 @@
 <template>
     <div class="mediator-catalog">
 
-        
+        <card
+        v-for="car in carstoshow" :key="car"
+        :car="car"
+        >
+    
+        </card>
+
+
 
         
             
@@ -13,21 +20,22 @@
 
 <script>
     
-
+    import card from '@/components/CATALOG/CardForMakeModelCatalog.vue'
     
 
     export default {
         name: 'Mediatorformakecard-catalog',
-        props:['carsfromcatalog','modelsfromcatalog'],
+        props:['carsfromcatalogmain','modelsfromcatalogmain'],
         components: {
-
+            card,
         },
         data() {
             return {
 
-            cars:this.carsfromcatalog,
-            models:this.modelsfromcatalog, 
-            carstoshow:[],   
+            cars:this.carsfromcatalogmain,
+            models:this.modelsfromcatalogmain, 
+          
+          
               
 
 
@@ -41,20 +49,17 @@
         },
         methods: {
             
-       
+   
                                   
-        },
-
-        created: {
-
-        },
+       },
+       
         
         watch: {
 
-            carsfromcatalog (val) {
+            carsfromcatalogmain (val) {
                 this.cars = val
             },
-            modelsfromcatalog (val) {
+            modelsfromcatalogmain (val) {
                 this.models = val
             }
 
@@ -63,7 +68,17 @@
 
 
         computed: {
-           
+
+           carstoshow () {
+                      let c = []
+                      this.models.forEach(el=>{
+                            let a = el
+                            let b = this.cars.filter(el=>el.model===a)
+                            b.forEach(el=>c.push(el))
+                        })
+
+                        return c
+           }
 
         }
 
