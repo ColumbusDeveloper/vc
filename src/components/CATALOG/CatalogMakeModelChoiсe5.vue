@@ -1,5 +1,9 @@
 <template>
     <div class="make-model">
+        <mediatorformakevardatalog class="make-model__card"
+        :carsfromcatalog="cars"
+        :modelsfromcatalog="models"
+        />
 
         <div class="make-model__btn-arrow-box">
             <div class="make-model__nameBtn" @click="form=!form,getStarted()" >Make, Model</div>
@@ -51,14 +55,14 @@
 
 <script>
     
-
+    import mediatorformakevardatalog from '@/components/CATALOG/MediatorForMakeCardCatalog.vue'
     
 
     export default {
         name: 'Makemodel-select',
         props:['catalogpropscars'],
         components: {
-
+            mediatorformakevardatalog,
         },
         data() {
             return {
@@ -69,6 +73,7 @@
                 makes:[],
                 varModels:[],
                 models:[], 
+             
               
 
 
@@ -102,7 +107,6 @@
            deleteAddItemFromMakes(val) {
                 let b = val
                 let z = this.makes.findIndex(el=>el===b)
-                console.log(z);
                 let s = this.cars.filter(el=>el.make.indexOf(b)>-1)
                 if (s!==[]) {
                     
@@ -133,9 +137,7 @@
                     let w = this.originalMakes.findIndex(el=>el===a)
                     if (w>-1) {
                         this.originalMakes.splice(w,1)
-                    }
-                  
-                    console.log(w); 
+                    }        
                 }
                                          
            },
@@ -169,6 +171,10 @@
             this.makes.push(a)
             this.makes = [...new Set(this.makes)]           
             }
+
+            
+
+
 
             
                     
@@ -239,6 +245,10 @@
 
         &__label {
             padding-left: 5px;
+        }
+
+        &__card {
+            display: none;
         }
 }
 
