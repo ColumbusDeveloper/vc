@@ -25,7 +25,7 @@
 
     export default {
         name: 'Mediatorformakecard-catalog',
-        props:['carsfromcatalogmain','modelsfromcatalogmain'],
+        props:['carsfromcatalogmain','modelsfromcatalogmain','modelsfromcatalogview'],
         components: {
             card,
         },
@@ -34,16 +34,9 @@
 
             cars:this.carsfromcatalogmain,
             models:this.modelsfromcatalogmain, 
-          
-          
-              
-
-
-                
-
-                
-          
-
+            allmodels:this.modelsfromcatalogview,
+            modelstoshowfinal:[],
+            
             }
 
         },
@@ -53,6 +46,7 @@
                                   
        },
        
+       
         
         watch: {
 
@@ -61,8 +55,17 @@
             },
             modelsfromcatalogmain (val) {
                 this.models = val
+                let b = this.models.length
+                let c = this.allmodels.length
+                    if (b<c) {
+                        this.modelstoshowfinal = this.models
+                    } else {
+                        this.modelstoshowfinal = this.allmodels
+                    }
+            },
+            modelsfromcatalogview (val) {
+                this.allmodels = val
             }
-
 
         },
 
@@ -71,18 +74,17 @@
 
            carstoshow () {
                       let c = []
-                      this.models.forEach(el=>{
+                     
+                      this.modelstoshowfinal.forEach(el=>{
                             let a = el
                             let b = this.cars.filter(el=>el.model===a)
                             b.forEach(el=>c.push(el))
                         })
 
-                        return c
-           }
+                      return c
+           },
 
         }
-
-
 
     }
 </script>
