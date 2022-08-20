@@ -53,7 +53,7 @@ const cars = [
     car(7, 'Ford', 'Electra', 'Sedan', 'Automatic', 12000, 2016, 45000, 'FordElectra22.jpg')
 ]
 
-import makemodelselect from '../components/CATALOG/CatalogMakeModelChoiсe6.vue'
+import makemodelselect from '../components/CATALOG/CatalogMakeModelChoiсe7.vue'
 import mediatorformakemodelcard from '../components/CATALOG/MediatorForMakeCardCatalog.vue'
 
 export default {
