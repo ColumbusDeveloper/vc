@@ -11,7 +11,7 @@
 
               <mediatorformakemodelcard
               :carsfromcatalogmain="cars"
-              :modelsfromcatalogmain="models"
+              :modelsfromcatalogmain='models'
               :modelsfromcatalogview ='allmodels'
               >
 
@@ -53,6 +53,7 @@ const cars = [
     car(7, 'Ford', 'Electra', 'Sedan', 'Automatic', 12000, 2016, 45000, 'FordElectra22.jpg')
 ]
 
+
 import makemodelselect from '../components/CATALOG/CatalogMakeModelChoiсe7.vue'
 import mediatorformakemodelcard from '../components/CATALOG/MediatorForMakeCardCatalog.vue'
 
@@ -62,6 +63,7 @@ export default {
     return {
       cars: cars,
       models:[],
+      var:[],
       id:[],
       allmodels:[],
   
@@ -73,29 +75,22 @@ export default {
   },
   watch:{
     id (val) {
+
       let a = val
-
-      a.forEach(el=>{
-        let a = el
-        for (let i = 0; i<this.cars.length; i++) {
-          let b = this.cars[i].id
-          if (b===a) {
-            this.models.push(this.cars[i])
-          }
-          console.log(b);
-        }
-      })
-      
-     
-     
-
-
-      
+      let x = []
+      for (let value of Object.values(a)) {
+        let a = value
+        let b = this.cars.filter(el=>el.id===a)[0].model
+        x.push(b)
+      }
+      x = [...new Set(x)]
+      this.models = x   
     }
   },
   methods:{
       fillId(val) {
         this.id=val
+        this.id = [...new Set(this.id)]
       }
   },
   created () {
@@ -109,7 +104,7 @@ export default {
 
   },
   computed:{
-   
+        
   }
    
      

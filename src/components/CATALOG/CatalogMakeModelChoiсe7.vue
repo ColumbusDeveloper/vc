@@ -34,13 +34,14 @@
                     
                             <div class="make-model__choice-form-models"
                             v-for="(model,index) in findModelsComp" :key="index"
-                            @click="daughterInputClick(model)"
+                            @click="daughterInputClick(model,index)"
                             >
                                 <input type="checkbox" v-bind:value="model" >
                                 <label class="make-model__label">{{model}}</label>
                             </div>
 
                     </div>
+                    
 
             </div>
                 
@@ -70,6 +71,8 @@
                 originalMakes:[],
                 makes:[],
                 id:[],
+                did:[],
+                idid:[],
                 varModels:[],
                 models:[], 
                 modelparentinput:[],
@@ -116,15 +119,38 @@
                 let a = this.cars.filter(el=>el.model.indexOf(model)>-1)
                 a.forEach(el=>{
                     let a = el.id
-                    this.id.push(a)
+                   
+                     
+
+                  
+                    if(!this.id.includes(a)) {
+                       this.id.push(a)   
+                    } else if (this.id.includes(a)) {
+                        let m = this.id.findIndex(el=>el===a)
+                        this.id.splice(m,1)
+                    }
+                   
+
+
+                    
+
+                    
+                      
                  
+                   
+                   
+                    
+                    
                 })
+
+              
                
             
             },
             parentInputClick() {
 
             },
+           
                                            
         },
         created(){
