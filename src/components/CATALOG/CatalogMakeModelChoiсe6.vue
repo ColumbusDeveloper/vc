@@ -1,5 +1,7 @@
 <template>
-    <div class="make-model">
+    <div class="make-model"
+   
+    >
         
 
         <div class="make-model__btn-arrow-box">
@@ -14,6 +16,7 @@
 
         <div class="make-model__form"
         v-if="form" 
+        @click="passToParentComp()"
         >
             <div class="make-model__form-show-box">
                 
@@ -103,6 +106,9 @@
                 }
                
             },
+            passToParentComp() {
+                this.$emit('changeovers', this.modelstoshowfromparentinput)
+            },
             
            findModels(valCar) {
                 this.varModels = valCar        
@@ -166,9 +172,11 @@
             this.makes.push(a)
             this.makes = [...new Set(this.makes)]           
             }
-            this.$emit('changeovers', this.modelstoshowfromparentinput)
+            
+           
                  
         },
+        
         watch: {
 
             catalogpropscars (val) {
@@ -195,6 +203,7 @@
                    let b = el.model
                    this.modelstoshowfromparentinput.push(b)
                    this.modelstoshowfromparentinput = [...new Set(this.modelstoshowfromparentinput)]
+                  
                     console.log(b);
                 })
 

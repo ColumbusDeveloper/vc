@@ -36,6 +36,7 @@
             models:this.modelsfromcatalogmain, 
             allmodels:this.modelsfromcatalogview,
             modelstoshowfinal:[],
+            var:false,
             
             }
 
@@ -54,22 +55,21 @@
                 this.cars = val
             },
             modelsfromcatalogmain (val) {
-                this.models = val
-                let b = this.models.length
-                let c = this.allmodels.length
-                    if (b<c) {
-                        this.modelstoshowfinal = this.models
-                    } else {
-                        this.modelstoshowfinal = this.allmodels
-                    }
+                this.models = val                
             },
             modelsfromcatalogview (val) {
                 this.allmodels = val
-            }
+            },
+            models (val) {   
+                this.modelstoshowfinal = val
+            },
 
         },
-
-
+        created () {
+                this.models = this.allmodels 
+                this.modelstoshowfinal = this.allmodels           
+        },
+       
         computed: {
 
            carstoshow () {
