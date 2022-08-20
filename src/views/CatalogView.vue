@@ -6,7 +6,7 @@
               
               <makemodelselect
               :catalogpropscars="cars"
-              @changeovers="models=$event"
+              @changeovers="fillId"
               ></makemodelselect>
 
               <mediatorformakemodelcard
@@ -62,6 +62,7 @@ export default {
     return {
       cars: cars,
       models:[],
+      id:[],
       allmodels:[],
   
     }
@@ -70,13 +71,48 @@ export default {
     makemodelselect,
     mediatorformakemodelcard,
   },
+  watch:{
+    id (val) {
+      let a = val
+
+      a.forEach(el=>{
+        let a = el
+        for (let i = 0; i<this.cars.length; i++) {
+          let b = this.cars[i].id
+          if (b===a) {
+            this.models.push(this.cars[i])
+          }
+          console.log(b);
+        }
+      })
+      
+     
+     
+
+
+      
+    }
+  },
+  methods:{
+      fillId(val) {
+        this.id=val
+      }
+  },
   created () {
     this.cars.forEach(el=>{
       let a = el.model
       this.allmodels.push(a)
-   })}
-    
- 
+   })
+  },
+
+  mounted () {
+
+  },
+  computed:{
+   
+  }
+   
+     
 }
 </script>
 

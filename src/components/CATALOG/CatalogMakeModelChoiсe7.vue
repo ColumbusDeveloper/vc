@@ -22,22 +22,22 @@
                 
                     <div class="make-model__choice-form"
                     v-for="(value, name, index) in makesobject" :key="index" 
-                    @click='inputModelsFromParent(name)'
+                    
                     >
                                        
                         <input type="checkbox" v-bind:value="name" 
-                        v-model="parentinputmodel"     
-      
+                        v-model="modelparentinput"     
+                        @click="parentInputClick()"
                         >
 
                         <label class="make-model__label">{{name}}{{findModels(name)}}</label>
                     
                             <div class="make-model__choice-form-models"
-                            v-for="(item,index) in findModelsComp" :key="index"
-                            @click='changeStatusOfParentInput(name,item)'
+                            v-for="(model,index) in findModelsComp" :key="index"
+                            @click="daughterInputClick(model)"
                             >
-                                <input type="checkbox" v-bind:value="item" >
-                                <label class="make-model__label">{{item}}</label>
+                                <input type="checkbox" v-bind:value="model" >
+                                <label class="make-model__label">{{model}}</label>
                             </div>
 
                     </div>
@@ -69,14 +69,11 @@
                 form: false,
                 originalMakes:[],
                 makes:[],
+                id:[],
                 varModels:[],
                 models:[], 
-                carstoshowfromparentinput:[],
-                modelstoshowfromparentinput:[],
-                varformodelstoshow:[],
-                parentinputmodel:[],
-                varparentinput:[],
-                inputparentcheck:{},
+                modelparentinput:[],
+                
 
 
                 makesobject: {
@@ -107,65 +104,28 @@
                
             },
             passToParentComp() {
-                this.$emit('changeovers', this.modelstoshowfromparentinput)
+                this.$emit('changeovers', this.id)
+             
             },
             
            findModels(valCar) {
                 this.varModels = valCar        
             },
-            changeStatusOfParentInput(val) {
-                // console.log(model);
-                this.varparentinput.push(val)
-                let qtyAdded = this.varparentinput.length
-                let b = []
-                let a = this.cars.filter(el=>el.make===val)
-                a = [...new Set(a)]
+            daughterInputClick(model) {
+                
+                let a = this.cars.filter(el=>el.model.indexOf(model)>-1)
                 a.forEach(el=>{
-                    let c = el.model
-                    b.push(c)
-
+                    let a = el.id
+                    this.id.push(a)
+                 
                 })
-                b = [...new Set(b)]
-                let qtyTotalMakes = b.length
-                if(qtyAdded===qtyTotalMakes) {
-                    this.parentinputmodel.push(val)
-                    this.varparentinput = []                    
-                }
-
-                this.modelstoshowfromparentinput.push(val)
-
-                this.varformodelstoshow = []
-                this.carstoshowfromparentinput = []
-    
-                let h = this.parentinputmodel.reduce(function(target, key) {
-                target[key] = true
-                return target
-                }, {}) 
-
-                this.inputparentcheck = h
-
-                      
-            },
-            inputModelsFromParent(val) {
                
-                this.varformodelstoshow.push(val)
-                this.varformodelstoshow = [...new Set(this.varformodelstoshow)]    
-            },
             
+            },
+            parentInputClick() {
 
-
-
-
-                               
-
-
-
-
-
-
-
-           
-                                   
+            },
+                                           
         },
         created(){
            
@@ -189,35 +149,7 @@
             catalogpropscars (val) {
                 this.cars=val
             },
-            varformodelstoshow (val) {
-              
-                let a = val
-                let b = Object.values(a)
-                b.forEach(el=>{
-                    let a = el
-                    let m = this.cars.filter(el=>el.make===a) 
-                    m.forEach(el=>{
-                        let d = el
-                        this.carstoshowfromparentinput.push(d)
-                        this.carstoshowfromparentinput = [...new Set(this.carstoshowfromparentinput)]
-                    })
-                    
-                })
- 
-            },
-            carstoshowfromparentinput (val) {
-                let a = val
-                a.forEach(el=>{
-                   let b = el.model
-                   this.modelstoshowfromparentinput.push(b)
-                   this.modelstoshowfromparentinput = [...new Set(this.modelstoshowfromparentinput)]
-                  
-                    
-                })
-
-         
-               
-            }
+            
             
 
 
