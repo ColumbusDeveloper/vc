@@ -17,6 +17,7 @@
         <div class="make-model__form"
         v-if="form" 
         @click="passToParentComp()"
+      
         >
             <div class="make-model__form-show-box">
                 
@@ -26,18 +27,22 @@
                     >
                                        
                         <input type="checkbox" v-bind:value="name" 
-                        v-model="modelparentinput"     
-                        @click="parentInputClick()"
+                        
+                        @click="parentInputClick(name)"
                         >
 
                         <label class="make-model__label">{{name}}{{findModels(name)}}</label>
                     
                             <div class="make-model__choice-form-models"
                             v-for="(model,index) in findModelsComp" :key="index"
-                            @click="daughterInputClick(model,index)"
                             >
-                                <input type="checkbox" v-bind:value="model" >
-                                <label class="make-model__label">{{model}}</label>
+                                <input type="checkbox" v-bind:value="model" 
+                                @click="daughterInputClick(model,index)"
+                                >
+                                <label class="make-model__label"
+
+                                >
+                                {{model}}</label>
                             </div>
 
                     </div>
@@ -71,12 +76,10 @@
                 originalMakes:[],
                 makes:[],
                 id:[],
-                did:[],
-                idid:[],
                 varModels:[],
                 models:[], 
-                modelparentinput:[],
-                
+                statusofparent:[],
+               
 
 
                 makesobject: {
@@ -85,10 +88,6 @@
                 Ford: 'Ford'
                 },
                 
-
-                
-          
-
             }
 
         },
@@ -115,40 +114,48 @@
                 this.varModels = valCar        
             },
             daughterInputClick(model) {
-                
+      
                 let a = this.cars.filter(el=>el.model.indexOf(model)>-1)
                 a.forEach(el=>{
                     let a = el.id
-                   
-                     
-
-                  
+ 
                     if(!this.id.includes(a)) {
                        this.id.push(a)   
                     } else if (this.id.includes(a)) {
                         let m = this.id.findIndex(el=>el===a)
                         this.id.splice(m,1)
                     }
-                   
-
-
-                    
-
-                    
-                      
-                 
-                   
-                   
-                    
-                    
+   
                 })
 
-              
-               
-            
             },
-            parentInputClick() {
+            parentInputClick(make) {
 
+                let a = this.cars.filter(el=>el.make.indexOf(make)>-1)
+                let c = this.statusofparent
+                let q = Object.values(c)
+                let m = q.filter(item => item===make).length
+                console.log(m);
+                if(m===0) {
+                    a.forEach(el=>{
+                        let b = el.id
+                        if(!this.id.includes(b)){
+                            this.id.push(b)
+                            this.statusofparent.push(make)
+                        }                                           
+                    })   
+                    this.id = [...new Set(this.id)]
+                    this.statusofparent = [...new Set(this.statusofparent)]
+                } else {
+                    a.forEach(el=>{
+                        let d = el.id
+                        let m = this.id.findIndex(el=>el===d)
+                        this.id.splice(m,1)
+                    })
+                    let g = this.statusofparent.findIndex(el=>el===make)
+                    this.statusofparent.splice(g,1)
+                }
+                       
             },
            
                                            

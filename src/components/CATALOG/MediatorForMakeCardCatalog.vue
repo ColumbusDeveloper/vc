@@ -74,11 +74,12 @@
 
            carstoshow () {
                       let c = []
-                     
+                 
                       this.modelstoshowfinal.forEach(el=>{
                             let a = el
                             let b = this.cars.filter(el=>el.model===a)
                             b.forEach(el=>c.push(el))
+                            c = [...new Set(c)]
                         })
 
                       return c
