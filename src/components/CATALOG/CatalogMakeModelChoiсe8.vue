@@ -25,26 +25,39 @@
                     v-for="(value, name, index) in makesobject" :key="index" 
                     
                     >
-                                       
-                        <input type="checkbox" v-bind:value="name" 
-                        
+                        <div
                         @click="parentInputClick(name)"
                         >
+                        <span class="make-model__form-show-parent-name">
+                        <i class="fa-solid fa-xmark activeNone" :class="{activeCrossModel:this.statusofparent.includes(name)}"></i>
+                        <i class="fa-solid fa-check activeNone" :class="{activeCrossModel:!this.statusofparent.includes(name)}"></i>
+                        {{name}}{{findModels(name)}}</span>
+                        </div>          
+                        
 
-                        <label class="make-model__label">{{name}}{{findModels(name)}}</label>
+                        
                     
                             <div class="make-model__choice-form-models"
                             v-for="(model,index) in findModelsComp" :key="index"
                             >
-                                <input type="checkbox" v-bind:value="model" 
+                                <div
                                 @click="daughterInputClick(model,index)"
                                 >
-                                <label class="make-model__label"
+                                <span class="make-model__form-show-parent-name">
+                                <i class="fa-solid fa-xmark activeNone" :class="{activeCross:this.statusofdaughter.includes(model)}"></i>
+                                <i class="fa-solid fa-check activeNone" :class="{activeCross:!this.statusofdaughter.includes(model)}"></i>
+                                {{model}}</span>
+                                </div>
+                                
 
-                                >
-                                {{model}}</label>
+
+
+
+
+                                
+                               
                             </div>
-                        {{statusofparent}}  {{id}}
+                        {{statusofparent}} {{id}} 
                     </div>
                     
 
@@ -79,6 +92,7 @@
                 varModels:[],
                 models:[], 
                 statusofparent:[],
+                statusofdaughter:[],
                
 
 
@@ -116,14 +130,18 @@
             daughterInputClick(model) {
       
                 let a = this.cars.filter(el=>el.model.indexOf(model)>-1)
+                
+                
                 a.forEach(el=>{
                     let a = el.id
- 
+                  
                     if(!this.id.includes(a)) {
-                       this.id.push(a)  
-                    
+                       this.id.push(a)
+                       this.statusofdaughter.push(model)     
                        this.id = [...new Set(this.id)]
                     } else if (this.id.includes(a)) {
+                        let c = this.statusofdaughter.findIndex(el=>el===model)
+                        this.statusofdaughter.splice(c,1)
                         let m = this.id.findIndex(el=>el===a)
                         this.id.splice(m,1)
                       
@@ -254,15 +272,22 @@
 		&__choice-form {
 		}
 
-		&__choice-form-models {
-            padding-left: 13px;
-		}
-
-        &__label {
-            padding-left: 5px;
+        &__form-show-parent-name {
+            display: flex;
+            align-items: center;
         }
 
+
         
+}
+.activeNone {
+    display: none;
+}
+.activeCross {
+    display: block;
+}
+.activeCrossModel {
+    display: block;
 }
 
 

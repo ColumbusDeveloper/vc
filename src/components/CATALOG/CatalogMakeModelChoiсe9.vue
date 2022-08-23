@@ -25,29 +25,33 @@
                     v-for="(value, name, index) in makesobject" :key="index" 
                     
                     >
-                                       
-                        <input type="checkbox" v-bind:value="name" 
-                        
+                        <div
                         @click="parentInputClick(name)"
-                        >
 
-                        <label class="make-model__label">{{name}}{{findModels(name)}}</label>
-                    
+                        >
+                        <span class="make-model__form-show-parent-name">
+                        <i class="fa-solid fa-xmark activeNone" :class="{activeCrossModel:this.statusofparent.includes(name)}"></i>
+                        <i class="fa-solid fa-check activeNone" :class="{activeCrossModel:!this.statusofparent.includes(name)}"></i>
+                        {{name}}{{findModels(name)}}</span>
+                        </div>          
+                                   
                             <div class="make-model__choice-form-models"
                             v-for="(model,index) in findModelsComp" :key="index"
                             >
-                                <input type="checkbox" v-bind:value="model" 
-                                @click="daughterInputClick(model,index)"
+                                <div
+                                @click="daughterInputClick(model,make)"
                                 >
-                                <label class="make-model__label"
-
-                                >
-                                {{model}}</label>
+                                <span class="make-model__form-show-parent-name">
+                                <i class="fa-solid fa-xmark activeNone" :class="{activeCross:this.statusofdaughter.includes(model)}"></i>
+                                <i class="fa-solid fa-check activeNone" :class="{activeCross:!this.statusofdaughter.includes(model)}"></i>
+                                {{model}}</span>
+                                </div>
+                                                              
                             </div>
-                        {{statusofparent}}  {{id}}
+                        
                     </div>
                     
-
+            {{statusofparent}} {{statusofdaughter}} {{findModels(name)}}
             </div>
                 
         </div>
@@ -79,7 +83,8 @@
                 varModels:[],
                 models:[], 
                 statusofparent:[],
-               
+                statusofdaughter:[],
+              
 
 
                 makesobject: {
@@ -111,59 +116,52 @@
             },
             
            findModels(valCar) {
-                this.varModels = valCar        
+                this.varModels = valCar 
+              
             },
-            daughterInputClick(model) {
-      
-                let a = this.cars.filter(el=>el.model.indexOf(model)>-1)
-                a.forEach(el=>{
-                    let a = el.id
- 
-                    if(!this.id.includes(a)) {
-                       this.id.push(a)  
-                    
-                       this.id = [...new Set(this.id)]
-                    } else if (this.id.includes(a)) {
-                        let m = this.id.findIndex(el=>el===a)
-                        this.id.splice(m,1)
-                      
-                    }
-   
-                })
+            
+            parentInputClick(make) {  
+                if(!this.statusofparent.includes(make)) {
+                    let x = []
+                    x.unshift(make) 
+                    this.statusofparent.push(x[0])
+                    this.statusofparent = [...new Set(this.statusofparent)] 
 
-                this.id = [...new Set(this.id)]
 
-            },
-            parentInputClick(make) {
 
-                let a = this.cars.filter(el=>el.make.indexOf(make)>-1)
-                let c = this.statusofparent
-                let q = Object.values(c)
-                let m = q.filter(item => item===make).length
-                console.log(m);
-                if(m===0) {
-                    a.forEach(el=>{
-                        let b = el.id
-                        if(!this.id.includes(b)){
-                            this.id.push(b)
-                            this.statusofparent.push(make)
-                        } else if (this.id.includes(b)) {
-                            let m = this.id.findIndex(el=>el===b)
-                            this.id.splice(m,1)
-                        }                                          
-                    })   
-                    this.id = [...new Set(this.id)]
-                    this.statusofparent = [...new Set(this.statusofparent)]
-                } else {
-                    a.forEach(el=>{
-                        let d = el.id
-                        let m = this.id.findIndex(el=>el===d)
-                        this.id.splice(m,1)
+                    let values = Object.values(this.statusofparent)      
+                    values.forEach(el=>{
+                        let s = el
+                        let w = []
+                        let f = this.cars.filter(el=>el.make===s)
+                        f.forEach(el=>{
+                            let z = el
+                            w.push(z)
+                        })
+                        w.forEach(el=>{
+                            let k = el.model
+                            this.statusofdaughter.push(k)
+                            this.statusofdaughter = [...new Set(this.statusofdaughter)]
+                        })                   
                     })
-                    let g = this.statusofparent.findIndex(el=>el===make)
-                    this.statusofparent.splice(g,1)
-                }
-                       
+
+
+                           
+                } else if (this.statusofparent.includes(make)) {
+                    let v = []
+                    v.unshift(make) 
+                    let d = this.statusofparent.indexOf(v[0])
+                    this.statusofparent.splice(d,1) 
+
+
+                }    
+
+                
+                
+            },
+
+            daughterInputClick(model,make) {
+                console.log(model,make);
             },
            
                                            
@@ -191,6 +189,8 @@
                 this.cars=val
             },
             
+           
+            
             
 
 
@@ -214,6 +214,28 @@
                 m = [...new Set(m)]
                 return m
             },
+            // dot () {
+            //     let a = []
+            //     let b = this.st
+               
+            //     this.statusofdaughter.forEach(el=>{
+            //         let b = el
+            //         a.push(b)
+            //     })
+            //     a.forEach(el=>{
+            //         let g = el
+            //         let s = this.cars.filter(el=>el.make===g)
+            //         s.forEach(el=>{
+            //             let q = el.model
+            //             b.push(q)
+            //         })
+                    
+            //     })
+
+            //     b = [...new Set(b)]
+            //     return b
+            // }
+           
             
 
         }
@@ -254,15 +276,22 @@
 		&__choice-form {
 		}
 
-		&__choice-form-models {
-            padding-left: 13px;
-		}
-
-        &__label {
-            padding-left: 5px;
+        &__form-show-parent-name {
+            display: flex;
+            align-items: center;
         }
 
+
         
+}
+.activeNone {
+    display: none;
+}
+.activeCross {
+    display: block;
+}
+.activeCrossModel {
+    display: block;
 }
 
 
