@@ -7,6 +7,7 @@ import router from './router'
 import './assets/varmix.scss';
 
 
+
 createApp(App).use(router).mount('#app')
 
 
