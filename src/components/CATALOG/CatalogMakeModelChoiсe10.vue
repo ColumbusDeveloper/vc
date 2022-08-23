@@ -30,28 +30,32 @@
 
                         >
                         <span class="make-model__form-show-parent-name">
-                        <i class="fa-solid fa-xmark activeNone" :class="{activeCrossModel:this.statusofparent.includes(name)}"></i>
-                        <i class="fa-solid fa-check activeNone" :class="{activeCrossModel:!this.statusofparent.includes(name)}"></i>
+                        <i class="fa-solid fa-check activeNone active" :class="{activeCrossModel:this.statusofparent.includes(name)}"></i>
+                        <i class="fa-solid fa-xmark activeNone" :class="{activeCrossModel:!this.statusofparent.includes(name)}"></i>
                         {{name}}{{findModels(name)}}</span>
-                        </div>          
+                        </div>  
+                        
+                        
                                    
                             <div class="make-model__choice-form-models"
                             v-for="(model,index) in findModelsComp" :key="index"
                             >
                                 <div
-                                @click="daughterInputClick(model,make)"
+                                @click="daughterInputClick(model,name)"
                                 >
                                 <span class="make-model__form-show-parent-name">
-                                <i class="fa-solid fa-xmark activeNone" :class="{activeCross:this.statusofdaughter.includes(model)}"></i>
-                                <i class="fa-solid fa-check activeNone" :class="{activeCross:!this.statusofdaughter.includes(model)}"></i>
+                                <i class="fa-solid fa-check activeNone active" :class="{activeCross:this.statusofdaughter.includes(model)}"></i>
+                                <i class="fa-solid fa-xmark activeNone" :class="{activeCross:!this.statusofdaughter.includes(model)}"></i>
                                 {{model}}</span>
                                 </div>
+
+                                
                                                               
                             </div>
                         
                     </div>
                     
-            {{statusofparent}} {{statusofdaughter}} {{findModels(name)}}
+            {{statusofparent}} {{statusofdaughter}} {{v}} {{varstatusofdaughter}}
             </div>
                 
         </div>
@@ -84,6 +88,7 @@
                 models:[], 
                 statusofparent:[],
                 statusofdaughter:[],
+                varstatusofdaughter:[],
               
 
 
@@ -123,15 +128,11 @@
             parentInputClick(make) {  
                 if(!this.statusofparent.includes(make)) {
                     let x = []
-                    x.unshift(make) 
-                    this.statusofparent.push(x[0])
-                    this.statusofparent = [...new Set(this.statusofparent)] 
-
-
-
-                    let values = Object.values(this.statusofparent)      
+                    x.unshift(make)    
+                    let values = x      
                     values.forEach(el=>{
                         let s = el
+                        this.v = s
                         let w = []
                         let f = this.cars.filter(el=>el.make===s)
                         f.forEach(el=>{
@@ -140,34 +141,66 @@
                         })
                         w.forEach(el=>{
                             let k = el.model
+                            let l = el.make
                             this.statusofdaughter.push(k)
                             this.statusofdaughter = [...new Set(this.statusofdaughter)]
+                            this.statusofparent.push(l)
+                            this.statusofparent = [...new Set(this.statusofparent)] 
                         })                   
-                    })
-
-
-                           
+                    })           
                 } else if (this.statusofparent.includes(make)) {
+                    let c=this.varstatusofdaughter.indexOf(make)
+                    if (c>-1) {
+                        this.varstatusofdaughter.splice(c,1)
+                    }
                     let v = []
+                    let j = []
                     v.unshift(make) 
-                    let d = this.statusofparent.indexOf(v[0])
+                    let g = v[0]
+                    let d = this.statusofparent.indexOf(g)
                     this.statusofparent.splice(d,1) 
-
-
-                }    
-
-                
-                
+                    let r = this.cars.filter(el=>el.make===g)
+                    r.forEach(el=>{
+                        let q = el.model
+                        j.push(q)
+                    })
+                    j.forEach(el=>{
+                        let w = el
+                        let s = this.statusofdaughter.indexOf(w)
+                        let n = []
+                        n.push(s)
+                        n=[...new Set(n)]
+                        if(n>-1) {
+                            this.statusofdaughter.splice(n,1)
+                        }                 
+                    })
+                }               
             },
 
             daughterInputClick(model,make) {
-                console.log(model,make);
+                let v = []
+                v.unshift(model) 
+                let m = v[0]
+
+                let q = []
+                q.unshift(make)
+                let w = q[0]
+
+                if(!this.statusofdaughter.includes(m)&&this.statusofparent.includes(w)) {
+                    this.statusofdaughter.push(m)
+                    this.varstatusofdaughter.push(w)
+                    this.varstatusofdaughter=[...new Set(this.varstatusofdaughter)]
+                }else if (this.statusofdaughter.includes(m)) {
+                    let s = this.statusofdaughter.indexOf(m)
+                    if(s>-1) {
+                        this.statusofdaughter.splice(s,1)
+                    }
+                    
+                }
             },
-           
-                                           
+                                               
         },
-        created(){
-           
+        created(){     
             for (let i = 0; i<this.cars.length; i++) {
             let a = this.cars[i].make
             let b = this.cars[i].model
@@ -177,10 +210,7 @@
             this.originalMakes = [...new Set(this.originalMakes)]  
             this.makes.push(a)
             this.makes = [...new Set(this.makes)]           
-            }
-            
-           
-                 
+            }                
         },
         
         watch: {
@@ -188,17 +218,7 @@
             catalogpropscars (val) {
                 this.cars=val
             },
-            
-           
-            
-            
-
-
-
-
-          
-            
-
+        
         },
 
 
@@ -214,30 +234,6 @@
                 m = [...new Set(m)]
                 return m
             },
-            // dot () {
-            //     let a = []
-            //     let b = this.st
-               
-            //     this.statusofdaughter.forEach(el=>{
-            //         let b = el
-            //         a.push(b)
-            //     })
-            //     a.forEach(el=>{
-            //         let g = el
-            //         let s = this.cars.filter(el=>el.make===g)
-            //         s.forEach(el=>{
-            //             let q = el.model
-            //             b.push(q)
-            //         })
-                    
-            //     })
-
-            //     b = [...new Set(b)]
-            //     return b
-            // }
-           
-            
-
         }
 
 
@@ -286,12 +282,19 @@
 }
 .activeNone {
     display: none;
+    
 }
 .activeCross {
     display: block;
+    
+    
 }
 .activeCrossModel {
     display: block;
+}
+.active {
+    color: red;
+    font-weight: 900;
 }
 
 

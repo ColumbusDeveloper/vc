@@ -54,7 +54,7 @@ const cars = [
 ]
 
 
-import makemodelselect from '../components/CATALOG/CatalogMakeModelChoiсe9.vue'
+import makemodelselect from '../components/CATALOG/CatalogMakeModelChoiсe11.vue'
 import mediatorformakemodelcard from '../components/CATALOG/MediatorForMakeCardCatalog.vue'
 
 export default {
