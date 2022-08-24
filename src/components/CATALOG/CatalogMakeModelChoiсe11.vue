@@ -16,7 +16,7 @@
 
         <div class="make-model__form"
         v-if="form" 
-        @click="passToParentComp()"
+        @click="passToParentComp(),idGenerator()"
       
         >
             <div class="make-model__form-show-box">
@@ -74,6 +74,8 @@
 
 
 <script>
+
+
     
 
     
@@ -95,9 +97,11 @@
                 varModels:[],
                 models:[], 
                 statusofparent:[],
+                idparentgenerator:[],
+                iddaughtergenerator:[],
                 statusofdaughter:[],
                 varstatusofdaughter:[],
-              
+                var:[],
 
 
                 makesobject: {
@@ -151,10 +155,13 @@
                         w.forEach(el=>{
                             let k = el.model
                             let l = el.make
+                            let o = el.id
                             this.statusofdaughter.push(k)
                             this.statusofdaughter = [...new Set(this.statusofdaughter)]
                             this.statusofparent.push(l)
                             this.statusofparent = [...new Set(this.statusofparent)] 
+                            this.idparentgenerator.push(o)
+                            this.idparentgenerator = [...new Set(this.idparentgenerator)]
                         })                   
                     })           
                 } else if (this.statusofparent.includes(make)) {
@@ -164,6 +171,7 @@
                     }
                     let v = []
                     let j = []
+                    let i = []
                     v.unshift(make) 
                     let g = v[0]
                     let d = this.statusofparent.indexOf(g)
@@ -171,7 +179,9 @@
                     let r = this.cars.filter(el=>el.make===g)
                     r.forEach(el=>{
                         let q = el.model
+                        let x = el.id
                         j.push(q)
+                        i.push(x)
                     })
                     j.forEach(el=>{
                         let w = el
@@ -181,6 +191,16 @@
                         n=[...new Set(n)]
                         if(n>-1) {
                             this.statusofdaughter.splice(n,1)
+                        }                 
+                    })
+                    i.forEach(el=>{
+                        let w = el
+                        let s = this.idparentgenerator.indexOf(w)
+                        let n = []
+                        n.push(s)
+                        n=[...new Set(n)]
+                        if(n>-1) {
+                            this.idparentgenerator.splice(n,1)
                         }                 
                     })
                 }               
@@ -206,7 +226,36 @@
                     }
                     
                 }
+                let c = []
+                let a = this.statusofdaughter
+                let b = Object.values(a)
+                b.forEach(el=>{
+                    let w = el
+                    let h = this.cars.filter(el=>el.model.indexOf(w)>-1)
+                    h.forEach(el=>{
+                        let d = el.id
+                        c.push(d)
+                    })
+                })
+                c=[...new Set(c)]
+                this.iddaughtergenerator = c
+                
+            
             },
+            idGenerator () {
+                let a = Object.values(this.idparentgenerator)
+                let b = Object.values(this.iddaughtergenerator)
+                console.log(a,b);
+                this.id = a
+                if(b.length!==0) {
+                    b.forEach(el=>{
+                        let m = el
+                        let w = this.id.indexOf(m)
+                        this.id.splice(w,1)
+                    })
+                }
+            }
+            
                                                
         },
         created(){     
@@ -226,22 +275,40 @@
             catalogpropscars (val) {
                 this.cars=val
             },
-            statusofparent (val) {
-                let a = val
-                let b = Object.values(a)
-                b.forEach(el=>{
-                    let c = el
-                    let w = this.cars.filter(el=>el.make.indexOf(c)>-1)
-                    w.forEach(el=>{
-                        let q = el.id
-                        this.id.push(q)
-                        this.id = [...new Set(this.id)]
-                    })
-                  
-                })
+            // statusofparent (val) {
+            //     let a = val
+            //     let b = Object.values(a)
              
-            },
-        
+            //     b.forEach(el=>{
+            //         let c = el
+                    
+            //         let w = this.cars.filter(el=>el.make===c)
+                    
+            //         let x = []
+            //         w.forEach(el=>{
+            //             let a=el.id
+            //             x.push(a)
+
+            //         })  
+                           
+            //                 x.forEach(el=>{
+            //                 let q = el
+            //                 if(!this.idparentgenerator.includes(q)) {
+            //                     this.idparentgenerator.push(q)
+            //                 }else if (this.idparentgenerator.includes(q)) {
+            //                     let s = this.idparentgenerator.indexOf(q)
+            //                     this.idparentgenerator.splice(s,1)
+            //                 }
+
+            //             })
+                  
+            //     })
+
+                
+                
+                   
+            // },
+            
         },
 
 
