@@ -30,8 +30,8 @@
 
                         >
                         <span class="make-model__form-show-parent-name">
-                        <i class="fa-solid fa-check activeNone active" :class="{activeCrossModel:this.statusofparent.includes(name)}"></i>
-                        <i class="fa-solid fa-xmark activeNone" :class="{activeCrossModel:!this.statusofparent.includes(name)}"></i>
+                        <i class="fa-solid fa-check activeNone active make-model__icon" :class="{activeCrossModel:this.statusofparent.includes(name)}"></i>
+                        <i class="fa-solid fa-xmark activeNone make-model__icon" :class="{activeCrossModel:!this.statusofparent.includes(name)}"></i>
                         {{name}}{{findModels(name)}}</span>
                         </div>  
                         
@@ -43,9 +43,9 @@
                                 <div
                                 @click="daughterInputClick(model,name)"
                                 >
-                                <span class="make-model__form-show-parent-name">
-                                <i class="fa-solid fa-check activeNone active" :class="{activeCross:this.statusofdaughter.includes(model)}"></i>
-                                <i class="fa-solid fa-xmark activeNone" :class="{activeCross:!this.statusofdaughter.includes(model)}"></i>
+                                <span class="make-model__form-show-parent-name make-model__form-show-daughter-name">
+                                <i class="fa-solid fa-check activeNone active make-model__icon" :class="{activeCross:this.statusofdaughter.includes(model)}"></i>
+                                <i class="fa-solid fa-xmark activeNone make-model__icon" :class="{activeCross:!this.statusofdaughter.includes(model)}"></i>
                                 {{model}}</span>
                                 </div>
 
@@ -55,7 +55,15 @@
                         
                     </div>
                     
-            {{statusofparent}} {{statusofdaughter}} {{v}} {{varstatusofdaughter}}
+        
+            </div>
+            <div class="make-model__final-show-box" >
+                <div class="make-model__final-show-box-item">
+                    <i class="fa-solid fa-xmark make-model__icon"></i>
+                    <div class="make-model__final-show-box-item-single-car">
+                        <!-- {{name}} {{model}} year-{{model.year}} price-{{model.price}} -->
+                    </div>
+                </div>
             </div>
                 
         </div>
@@ -111,14 +119,15 @@
                 this.models.push(b)
                 this.models = [...new Set(this.models)]  
                 this.originalMakes.push(a)
-                this.originalMakes = [...new Set(this.originalMakes)]        
+                this.originalMakes = [...new Set(this.originalMakes)] 
+                this.statusofparent=[]
+                this.statusofdaughter=[]     
                 }
                
             },
-            passToParentComp() {
-                this.$emit('changeovers', this.id)
-             
-            },
+            // passToParentComp() {
+            //     this.$emit('changeovers', this.id)   
+            // },
             
            findModels(valCar) {
                 this.varModels = valCar 
@@ -214,9 +223,23 @@
         },
         
         watch: {
-
             catalogpropscars (val) {
                 this.cars=val
+            },
+            statusofparent (val) {
+                let a = val
+                let b = Object.values(a)
+                b.forEach(el=>{
+                    let c = el
+                    let w = this.cars.filter(el=>el.make.indexOf(c)>-1)
+                    w.forEach(el=>{
+                        let q = el.id
+                        this.id.push(q)
+                        this.id = [...new Set(this.id)]
+                    })
+                  
+                })
+             
             },
         
         },
@@ -246,27 +269,34 @@
    .make-model {
     display: flex;
     flex-direction: column;
+    width: 300px;
 
 		&__btn-arrow-box {
             display: flex;
+         
+            justify-content: space-between;
 		}
 
 		&__nameBtn {
+            cursor: pointer;
 		}
 
 		&__arrow-box {
 		}
 
 		&__arrow-Up {
+            cursor: pointer;
 		}
 
 		&__arrow-Down {
+            cursor: pointer;
 		}
 
 		&__form {
 		}
 
 		&__form-show-box {
+            padding-top: 10px;
 		}
 
 		&__choice-form {
@@ -275,6 +305,25 @@
         &__form-show-parent-name {
             display: flex;
             align-items: center;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        &__form-show-daughter-name {
+            margin-left: 14px;
+            font-weight: 400;
+        }
+        &__icon {
+            width: 20px;
+        }
+        &__final-show-box {
+            margin-top: 15px;
+            border-width:1px;
+            border-style: solid;
+            border-color: #41456B;
+            border-radius: 5px;
+            width: 100%;
+            box-shadow: 0 0 8px 0 #41456B ;
+            min-height: 30px;
         }
 
 
