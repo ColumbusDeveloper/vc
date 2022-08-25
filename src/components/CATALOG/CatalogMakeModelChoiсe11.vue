@@ -26,7 +26,7 @@
                     
                     >
                         <div
-                        @click="parentInputClick(name)"
+                        @click="parentInputClick(name),idGenerator()"
 
                         >
                         <span class="make-model__form-show-parent-name">
@@ -41,7 +41,7 @@
                             v-for="(model,index) in findModelsComp" :key="index"
                             >
                                 <div
-                                @click="daughterInputClick(model,name)"
+                                @click="daughterInputClick(model,name),idGenerator(model)"
                                 >
                                 <span class="make-model__form-show-parent-name make-model__form-show-daughter-name">
                                 <i class="fa-solid fa-check activeNone active make-model__icon" :class="{activeCross:this.statusofdaughter.includes(model)}"></i>
@@ -94,6 +94,7 @@
                 originalMakes:[],
                 makes:[],
                 id:[],
+                vartocalcid:[],
                 varModels:[],
                 models:[], 
                 statusofparent:[],
@@ -215,6 +216,8 @@
                 q.unshift(make)
                 let w = q[0]
 
+                
+
                 if(!this.statusofdaughter.includes(m)&&this.statusofparent.includes(w)) {
                     this.statusofdaughter.push(m)
                     this.varstatusofdaughter.push(w)
@@ -235,25 +238,70 @@
                     h.forEach(el=>{
                         let d = el.id
                         c.push(d)
+                         c=[...new Set(c)]
+                        
                     })
+                     
                 })
-                c=[...new Set(c)]
+               
                 this.iddaughtergenerator = c
-                
             
             },
-            idGenerator () {
-                let a = Object.values(this.idparentgenerator)
-                let b = Object.values(this.iddaughtergenerator)
-                console.log(a,b);
-                this.id = a
-                if(b.length!==0) {
-                    b.forEach(el=>{
-                        let m = el
-                        let w = this.id.indexOf(m)
-                        this.id.splice(w,1)
-                    })
+            idGenerator (model) {
+                let z = this.cars.filter(el=>el.model.indexOf(model)>-1)
+                for (let i = 0; i<z.length; i++) {
+                    let q = z[i].id   
+                    
+                    if (!this.var.includes(q)) {
+                        this.var.push(q)
+                        
+                        
+                    } else if (this.var.includes(q)) {
+                        let x = this.var.indexOf(q) 
+                        this.var.splice(x,1)
+                        
+                    }
+
+                    if (!this.id.includes(this.var)){
+                        let c = this.id.indexOf(this.var)
+                       this.id.splice(c,1)
+                    }else if(this.id.includes(this.var)){
+                        let c = this.id.indexOf(this.var)
+                        this.id.splice(c,1)
+                    }
+                     
+                    
+                   
                 }
+
+                
+                
+
+                
+                
+
+                // if (this.var.length!==0) {
+                //         this.var.forEach(el=>{
+                //         let a = el
+                    
+                //         let b = this.vartocalcid.indexOf(a)
+                //         this.vartocalcid.splice(b,1)
+                //         this.id=this.vartocalcid
+                //     })
+                // } else {
+                //     this.id = this.idparentgenerator
+                // }
+                
+
+               
+              
+                
+                
+
+                
+
+                
+                
             }
             
                                                
@@ -275,39 +323,55 @@
             catalogpropscars (val) {
                 this.cars=val
             },
-            // statusofparent (val) {
-            //     let a = val
-            //     let b = Object.values(a)
-             
-            //     b.forEach(el=>{
-            //         let c = el
+            idparentgenerator () {
+                let w = this.idparentgenerator
+                for (let i = 0; i<w.length; i++) {
+                    let a = w[i]
+                    this.id.push(a)
+                    this.id = [...new Set(this.id)]
+                        
+                }
+                // for(let i = 0; i<this.var.length; i++) {
+                //         let b = this.var[i]
+                //         let c = this.id.indexOf(b)
+                //         this.id.splice(c,1)
+                //     }
+            },
+            
+            statusofdaughter () {
+                let a = this.statusofdaughter
+                let b = a.map(el=>{
+                    let a = el
+                    let w = this.cars.filter(el=>el.model.indexOf(a)>-1)[0]
+                    return w.id
+                })
+                this.iddaughtergenerator = b
+                // let b = []
+                // a.forEach(el=>{
                     
-            //         let w = this.cars.filter(el=>el.make===c)
-                    
-            //         let x = []
-            //         w.forEach(el=>{
-            //             let a=el.id
-            //             x.push(a)
-
-            //         })  
-                           
-            //                 x.forEach(el=>{
-            //                 let q = el
-            //                 if(!this.idparentgenerator.includes(q)) {
-            //                     this.idparentgenerator.push(q)
-            //                 }else if (this.idparentgenerator.includes(q)) {
-            //                     let s = this.idparentgenerator.indexOf(q)
-            //                     this.idparentgenerator.splice(s,1)
-            //                 }
-
-            //             })
-                  
-            //     })
-
-                
-                
+                //     let c = el
+                //     let w = this.cars.filter(el=>el.model.indexOf(c)>-1)[0]
+                //     b.push(w)
                    
-            // },
+
+                // })
+
+                // b.forEach(el=>{
+                //     let n = el.id
+
+                    
+                //     if (!this.iddaughtergenerator.includes(n)){
+                //         this.iddaughtergenerator.push(n)
+                //     }else {
+                //         let z = this.iddaughtergenerator.indexOf(n)
+                //         this.iddaughtergenerator.splice(z,1)
+                //     }
+                // })
+                
+                
+            },
+            
+           
             
         },
 
