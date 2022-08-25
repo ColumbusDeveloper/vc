@@ -26,7 +26,7 @@
                     
                     >
                         <div
-                        @click="parentInputClick(name),idGenerator()"
+                        @click="parentInputClick(name),addToMainCars(name)"
 
                         >
                         <span class="make-model__form-show-parent-name">
@@ -41,7 +41,7 @@
                             v-for="(model,index) in findModelsComp" :key="index"
                             >
                                 <div
-                                @click="daughterInputClick(model,name),idGenerator(model)"
+                                @click="daughterInputClick(model,name)"
                                 >
                                 <span class="make-model__form-show-parent-name make-model__form-show-daughter-name">
                                 <i class="fa-solid fa-check activeNone active make-model__icon" :class="{activeCross:this.statusofdaughter.includes(model)}"></i>
@@ -58,10 +58,14 @@
         
             </div>
             <div class="make-model__final-show-box" >
-                <div class="make-model__final-show-box-item">
-                    <i class="fa-solid fa-xmark make-model__icon"></i>
+                <div class="make-model__final-show-box-item"
+                 v-for="car in toShowTotalMakeModelCatalog" :key="car"
+                >
+                    <i class="fa-solid fa-xmark make-model__icon"
+                    @click="deleteFromMain(car.id)"
+                    ></i>
                     <div class="make-model__final-show-box-item-single-car">
-                        <!-- {{name}} {{model}} year-{{model.year}} price-{{model.price}} -->
+                        {{car.name}} {{car.model}} year-{{car.year}} price-{{car.price}}
                     </div>
                 </div>
             </div>
@@ -102,6 +106,7 @@
                 iddaughtergenerator:[],
                 statusofdaughter:[],
                 varstatusofdaughter:[],
+                deletefrommain:[],
                 var:[],
 
 
@@ -115,6 +120,13 @@
 
         },
         methods: {
+
+            deleteFromMain(val) {
+                this.$emit('deletefrommain', val)   
+            },
+            addToMainCars(name){
+                this.$emit('addtomaincars', name)   
+            },
             
             getStarted() {
                 
@@ -130,9 +142,9 @@
                 }
                
             },
-            // passToParentComp() {
-            //     this.$emit('changeovers', this.id)   
-            // },
+            passToParentComp() {
+                this.$emit('changeovers', this.id)   
+            },
             
            findModels(valCar) {
                 this.varModels = valCar 
@@ -229,80 +241,10 @@
                     }
                     
                 }
-                let c = []
-                let a = this.statusofdaughter
-                let b = Object.values(a)
-                b.forEach(el=>{
-                    let w = el
-                    let h = this.cars.filter(el=>el.model.indexOf(w)>-1)
-                    h.forEach(el=>{
-                        let d = el.id
-                        c.push(d)
-                         c=[...new Set(c)]
-                        
-                    })
-                     
-                })
-               
-                this.iddaughtergenerator = c
+                
             
             },
-            idGenerator (model) {
-                let z = this.cars.filter(el=>el.model.indexOf(model)>-1)
-                for (let i = 0; i<z.length; i++) {
-                    let q = z[i].id   
-                    
-                    if (!this.var.includes(q)) {
-                        this.var.push(q)
-                        
-                        
-                    } else if (this.var.includes(q)) {
-                        let x = this.var.indexOf(q) 
-                        this.var.splice(x,1)
-                        
-                    }
-
-                    if (!this.id.includes(this.var)){
-                        let c = this.id.indexOf(this.var)
-                       this.id.splice(c,1)
-                    }else if(this.id.includes(this.var)){
-                        let c = this.id.indexOf(this.var)
-                        this.id.splice(c,1)
-                    }
-                     
-                    
-                   
-                }
-
-                
-                
-
-                
-                
-
-                // if (this.var.length!==0) {
-                //         this.var.forEach(el=>{
-                //         let a = el
-                    
-                //         let b = this.vartocalcid.indexOf(a)
-                //         this.vartocalcid.splice(b,1)
-                //         this.id=this.vartocalcid
-                //     })
-                // } else {
-                //     this.id = this.idparentgenerator
-                // }
-                
-
-               
-              
-                
-                
-
-                
-
-                
-                
-            }
+            
             
                                                
         },
@@ -323,55 +265,10 @@
             catalogpropscars (val) {
                 this.cars=val
             },
-            idparentgenerator () {
-                let w = this.idparentgenerator
-                for (let i = 0; i<w.length; i++) {
-                    let a = w[i]
-                    this.id.push(a)
-                    this.id = [...new Set(this.id)]
-                        
-                }
-                // for(let i = 0; i<this.var.length; i++) {
-                //         let b = this.var[i]
-                //         let c = this.id.indexOf(b)
-                //         this.id.splice(c,1)
-                //     }
-            },
-            
-            statusofdaughter () {
-                let a = this.statusofdaughter
-                let b = a.map(el=>{
-                    let a = el
-                    let w = this.cars.filter(el=>el.model.indexOf(a)>-1)[0]
-                    return w.id
-                })
-                this.iddaughtergenerator = b
-                // let b = []
-                // a.forEach(el=>{
-                    
-                //     let c = el
-                //     let w = this.cars.filter(el=>el.model.indexOf(c)>-1)[0]
-                //     b.push(w)
-                   
-
-                // })
-
-                // b.forEach(el=>{
-                //     let n = el.id
-
-                    
-                //     if (!this.iddaughtergenerator.includes(n)){
-                //         this.iddaughtergenerator.push(n)
-                //     }else {
-                //         let z = this.iddaughtergenerator.indexOf(n)
-                //         this.iddaughtergenerator.splice(z,1)
-                //     }
-                // })
-                
-                
-            },
-            
-           
+          
+            statusid (val) {
+                this.id = val
+            },    
             
         },
 
@@ -388,6 +285,36 @@
                 m = [...new Set(m)]
                 return m
             },
+            statusid () {
+                let a = []
+                this.statusofdaughter.forEach(el=>{
+                    let b = el
+                    let c = this.cars.filter(el=>el.model.indexOf(b)>-1)
+                    c.forEach(el=>{           
+                        let q = el.id
+                        a.push(q)                          
+                    })   
+                })
+                return a 
+            },
+            toShowTotalMakeModelCatalog () {
+                let g = []
+                
+                for(let i = 0; i<this.id.length; i++) {
+                    let a = this.id[i]
+                    for(let i = 0; i<this.cars.length; i++) {
+                        if(this.cars[i].id===a) {
+                            g.push(this.cars[i])
+                        }
+                    }
+                    
+                   
+                }
+                
+             
+              
+                return g
+            }
         }
 
 
@@ -455,6 +382,11 @@
             width: 100%;
             box-shadow: 0 0 8px 0 #41456B ;
             min-height: 30px;
+            padding: 5px;
+        }
+        &__final-show-box-item {
+            display: flex;
+            align-items: center;
         }
 
 

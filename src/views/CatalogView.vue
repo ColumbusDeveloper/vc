@@ -7,6 +7,8 @@
               <makemodelselect
               :catalogpropscars="cars"
               @changeovers="fillId"
+              @deletefrommain="deletefrommain"
+              @addtomaincars="addtomaincars"
               ></makemodelselect>
 
               <mediatorformakemodelcard
@@ -61,11 +63,14 @@ export default {
   name: 'CatalogView',
   data () {
     return {
-      cars: cars,
+      cars:cars,
+      carstoadd:cars,
       models:[],
       var:[],
       id:[],
       allmodels:[],
+      deletefromcars:[],
+      let:[],
   
     }
   },
@@ -75,23 +80,47 @@ export default {
   },
   watch:{
     id (val) {
+     
+        let a = val
+        let x = []
+        for (let value of Object.values(a)) {
+          let a = value
+          let b = this.cars.filter(el=>el.id===a)[0].model
+          x.push(b)
+        }
+        x = [...new Set(x)]
+        this.models = x   
+  
 
-      let a = val
-      let x = []
-      for (let value of Object.values(a)) {
-        let a = value
-        let b = this.cars.filter(el=>el.id===a)[0].model
-        x.push(b)
-      }
-      x = [...new Set(x)]
-      this.models = x   
+      
     }
   },
   methods:{
       fillId(val) {
-        this.id=val
-        this.id = [...new Set(this.id)]
-      }
+        
+          this.id=val
+  
+      },
+      deletefrommain (val) {
+          let a = val
+
+          let b = this.cars.filter(el=>el.id!==a)
+          this.cars = b     
+      },
+      addtomaincars (name) {
+        if(this.cars.length<this.carstoadd.length) {
+            let a = name
+            let b = this.carstoadd.filter(el=>el.make===a)
+            for(let i = 0;i<b.length;i++) {
+              let c = b[i]
+              this.cars.push(c)
+              this.cars = [...new Set(this.cars)]
+            }
+            
+     
+        }
+         
+      },
   },
   created () {
     this.cars.forEach(el=>{
