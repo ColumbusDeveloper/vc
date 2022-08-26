@@ -138,6 +138,7 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
+            @include letterContentSecondarySmallGrayClear;
             p{
                 padding-right: 50px;
                 margin-bottom: 0;

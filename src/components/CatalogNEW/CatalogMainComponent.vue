@@ -4,10 +4,15 @@
     >
 
         <div class="ma-mo__detailed-search-box">
-                
+            <div class="ma-mo__global-search-header">
+                        <p class="ma-mo__global-search-header-stable">Detailed search</p>
+                        <p class="ma-mo__global-search-header-changeable">Clear filters</p>
+            </div>         
         </div>
         <div class="ma-mo__global-search-and-card-box">
                 <div class="ma-mo__global-search">
+                   
+                    
 
                 </div>
                 <div class="ma-mo__card-box">
@@ -133,7 +138,32 @@
 		}
 
         
+
+		&__global-search-header {
+            display: flex;
+            align-items: flex-end;
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+         
+		}
+
+		&__global-search-header-stable {
+            @include letterSemiboldDarkBlue;
+            margin-right: 20px
+		}
+
+		&__global-search-header-changeable {
+            @include letterContentSecondarySmallGrayClear;
+            color: #7481FF;
+		}
 }
+
+
+       
+
+        
+
 
 
 
