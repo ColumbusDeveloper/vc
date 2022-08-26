@@ -152,6 +152,7 @@
             },
             
             parentInputClick(make) {  
+                
                 if(!this.statusofparent.includes(make)) {
                     let x = []
                     x.unshift(make)    
