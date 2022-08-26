@@ -5,7 +5,7 @@
             <div class="col catalog">
               
               <catalog
-              
+              :catalogpropscars="cars"
               ></catalog>
 
               
@@ -61,13 +61,7 @@ export default {
   data () {
     return {
       cars:cars,
-      carstoadd:cars,
-      models:[],
-      var:[],
-      id:[],
-      allmodels:[],
-      deletefromcars:[],
-      let:[],
+      
   
     }
   },
@@ -75,59 +69,16 @@ export default {
     catalog,
   },
   watch:{
-    id (val) {
-     
-        let a = val
-        let x = []
-        for (let value of Object.values(a)) {
-          let a = value
-          let b = this.cars.filter(el=>el.id===a)[0].model
-          x.push(b)
-        }
-        x = [...new Set(x)]
-        this.models = x   
-  
-
-      
-    }
+   
   },
   methods:{
-      fillId(val) {
-        
-          this.id=val
+      
+      
+      
+  },
+
+
   
-      },
-      deletefrommain (val) {
-          let a = val
-
-          let b = this.cars.filter(el=>el.id!==a)
-          this.cars = b     
-      },
-      addtomaincars (name) {
-        if(this.cars.length<this.carstoadd.length) {
-            let a = name
-            let b = this.carstoadd.filter(el=>el.make===a)
-            for(let i = 0;i<b.length;i++) {
-              let c = b[i]
-              this.cars.push(c)
-              this.cars = [...new Set(this.cars)]
-            }
-            
-     
-        }
-         
-      },
-  },
-  created () {
-    this.cars.forEach(el=>{
-      let a = el.model
-      this.allmodels.push(a)
-   })
-  },
-
-  mounted () {
-
-  },
   computed:{
         
   }
@@ -139,17 +90,8 @@ export default {
 <style lang="scss" scoped>
   @import '../assets/varmix.scss';
 
-  .main {
-    height: 100px;
-    width: 100px;
-    border-width:2px;
-    border-style: solid;
-    border-color: #000;
-  }
-  .catalog{
-    display: flex;
-    justify-content: space-between;
-  }
+  
+ 
   
   
 
