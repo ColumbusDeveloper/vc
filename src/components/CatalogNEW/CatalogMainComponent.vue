@@ -7,7 +7,12 @@
             <div class="ma-mo__global-search-header">
                         <p class="ma-mo__global-search-header-stable">Detailed search</p>
                         <p class="ma-mo__global-search-header-changeable">Clear filters</p>
-            </div>         
+            </div>   
+            <doubleinprange
+            
+            >
+
+            </doubleinprange>      
         </div>
         <div class="ma-mo__global-search-and-card-box">
                 <div class="ma-mo__global-search">
@@ -49,7 +54,7 @@
 
 
     import card from '@/components/CatalogNEW/CardCatalog.vue'
-
+    import doubleinprange from '@/components/CatalogNEW/DoubleInputRange.vue'
     
 
     export default {
@@ -57,6 +62,7 @@
         props:['catalogpropscars'],
         components: {
             card,
+            doubleinprange,
         },
         data() {
             return {
@@ -108,7 +114,9 @@
     .ma-mo {
         display: flex;
 		&__detailed-search-box {
-            background-color: rgb(211, 95, 101);
+            display: flex;
+            flex-direction: column;
+         
             border-width:2px;
             border-style: solid;
             border-color: #000;
