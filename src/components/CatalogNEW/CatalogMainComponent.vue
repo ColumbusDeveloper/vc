@@ -11,9 +11,14 @@
         </div>
         <div class="ma-mo__global-search-and-card-box">
                 <div class="ma-mo__global-search">
-                   
-                    
+                    <div class="ma-mo__global-search-item-left">
+                        
+                    </div>
 
+                    <div class="ma-mo__global-search-item-right">
+                        
+                    </div>
+                   
                 </div>
                 <div class="ma-mo__card-box">
                     <card 
@@ -121,11 +126,9 @@
 		}
 
 		&__global-search {
-            background-color: yellow;
-            height: 45px;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+            
+            display: flex;
+            
 		}
 
 		&__card-box {
@@ -141,22 +144,45 @@
 
 		&__global-search-header {
             display: flex;
-            align-items: flex-end;
+            justify-content: space-between;
+            align-items: center;
             border-width:2px;
             border-style: solid;
             border-color: #000;
+            height: 55px;
          
 		}
 
 		&__global-search-header-stable {
             @include letterSemiboldDarkBlue;
-            margin-right: 20px
+            margin-right: 20px;
+            padding: 0;
+            margin-bottom: 0;
 		}
 
 		&__global-search-header-changeable {
             @include letterContentSecondarySmallGrayClear;
             color: #7481FF;
+            margin-bottom: 0;
 		}
+
+        &__global-search-item-left {
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+            background-color: rgb(240, 240, 101);
+            height: 55px;
+            width: 50%;
+        }
+
+        &__global-search-item-right {
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+            background-color: rgb(163, 163, 53);
+            height: 55px;
+            width: 50%;
+        }
 }
 
 
