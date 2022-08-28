@@ -4,7 +4,7 @@
 
     <div class="wrapper"> 
       <div class="container">
-        <div class="slider-track" v-bind:style="{'background':'linear-gradient ('+ this.color +','+ this.color1 +')' }"></div>
+        <div class="slider-track" ref="header"></div>
         <input type="range" min="1" max="300000" value="5000" class="inp" id="slider-1" @input="slideOne(),slide()">
         <input type="range" min="1" max="300000" value="150000" class="inp" id="slider-2" @input="slideTwo(),slide()">
       </div>
@@ -56,7 +56,7 @@
 
     methods:{
       slideOne() {
-        let minGap = 10000
+        let minGap = 5000
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
         if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
@@ -76,36 +76,23 @@
       slide () {
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
-        let sliderTrack = document.querySelector(".slider-track")
         let sliderMaxValue = document.getElementById("slider-1").max
         let percent1 = (sliderOne.value/sliderMaxValue) * 100
         this.percentForBac1=percent1
         let percent2 = (sliderTwo.value/sliderMaxValue) * 100
         this.percentForBac2=percent2
-        sliderTrack.style.background = `linear-gradient (to right, #dadae5 ${percent1}%, #3264fe ${percent1}%, #3264fe ${percent2}%, #dadae5 ${percent2}%)`
-        // console.log(sliderTrack.style.background);
-      }
+        this.$refs.header.style.background = `linear-gradient(to right, #D7D7D7 ${percent1}%, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
+      },
+      
+
 
 
       
     },
+    
     computed:{
 
-      per1() {
-        let a = this.percentForBac1
-        // let sliderOne = document.getElementById("slider-1")   
-        // let sliderMaxValue = document.getElementById("slider-1").max
-        // a = (sliderOne.value/sliderMaxValue) * 100    
-        return a  
-      }
-      // bg() {
-        
-      //   return {
-      //     'background-color': linear-gradient (to right, #dadae5 ${this.percentForBac1}%), #3264fe ${this.percentForBac1}%, #3264fe ${this.percentForBac2}%, #dadae5 ${this.percentForBac2}%)`
-      //   }
       
-
-      // }
 
     },
   }
@@ -118,13 +105,12 @@
      .wrapper {
        
       position: relative;
+      width: auto;
       
      }
 
      .container {
-      width: 100%;
-      height: 100%;
-    
+      margin-left: -24px;
      }
 
      .inp {
@@ -201,7 +187,6 @@
       width: 100%;
       height: 5px;
       position: absolute;
-  
       margin: auto;
       top: 0;
       bottom: 0;

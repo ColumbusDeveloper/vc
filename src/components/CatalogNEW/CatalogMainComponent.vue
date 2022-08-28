@@ -4,15 +4,25 @@
     >
 
         <div class="ma-mo__detailed-search-box">
-            <div class="ma-mo__global-search-header">
-                        <p class="ma-mo__global-search-header-stable">Detailed search</p>
-                        <p class="ma-mo__global-search-header-changeable">Clear filters</p>
-            </div>   
-            <doubleinprange
-            
-            >
 
-            </doubleinprange>      
+            
+            <div class="ma-mo__global-search-header">
+                    <p class="ma-mo__global-search-header-stable">Detailed search</p>
+                    <p class="ma-mo__global-search-header-changeable">Clear filters</p>
+            </div>   
+
+            <div class="ma-mo__detailed-search-box-calk-container">
+                    <div class="ma-mo__detailed-search-box-doubleinprange">
+                        <doubleinprange class="ma-mo__detailed-search-box-doubleinprange-elem"
+                    
+                        >
+
+                        </doubleinprange> 
+                    </div>
+            </div>
+            
+            
+                 
         </div>
         <div class="ma-mo__global-search-and-card-box">
                 <div class="ma-mo__global-search">
@@ -116,13 +126,20 @@
 		&__detailed-search-box {
             display: flex;
             flex-direction: column;
-         
             border-width:2px;
             border-style: solid;
             border-color: #000;
             width: 30%;
+            
            
 		}
+
+        &__detailed-search-box-calk-container {
+            padding-left: 30px;
+            padding-right: 30px;
+            display: flex;
+            flex-direction: column;
+        }
 
 		&__global-search-and-card-box {
             border-width:2px;
@@ -190,6 +207,16 @@
             background-color: rgb(163, 163, 53);
             height: 55px;
             width: 50%;
+        }
+
+        &__detailed-search-box-doubleinprange {
+            margin-top: 100px;   
+            height: 5px;
+            background-color:#D7D7D7 ;         
+        }
+
+        &__detailed-search-box-doubleinprange-elem {
+            margin-top: 3px;
         }
 }
 
