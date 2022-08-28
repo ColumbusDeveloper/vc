@@ -19,6 +19,13 @@
 
                         </doubleinprange> 
                     </div>
+                    <div class="ma-mo__detailed-search-box-inprange">   
+                        <inprange class="ma-mo__detailed-search-box-inprange-elem"
+                        
+                        >
+
+                        </inprange> 
+                    </div>
             </div>
             
             
@@ -65,6 +72,7 @@
 
     import card from '@/components/CatalogNEW/CardCatalog.vue'
     import doubleinprange from '@/components/CatalogNEW/DoubleInputRange.vue'
+    import inprange from '@/components/CatalogNEW/InputRange.vue'
     
 
     export default {
@@ -73,6 +81,7 @@
         components: {
             card,
             doubleinprange,
+            inprange,
         },
         data() {
             return {
@@ -217,6 +226,10 @@
 
         &__detailed-search-box-doubleinprange-elem {
             margin-top: 3px;
+        }
+
+        &__detailed-search-box-inprange {
+            margin-top: 100px;   
         }
 }
 

@@ -43,11 +43,7 @@
         maxPrice:100000,
         percentForBac1:null,
         percentForBac2:null,
-        direction:'to right',
-        color:'#7481FF',
-        color1:'#41456B',
-     
-          
+              
       }
     },
     watch:{
