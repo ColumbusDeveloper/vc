@@ -1,19 +1,20 @@
 <template>
-  <div class="doubleinput">
+  <div class="singleinput">
 
 
    
-    <div class="range">
-      <div class="wrapper">
-       
-        <input type="range" min="0" max="200" value="20" step="1" class = "slider"
-        @input="slide()"
-        >
-        <div class="progress"></div>
-
-      </div>
+    
+    <div class="wrapper">
+      
+      <input type="range" min="20" max="200"  step="1" class = "slider"
+      @input="slide()"
+      v-model="singleinputmodel"
+      >
+      <div class="progress" ref="head"></div>
 
     </div>
+
+   
        
     
     
@@ -43,8 +44,7 @@
     data() {
       return {
 
-        min:0,
-        max:200,
+        singleinputmodel:70,//эта же модель устанавливает начальное положение ползунка
         
               
       }
@@ -56,16 +56,13 @@
     methods:{
     
       slide() {
-        const slider = document.querySelector('.slider')
-        let a = slider.value/2
-        const progress = document.querySelector('.progress')
-        progress.style.width = `${a}%`
+        let sliderOne = document.querySelector('.slider')   
+        let sliderMaxValue = document.querySelector('.slider').max
+        let percent1 = (sliderOne.value/sliderMaxValue) * 100-4//подбирается опытным путем
+        let percent2 = (sliderOne.value/sliderMaxValue) * 100-4
+        this.$refs.head.style.background = `linear-gradient(to right, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
       },
-      
-
-
-
-      
+         
     },
     
     computed:{
@@ -73,6 +70,11 @@
       
 
     },
+    mounted() {
+        
+        this.slide() //для того чтобы программа запустилась сама после отрисовки страницы
+      
+    }
   }
 </script>
 
@@ -81,43 +83,47 @@
   @import '../../assets/varmix.scss';
 
     .wrapper{
-    
       position: relative;
-    
+      width: auto;
+  
     }
 
    
    
-    .range  input{
-      -webkit-appearance: none;
+    input{
+      -webkit-appearance: none; // сам инпут, мы тут его полнстью обнуляем и создаем полностью
       height: 6px;
       width: 100%;
-      background-color: #D7D7D7;
+      background-color: transparent;
       outline: none;
       -webkit-transition: .2s;
       transition: opacity .2s;
       cursor: pointer;
+      width: 100%;
+
     }
 
-    .range  input::-webkit-slider-thumb {
-      -webkit-appearance: none;
+    input::-webkit-slider-thumb {
+      -webkit-appearance: none; //сам ползунок, можно менять как хочешь
       height: 18px;
       width: 18px;
       background: #7481FF;
       cursor: pointer;
       border-radius: 1px;
-
+      margin-top: -17px;
     }
 
     .progress{
-      -webkit-appearance: none;
-      position: absolute;
-      content:'';
-      border-radius: 1px;
+      -webkit-appearance: none; //полоска, что собой заменяет полоску инпута, сразу устанавливаем бэкграунд,
+      border-radius: 1px; //потом метод slide() добавляет новый бэкграунд по мере продвижения ползунка
       height: 6px;
-      background-color: #7481FF;
-      top: calc(50% );
-      z-index: 1;
+      background-color: #D7D7D7;
+      margin-top: -20px;
+    }
+
+    input[type="range"]:active::-webkit-slider-thumb {
+      background-color: #090b18;  //при нажатии меняет цвет, типа ховер
+      border: 1px solid  #7481FF;
     }
  
 </style>

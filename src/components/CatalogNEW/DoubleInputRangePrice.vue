@@ -5,10 +5,15 @@
     <div class="wrapper"> 
       <div class="container">
         <div class="slider-track" ref="header"></div>
-        <input type="range" min="1" max="300000" value="5000" class="inp" id="slider-1" @input="slideOne(),slide()">
-        <input type="range" min="1" max="300000" value="150000" class="inp" id="slider-2" @input="slideTwo(),slide()">
+        <input type="range" min="1" max="200000" v-model="minPrice" class="inp min" id="slider-1" @input="slideOne(),slide()">
+        <input type="range" min="1" max="200000" v-model="maxPrice"  class="inp max" id="slider-2" @input="slideTwo(),slide()">
       </div>
     </div>
+
+    <!--один инпут для минимальной цены, другой для масксимальной, в моделях уже есть данные
+    они и определят начальное положение инпутов при запуске страницы
+    запуск именно этого состояния позунков выполняется через запуск метода slide () в mounted ()-->
+
     
        
     
@@ -41,9 +46,7 @@
 
         minPrice:10000,
         maxPrice:100000,
-        percentForBac1:null,
-        percentForBac2:null,
-              
+                   
       }
     },
     watch:{
@@ -73,10 +76,8 @@
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
         let sliderMaxValue = document.getElementById("slider-1").max
-        let percent1 = (sliderOne.value/sliderMaxValue) * 100
-        this.percentForBac1=percent1
+        let percent1 = (sliderOne.value/sliderMaxValue) * 100 
         let percent2 = (sliderTwo.value/sliderMaxValue) * 100
-        this.percentForBac2=percent2
         this.$refs.header.style.background = `linear-gradient(to right, #D7D7D7 ${percent1}%, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
       },
       
@@ -84,6 +85,9 @@
 
 
       
+    },
+    mounted () {
+        this.slide ()
     },
     
     computed:{
@@ -184,6 +188,11 @@
       bottom: 0;
       border-radius: 1px;
      }
+
+     input:active::-webkit-slider-thumb {
+      background-color: #090b18;
+      border: 1px solid  #7481FF;
+    }
 
      
      
