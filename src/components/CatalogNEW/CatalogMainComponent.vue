@@ -13,28 +13,32 @@
 
             <div class="ma-mo__detailed-search-box-calk-container">
 
-                    <div class="ma-mo__detailed-search-box-doubleinprange-price">
-
-                        <div class="make-model__arrow-box" @click="form=!form,getStarted()">
-                            <div class="make-model__arrow-Up"><i class="fa-solid fa-angle-up" v-if="form"></i></div>
-                            <div class="make-model__arrow-Down"><i class="fa-solid fa-angle-down" v-if="form===false"></i></div>
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinp:pricedbinpform}">
+                        <div class="ma-mo__open-arrow-box arr-box">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text">
+                                Price
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="pricedbinpform=!pricedbinpform,getStartedInpPrice()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="pricedbinpform"></i></div>
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="pricedbinpform===false"></i></div>
+                            </div>
                         </div>
-                        
-                        <div class="ma-mo__detailed-search-box-doubleinprange-price-box">
 
-                            <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box">
-                                <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-min">
+                        <div class="ma-mo__detailed-search-box-doubleinprange-price-box inp-cont-box" v-if="pricedbinpform">
 
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box inp-cont-box-content">
+                                <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-min inp-cont-box-content-min">
+                                    $$$
                                 </div>
 
-                                <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-min">
-
+                                <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-max inp-cont-box-content-max">
+                                    $$$
                                 </div>
                             </div>
 
-                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box">
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box">
 
-                                <doubleinprangeprice class="ma-mo__detailed-search-box-doubleinprange-price-elem"
+                                <doubleinprangeprice class="ma-mo__detailed-search-box-doubleinprange-price-elem inp-box-component"
                     
                                 >
 
@@ -46,20 +50,83 @@
                         
                     </div>
 
-                    <div class="ma-mo__detailed-search-box-doubleinprange-year">
-                        <doubleinprangeyear class="ma-mo__detailed-search-box-doubleinprange-year-elem"
-                    
-                        >
+                    <div class="ma-mo__detailed-search-box-doubleinprange-year inp-container" :class="{activeinp:yeardbinpform}">
 
-                        </doubleinprangeyear> 
+                        <div class="ma-mo__open-arrow-box">
+                            <p class="ma-mo__open-arrow-box-text">
+                                Year
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows" @click="yeardbinpform=!yeardbinpform,getStartedInpYear()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="yeardbinpform"></i></div>
+                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="yeardbinpform===false"></i></div>
+                            </div>
+                        </div>
+                       
+
+                        <div class="ma-mo__detailed-search-box-doubleinprange-year-box inp-cont-box" v-if="yeardbinpform">
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box inp-cont-box-content">
+                                <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-min inp-cont-box-content-min">
+                                    $$$
+                                </div>
+
+                                <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-max inp-cont-box-content-max">
+                                    $$$
+                                </div>
+                            </div>
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-year-input-box inp-box">
+
+                                <doubleinprangeyear class="ma-mo__detailed-search-box-doubleinprange-year-elem inp-box-component"
+                    
+                                >
+
+                                </doubleinprangeyear> 
+
+                            </div>
+
+                        </div>
+
+
                     </div>
 
-                    <div class="ma-mo__detailed-search-box-inprange">   
-                        <inprange class="ma-mo__detailed-search-box-inprange-elem"
-                        
-                        >
+                    
 
-                        </inprange> 
+                    <div class="ma-mo__detailed-search-box-inprange inp-container" :class="{activeinp:kiloinpform}">  
+
+                        <div class="ma-mo__open-arrow-box">
+                            <p class="ma-mo__open-arrow-box-text">
+                                Kilometers
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows" @click="kiloinpform=!kiloinpform,getStartedInpKilo()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="kiloinpform"></i></div>
+                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="kiloinpform===false"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="ma-mo__detailed-search-box-inprange-box inp-cont-box inp-cont-box" v-if="kiloinpform">
+
+                            <div class="ma-mo__detailed-search-box-inprange-box-text-box inp-cont-box-content">
+                                <div class="ma-mo__detailed-search-box-inprange-text inp-cont-box-content-elem">
+                                    $$$
+                                </div>
+
+                            </div>
+
+                            <div class="ma-mo__detailed-search-box-inprange-input-box inp-box">
+
+                                <inprange class="ma-mo__detailed-search-box-inprange-input-box-elem inp-box-component"
+                        
+                                >
+
+                                </inprange> 
+
+                            </div>
+
+                        </div>
+
+
+                        
                     </div>
 
             </div>
@@ -125,6 +192,10 @@
             return {
 
                 cars: this.catalogpropscars,
+                pricedbinpform:false,
+                yeardbinpform:false,
+                kiloinpform:false,
+
                 
 
 
@@ -257,89 +328,224 @@
 
         
 
-            &__detailed-search-box-doubleinprange-price {
+        
+
+        &__detailed-search-box-doubleinprange-price-elem {
+            
+        }
+
+        
+
+        &__detailed-search-box-doubleinprange-year-elem {
+
+        }
+
+        
+
+        &__detailed-search-box-inprange-elem {
+
+        }
+        
+        &__detailed-search-box-doubleinprange-price {
+
+        }
+
+        &__open-arrow-box {
+            display: flex;
+            justify-content: space-between;
+            @include letterSemiboldDarkBlue;
+
+        }
+
+        &__open-arrow-box-text {
+
+        }
+
+        &__open-arrow-box-arrows {
+
+        }
+
+        &__open-arrow-box-arrows-arrow-Up {
+
+        }
+
+        &__open-arrow-box-arrows-arrow-Down {
+
+        }
+
+        &__detailed-search-box-doubleinprange-price-box {
+
+        }
+
+        &__detailed-search-box-doubleinprange-price-text-box {
+
+        }
+
+        &__detailed-search-box-doubleinprange-price-text-box-min {
+
+        }
+
+        &__detailed-search-box-doubleinprange-price-text-box-max {
+
+        }
+
+        &__detailed-search-box-doubleinprange-price-input-box {
+
+        }
+
+        &__detailed-search-box-doubleinprange-price-elem {
+
+        }
+
+        &__detailed-search-box-doubleinprange-year {
+
+        }
+
+        &__detailed-search-box-doubleinprange-year-box {
+
+        }
+
+        &__detailed-search-box-doubleinprange-year-text-box {
+
+        }
+
+        &__detailed-search-box-doubleinprange-year-text-box-min {
+
+        }
+
+        &__detailed-search-box-doubleinprange-year-text-box-max {
+        }
+
+
+        &__detailed-search-box-doubleinprange-year-input-box {
+
+        }
+
+        &__detailed-search-box-doubleinprange-year-elem {
+
+        }
+
+        &__detailed-search-box-inprange {
+
+        }
+
+        &__detailed-search-box-inprange-box {
+
+        }
+
+        &__detailed-search-box-inprange-box-text-box {
+
+        }
+
+        &__detailed-search-box-inprange-text {
+
+        }
+
+        &__detailed-search-box-inprange-input-box {
+
+        }
+
+        &__detailed-search-box-inprange-input-box-elem {
+
+        }
+        
+        .inp-container {
+            width: 300px;
+            padding: 8px;
+            border-width:1px;
+            border-style: solid;
+            border-color: #D7D7D7;
+            margin-top: 5px;
+            height: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            @media (max-width:1440px) {
                 width: 300px;
-                padding: 15px;
-                border-width:2px;
-                border-style: solid;
-                border-color: #000;
-                margin-top: 5px;
-                @media (max-width:1440px) {
-                   width: 300px;
-                }
-                @media (max-width:1200px) {
-                   width: 275px;
-                }
-                @media (max-width:992px) {
-                   width: 200px;
-                }
-                @media (max-width:768px) {
-                   width: 150px;
-                }
-
             }
-
-            &__detailed-search-box-doubleinprange-price-elem {
-               
+            @media (max-width:1200px) {
+                width: 275px;
             }
-
-            &__detailed-search-box-doubleinprange-year {
-                width: 300px;
-                padding: 15px;
-                border-width:2px;
-                border-style: solid;
-                border-color: #000;
-                margin-top: 5px;
-                @media (max-width:1440px) {
-                   width: 300px;
-                }
-                @media (max-width:1200px) {
-                   width: 275px;
-                }
-                @media (max-width:992px) {
-                   width: 200px;
-                }
-                @media (max-width:768px) {
-                   width: 150px;
-                }
+            @media (max-width:992px) {
+                width: 200px;
             }
-
-            &__detailed-search-box-doubleinprange-year-elem {
-
-            }
-
-            &__detailed-search-box-inprange {
-                width: 300px;
-                padding: 15px;
-                border-width:2px;
-                border-style: solid;
-                border-color: #000;
-                margin-top: 5px;
-                @media (max-width:1440px) {
-                   width: 300px;
-                }
-                @media (max-width:1200px) {
-                   width: 275px;
-                }
-                @media (max-width:992px) {
-                   width: 200px;
-                }
-                @media (max-width:768px) {
-                   width: 150px;
-                }
-
-            }
-
-            &__detailed-search-box-inprange-elem {
-
+            @media (max-width:768px) {
+                width: 150px;
             }
             
 
+        }
+
+        .arr-box {
+
+        }
+
+        .arr-box-text {
+
+        }
+
+        .arr-box-arrows-box {
+
+        }
+
+        .arr-box-arrows-box-el1 {
+
+        }
+
+        .arr-box-arrows-box-el2 {
+
+        }
+
+        .inp-cont-box {
+
+        }
+
+        .inp-cont-box-content {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 23px;
+            @include   letterSemiboldDarkBlue   ;
+            font-size: 1.5rem;
+        }
+
+        .inp-cont-box-content-min {
+
+        }
+
+        .inp-cont-box-content-max {
+
+        }
+
+        .inp-box {
+
+        }
+
+        .inp-box-component {
+
+        }
+
+        .inp-cont-box-content-elem {
+
+        }
+
+        .activeinp {
+             height: 123px;
+             padding-bottom: 25px;
+        }
+
+
+
+
+
+
+
+
+    }
+
+    
+    
 
         
-
-        
-}
 
 
        
