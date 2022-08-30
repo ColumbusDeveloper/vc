@@ -200,9 +200,10 @@
                 pricedbinpform:false,
                 yeardbinpform:false,
                 kiloinpform:false,
-                minyear:null,
-                maxyear:null,
+                minyear:2010,
+                maxyear:2015,
                 qtyofyears:null,
+                
                 
             }
 
@@ -217,34 +218,28 @@
                 })
                 a = [...new Set(a)]
                 this.qtyofyears = a.length
+                
             },
 
             setminyear (val) {
-                this.minyear = val  
                 
-               
+                if(val) {
+                    this.minyear = val 
+                }else {
+                    this.minyear = 2010
+                }
+                    
             },
 
             setmaxyear (val) {
-                this.maxyear = val 
-                
-                  
+                if(val) {
+                    this.maxyear = val 
+                } else {
+                    this.maxyear = 2015
+                }
+                              
             },
-
-            
-
-
-            
-            
-
-           
-           
-            
-            
-           
-
-           
-                                               
+                                           
         },
         
         
@@ -260,7 +255,12 @@
            
             
            
+        },
+
+        mounted () {
+            
         }
+        
 
 
 

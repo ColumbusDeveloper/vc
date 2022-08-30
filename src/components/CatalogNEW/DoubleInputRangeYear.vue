@@ -5,6 +5,7 @@
     <div class="wrapper"> 
       <div class="container">
         <div class="slider-track" ref="header"></div>
+        <div class="slider-track-cover"></div>
         <input type="range" min="1"  v-model="minYear" step="1" class="inp min" id="slider-1" @input="slideOne(),slide(),dataMinYearToCatalog()">
         <input type="range" min="1"  v-model="maxYear" step="1" class="inp max" id="slider-2" @input="slideTwo(),slide(),dataMaxYearToCatalog()">
       </div>
@@ -43,8 +44,11 @@
 
         minYear:4,
         maxYear:8,
+        minYearNum:null,
+        maxYearNum:null,
         cars:this.carspropsyear,
         inputmax:null,
+        arrofyears:[],
                  
       }
     },
@@ -54,28 +58,45 @@
       },
       qtyyears (val) {
         this.inputmax = val
+      },
+      min(val) {
+        this.minYearNum = val
+      },
+      max (val) {
+        this.maxYearNum = val
       }
       
     },
 
     methods:{
 
+      arr () {
+        let a = []
+        this.cars.forEach(el => {
+          let b = el.year
+          a.push(b)
+        });
+        a=[...new Set(a)]
+        let x = a.sort()
+        let b = Object.values(x)
+        b.forEach(el=>{
+          let q = el
+          this.arrofyears.push(q)
+        })
+        
+      
+      },
+
       slideOne() {
-        let minGap = 0
+        let minGap = 1
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
         if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
           sliderOne.value = parseInt(sliderTwo.value) - minGap
         }
-
-        
-      
-       
-        
-
       },
       slideTwo() {
-        let minGap = 0
+        let minGap = 1
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
       
@@ -94,20 +115,30 @@
         this.$refs.header.style.background = `linear-gradient(to right, #D7D7D7 ${percent1}%, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
       },
       dataMinYearToCatalog() {
-        this.$emit('fromYearMin',this.minYear)
+        this.$emit('fromYearMin',this.minYearNum)
       },
       dataMaxYearToCatalog() {
-        this.$emit('fromYearMax',this.maxYear)
+        this.$emit('fromYearMax',this.maxYearNum)
       },
          
     },
+    
     mounted () {
         this.slide ()
         this.dataMinYearToCatalog()
         this.dataMaxYearToCatalog()
+        this.arr ()
     },
     
     computed:{
+      min () {
+        let a = this.minYear - 1
+        return this.arrofyears[a]
+      },
+      max () {
+        let a = this.maxYear - 1
+        return this.arrofyears[a]
+      }
       
       
 
@@ -203,8 +234,9 @@
       margin: auto;
       top: 0;
       bottom: 0;
-      border-radius: 1px;
+      border-radius: 1px;   
      }
+     
 
      input:active::-webkit-slider-thumb {
       background-color: #090b18;
