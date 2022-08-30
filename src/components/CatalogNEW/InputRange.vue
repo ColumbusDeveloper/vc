@@ -38,19 +38,22 @@
 
 
     },
-    props:[''],
+    props:['carspropsinprange'],
     
 
     data() {
       return {
 
-        singleinputmodel:70,//эта же модель устанавливает начальное положение ползунка
+        singleinputmodel:70,
+        cars:this.carspropsinprange,
         
               
       }
     },
     watch:{
-      
+      carspropsinprange (val) {
+        this.cars = val
+      }
     },
 
     methods:{
@@ -58,7 +61,7 @@
       slide() {
         let sliderOne = document.querySelector('.slider')   
         let sliderMaxValue = document.querySelector('.slider').max
-        let percent1 = (sliderOne.value/sliderMaxValue) * 100-4//подбирается опытным путем
+        let percent1 = (sliderOne.value/sliderMaxValue) * 100-4
         let percent2 = (sliderOne.value/sliderMaxValue) * 100-4
         this.$refs.head.style.background = `linear-gradient(to right, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
       },
@@ -72,7 +75,7 @@
     },
     mounted() {
         
-        this.slide() //для того чтобы программа запустилась сама после отрисовки страницы
+        this.slide() 
       
     }
   }
@@ -91,7 +94,7 @@
    
    
     input{
-      -webkit-appearance: none; // сам инпут, мы тут его полнстью обнуляем и создаем полностью
+      -webkit-appearance: none; 
       height: 6px;
       width: 100%;
       background-color: transparent;
@@ -104,7 +107,7 @@
     }
 
     input::-webkit-slider-thumb {
-      -webkit-appearance: none; //сам ползунок, можно менять как хочешь
+      -webkit-appearance: none; 
       height: 18px;
       width: 18px;
       background: #7481FF;
@@ -114,15 +117,15 @@
     }
 
     .progress{
-      -webkit-appearance: none; //полоска, что собой заменяет полоску инпута, сразу устанавливаем бэкграунд,
-      border-radius: 1px; //потом метод slide() добавляет новый бэкграунд по мере продвижения ползунка
+      -webkit-appearance: none; 
+      border-radius: 1px; 
       height: 6px;
       background-color: #D7D7D7;
       margin-top: -20px;
     }
 
     input[type="range"]:active::-webkit-slider-thumb {
-      background-color: #090b18;  //при нажатии меняет цвет, типа ховер
+      background-color: #090b18;  
       border: 1px solid  #7481FF;
     }
  

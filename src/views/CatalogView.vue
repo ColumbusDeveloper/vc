@@ -10,6 +10,8 @@
 
               
 
+              
+
 
 
           
@@ -56,17 +58,20 @@ const cars = [
 import catalog from '../components/CatalogNEW/CatalogMainComponent.vue'
 
 
+
 export default {
   name: 'CatalogView',
   data () {
     return {
       cars:cars,
       
+      
   
     }
   },
   components: {
     catalog,
+   
   },
   watch:{
    

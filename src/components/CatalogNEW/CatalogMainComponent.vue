@@ -2,6 +2,7 @@
     <div class="ma-mo"
    
     >
+    
 
         <div class="ma-mo__detailed-search-box">
 
@@ -67,18 +68,21 @@
 
                             <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box inp-cont-box-content">
                                 <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-min inp-cont-box-content-min">
-                                    $$$
+                                    {{minyear}}
                                 </div>
 
                                 <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-max inp-cont-box-content-max">
-                                    $$$
+                                    {{maxyear}}
                                 </div>
                             </div>
 
                             <div class="ma-mo__detailed-search-box-doubleinprange-year-input-box inp-box">
 
                                 <doubleinprangeyear class="ma-mo__detailed-search-box-doubleinprange-year-elem inp-box-component"
-                    
+                                :carspropsyear="cars"
+                                :qtyyears="qtyofyears"
+                                @fromYearMin="setminyear"
+                                @fromYearMax="setmaxyear"
                                 >
 
                                 </doubleinprangeyear> 
@@ -116,7 +120,7 @@
                             <div class="ma-mo__detailed-search-box-inprange-input-box inp-box">
 
                                 <inprange class="ma-mo__detailed-search-box-inprange-input-box-elem inp-box-component"
-                        
+                                :carspropsinprange="cars"
                                 >
 
                                 </inprange> 
@@ -143,6 +147,7 @@
                     <div class="ma-mo__global-search-item-right">
                         
                     </div>
+                    
                    
                 </div>
                 <div class="ma-mo__card-box">
@@ -187,18 +192,50 @@
             doubleinprangeprice,
             doubleinprangeyear,
             inprange,
+        
         },
         data() {
             return {
-
                 cars: this.catalogpropscars,
                 pricedbinpform:false,
                 yeardbinpform:false,
-                kiloinpform:false,      
+                kiloinpform:false,
+                minyear:null,
+                maxyear:null,
+                qtyofyears:null,
+                
             }
 
         },
         methods: {
+
+            getStartedInpYear() {
+                let a = []
+                this.cars.forEach(el => {
+                    let b = el.year
+                    a.push(b)
+                })
+                a = [...new Set(a)]
+                this.qtyofyears = a.length
+            },
+
+            setminyear (val) {
+                this.minyear = val  
+                
+               
+            },
+
+            setmaxyear (val) {
+                this.maxyear = val 
+                
+                  
+            },
+
+            
+
+
+            
+            
 
            
            
@@ -320,29 +357,6 @@
             width: 50%;
         }
 
-        
-
-        
-
-        &__detailed-search-box-doubleinprange-price-elem {
-            
-        }
-
-        
-
-        &__detailed-search-box-doubleinprange-year-elem {
-
-        }
-
-        
-
-        &__detailed-search-box-inprange-elem {
-
-        }
-        
-        &__detailed-search-box-doubleinprange-price {
-
-        }
 
         &__open-arrow-box {
             display: flex;
@@ -350,99 +364,7 @@
             @include letterSemiboldDarkBlue;
 
         }
-
-        &__open-arrow-box-text {
-
-        }
-
-        &__open-arrow-box-arrows {
-
-        }
-
-        &__open-arrow-box-arrows-arrow-Up {
-
-        }
-
-        &__open-arrow-box-arrows-arrow-Down {
-
-        }
-
-        &__detailed-search-box-doubleinprange-price-box {
-
-        }
-
-        &__detailed-search-box-doubleinprange-price-text-box {
-
-        }
-
-        &__detailed-search-box-doubleinprange-price-text-box-min {
-
-        }
-
-        &__detailed-search-box-doubleinprange-price-text-box-max {
-
-        }
-
-        &__detailed-search-box-doubleinprange-price-input-box {
-
-        }
-
-        &__detailed-search-box-doubleinprange-price-elem {
-
-        }
-
-        &__detailed-search-box-doubleinprange-year {
-
-        }
-
-        &__detailed-search-box-doubleinprange-year-box {
-
-        }
-
-        &__detailed-search-box-doubleinprange-year-text-box {
-
-        }
-
-        &__detailed-search-box-doubleinprange-year-text-box-min {
-
-        }
-
-        &__detailed-search-box-doubleinprange-year-text-box-max {
-        }
-
-
-        &__detailed-search-box-doubleinprange-year-input-box {
-
-        }
-
-        &__detailed-search-box-doubleinprange-year-elem {
-
-        }
-
-        &__detailed-search-box-inprange {
-
-        }
-
-        &__detailed-search-box-inprange-box {
-
-        }
-
-        &__detailed-search-box-inprange-box-text-box {
-
-        }
-
-        &__detailed-search-box-inprange-text {
-
-        }
-
-        &__detailed-search-box-inprange-input-box {
-
-        }
-
-        &__detailed-search-box-inprange-input-box-elem {
-
-        }
-        
+     
         .inp-container {
             width: 300px;
             padding: 8px;
@@ -469,31 +391,6 @@
             
 
         }
-
-        .arr-box {
-
-        }
-
-        .arr-box-text {
-
-        }
-
-        .arr-box-arrows-box {
-
-        }
-
-        .arr-box-arrows-box-el1 {
-
-        }
-
-        .arr-box-arrows-box-el2 {
-
-        }
-
-        .inp-cont-box {
-
-        }
-
         .inp-cont-box-content {
             display: flex;
             justify-content: space-between;
@@ -501,26 +398,7 @@
             @include   letterSemiboldDarkBlue   ;
             font-size: 1.5rem;
         }
-
-        .inp-cont-box-content-min {
-
-        }
-
-        .inp-cont-box-content-max {
-
-        }
-
-        .inp-box {
-
-        }
-
-        .inp-box-component {
-
-        }
-
-        .inp-cont-box-content-elem {
-
-        }
+   
 
         .activeinp {
              height: 123px;
@@ -528,29 +406,8 @@
         }
 
 
-
-
-
-
-
-
     }
 
     
     
-
-        
-
-
-       
-
-        
-
-
-
-
-
-
-
-
 </style>

@@ -5,16 +5,12 @@
     <div class="wrapper"> 
       <div class="container">
         <div class="slider-track" ref="header"></div>
-        <input type="range" min="1" max="200000" v-model="minPrice" class="inp min" id="slider-1" @input="slideOne(),slide()">
-        <input type="range" min="1" max="200000" v-model="maxPrice"  class="inp max" id="slider-2" @input="slideTwo(),slide()">
+        <input type="range" min="1"  v-model="minYear" step="1" class="inp min" id="slider-1" @input="slideOne(),slide(),dataMinYearToCatalog()">
+        <input type="range" min="1"  v-model="maxYear" step="1" class="inp max" id="slider-2" @input="slideTwo(),slide(),dataMaxYearToCatalog()">
       </div>
     </div>
 
-    <!--один инпут для минимальной цены, другой для масксимальной, в моделях уже есть данные
-    они и определят начальное положение инпутов при запуске страницы
-    запуск именно этого состояния позунков выполняется через запуск метода slide () в mounted ()-->
 
-    
        
     
     
@@ -33,41 +29,56 @@
   export default {
     
     name: 'Input-year',
+
     components: {
       
 
 
     },
-    props:[''],
+    props:['carspropsyear','qtyyears'],
     
 
     data() {
       return {
 
-        minPrice:10000,
-        maxPrice:100000,
-                   
+        minYear:4,
+        maxYear:8,
+        cars:this.carspropsyear,
+        inputmax:null,
+                 
       }
     },
     watch:{
+      carspropsyear (val) {
+        this.cars = val
+      },
+      qtyyears (val) {
+        this.inputmax = val
+      }
       
     },
 
     methods:{
+
       slideOne() {
-        let minGap = 5000
+        let minGap = 0
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
         if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
           sliderOne.value = parseInt(sliderTwo.value) - minGap
         }
+
+        
+      
+       
         
 
       },
       slideTwo() {
-        let minGap = 10000
+        let minGap = 0
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
+      
         if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
           sliderTwo.value = parseInt(sliderOne.value) + minGap
         }
@@ -75,23 +86,29 @@
       slide () {
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
+        sliderOne.max=this.qtyyears
+        sliderTwo.max=this.qtyyears
         let sliderMaxValue = document.getElementById("slider-1").max
-        let percent1 = (sliderOne.value/sliderMaxValue) * 100 
-        let percent2 = (sliderTwo.value/sliderMaxValue) * 100
+        let percent1 = (sliderOne.value/sliderMaxValue) * 100 -5
+        let percent2 = (sliderTwo.value/sliderMaxValue) * 100 -5
         this.$refs.header.style.background = `linear-gradient(to right, #D7D7D7 ${percent1}%, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
       },
-      
-
-
-
-      
+      dataMinYearToCatalog() {
+        this.$emit('fromYearMin',this.minYear)
+      },
+      dataMaxYearToCatalog() {
+        this.$emit('fromYearMax',this.maxYear)
+      },
+         
     },
     mounted () {
         this.slide ()
+        this.dataMinYearToCatalog()
+        this.dataMaxYearToCatalog()
     },
     
     computed:{
-
+      
       
 
     },
