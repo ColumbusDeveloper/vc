@@ -32,13 +32,13 @@
 
   export default {
     
-    name: 'Double-input',
+    name: 'Input-price',
     components: {
       
 
 
     },
-    props:[''],
+    props:['carspropsprice'],
     
 
     data() {
@@ -46,11 +46,14 @@
 
         minPrice:10000,
         maxPrice:100000,
+        cars:this.carspropsprice
                    
       }
     },
     watch:{
-      
+      carspropsprice (val) {
+        this.cars = val
+      }
     },
 
     methods:{

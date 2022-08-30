@@ -39,7 +39,7 @@
                             <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box">
 
                                 <doubleinprangeprice class="ma-mo__detailed-search-box-doubleinprange-price-elem inp-box-component"
-                    
+                                :carspropsprice="cars"
                                 >
 
                                 </doubleinprangeprice> 
@@ -194,13 +194,7 @@
                 cars: this.catalogpropscars,
                 pricedbinpform:false,
                 yeardbinpform:false,
-                kiloinpform:false,
-
-                
-
-
-               
-                
+                kiloinpform:false,      
             }
 
         },

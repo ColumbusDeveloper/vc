@@ -32,7 +32,7 @@
 
   export default {
     
-    name: 'Double-input',
+    name: 'Input-year',
     components: {
       
 
