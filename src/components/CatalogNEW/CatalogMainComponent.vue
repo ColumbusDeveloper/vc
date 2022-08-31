@@ -150,14 +150,28 @@
                     
                    
                 </div>
-                <div class="ma-mo__card-box">
-                    <card 
+
+                <div class="ma-mo__card-box-main-screen" :class="{vis:carstoshow===false}">
+                    <ca
                     v-for="car in cars" :key="car"
+                    :car="car"
+                    >
+
+                    </ca>
+                </div>
+
+
+
+                <div class="ma-mo__card-box ma-mo__card-box-calc" :class="{vis:carstoshow===false}">
+                    <card 
+                    v-for="car in calculatedcars" :key="car"
                     :car="car"
                     >
 
                     </card>
                 </div>
+                
+                
         </div>
 
         
@@ -179,6 +193,7 @@
 
 
     import card from '@/components/CatalogNEW/CardCatalog.vue'
+    import ca from '@/components/CatalogNEW/Card.vue'
     import doubleinprangeprice from '@/components/CatalogNEW/DoubleInputRangePrice.vue'
     import doubleinprangeyear from '@/components/CatalogNEW/DoubleInputRangeYear.vue'
     import inprange from '@/components/CatalogNEW/InputRange.vue'
@@ -189,6 +204,7 @@
         props:['catalogpropscars'],
         components: {
             card,
+            ca,
             doubleinprangeprice,
             doubleinprangeyear,
             inprange,
@@ -197,6 +213,7 @@
         data() {
             return {
                 cars: this.catalogpropscars,
+                calculatedcars:[],
                 pricedbinpform:false,
                 yeardbinpform:false,
                 kiloinpform:false,
@@ -205,7 +222,8 @@
                 qtyofyears:null,
                 arrofyears:[],
                 idfrominpyear:null,
-                generalid:[]
+                generalid:[],
+
                 
                 
             }
@@ -221,8 +239,11 @@
                 })
                 a = [...new Set(a)]
                 this.qtyofyears = a.length
-                
+          
+             
             },
+
+            
 
             setminyear (val) {
                 
@@ -270,33 +291,56 @@
                 this.idfrominpyear = val
                 this.generalid = val
             },
+            generalid (val) {
+                let a = Object.values(val)
+                if (a) {
+                    this.calculatedcars = []
+                    for(let i = 0; i<a.length; i++) {
+                        let b = a[i]
+                        for(let i = 0; i<this.cars.length; i++) {
+                            let h = this.cars[i].id
+                            if(b===h) {
+                                this.calculatedcars.push(this.cars[i])
+                            }
+                        }
+                    }
+                }
+            },
+           
             
         },
 
 
         computed: {
-                selectidfromyear() {
-                let d = []  
-                for(let i = 0; i<this.arrofyears.length;i++) {
-                let a = this.arrofyears[i]
-                if(a<=this.maxyear&&a>=this.minyear) {
-                    this.cars.forEach(el=>{
-                        let m = el
-                        if (m.year===a) {
-                        d.push(m.id)
-                        }
-                    })
-                }
-                }
-           
-                return d
+
+            selectidfromyear() {
+            let d = []  
+            for(let i = 0; i<this.arrofyears.length;i++) {
+            let a = this.arrofyears[i]
+            if(a<=this.maxyear&&a>=this.minyear) {
+                this.cars.forEach(el=>{
+                    let m = el
+                    if (m.year===a) {
+                    d.push(m.id)
+                    }
+                })
             }
+            }
+        
+            return d
+            },
+            
+
             
            
         },
+        
 
         mounted () {
-            
+           
+        },
+        created() {
+          
         }
         
 
@@ -402,7 +446,7 @@
             @include letterSemiboldDarkBlue;
 
         }
-     
+
         .inp-container {
             width: 300px;
             padding: 8px;
@@ -442,6 +486,8 @@
              height: 123px;
              padding-bottom: 25px;
         }
+
+        
 
 
     }
