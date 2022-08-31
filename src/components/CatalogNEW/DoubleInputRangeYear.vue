@@ -111,6 +111,7 @@
         let sliderTwo = document.getElementById("slider-2")
         sliderOne.max=this.qtyyears
         sliderTwo.max=this.qtyyears
+        
         let sliderMaxValue = document.getElementById("slider-1").max
         let percent1 = (sliderOne.value/sliderMaxValue) * 100 -5
         let percent2 = (sliderTwo.value/sliderMaxValue) * 100 -5

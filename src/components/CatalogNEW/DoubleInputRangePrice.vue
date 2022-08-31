@@ -4,9 +4,9 @@
 
     <div class="wrapper"> 
       <div class="container">
-        <div class="slider-track" ref="header"></div>
-        <input type="range" min="1" max="200000" v-model="minPrice" class="inp min" id="slider-1" @input="slideOne(),slide()">
-        <input type="range" min="1" max="200000" v-model="maxPrice"  class="inp max" id="slider-2" @input="slideTwo(),slide()">
+        <div class="slider-trackP" ref="pr"></div>
+        <input type="range" min="1"  v-model="minPrice" class="inp min" step="1" id="slider-11" @input="slideOneP(),slideP()">
+        <input type="range" min="1"  v-model="maxPrice"  class="inp max" step="1" id="slider-22" @input="slideTwoP(),slideP()">
       </div>
     </div>
 
@@ -33,51 +33,74 @@
 
 
     },
-    props:['carspropsprice'],
+    props:['carspropsprice','qtyOfPrices'],
     
 
     data() {
       return {
 
-        minPrice:10000,
-        maxPrice:100000,
-        cars:this.carspropsprice
+        minPrice:4,
+        maxPrice:8,
+        cars:this.carspropsprice,
+        arrOfPrices:[],
+        qty:this.qtyOfPrices,
                    
       }
     },
     watch:{
       carspropsprice (val) {
         this.cars = val
+      },
+      qtyOfPrices (val) {
+        this.qty = val
       }
+      
     },
 
     methods:{
-      slideOne() {
-        let minGap = 5000
-        let sliderOne = document.getElementById("slider-1")
-        let sliderTwo = document.getElementById("slider-2")
+      slideOneP() {
+        let minGap = 1
+        let sliderOne = document.getElementById("slider-11")
+        let sliderTwo = document.getElementById("slider-22")
         if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
           sliderOne.value = parseInt(sliderTwo.value) - minGap
         }
-        
-
       },
-      slideTwo() {
-        let minGap = 10000
-        let sliderOne = document.getElementById("slider-1")
-        let sliderTwo = document.getElementById("slider-2")
+      slideTwoP() {
+        let minGap = 1
+        let sliderOne = document.getElementById("slider-11")
+        let sliderTwo = document.getElementById("slider-22")
         if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
           sliderTwo.value = parseInt(sliderOne.value) + minGap
         }
       },
-      slide () {
-        let sliderOne = document.getElementById("slider-1")
-        let sliderTwo = document.getElementById("slider-2")
-        let sliderMaxValue = document.getElementById("slider-1").max
-        let percent1 = (sliderOne.value/sliderMaxValue) * 100 
-        let percent2 = (sliderTwo.value/sliderMaxValue) * 100
-        this.$refs.header.style.background = `linear-gradient(to right, #D7D7D7 ${percent1}%, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
+      slideP () {
+        let sliderOne = document.getElementById("slider-11")
+        let sliderTwo = document.getElementById("slider-22")
+        sliderOne.max = this.qty
+        sliderTwo.max = this.qty
+        console.log(sliderTwo.max);
+        let sliderMaxValue = document.getElementById("slider-11").max
+        let percent1 = (sliderOne.value/sliderMaxValue) * 100 - 5
+        let percent2 = (sliderTwo.value/sliderMaxValue) * 100 - 5
+        this.$refs.pr.style.background = `linear-gradient(to right, #D7D7D7 ${percent1}%, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
       },
+      findArrOfPrices () {
+        let a = []
+        this.cars.forEach(el=>{
+          let b = el.price
+          a.push(b)
+        })
+        a = [...new Set(a)]
+        this.arrOfPrices = a
+        this.arrOfPrices.sort(function(a, b) {
+          return a - b;
+        })
+      },
+      
+
+      
+
       
 
 
@@ -85,10 +108,13 @@
       
     },
     mounted () {
-        this.slide ()
+        this.slideP()
+        this.findArrOfPrices ()
+
     },
     
     computed:{
+      
 
       
 
@@ -177,7 +203,7 @@
       }
 
 
-     .slider-track {
+     .slider-trackP {
       width: 100%;
       height: 5px;
       position: absolute;

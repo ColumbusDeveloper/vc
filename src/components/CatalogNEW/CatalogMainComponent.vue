@@ -41,6 +41,7 @@
 
                                 <doubleinprangeprice class="ma-mo__detailed-search-box-doubleinprange-price-elem inp-box-component"
                                 :carspropsprice="cars"
+                                :qtyOfPrices = "findQtyOfPrices"
                                 >
 
                                 </doubleinprangeprice> 
@@ -57,7 +58,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Year
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="yeardbinpform=!yeardbinpform,getStartedInpYear(),arr ()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="yeardbinpform=!yeardbinpform,showcalc=!showcalc,getStartedInpYear(),arr ()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="yeardbinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="yeardbinpform===false"></i></div>
                             </div>
@@ -151,7 +152,16 @@
                    
                 </div>
 
-                <div class="ma-mo__card-box-main-screen" :class="{vis:carstoshow===false}">
+                <div class="ma-mo__card-box ma-mo__card-box-calc" v-if="showcalc">
+                    <card 
+                    v-for="car in calculatedcars" :key="car"
+                    :car="car"
+                    >
+
+                    </card>
+                </div>
+
+                <div class="ma-mo__card-box ma-mo__card-box-main-screen" v-else>
                     <ca
                     v-for="car in cars" :key="car"
                     :car="car"
@@ -162,14 +172,7 @@
 
 
 
-                <div class="ma-mo__card-box ma-mo__card-box-calc" :class="{vis:carstoshow===false}">
-                    <card 
-                    v-for="car in calculatedcars" :key="car"
-                    :car="car"
-                    >
-
-                    </card>
-                </div>
+                
                 
                 
         </div>
@@ -213,6 +216,7 @@
         data() {
             return {
                 cars: this.catalogpropscars,
+                showcalc:false,
                 calculatedcars:[],
                 pricedbinpform:false,
                 yeardbinpform:false,
@@ -289,7 +293,9 @@
             },
             selectidfromyear (val) {
                 this.idfrominpyear = val
+                this.idfrominpyear = [...new Set(this.idfrominpyear)]
                 this.generalid = val
+                this.generalid = [...new Set(this.generalid)]
             },
             generalid (val) {
                 let a = Object.values(val)
@@ -329,6 +335,15 @@
         
             return d
             },
+            findQtyOfPrices () {
+                let a = []
+                this.cars.forEach(el=>{
+                let b = el.price
+                a.push(b)
+                })
+                a = [...new Set(a)]
+                return a.length
+            }
             
 
             
@@ -447,6 +462,8 @@
 
         }
 
+        
+
         .inp-container {
             width: 300px;
             padding: 8px;
@@ -486,6 +503,8 @@
              height: 123px;
              padding-bottom: 25px;
         }
+
+       
 
         
 

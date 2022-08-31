@@ -94,7 +94,7 @@
 <style lang="scss">
     @import '@/assets/varmix.scss';
    .card {
-    border-width:2px;
+    border-width:10px;
     border-style: solid;
     border-color: #000;
     background-color: rgb(48, 116, 90);
