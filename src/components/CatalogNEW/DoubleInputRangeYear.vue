@@ -49,6 +49,7 @@
         cars:this.carspropsyear,
         inputmax:null,
         arrofyears:[],
+        selectedId:[],
                  
       }
     },
@@ -64,7 +65,8 @@
       },
       max (val) {
         this.maxYearNum = val
-      }
+      },
+      
       
     },
 
@@ -138,7 +140,8 @@
       max () {
         let a = this.maxYear - 1
         return this.arrofyears[a]
-      }
+      },
+      
       
       
 

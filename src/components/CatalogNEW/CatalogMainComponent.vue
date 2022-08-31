@@ -57,7 +57,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Year
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="yeardbinpform=!yeardbinpform,getStartedInpYear()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="yeardbinpform=!yeardbinpform,getStartedInpYear(),arr ()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="yeardbinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="yeardbinpform===false"></i></div>
                             </div>
@@ -203,6 +203,9 @@
                 minyear:2010,
                 maxyear:2015,
                 qtyofyears:null,
+                arrofyears:[],
+                idfrominpyear:null,
+                generalid:[]
                 
                 
             }
@@ -239,6 +242,21 @@
                 }
                               
             },
+            arr () {
+            let a = []
+            this.cars.forEach(el => {
+            let b = el.year
+            a.push(b)
+            });
+            a=[...new Set(a)]
+            let x = a.sort()
+            let b = Object.values(x)
+            b.forEach(el=>{
+            let q = el
+            this.arrofyears.push(q)
+            })},
+
+            
                                            
         },
         
@@ -247,12 +265,32 @@
 
             catalogpropscars (val) {
                 this.cars = val
-            }
+            },
+            selectidfromyear (val) {
+                this.idfrominpyear = val
+                this.generalid = val
+            },
+            
         },
 
 
         computed: {
+                selectidfromyear() {
+                let d = []  
+                for(let i = 0; i<this.arrofyears.length;i++) {
+                let a = this.arrofyears[i]
+                if(a<=this.maxyear&&a>=this.minyear) {
+                    this.cars.forEach(el=>{
+                        let m = el
+                        if (m.year===a) {
+                        d.push(m.id)
+                        }
+                    })
+                }
+                }
            
+                return d
+            }
             
            
         },
