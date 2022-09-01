@@ -251,20 +251,14 @@
             },
 
             minmaxyeartoinp () {
-                let a = this.arrofyears.indexOf(this.minyear[0])
-                this.minyeartoinp = a + 1
+                
                 let b = this.arrofyears.indexOf(this.maxyear[0])
                 this.maxyeartoinp = b + 1
+                let a = this.arrofyears.indexOf(this.minyear[0])
+                this.minyeartoinp = a + 1
             },
 
-            setminyear (val) {
-             
-                if(val<=this.maxyear[0]) {
-                    this.minyear.unshift(val)
-                    this.minyear.splice(1)
-                }
-                    
-            },
+            
 
             setmaxyear (val) {
                 
@@ -275,6 +269,15 @@
                 }
                               
             },
+            setminyear (val) {
+             
+             if(val<=this.maxyear[0]) {
+                 this.minyear.unshift(val)
+                 this.minyear.splice(1)
+             }
+                 
+            },
+            
             arr () {
             let a = []
             this.cars.forEach(el => {

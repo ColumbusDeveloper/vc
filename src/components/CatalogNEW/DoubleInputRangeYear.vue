@@ -5,9 +5,17 @@
     <div class="wrapper"> 
       <div class="container">
         <div class="slider-track" ref="header"></div>
-        <div class="slider-track-cover"></div>
-        <input type="range" min="1"  v-model="minYear" step="1" class="inp min" id="slider-1" @input="slideOne(),slide(),dataMinYearToCatalog()">
-        <input type="range" min="1"  v-model="maxYear" step="1" class="inp max" id="slider-2" @input="slideTwo(),slide(),dataMaxYearToCatalog()">
+        <input type="range" min="1"  v-model="minYear" step="1" class="inp min" id="slider-1" 
+        @input="slideOne(),slide(),dataMinYearToCatalog()"
+        @change="setindexmin()"
+        :class="{zindex:indmin}"
+        >
+
+        <input type="range" min="1"  v-model="maxYear" step="1" class="inp max" id="slider-2"
+        @input="slideTwo(),slide(),dataMaxYearToCatalog()"
+        @change="setindexmax()"
+        :class="{zindex:indmax}"
+        >
       </div>
     </div>
 
@@ -50,7 +58,8 @@
         inputmax:null,
         arrofyears:[],
         selectedId:[],
-                 
+        indmin:false,
+        indmax:false,          
       }
     },
     watch:{
@@ -95,7 +104,14 @@
         
       
       },
-
+      setindexmin() {
+        this.indmin = true
+        this.indmax = false
+      },
+      setindexmax() {
+        this.indmin = false
+        this.indmax = true
+      },
       slideOne() {
         let minGap = 0
         let sliderOne = document.getElementById("slider-1")
@@ -135,10 +151,7 @@
     
     mounted () {
         this.slide ()
-        this.arr ()
-        
-
-     
+        this.arr ()   
     },
     
     computed:{
@@ -164,23 +177,30 @@
     
      .wrapper {
        
-      position: relative;
+  
       width: auto;
       
      }
 
      .container {
       margin-left: -24px;
+      position: relative;
+        .zindex {
+        z-index: 1;
+      }
+      
      }
 
      .inp {
       width: auto;
      }
+
      
 
      input[type="range"] {
       -webkit-appearance: none;
       -moz-appearance: none;
+   
       appearance: none;
       width: 100%;
       outline: none;
