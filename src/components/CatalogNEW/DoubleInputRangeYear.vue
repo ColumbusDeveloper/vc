@@ -36,7 +36,7 @@
 
 
     },
-    props:['carspropsyear','qtyyears'],
+    props:['carspropsyear','qtyyears','minyeartoinp','maxyeartoinp'],
     
 
     data() {
@@ -66,6 +66,13 @@
       max (val) {
         this.maxYearNum = val
       },
+      minyeartoinp (val) {
+        this.minYear = val
+      },
+      maxyeartoinp (val) {
+        this.maxYear = val
+      }
+
       
       
     },
@@ -90,7 +97,7 @@
       },
 
       slideOne() {
-        let minGap = 1
+        let minGap = 0
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
         if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
@@ -98,7 +105,7 @@
         }
       },
       slideTwo() {
-        let minGap = 1
+        let minGap = 0
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
       
@@ -128,9 +135,10 @@
     
     mounted () {
         this.slide ()
-        this.dataMinYearToCatalog()
-        this.dataMaxYearToCatalog()
         this.arr ()
+        
+
+     
     },
     
     computed:{

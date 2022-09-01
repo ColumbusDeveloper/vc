@@ -69,11 +69,11 @@
 
                             <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box inp-cont-box-content">
                                 <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-min inp-cont-box-content-min">
-                                    {{minyear}}
+                                    {{minyear[0]}} 
                                 </div>
 
                                 <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-max inp-cont-box-content-max">
-                                    {{maxyear}}
+                                    {{maxyear[0]}}
                                 </div>
                             </div>
 
@@ -82,8 +82,11 @@
                                 <doubleinprangeyear class="ma-mo__detailed-search-box-doubleinprange-year-elem inp-box-component"
                                 :carspropsyear="cars"
                                 :qtyyears="qtyofyears"
+                                :minyeartoinp="minyeartoinp"
+                                :maxyeartoinp="maxyeartoinp"
                                 @fromYearMin="setminyear"
                                 @fromYearMax="setmaxyear"
+                                @click="minmaxyeartoinp ()"
                                 >
 
                                 </doubleinprangeyear> 
@@ -221,15 +224,15 @@
                 pricedbinpform:false,
                 yeardbinpform:false,
                 kiloinpform:false,
-                minyear:2010,
-                maxyear:2015,
+                minyear:[2010],
+                maxyear:[2015],
                 qtyofyears:null,
                 arrofyears:[],
                 idfrominpyear:null,
                 generalid:[],
-
-                
-                
+                minyeartoinp:null,
+                maxyeartoinp:null,
+        
             }
 
         },
@@ -247,23 +250,28 @@
              
             },
 
-            
+            minmaxyeartoinp () {
+                let a = this.arrofyears.indexOf(this.minyear[0])
+                this.minyeartoinp = a + 1
+                let b = this.arrofyears.indexOf(this.maxyear[0])
+                this.maxyeartoinp = b + 1
+            },
 
             setminyear (val) {
-                
-                if(val) {
-                    this.minyear = val 
-                }else {
-                    this.minyear = 2010
+             
+                if(val<=this.maxyear[0]) {
+                    this.minyear.unshift(val)
+                    this.minyear.splice(1)
                 }
                     
             },
 
             setmaxyear (val) {
-                if(val) {
-                    this.maxyear = val 
-                } else {
-                    this.maxyear = 2015
+                
+
+                if(val>=this.minyear) {
+                    this.maxyear.unshift(val)
+                    this.maxyear.splice(1)
                 }
                               
             },
@@ -352,7 +360,7 @@
         
 
         mounted () {
-           
+       
         },
         created() {
           
@@ -372,9 +380,7 @@
 		&__detailed-search-box {
             display: flex;
             flex-direction: column;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+           
             width: 30%;
             
            
@@ -387,9 +393,7 @@
         }
 
 		&__global-search-and-card-box {
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+            
             width: 70%;
             display: flex;
             flex-direction: column;
@@ -402,7 +406,7 @@
 		}
 
 		&__card-box {
-            background-color: aqua;      
+          
             display: grid;
             grid-template-columns: 1fr 1fr;
             @media (max-width:768px) {
@@ -416,9 +420,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+          
             height: 55px;
          
 		}
@@ -437,19 +439,13 @@
 		}
 
         &__global-search-item-left {
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
-            background-color: rgb(240, 240, 101);
+            
             height: 55px;
             width: 50%;
         }
 
         &__global-search-item-right {
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
-            background-color: rgb(163, 163, 53);
+            
             height: 55px;
             width: 50%;
         }
@@ -467,9 +463,7 @@
         .inp-container {
             width: 300px;
             padding: 8px;
-            border-width:1px;
-            border-style: solid;
-            border-color: #D7D7D7;
+        
             margin-top: 5px;
             height: 45px;
             display: flex;
