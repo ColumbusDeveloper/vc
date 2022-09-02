@@ -232,6 +232,7 @@
                 generalid:[],
                 minyeartoinp:null,
                 maxyeartoinp:null,
+                inpyearstartstop:false,
         
             }
 
@@ -246,7 +247,11 @@
                 })
                 a = [...new Set(a)]
                 this.qtyofyears = a.length
-          
+                this.inpyearstartstop=!this.inpyearstartstop
+                if(this.inpyearstartstop) {
+                    this.minyear=[2010]
+                    this.maxyear=[2015]
+                }
              
             },
 
@@ -334,14 +339,14 @@
             let d = []  
             for(let i = 0; i<this.arrofyears.length;i++) {
             let a = this.arrofyears[i]
-            if(a<=this.maxyear&&a>=this.minyear) {
-                this.cars.forEach(el=>{
-                    let m = el
-                    if (m.year===a) {
-                    d.push(m.id)
-                    }
-                })
-            }
+                if(a<=this.maxyear&&a>=this.minyear) {
+                    this.cars.forEach(el=>{
+                        let m = el
+                        if (m.year===a) {
+                        d.push(m.id)
+                        }
+                    })
+                }
             }
         
             return d

@@ -5,12 +5,22 @@
     <div class="wrapper"> 
       <div class="container">
         <div class="slider-trackP" ref="pr"></div>
-        <input type="range" min="1"  v-model="minPrice" class="inp min" step="1" id="slider-11" @input="slideOneP(),slideP()">
-        <input type="range" min="1"  v-model="maxPrice"  class="inp max" step="1" id="slider-22" @input="slideTwoP(),slideP()">
+        <input type="range" min="1"  v-model="minPrice" class="inp min" step="1" id="slider-11" 
+        @input="slideOneP(),slideP(),minInpPriceToCatalogMain()"
+        @change="setindexmin()"
+        :class="{zindex:indmin}"
+        >
+        <input type="range" min="1"  v-model="maxPrice"  class="inp max" step="1" id="slider-22" 
+        @input="slideTwoP(),slideP(),maxInpPriceToCatalogMain()"
+        @change="setindexmax()"
+        :class="{zindex:indmax}"
+        >
       </div>
     </div>
 
-    
+    <!--по событтию инпут запускаются slideOneP(),slideP(), они отрисовывают инпуты вообще, по событию @change запускается setindexmin(),
+    этот метод добавляет инпутам дополнительный класс zindex, он повыщает индекс того элемента по которому по последнему произошли 
+    изменения. Из-за этого за него можно зацепиться, когда инпуты дойдут до краю.     -->
     
     
 
@@ -39,37 +49,59 @@
     data() {
       return {
 
-        minPrice:4,
-        maxPrice:8,
-        cars:this.carspropsprice,
-        arrOfPrices:[],
-        qty:this.qtyOfPrices,
+        minPrice:4,//модель для инпута, ответственного за минимальное значение, установил первоначальное значение произвольно
+        maxPrice:8,//модель для инпута, ответственного за максимальное значение, установил первоначальное значение произвольно
+        minPriceRealNumber:null,//цифра из модели, привязанной к инпуту min преобразуется в цифру реальной цены, зарегистрированной под инддексом в переменной arrOfPrices
+        maxPriceRealNumber:null,//цифра из модели, привязанной к инпуту max преобразуется в цифру реальной цены, зарегистрированной под инддексом в переменной arrOfPrices
+        arrOfIdGeneratedWithPriceComponent:[],//содержит все id машин на сайте в пределах указанной минимальной и максимальной цены
+        cars:this.carspropsprice,//массив со всеми зарегистрированными на сайте машинами
+        arrOfPrices:[], //перечислены без повторений все цены, зарегистрированные на сайте, без повторений
+        qty:this.qtyOfPrices,//количество уникальных цен на сайте, используем, чтобы определить атрибут max инпутов, забираем пропсами с родительского компонента
+        indmin:false,//переменные, участвуюшие в установке z-index для каждого из инпутов
+        indmax:false,//переменные, участвуюшие в установке z-index для каждого из инпутов  
                    
       }
     },
     watch:{
-      carspropsprice (val) {
+      carspropsprice (val) {//запись обновленных состояний в переменную из пропса
         this.cars = val
       },
-      qtyOfPrices (val) {
+      qtyOfPrices (val) {//запись обновленных состояний в переменную из функции, которая выполняется при mounted()
         this.qty = val
+      },
+      setMinPriceRealNumber (val) {//запись обновленных состояний в переменную из computed свойства
+        this.minPriceRealNumber = val
+      },
+      setMaxPriceRealNumber (val) {//запись обновленных состояний в переменную из computed свойства
+        this.maxPriceRealNumber = val
+      },
+      SetArrOfIdGeneratedWithPriceComponent (val) {
+        this.arrOfIdGeneratedWithPriceComponent = val
       }
       
     },
 
     methods:{
-      slideOneP() {
-        let minGap = 1
-        let sliderOne = document.getElementById("slider-11")
-        let sliderTwo = document.getElementById("slider-22")
+      setindexmin() {
+        this.indmin = true
+        this.indmax = false
+      },
+      setindexmax() {
+        this.indmin = false
+        this.indmax = true
+      },
+      slideOneP() {//названия методов должны быть уникальными для подобных компонентов
+        let minGap = 0
+        let sliderOne = document.getElementById("slider-11")//названия id должны быть уникальными для подобных компонентов
+        let sliderTwo = document.getElementById("slider-22")//названия id должны быть уникальными для подобных компонентов
         if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
           sliderOne.value = parseInt(sliderTwo.value) - minGap
         }
       },
-      slideTwoP() {
-        let minGap = 1
-        let sliderOne = document.getElementById("slider-11")
-        let sliderTwo = document.getElementById("slider-22")
+      slideTwoP() {//названия методов должны быть уникальными для подобных компонентов
+        let minGap = 0
+        let sliderOne = document.getElementById("slider-11")//названия id должны быть уникальными для подобных компонентов
+        let sliderTwo = document.getElementById("slider-22")//названия id должны быть уникальными для подобных компонентов
         if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
           sliderTwo.value = parseInt(sliderOne.value) + minGap
         }
@@ -97,15 +129,7 @@
           return a - b;
         })
       },
-      
-
-      
-
-      
-
-
-
-      
+         
     },
     mounted () {
         this.slideP()
@@ -115,7 +139,29 @@
     
     computed:{
       
-
+      setMinPriceRealNumber () {
+        let a = this.minPrice - 1//массив arrOfPrices отсортирован по возрастанию (это очень важно), соответственно, цифры в модели будут 
+        return this.arrOfPrices[a]//совпадать с индексами значений цен, за минусом 1, так массивы начинаются с 0, 
+      },//длина (max) инпута соотвествтует длинне массива из всех уникальных значений, зарегистрированных на сайте цен, установил в методе slideP () выше
+      setMaxPriceRealNumber () {//аналогично написанному выше
+        let b = this.maxPrice - 1
+        return this.arrOfPrices[b]
+      },
+      SetArrOfIdGeneratedWithPriceComponent () {
+        let d = []
+        for (let i = 0; i<this.arrOfPrices.length;i++){
+          let a = this.arrOfPrices[i]
+              if (a<=this.maxPriceRealNumber&&a>=this.minPriceRealNumber) {
+                  this.cars.forEach(el=>{
+                          let m = el
+                          if (m.price===a) {
+                            d.push(m.id)
+                          }
+                  })
+              }
+        }
+        return d
+      }
       
 
     },
@@ -128,13 +174,17 @@
     
      .wrapper {
        
-      position: relative;
+      
       width: auto;
       
      }
 
      .container {
+      position: relative;
       margin-left: -24px;
+        .zindex {
+          z-index: 1; //добавляет инпуту, по которому произошли изменения, повышенный z-index, благодаря этому
+        }             //дойдя до края ползунок оказывается сверху и за него можно схватиться
      }
 
      .inp {
