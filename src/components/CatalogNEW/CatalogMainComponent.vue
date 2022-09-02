@@ -29,11 +29,11 @@
 
                             <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box inp-cont-box-content">
                                 <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-min inp-cont-box-content-min">
-                                    $$$
+                                    {{idfrominputprice[0]}}
                                 </div>
 
                                 <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-max inp-cont-box-content-max">
-                                    $$$
+                                    {{idfrominputprice[idfrominputprice.length-1]}}
                                 </div>
                             </div>
 
@@ -41,7 +41,8 @@
 
                                 <doubleinprangeprice class="ma-mo__detailed-search-box-doubleinprange-price-elem inp-box-component"
                                 :carspropsprice="cars"
-                                :qtyOfPrices = "findQtyOfPrices"
+                                @minpricedata="minprice=$event"
+                                @maxpricedata="maxprice=$event"
                                 >
 
                                 </doubleinprangeprice> 
@@ -226,9 +227,12 @@
                 kiloinpform:false,
                 minyear:[2010],
                 maxyear:[2015],
+                minprice:[],
+                maxprice:[],
                 qtyofyears:null,
                 arrofyears:[],
-                idfrominpyear:null,
+                idfrominpyear:[],
+                idfrominputprice:[],
                 generalid:[],
                 minyeartoinp:null,
                 maxyeartoinp:null,
@@ -238,6 +242,7 @@
 
         },
         methods: {
+            
 
             getStartedInpYear() {
                 let a = []
