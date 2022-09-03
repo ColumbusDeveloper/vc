@@ -66,14 +66,7 @@
       carspropsprice (val) {//запись обновленных состояний в переменную из пропса
         this.cars = val
       },
-      setMinPriceRealNumber (val) {//запись обновленных состояний в переменную из computed свойства
-        this.minPriceRealNumber = val
-      },
-      setMaxPriceRealNumber (val) {//запись обновленных состояний в переменную из computed свойства
-        this.maxPriceRealNumber = val
-      },
-      
-      
+        
     },
 
     methods:{
@@ -119,18 +112,7 @@
         this.$refs.pr.style.background = `linear-gradient(to right, #D7D7D7 ${percent1}%, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
      
       },
-      findArrOfPrices () {
-        let a = []
-        this.cars.forEach(el=>{
-          let b = el.price
-          a.push(b)
-        })
-        a = [...new Set(a)]
-        this.arrOfPrices = a
-        this.arrOfPrices.sort(function(a, b) {
-          return a - b;
-        })
-      },
+      
      
        
          
@@ -138,7 +120,6 @@
    
     mounted () {
         this.slideP()
-        this.findArrOfPrices ()
         this.sendMinDtaToParentComponent()  
         this.sendMaxDtaToParentComponent() 
       
@@ -156,14 +137,7 @@
         a = [...new Set(a)]
         return a.length
       },  
-      setMinPriceRealNumber () {
-        let a = this.minPrice - 1//массив arrOfPrices отсортирован по возрастанию (это очень важно), соответственно, цифры в модели будут 
-        return this.arrOfPrices[a]//совпадать с индексами значений цен, за минусом 1, так массивы начинаются с 0, 
-      },//длина (max) инпута соотвествтует длинне массива из всех уникальных значений, зарегистрированных на сайте цен, установил в методе slideP () выше
-      setMaxPriceRealNumber () {//аналогично написанному выше
-        let b = this.maxPrice - 1
-        return this.arrOfPrices[b]
-      },
+      
       
       
 

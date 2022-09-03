@@ -29,11 +29,11 @@
 
                             <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box inp-cont-box-content">
                                 <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-min inp-cont-box-content-min">
-                                    {{idfrominputprice[0]}}
+                                    {{minpricerealnum[0]}} 
                                 </div>
 
                                 <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-max inp-cont-box-content-max">
-                                    {{idfrominputprice[idfrominputprice.length-1]}}
+                                    {{maxpricerealnum[0]}}
                                 </div>
                             </div>
 
@@ -220,6 +220,16 @@
         data() {
             return {
                 cars: this.catalogpropscars,
+                idfrominpyear:[],
+                idfrominputprice:[],
+                generalid:[],
+
+
+                qtyofyears:null,
+                arrofyears:[], 
+                minyeartoinp:null,
+                maxyeartoinp:null,
+                inpyearstartstop:false,
                 showcalc:false,
                 calculatedcars:[],
                 pricedbinpform:false,
@@ -227,23 +237,35 @@
                 kiloinpform:false,
                 minyear:[2010],
                 maxyear:[2015],
-                minprice:[],
-                maxprice:[],
-                qtyofyears:null,
-                arrofyears:[],
-                idfrominpyear:[],
-                idfrominputprice:[],
-                generalid:[],
-                minyeartoinp:null,
-                maxyeartoinp:null,
-                inpyearstartstop:false,
+
+
+                minprice:null,
+                maxprice:null,
+                minpricerealnum:[11000],
+                maxpricerealnum:[27000],
+                arrOfPrices:[],
+
+
+                
         
             }
 
         },
         methods: {
+            findArrOfPrices () {
+                let a = []
+                this.cars.forEach(el=>{
+                let b = el.price
+                a.push(b)
+                })
+                a = [...new Set(a)]
+                this.arrOfPrices = a
+                this.arrOfPrices.sort(function(a, b) {
+                return a - b;
+                })
+            },
             
-
+            
             getStartedInpYear() {
                 let a = []
                 this.cars.forEach(el => {
@@ -281,10 +303,10 @@
             },
             setminyear (val) {
              
-             if(val<=this.maxyear[0]) {
-                 this.minyear.unshift(val)
-                 this.minyear.splice(1)
-             }
+                if(val<=this.maxyear[0]) {
+                    this.minyear.unshift(val)
+                    this.minyear.splice(1)
+                }
                  
             },
             
@@ -308,6 +330,21 @@
         
         
         watch: {
+            setMinPriceRealNumber (val) {
+             
+                if(val<=this.maxpricerealnum[0]) {
+                    this.minpricerealnum.unshift(val)
+                    this.minpricerealnum.splice(1)
+                }
+             
+            },         
+            setMaxPriceRealNumber (val) {
+                
+                if(val>=this.minpricerealnum[0]) {
+                    this.maxpricerealnum.unshift(val)
+                    this.maxpricerealnum.splice(1)
+                }
+            },
 
             catalogpropscars (val) {
                 this.cars = val
@@ -364,7 +401,15 @@
                 })
                 a = [...new Set(a)]
                 return a.length
-            }
+            },
+            setMinPriceRealNumber () {
+                let a = this.minprice - 1//массив arrOfPrices отсортирован по возрастанию (это очень важно), соответственно, цифры в модели будут 
+                return this.arrOfPrices[a]//совпадать с индексами значений цен, за минусом 1, так массивы начинаются с 0, 
+            },          //длина (max) инпута соотвествтует длинне массива из всех уникальных значений, зарегистрированных на сайте цен, установил в методе slideP () выше
+            setMaxPriceRealNumber () {//аналогично написанному выше
+                let b = this.maxprice - 1
+                return this.arrOfPrices[b]
+            },
             
 
             
@@ -373,7 +418,7 @@
         
 
         mounted () {
-       
+            this.findArrOfPrices ()
         },
         created() {
           
