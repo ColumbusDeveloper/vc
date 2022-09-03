@@ -43,6 +43,7 @@
                                 :carspropsprice="cars"
                                 @minpricedata="minprice=$event"
                                 @maxpricedata="maxprice=$event"
+                            
                                 >
 
                                 </doubleinprangeprice> 
@@ -220,10 +221,12 @@
         data() {
             return {
                 cars: this.catalogpropscars,
-                idfrominpyear:[],
-                idfrominputprice:[],
-                generalid:[],
+                
 
+
+                generalid:[],//разница между всеми id на сайте и суммой всех исключенных компонентами id
+                calculatedcars:[],//объекты из массива cars, содержащие  id  из переменной generalid
+                allid:[],//все имеющиеся в массиве cars id
 
                 qtyofyears:null,
                 arrofyears:[], 
@@ -231,19 +234,22 @@
                 maxyeartoinp:null,
                 inpyearstartstop:false,
                 showcalc:false,
-                calculatedcars:[],
-                pricedbinpform:false,
                 yeardbinpform:false,
                 kiloinpform:false,
                 minyear:[2010],
                 maxyear:[2015],
+                idfrominpyear:[],
 
 
-                minprice:null,
-                maxprice:null,
-                minpricerealnum:[11000],
-                maxpricerealnum:[27000],
-                arrOfPrices:[],
+
+                pricedbinpform:false,//если true, то открывается компонент, устанавливаются стартовые значения minpricerealnum и maxpricerealnum, в методе getStartedInpPrice()
+                minprice:null,//номера, которые приходят из дочернего компонента и будут преобразовываться в значения реальных цен
+                maxprice:null,//номера, которые приходят из дочернего компонента и будут преобразовываться в значения реальных цен
+                minpricerealnum:[11000],//хранит реальные цены на авто
+                maxpricerealnum:[27000],//хранит реальные цены на авто
+                idpriceinputcompgenerated:[],//хранит id элементов массива cars, сгенерированные компонентом
+                iddeletedbypriceinp:[],//хранит id элементов массива cars, исключенные компонентом из массива cars потому что он их не выбрал
+                arrOfPrices:[],//хранит уникальные цены на все представленные на сайте авто, в порядке возрастания
 
 
                 
@@ -252,6 +258,18 @@
 
         },
         methods: {
+            SetAllId () {
+                let a = this.cars.slice()
+                for(let i=0; i<a.length; i++) {
+                    let b = a[i].id
+                    this.allid.push(b)
+                }
+                this.allid.sort(function(a,b){
+                    return a-b
+                })
+                
+            },
+            
             findArrOfPrices () {
                 let a = []
                 this.cars.forEach(el=>{
@@ -263,6 +281,12 @@
                 this.arrOfPrices.sort(function(a, b) {
                 return a - b;
                 })
+            },
+            getStartedInpPrice() {
+                if(this.pricedbinpform) {
+                    this.minpricerealnum=[11000]
+                    this.maxpricerealnum=[27000]
+                }
             },
             
             
@@ -355,6 +379,19 @@
                 this.generalid = val
                 this.generalid = [...new Set(this.generalid)]
             },
+            selectidfromprice(val) {
+                let a = val
+                this.idpriceinputcompgenerated = a
+                let b = this.allid.slice()
+                this.idpriceinputcompgenerated.forEach(el=>{
+                    let a = el
+                    let s = b.indexOf(a)
+                    b.splice(s,1)
+                    this.iddeletedbypriceinp = b
+                })
+                
+                
+            },
             generalid (val) {
                 let a = Object.values(val)
                 if (a) {
@@ -390,9 +427,25 @@
                     })
                 }
             }
-        
             return d
             },
+            selectidfromprice() {
+            let d = []  
+            for(let i = 0; i<this.arrOfPrices.length;i++) {
+            let a = this.arrOfPrices[i]
+                if(a<=this.maxpricerealnum&&a>=this.minpricerealnum) {
+                    this.cars.forEach(el=>{
+                        let m = el
+                        if (m.price===a) {
+                        d.push(m.id)
+                        }
+                    })
+                }
+            }
+            return d
+            },
+            
+
             findQtyOfPrices () {
                 let a = []
                 this.cars.forEach(el=>{
@@ -419,6 +472,7 @@
 
         mounted () {
             this.findArrOfPrices ()
+            this.SetAllId ()
         },
         created() {
           
@@ -521,7 +575,6 @@
         .inp-container {
             width: 300px;
             padding: 8px;
-        
             margin-top: 5px;
             height: 45px;
             display: flex;

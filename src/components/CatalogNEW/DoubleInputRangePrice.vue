@@ -6,22 +6,20 @@
       <div class="container">
         <div class="slider-trackP" ref="pr"></div>
         <input type="range" min="1"  v-model="minPrice" class="inp min" step="1" id="slider-11" 
-        @input="slideOneP(),slideP(),sendMinDtaToParentComponent()"
-        @change="setindexmin()" 
+        @input="slideOneP(),slideP(),sendMinDtaToParentComponent(),setindexmin()"
         :class="{zindex:indmin}"
         >
         <input type="range" min="1"  v-model="maxPrice"  class="inp max" step="1" id="slider-22" 
-        @input="slideTwoP(),slideP(),sendMaxDtaToParentComponent()"
-        @change="setindexmax()"
+        @input="slideTwoP(),slideP(),sendMaxDtaToParentComponent(),setindexmax()"
         :class="{zindex:indmax}"
         >
       </div>
     </div>
 
-    <!--по событтию инпут запускаются slideOneP(),slideP(), они отрисовывают инпуты вообще, по событию @change запускается setindexmin(),
+    <!--по событтию инпут запускаются slideOneP(),slideP(), также запускается setindexmin(),
     этот метод добавляет инпутам дополнительный класс zindex, он повыщает индекс того элемента по которому по последнему произошли 
-    изменения. Из-за этого за него можно зацепиться, когда инпуты дойдут до краю.  Следующие методы формируют и отправляют
-    родителю нщиера от минимума до максимума, рассчитанного из комрьютед свойства  findQtyOfPrices ()  -->
+    изменения. Из-за этого за него можно зацепиться, когда инпуты дойдут до краю, также это не даст инпуту пройти дальше своего коллеги.  
+    Следующие методы формируют и отправляют родителю номера от минимума до максимума, рассчитанного из компьютед свойства  findQtyOfPrices ()  -->
     
     
 
@@ -44,16 +42,13 @@
 
 
     },
-    props:['carspropsprice',],
+    props:['carspropsprice'],
     
 
     data() {
       return {
-
         minPrice:4,//модель для инпута, ответственного за минимальное значение, установил первоначальное значение произвольно
         maxPrice:8,//модель для инпута, ответственного за максимальное значение, установил первоначальное значение произвольно
-        minPriceRealNumber:null,//цифра из модели, привязанной к инпуту min преобразуется в цифру реальной цены, зарегистрированной под инддексом в переменной arrOfPrices
-        maxPriceRealNumber:null,//цифра из модели, привязанной к инпуту max преобразуется в цифру реальной цены, зарегистрированной под инддексом в переменной arrOfPrices
         cars:this.carspropsprice,//массив со всеми зарегистрированными на сайте машинами
         arrOfPrices:[], //перечислены без повторений все цены, зарегистрированные на сайте, без повторений
         indmin:false,//переменные, участвуюшие в установке z-index для каждого из инпутов
@@ -63,18 +58,20 @@
     },
     watch:{
       
-      carspropsprice (val) {//запись обновленных состояний в переменную из пропса
+      carspropsprice (val) {//запись обновленных состояний в переменную из пропса !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         this.cars = val
       },
+      
+        
         
     },
 
     methods:{
       sendMinDtaToParentComponent() {
-        this.$emit('minpricedata',this.minPrice)
+        this.$emit('minpricedata',this.minPrice)//отправляет данные в родительский компонент, запускается из mounted(), а также при событии инпут 
       },
       sendMaxDtaToParentComponent() {
-        this.$emit('maxpricedata',this.maxPrice)
+        this.$emit('maxpricedata',this.maxPrice)////отправляет данные в родительский компонент, запускается из mounted(), а также при событии инпут 
       },
       setindexmin() {//используется для определения z-index инпутов
         this.indmin = true
@@ -84,7 +81,7 @@
         this.indmin = false
         this.indmax = true
       },
-      slideOneP() {//названия методов должны быть уникальными для подобных компонентов
+      slideOneP() {//названия методов должны быть уникальными для подобных компонентов, описание внешнего вида инпутов
         let minGap = 0
         let sliderOne = document.getElementById("slider-11")//названия id должны быть уникальными для подобных компонентов
         let sliderTwo = document.getElementById("slider-22")//названия id должны быть уникальными для подобных компонентов
@@ -92,7 +89,7 @@
           sliderOne.value = parseInt(sliderTwo.value) - minGap
         }
       },
-      slideTwoP() {//названия методов должны быть уникальными для подобных компонентов
+      slideTwoP() {//названия методов должны быть уникальными для подобных компонентов, описание внешнего вида инпутов
         let minGap = 0
         let sliderOne = document.getElementById("slider-11")//названия id должны быть уникальными для подобных компонентов
         let sliderTwo = document.getElementById("slider-22")//названия id должны быть уникальными для подобных компонентов
@@ -100,7 +97,7 @@
           sliderTwo.value = parseInt(sliderOne.value) + minGap
         }
       },
-      slideP () {
+      slideP () {//названия методов должны быть уникальными для подобных компонентов, описание внешнего вида инпутов
         let sliderOne = document.getElementById("slider-11")
         let sliderTwo = document.getElementById("slider-22")
         sliderOne.max = this.findQtyOfPrices
@@ -128,7 +125,7 @@
     },
     
     computed:{
-      findQtyOfPrices () {
+      findQtyOfPrices () {//находит количество зарегистрированных разных цен на машины, это количество и будет max каждого из инпутов
         let a = []
         this.cars.forEach(el=>{
         let b = el.price
@@ -138,9 +135,6 @@
         return a.length
       },  
       
-      
-      
-
     },
   }
 </script>
