@@ -239,6 +239,7 @@
                 minyear:[2010],
                 maxyear:[2015],
                 idfrominpyear:[],
+                iddeletedbyyearinp:[],
 
 
 
@@ -246,10 +247,10 @@
                 minprice:null,//номера, которые приходят из дочернего компонента и будут преобразовываться в значения реальных цен
                 maxprice:null,//номера, которые приходят из дочернего компонента и будут преобразовываться в значения реальных цен
                 minpricerealnum:[11000],//хранит реальные цены на авто
-                maxpricerealnum:[27000],//хранит реальные цены на авто
+                maxpricerealnum:[27000],//хранит реальные цены на авто         
+                arrOfPrices:[],//хранит уникальные цены на все представленные на сайте авто, в порядке возрастания
                 idpriceinputcompgenerated:[],//хранит id элементов массива cars, сгенерированные компонентом
                 iddeletedbypriceinp:[],//хранит id элементов массива cars, исключенные компонентом из массива cars потому что он их не выбрал
-                arrOfPrices:[],//хранит уникальные цены на все представленные на сайте авто, в порядке возрастания
 
 
                 
@@ -287,6 +288,7 @@
                     this.minpricerealnum=[11000]
                     this.maxpricerealnum=[27000]
                 }
+                this.findArrOfPrices ()
             },
             
             
@@ -376,9 +378,28 @@
             selectidfromyear (val) {
                 this.idfrominpyear = val
                 this.idfrominpyear = [...new Set(this.idfrominpyear)]
-                this.generalid = val
+                this.generalid = this.allid.slice()
+                let b = this.allid.slice()
+                this.idfrominpyear.forEach(el=>{
+                    let a = el
+                    let s = b.indexOf(a)
+                    b.splice(s,1)
+                    this.iddeletedbyyearinp = b
+                })
+                this.idfrominpyear.forEach(el=>{
+                    let c = el
+                    this.generalid.push(c)
+                })
+                this.iddeletedbyyearinp.forEach(el=>{
+                    let b = el
+                    let m = this.generalid.indexOf(b)
+                    this.generalid.splice(m,1)
+                })
+                
                 this.generalid = [...new Set(this.generalid)]
+                
             },
+
             selectidfromprice(val) {
                 let a = val
                 this.idpriceinputcompgenerated = a
@@ -471,8 +492,9 @@
         
 
         mounted () {
-            this.findArrOfPrices ()
+            
             this.SetAllId ()
+            
         },
         created() {
           
