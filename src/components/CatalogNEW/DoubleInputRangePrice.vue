@@ -47,10 +47,10 @@
 
     data() {
       return {
-        minPrice:4,//модель для инпута, ответственного за минимальное значение, установил первоначальное значение произвольно
-        maxPrice:8,//модель для инпута, ответственного за максимальное значение, установил первоначальное значение произвольно
+        minPrice:null,//модель для инпута, ответственного за минимальное значение, устанавливается в методе findStartEndOfInputsArrOfInputs ()
+        maxPrice:null,//модель для инпута, ответственного за максимальное значение, устанавливается в методе findStartEndOfInputsArrOfInputs ()
         cars:this.carspropsprice,//массив со всеми зарегистрированными на сайте машинами
-        arrOfPrices:[], //перечислены без повторений все цены, зарегистрированные на сайте, без повторений
+        arrOfPrices:[], //перечислены без повторений все цены, зарегистрированные на сайте
         indmin:false,//переменные, участвуюшие в установке z-index для каждого из инпутов
         indmax:false,//переменные, участвуюшие в установке z-index для каждого из инпутов  
                    
@@ -58,9 +58,10 @@
     },
     watch:{
       
-      carspropsprice (val) {//запись обновленных состояний в переменную из пропса !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      carspropsprice (val) {//запись обновленных состояний в переменную из пропса 
         this.cars = val
       },
+      
       
         
         
@@ -100,8 +101,8 @@
       slideP () {//названия методов должны быть уникальными для подобных компонентов, описание внешнего вида инпутов
         let sliderOne = document.getElementById("slider-11")
         let sliderTwo = document.getElementById("slider-22")
-        sliderOne.max = this.findQtyOfPrices
-        sliderTwo.max = this.findQtyOfPrices
+        sliderOne.max = this.qtyOfPrices
+        sliderTwo.max = this.qtyOfPrices
         console.log(sliderTwo.max);
         let sliderMaxValue = document.getElementById("slider-11").max
         let percent1 = (sliderOne.value/sliderMaxValue) * 100 - 5
@@ -109,32 +110,59 @@
         this.$refs.pr.style.background = `linear-gradient(to right, #D7D7D7 ${percent1}%, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
      
       },
+      findStartEndOfInputsArrOfInputs () {//добывает отсортированный по возрастанию массив уникальных цен на авто
+        let a = []//записывает массив в переменную arrOfPrices, минимум и максимум инпутов вычисляется просто
+                  //если массив arrOfPrices состоит из 10 членов, то минимум = 1, а максимум = 10.
+        this.cars.forEach(el=>{
+        let b = el.price
+        a.push(b)
+        
+        })
+        a = [...new Set(a)]
+        a = Object.values(a)
+        a.sort(function(a,b){
+          return a-b
+        })
+        this.arrOfPrices = a
+        let m = a[0]
+        this.minPrice = a.indexOf(m)+1
+
+        let d = a[a.length-1]
+        this.maxPrice = a.indexOf(d)+1
+      }, 
       
      
        
          
     },
    
-    mounted () {
+    mounted () {//методы, которые будут вызваны сразу в момент отрисовки компонента
         this.slideP()
         this.sendMinDtaToParentComponent()  
         this.sendMaxDtaToParentComponent() 
-      
+        this.findStartEndOfInputsArrOfInputs ()
+        
      
       
     },
     
     computed:{
-      findQtyOfPrices () {//находит количество зарегистрированных разных цен на машины, это количество и будет max каждого из инпутов
-        let a = []
-        this.cars.forEach(el=>{
-        let b = el.price
-        a.push(b)
-        })
-        a = [...new Set(a)]
-        return a.length
-      },  
-      
+       qtyOfPrices () {//высчитывает количество разных(уникальных) цен на авто на сайте, используем напрямую
+            let a = []//подставляем в метод slideP (). Очень важно устанавливать все, с чего начинаются все
+                      //последующие рассчеты через computed свойства, используем как переменные
+          this.cars.forEach(el=>{
+          let b = el.price
+          a.push(b)
+          
+          })
+          a = [...new Set(a)]
+          a = Object.values(a)
+          a.sort(function(a,b){
+            return a-b
+          })
+          return a.length
+       },
+    
     },
   }
 </script>
