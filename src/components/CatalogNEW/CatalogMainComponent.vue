@@ -220,9 +220,10 @@
             return {
                 cars: this.catalogpropscars,
                 allid:[],//все имеющиеся в массиве cars id
+                selectedID:[],//id элементов отобранных всеми компонентами, мешанка с повторениями, без финальной картины
 
                 inputsAtWork:[],//массив с формами всех включенных компонентов, как только компонент вкличился, форма в массив и наоборот
-                compositeID:[],//финальный массив id после отработки всех компонентов
+                calcID:[],//финальный массив id после отработки всех компонентов
                 calculatedcars:[],//объекты из массива cars, содержащие  id  из переменной generalid
                 
 
@@ -236,7 +237,7 @@
                 minyearrealnum:[],
                 maxyearrealnum:[],
                 arrOfYears:[],
-                idpyearinputcompgenerated:[],
+                // idpyearinputcompgenerated:[],
             
                 
 
@@ -255,7 +256,7 @@
                 minpricerealnum:[],//хранит реальные цены на авто
                 maxpricerealnum:[],//хранит реальные цены на авто         
                 arrOfPrices:[],//хранит уникальные цены на все представленные на сайте авто, в порядке возрастания
-                idpriceinputcompgenerated:[],//хранит id элементов массива cars, сгенерированные компонентом
+                // idpriceinputcompgenerated:[],//хранит id элементов массива cars, сгенерированные компонентом
               
 
                 
@@ -276,6 +277,21 @@
                     return a-b
                 })
                 
+            },
+
+            findCalcId () {
+
+                let b = []
+                for(let i = 0; i<this.selectedID.length; i++) {
+                    let c = this.selectedID[i]
+                    let q = this.selectedID.filter(el=>el===this.selectedID[i]).length
+               
+                    if (q===this.inputsAtWork.length) {
+                        b.push(c)
+                        b = [...new Set(b)]
+                    }
+                }
+                this.calcID = b
             },
             
           
@@ -309,6 +325,8 @@
                     let w = this.inputsAtWork.indexOf(this.pricecompname)
                     this.inputsAtWork.splice(w,1)
                 }
+
+                this.findCalcId ()
             },
             
            
@@ -343,6 +361,8 @@
                     let w = this.inputsAtWork.indexOf(this.yearcompname)
                     this.inputsAtWork.splice(w,1)
                 }
+
+                this.findCalcId ()
             },
 
             
@@ -389,17 +409,21 @@
                     this.maxyearrealnum.splice(1)//таким образом в массиве всегда одно число и оно динамически меняется
                 }
             },
-            selectedIDdfromPrice(val) { //отслеживаю изменения в соответсвующем computed  свойстве и записываю 
-                this.idpriceinputcompgenerated = val // в переменную, хранящую id элементов отобранных компонентом
-            },
+            // selectedIDdfromPrice(val) { //отслеживаю изменения в соответсвующем computed  свойстве и записываю 
+            //     this.idpriceinputcompgenerated = val // в переменную, хранящую id элементов отобранных компонентом
+            // },
 
-            selectedIDdfromYear(val) {//аналогично написанному выше просто по другому компоненту
-                this.idpyearinputcompgenerated = val
+            // selectedIDdfromYear(val) {//аналогично написанному выше просто по другому компоненту
+            //     this.idpyearinputcompgenerated = val
+            // }
+
+            selectedIDcomputed(val) { //полученные computed свойством id запихиваем d переменную selectedID
+                this.selectedID = val //id по компонентам динамически меняются вне зависимости друг от друга
+                this.selectedID = Object.values(this.selectedID)
             }
-
-
-         
-
+        
+                    // [1,2,3,4,4,4,5,4,1,5,4].filter(item => item === 4).length
+                    // inputsAtWork
             
             // selectedidfromyear (val) {
             //     this.idfrominpyear = val
@@ -500,36 +524,45 @@
                 return this.arrOfYears[b]
             },
 
-            selectedIDdfromPrice() {//свойство выводит id элементов массива cars которые оказались между двумя ползунками
-                let d = []             // отслеживаем какие цены из массива цен оказались между двумя ползунками 
-                    for(let i = 0; i<this.arrOfPrices.length;i++) {//дальше отслежваем какие id у элементов с такими ценами 
-                    let a = this.arrOfPrices[i]                   //все это хранится в виде массива в этом свойстве
-                        if(a<=this.maxpricerealnum&&a>=this.minpricerealnum) {
-                            this.cars.forEach(el=>{
-                                let m = el
-                                if (m.price===a) {
-                                d.push(m.id)
-                                }
-                            })
-                        }
-                    }
-                return d
-            },
+            
 
-            selectedIDdfromYear() {//свойство выводит id элементов массива cars которые оказались между двумя ползунками компонента, отслеживающего года авто
+            selectedIDcomputed() {//свойство выводит id элементов массива cars которые оказались между двумя ползунками компонента, отслеживающего года авто
+                let w = []
                 let d = []             // отслеживаем какие годы авто из массива годов оказались между двумя ползунками 
                     for(let i = 0; i<this.arrOfYears.length;i++) {//дальше отслежваем какие id у элементов массива cars с такими годами 
                     let a = this.arrOfYears[i]                   //все это хранится в виде массива в этом свойстве
                         if(a<=this.maxyearrealnum&&a>=this.minyearrealnum) {
                             this.cars.forEach(el=>{
                                 let m = el
-                                if (m.year===a) {
+                                if (m.year===a) { //все
                                 d.push(m.id)
                                 }
                             })
                         }
                     }
-                return d
+                    for(let i = 0; i<this.arrOfPrices.length;i++) {//дальше отслежваем какие id у элементов с такими ценами 
+                    let a = this.arrOfPrices[i]                   //все это хранится в виде массива в этом же свойстве
+                        if(a<=this.maxpricerealnum&&a>=this.minpricerealnum) {
+                            this.cars.forEach(el=>{
+                                let m = el
+                                if (m.price===a) {//так мы циклами проходимся по всем инпутным компонентам, при появлении нового компонента
+                                d.push(m.id)      //добавляем еще один цикл по этому компоненту
+                                }
+                            })
+                        }
+                    }
+
+                for(let i=0; i<d.length;i++) {
+                    let k = d[i]
+                    let v = d.filter(el=>el===k).length
+                    if (v===this.inputsAtWork.length) {
+                        w.push(k)
+                    }
+                }
+                
+                w = [...new Set(w)]
+                return w
+                
             },
 
            
