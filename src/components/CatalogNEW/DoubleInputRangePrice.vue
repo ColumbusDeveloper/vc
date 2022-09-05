@@ -47,9 +47,9 @@
 
     data() {
       return {
+        cars:this.carspropsprice,//массив со всеми зарегистрированными на сайте машинами
         minPrice:null,//модель для инпута, ответственного за минимальное значение, устанавливается в методе findStartEndOfInputsArrOfInputs ()
         maxPrice:null,//модель для инпута, ответственного за максимальное значение, устанавливается в методе findStartEndOfInputsArrOfInputs ()
-        cars:this.carspropsprice,//массив со всеми зарегистрированными на сайте машинами
         arrOfPrices:[], //перечислены без повторений все цены, зарегистрированные на сайте
         indmin:false,//переменные, участвуюшие в установке z-index для каждого из инпутов
         indmax:false,//переменные, участвуюшие в установке z-index для каждого из инпутов  
@@ -110,6 +110,7 @@
         this.$refs.pr.style.background = `linear-gradient(to right, #D7D7D7 ${percent1}%, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
      
       },
+
       findStartEndOfInputsArrOfInputs () {//добывает отсортированный по возрастанию массив уникальных цен на авто
         let a = []//записывает массив в переменную arrOfPrices, минимум и максимум инпутов вычисляется просто
                   //если массив arrOfPrices состоит из 10 членов, то минимум = 1, а максимум = 10.

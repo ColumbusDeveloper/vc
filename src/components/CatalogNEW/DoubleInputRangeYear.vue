@@ -6,14 +6,12 @@
       <div class="container">
         <div class="slider-track" ref="header"></div>
         <input type="range" min="1"  v-model="minYear" step="1" class="inp min" id="slider-1" 
-        @input="slideOne(),slide(),dataMinYearToCatalog()"
-        @change="setindexmin()"
+        @input="slideOne(),slide(),sendMinDtaToParentComponent(),setindexmin()"  
         :class="{zindex:indmin}"
         >
 
         <input type="range" min="1"  v-model="maxYear" step="1" class="inp max" id="slider-2"
-        @input="slideTwo(),slide(),dataMaxYearToCatalog()"
-        @change="setindexmax()"
+        @input="slideTwo(),slide(),sendMaxDtaToParentComponent(),setindexmax()" 
         :class="{zindex:indmax}"
         >
       </div>
@@ -44,20 +42,15 @@
 
 
     },
-    props:['carspropsyear','qtyyears','minyeartoinp','maxyeartoinp'],
+    props:['carspropsyear'],
     
 
     data() {
       return {
-
-        minYear:1,
-        maxYear:11,
-        minYearNum:null,
-        maxYearNum:null,
         cars:this.carspropsyear,
-        inputmax:null,
+        minYear:null,
+        maxYear:null,      
         arrofyears:[],
-        selectedId:[],
         indmin:false,
         indmax:false,          
       }
@@ -66,44 +59,17 @@
       carspropsyear (val) {
         this.cars = val
       },
-      qtyyears (val) {
-        this.inputmax = val
-      },
-      min(val) {
-        this.minYearNum = val
-      },
-      max (val) {
-        this.maxYearNum = val
-      },
-      minyeartoinp (val) {
-        this.minYear = val
-      },
-      maxyeartoinp (val) {
-        this.maxYear = val
-      }
-
-      
-      
+           
     },
 
     methods:{
 
-      arr () {
-        let a = []
-        this.cars.forEach(el => {
-          let b = el.year
-          a.push(b)
-        });
-        a=[...new Set(a)]
-        let x = a.sort()
-        let b = Object.values(x)
-        b.forEach(el=>{
-          let q = el
-          this.arrofyears.push(q)
-        })
-        
-      
+      sendMinDtaToParentComponent() {
+        this.$emit('minyeardata',this.minYear)//отправляет данные в родительский компонент, запускается из mounted(), а также при событии инпут 
       },
+      sendMaxDtaToParentComponent() {
+        this.$emit('maxyeardata',this.maxYear)////отправляет данные в родительский компонент, запускается из mounted(), а также при событии инпут 
+      },    
       setindexmin() {
         this.indmin = true
         this.indmax = false
@@ -132,37 +98,61 @@
       slide () {
         let sliderOne = document.getElementById("slider-1")
         let sliderTwo = document.getElementById("slider-2")
-        sliderOne.max=this.qtyyears
-        sliderTwo.max=this.qtyyears
+        sliderOne.max=this.qtyOfYears
+        sliderTwo.max=this.qtyOfYears
         
         let sliderMaxValue = document.getElementById("slider-1").max
         let percent1 = (sliderOne.value/sliderMaxValue) * 100 -5
         let percent2 = (sliderTwo.value/sliderMaxValue) * 100 -5
         this.$refs.header.style.background = `linear-gradient(to right, #D7D7D7 ${percent1}%, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)`  
       },
-      dataMinYearToCatalog() {
-        this.$emit('fromYearMin',this.minYearNum)
+
+      findStartEndOfInputsArrOfInputs () {//добывает отсортированный по возрастанию массив уникальных цен на авто
+        let a = []//записывает массив в переменную arrOfPrices, минимум и максимум инпутов вычисляется просто
+                  //если массив arrOfPrices состоит из 10 членов, то минимум = 1, а максимум = 10.
+        this.cars.forEach(el=>{
+        let b = el.year
+        a.push(b)  
+        })
+        a = [...new Set(a)]
+        a = Object.values(a)
+        a.sort(function(a,b){
+          return a-b
+        })
+        this.arrofyears = a
+        let m = a[0]
+        this.minYear = a.indexOf(m)+1
+
+        let d = a[a.length-1]
+        this.maxYear = a.indexOf(d)+1
       },
-      dataMaxYearToCatalog() {
-        this.$emit('fromYearMax',this.maxYearNum)
-      },
+      
          
     },
     
     mounted () {
         this.slide ()
-        this.arr ()   
+        this.sendMinDtaToParentComponent()
+        this.sendMaxDtaToParentComponent()
+        this.findStartEndOfInputsArrOfInputs ()
     },
     
     computed:{
-      min () {
-        let a = this.minYear - 1
-        return this.arrofyears[a]
-      },
-      max () {
-        let a = this.maxYear - 1
-        return this.arrofyears[a]
-      },
+        qtyOfYears () {//высчитывает количество разных(уникальных) лет авто на сайте, используем напрямую
+              let a = []//подставляем в метод slide (). Очень важно устанавливать все, с чего начинаются все
+                        //последующие рассчеты через computed свойства, используем как переменные
+            this.cars.forEach(el=>{
+            let b = el.year
+            a.push(b)
+            
+            })
+            a = [...new Set(a)]
+            a = Object.values(a)
+            a.sort(function(a,b){
+              return a-b
+            })
+            return a.length
+        },
       
       
       
