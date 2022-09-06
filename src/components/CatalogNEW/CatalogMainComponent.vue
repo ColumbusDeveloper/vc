@@ -155,7 +155,7 @@
                    
                 </div>
 
-                <div class="ma-mo__card-box ma-mo__card-box-calc" v-if="showcalc">
+                <div class="ma-mo__card-box ma-mo__card-box-calc" v-if="showcalculated">
                     <card 
                     v-for="car in calculatedcars" :key="car"
                     :car="car"
@@ -164,7 +164,7 @@
                     </card>
                 </div>
 
-                <div class="ma-mo__card-box ma-mo__card-box-main-screen" v-else>
+                <div class="ma-mo__card-box ma-mo__card-box-main-screen" v-if="showcars">
                     <ca
                     v-for="car in cars" :key="car"
                     :car="car"
@@ -222,12 +222,9 @@
                 allid:[],//все имеющиеся в массиве cars id
                 
                 inputsAtWork:[],//массив с формами всех включенных компонентов, отслеживаем длинну, для отрисовки calcID через повторения
-                calcID:[],//финальный массив id после отработки всех компонентов
-                calculatedcars:[],//объекты из массива cars, содержащие  id  из переменной generalid
-                
-
-
-
+                calculatedcars:[],//объекты из массива cars, отобранные инпутами компонентов, из computed свойства selectedCARScomputed()
+                showcalculated:false,// поведение прописано в методе show (), если true то показывается массив showcalculated                     
+                showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
 
                 yeardbinpform:false,
                 yearcompname:'year',
@@ -266,6 +263,18 @@
 
         },
         methods: {
+            show () { //определяет состояние переменных
+                if (this.calculatedcars.length<this.cars.length) { //либо массив с результатом работы инпутов всех компонентов
+                    this.showcalculated = true //либо массив со всеми машинами на сайте
+                    this.showcars = false
+                } else if(this.calculatedcars.length===0) {
+                    this.showcalculated = false
+                    this.showcars = true
+                } else if (this.cars.length===this.calculatedcars.length) {
+                    this.showcalculated = false
+                    this.showcars = true
+                }
+            },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
                 let a = this.cars.slice()
                 for(let i=0; i<a.length; i++) {
@@ -278,7 +287,7 @@
                 
             },
             getStartedInpPrice() { //при клике на стрелку компонента запускается функция
-                
+                this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
                 let a = []
                 this.cars.forEach(el => {
                 let b = el.price
@@ -302,19 +311,19 @@
                 this.maxpricerealnum.unshift(this.arrOfPrices[this.arrOfPrices.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реальной цены
 
                 if(!this.inputsAtWork.includes(this.pricecompname)) {//если в переменной для отслеживания включенных в работу инпутов названия, этого
-                    this.inputsAtWork.push(this.pricecompname)//компонента по которому производится клик нет, то его имя добавляется
+                    this.inputsAtWork.push(this.pricecompname)//если компонента по которому производится клик нет, то его имя добавляется
                 }else {                                       //в противном случае удаляется, получился кликер, имя то появляется то удаляется
-                    let w = this.inputsAtWork.indexOf(this.pricecompname)
-                    this.inputsAtWork.splice(w,1)
+                    let w = this.inputsAtWork.indexOf(this.pricecompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    this.inputsAtWork.splice(w,1) //чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                 }
 
-              
+                            
             },
             
            
 
             getStartedInpYear() {//при клике на стрелку компонента запускается функция, аналогично указанному выше, только для другого компонента
-                
+                this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
                 let a = []
                 this.cars.forEach(el => {
                 let b = el.year
@@ -338,12 +347,13 @@
                 this.maxyearrealnum.unshift(this.arrOfYears[this.arrOfYears.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального года
 
                 if(!this.inputsAtWork.includes(this.yearcompname)) {//если в переменной для отслеживания включенных в работу инпутов названия, этого
-                    this.inputsAtWork.push(this.yearcompname)//компонента по которому производится клик нет, то его имя добавляется
+                    this.inputsAtWork.push(this.yearcompname)//если компонента по которому производится клик нет, то его имя добавляется
                 }else {                                       //в противном случае удаляется, получился кликер, имя то появляется то удаляется
-                    let w = this.inputsAtWork.indexOf(this.yearcompname)
-                    this.inputsAtWork.splice(w,1)
+                    let w = this.inputsAtWork.indexOf(this.yearcompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                 }
-              
+
+                   
             },
                                           
         },
@@ -381,9 +391,8 @@
                 }
             },
             
-            selectedIDcomputed(val) { //вычисляемое свойство, которое динамически возвращает id элементов массива cars
-                this.calcID = val //в зависимости от состояния инпутов компонентов
-                                  //просто записываем состояние в переменную
+            selectedCARScomputed(val) { //вычисляемое свойство, которое динамически возвращает объекты из массива cars отобранные в ходе работы инпутов компонентов
+                this.calculatedcars = val
             }
                     
         },
@@ -412,13 +421,15 @@
 
             
 
-            selectedIDcomputed() {//свойство выводит id элементов массива cars которые оказались между двумя ползунками компонента, отслеживающего года авто
+            selectedCARScomputed() {//свойство выводит id элементов массива cars которые оказались между двумя ползунками компонента, отслеживающего года авто
+                
                 let w = []
                 let d = []             // отслеживаем какие годы авто из массива годов оказались между двумя ползунками 
+                let calculatedCARS = []
                     for(let i = 0; i<this.arrOfYears.length;i++) {//дальше отслежваем какие id у элементов массива cars с такими годами 
                     let a = this.arrOfYears[i]                   //все это хранится в виде массива в этом свойстве
                         if(a<=this.maxyearrealnum&&a>=this.minyearrealnum) {//все сваливаем в массив d
-                            this.cars.forEach(el=>{
+                            this.cars.forEach(el=>{//отслеживаем компонент Input-year
                                 let m = el
                                 if (m.year===a) { //все
                                 d.push(m.id)
@@ -428,7 +439,7 @@
                     }
                     for(let i = 0; i<this.arrOfPrices.length;i++) {//дальше отслежваем какие id у элементов с такими ценами 
                     let a = this.arrOfPrices[i]                   //все это хранится в виде массива в этом же свойстве
-                        if(a<=this.maxpricerealnum&&a>=this.minpricerealnum) {
+                        if(a<=this.maxpricerealnum&&a>=this.minpricerealnum) {//отслеживаем компонент Input-price
                             this.cars.forEach(el=>{
                                 let m = el
                                 if (m.price===a) {//так мы циклами проходимся по всем инпутным компонентам, при появлении нового компонента
@@ -446,8 +457,22 @@
                     }
                 }
                 
-                w = [...new Set(w)]//делаем массив состоящим из уникальных занчений
-                return w
+                w = [...new Set(w)]//делаем массив состоящим из уникальных значений именно id выводимых после отбора компонентами авто
+                w = Object.values(w)//на всякий случай делаем массив из значений имен объекта если это объект
+
+                w.forEach (el=>{//итерируем массив с id, прикаждой итерации итерируем массив cars и если есть совпадения
+                    let a = el // объукты с таким id заносим в массив calculatedCARS, котороый и возвращаем
+                    for(let i = 0; i<this.cars.length;i++) {//каждый раз при изменении инпутов компонентов все массивы становятся пустыми 
+                        let b = this.cars[i] //и наполняются новыми значениями всякий раз при поступлении новых данных
+                        let c = this.cars[i].id
+                        if (a===c) {
+                            calculatedCARS.push(b)
+                        }
+                    }
+                })
+
+                
+                return calculatedCARS
                 
             },
         
@@ -457,11 +482,11 @@
         mounted () {
             
             this.SetAllId ()
-            
+           
             
         },
         created() {
-          
+         
         }
         
 
