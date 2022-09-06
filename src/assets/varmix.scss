@@ -130,6 +130,12 @@ $adaptiveTextRegularLineHeight:0.02;
     
 };
 
+@mixin letterContentSecondarySmallGrayClear {
+    color: $colorSmallLetterContentGray;
+    font-weight: 400;
+    font-family: $fontFamily400;
+};
+
 
 
 @mixin letterH4HeadingBurgerMenuTextNumbersDarkBlue {

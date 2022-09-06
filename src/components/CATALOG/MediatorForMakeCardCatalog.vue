@@ -55,13 +55,19 @@
                 this.cars = val
             },
             modelsfromcatalogmain (val) {
-                this.models = val                
+                if(val!==0) {
+                    this.models = val 
+                }
+                               
             },
             modelsfromcatalogview (val) {
                 this.allmodels = val
             },
             models (val) {   
-                this.modelstoshowfinal = val
+                if (val!==0) {
+                     this.modelstoshowfinal = val
+                }
+               
             },
 
         },
