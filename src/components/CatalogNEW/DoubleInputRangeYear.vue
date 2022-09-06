@@ -48,8 +48,8 @@
     data() {
       return {
         cars:this.carspropsyear,
-        minYear:1,
-        maxYear:11,      
+        minYear:null,//чтобы появилась закрашенная полоска инпута в момент отрисовки эти переменные не должны быть пустышками
+        maxYear:null,//чтобы появилась закрашенная полоска инпута в момент отрисовки эти переменные не должны быть пустышками      
         arrofyears:[],
         indmin:false,
         indmax:false,          
