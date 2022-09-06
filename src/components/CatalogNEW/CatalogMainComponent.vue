@@ -264,15 +264,12 @@
         },
         methods: {
             show () { //определяет состояние переменных
-                if (this.calculatedcars.length<this.cars.length) { //либо массив с результатом работы инпутов всех компонентов
-                    this.showcalculated = true //либо массив со всеми машинами на сайте
-                    this.showcars = false
-                } else if(this.calculatedcars.length===0) {
-                    this.showcalculated = false
-                    this.showcars = true
-                } else if (this.cars.length===this.calculatedcars.length) {
-                    this.showcalculated = false
-                    this.showcars = true
+                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform) {//если хотя бы один компонент открыт, то выполняется ...
+                    this.showcars=false
+                    this.showcalculated=true
+                }else {
+                    this.showcars=true
+                    this.showcalculated=false
                 }
             },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
@@ -286,6 +283,7 @@
                 })
                 
             },
+
             getStartedInpPrice() { //при клике на стрелку компонента запускается функция
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
                 let a = []
@@ -482,11 +480,11 @@
         mounted () {
             
             this.SetAllId ()
-           
+            
             
         },
         created() {
-         
+            
         }
         
 
