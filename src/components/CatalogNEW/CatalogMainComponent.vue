@@ -19,7 +19,7 @@
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
                                 Price
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="pricedbinpform=!pricedbinpform,getStartedInpPrice()">
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedInpPrice()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="pricedbinpform"></i></div>
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="pricedbinpform===false"></i></div>
                             </div>
@@ -43,7 +43,7 @@
                                 :carspropsprice="cars"
                                 @minpricedata="minprice=$event"
                                 @maxpricedata="maxprice=$event"
-                            
+                               
                                 >
 
                                 </doubleinprangeprice> 
@@ -60,7 +60,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Year
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="yeardbinpform=!yeardbinpform,getStartedInpYear()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="yeardbinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="yeardbinpform===false"></i></div>
                             </div>
@@ -225,6 +225,7 @@
                 calculatedcars:[],//объекты из массива cars, отобранные инпутами компонентов, из computed свойства selectedCARScomputed()
                 showcalculated:false,// поведение прописано в методе show (), если true то показывается массив showcalculated                     
                 showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
+            
 
                 yeardbinpform:false,
                 yearcompname:'year',
@@ -233,6 +234,7 @@
                 minyearrealnum:[],
                 maxyearrealnum:[],
                 arrOfYears:[],
+            
                
             
                 
@@ -252,7 +254,7 @@
                 minpricerealnum:[],//хранит реальные цены на авто
                 maxpricerealnum:[],//хранит реальные цены на авто         
                 arrOfPrices:[],//хранит уникальные цены на все представленные на сайте авто, в порядке возрастания
-       
+            
               
 
                 
@@ -264,12 +266,13 @@
         },
         methods: {
             show () { //определяет состояние переменных
-                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform) {//если хотя бы один компонент открыт, то выполняется ...
+                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
                 }else {
                     this.showcars=true
                     this.showcalculated=false
+                  
                 }
             },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
@@ -285,6 +288,7 @@
             },
 
             getStartedInpPrice() { //при клике на стрелку компонента запускается функция
+                this.pricedbinpform=!this.pricedbinpform
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
                 let a = []
                 this.cars.forEach(el => {
@@ -304,9 +308,16 @@
                 this.arrOfPrices.sort(function(a,b){
                     return a-b
                 })
+
+                if(this.pricedbinpform) {
+                    this.minpricerealnum.unshift(this.arrOfPrices[0]) //устанавливает минимум инпута по умолчанию уже в цифрах реальной цены
+                    this.maxpricerealnum.unshift(this.arrOfPrices[this.arrOfPrices.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реальной цены
+                }else{
+                    this.minpricerealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
+                    this.maxpricerealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
+                }                          // и поставляют данные для selectedCARScomputed()
                 
-                this.minpricerealnum.unshift(this.arrOfPrices[0]) //устанавливает минимум инпута по умолчанию уже в цифрах реальной цены
-                this.maxpricerealnum.unshift(this.arrOfPrices[this.arrOfPrices.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реальной цены
+               
 
                 if(!this.inputsAtWork.includes(this.pricecompname)) {//если в переменной для отслеживания включенных в работу инпутов названия, этого
                     this.inputsAtWork.push(this.pricecompname)//если компонента по которому производится клик нет, то его имя добавляется
@@ -315,12 +326,17 @@
                     this.inputsAtWork.splice(w,1) //чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                 }
 
+                
+                
+                
+
                             
             },
             
            
 
             getStartedInpYear() {//при клике на стрелку компонента запускается функция, аналогично указанному выше, только для другого компонента
+                this.yeardbinpform=!this.yeardbinpform
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
                 let a = []
                 this.cars.forEach(el => {
@@ -341,15 +357,23 @@
                     return a-b
                 })
 
-                this.minyearrealnum.unshift(this.arrOfYears[0]) //устанавливает минимум инпута по умолчанию уже в цифрах реального минимального года
-                this.maxyearrealnum.unshift(this.arrOfYears[this.arrOfYears.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального года
+                if(this.yeardbinpform) {
+                    this.minyearrealnum.unshift(this.arrOfYears[0]) //устанавливает минимум инпута по умолчанию уже в цифрах реального минимального года
+                    this.maxyearrealnum.unshift(this.arrOfYears[this.arrOfYears.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального года
+                }else{
+                    this.minyearrealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
+                    this.maxyearrealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
+                }                         // и поставляют данные для selectedCARScomputed()
+
+
+                
 
                 if(!this.inputsAtWork.includes(this.yearcompname)) {//если в переменной для отслеживания включенных в работу инпутов названия, этого
                     this.inputsAtWork.push(this.yearcompname)//если компонента по которому производится клик нет, то его имя добавляется
                 }else {                                       //в противном случае удаляется, получился кликер, имя то появляется то удаляется
                     let w = this.inputsAtWork.indexOf(this.yearcompname)//нужно для использования в computed свойстве selectedCARScomputed()
                     this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
-                }
+                }   
 
                    
             },
@@ -390,7 +414,11 @@
             },
             
             selectedCARScomputed(val) { //вычисляемое свойство, которое динамически возвращает объекты из массива cars отобранные в ходе работы инпутов компонентов
-                this.calculatedcars = val
+                
+                    this.calculatedcars = val
+                    
+                
+                
             }
                     
         },
@@ -426,7 +454,8 @@
                 let calculatedCARS = []
                     for(let i = 0; i<this.arrOfYears.length;i++) {//дальше отслежваем какие id у элементов массива cars с такими годами 
                     let a = this.arrOfYears[i]                   //все это хранится в виде массива в этом свойстве
-                        if(a<=this.maxyearrealnum&&a>=this.minyearrealnum) {//все сваливаем в массив d
+                        if(a<=this.maxyearrealnum[0]&&a>=this.minyearrealnum[0]) {//все сваливаем в массив d
+                            
                             this.cars.forEach(el=>{//отслеживаем компонент Input-year
                                 let m = el
                                 if (m.year===a) { //все
@@ -437,7 +466,7 @@
                     }
                     for(let i = 0; i<this.arrOfPrices.length;i++) {//дальше отслежваем какие id у элементов с такими ценами 
                     let a = this.arrOfPrices[i]                   //все это хранится в виде массива в этом же свойстве
-                        if(a<=this.maxpricerealnum&&a>=this.minpricerealnum) {//отслеживаем компонент Input-price
+                        if(a<=this.maxpricerealnum[0]&&a>=this.minpricerealnum[0]) {//отслеживаем компонент Input-price
                             this.cars.forEach(el=>{
                                 let m = el
                                 if (m.price===a) {//так мы циклами проходимся по всем инпутным компонентам, при появлении нового компонента
@@ -446,6 +475,7 @@
                             })
                         }
                     }
+                    
 
                 for(let i=0; i<d.length;i++) {//итерируемся по массиву d и на каждой итерации сколько итый элемент встречается 
                     let k = d[i]              //в массиве d если встречается столько же раз сколько инпутов компонентов включено в этот момент,
@@ -469,6 +499,7 @@
                     }
                 })
 
+               
                 
                 return calculatedCARS
                 

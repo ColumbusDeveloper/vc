@@ -6,7 +6,7 @@
       <div class="container">
         <div class="slider-track" ref="header"></div>
         <input type="range" min="1"  v-model="minYear" step="1" class="inp min" id="slider-1" 
-        @input="slideOne(),slide(),sendMinDtaToParentComponent(),setindexmin()"  
+        @input="slideOne(),slide(),sendMinDtaToParentComponent(),setindexmin()" 
         :class="{zindex:indmin}"
         >
 
@@ -48,8 +48,8 @@
     data() {
       return {
         cars:this.carspropsyear,
-        minYear:null,
-        maxYear:null,      
+        minYear:null,//чтобы появилась закрашенная полоска инпута в момент отрисовки эти переменные не должны быть пустышками
+        maxYear:null,//чтобы появилась закрашенная полоска инпута в момент отрисовки эти переменные не должны быть пустышками      
         arrofyears:[],
         indmin:false,
         indmax:false,          
