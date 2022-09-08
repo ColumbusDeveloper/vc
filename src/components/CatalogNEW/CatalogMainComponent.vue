@@ -106,7 +106,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Kilometers
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="kiloinpform=!kiloinpform,getStartedInpKilo()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="kiloinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="kiloinpform===false"></i></div>
                             </div>
@@ -116,7 +116,7 @@
 
                             <div class="ma-mo__detailed-search-box-inprange-box-text-box inp-cont-box-content">
                                 <div class="ma-mo__detailed-search-box-inprange-text inp-cont-box-content-elem">
-                                    $$$
+                                    {{maxkilorealnum[0]}}   or less
                                 </div>
 
                             </div>
@@ -249,6 +249,10 @@
                 kiloinpform:false,
                 kilocompname:'kiloslider',
                 kilocompdata:null,
+                minkilorealnum:[],
+                maxkilorealnum:[],
+                arrOfKilometers:[],
+
         
             }
 
@@ -283,7 +287,7 @@
                 this.cars.forEach(el => {
                 let b = el.price
                 a.push(b)
-                });
+                })
                 a=[...new Set(a)]
                 let x = a.sort()
                 let b = Object.values(x)
@@ -327,7 +331,7 @@
                 this.cars.forEach(el => {
                 let b = el.year
                 a.push(b)
-                });
+                })
                 a=[...new Set(a)]
                 let x = a.sort()
                 let b = Object.values(x)
@@ -361,6 +365,48 @@
 
                    
             },
+
+            getStartedInpKilo() {
+                this.kiloinpform=!this.kiloinpform//просто переключает переменную, чтобы открыть закрыть компонент
+                this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
+                let a = []
+                this.cars.forEach(el => {
+                let b = el.kilometers
+                a.push(b)
+                })
+                a=[...new Set(a)]
+                let x = a.sort()
+                let b = Object.values(x)
+                b.forEach(el=>{
+                let q = el
+                this.arrOfKilometers.push(q) //подготавливает массив уникалных занчений километражей на сайте , по возрастанию километража авто
+                })
+                this.arrOfKilometers = [...new Set(this.arrOfKilometers)]
+                let k = Object.values(this.arrOfKilometers)
+                this.arrOfKilometers = k
+                this.arrOfKilometers.sort(function(a,b){ //очень важно отсортировать массив по ворастанию, тогда можно легко брать минимумы и максимумы
+                    return a-b
+                })
+                
+
+                if(this.kiloinpform) {
+                    this.minkilorealnum.unshift(this.arrOfKilometers[0]) //устанавливает минимум инпута по умолчанию уже в цифрах реального минимального пробега реального авто
+                    this.maxkilorealnum.unshift(this.arrOfKilometers[this.arrOfKilometers.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
+                }else{
+                    this.minkilorealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
+                    this.maxkilorealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
+                }                         // и поставляют данные для selectedCARScomputed()
+
+
+
+                if(!this.inputsAtWork.includes(this.kilocompname)) {
+                    this.inputsAtWork.push(this.kilocompname)//если компонента по которому производится клик нет, то его имя добавляется
+                }else {                                       //в противном случае удаляется, получился кликер, имя то появляется то удаляется
+                    let w = this.inputsAtWork.indexOf(this.kilocompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
+                } 
+            }
+        
                                           
         },
         
@@ -396,13 +442,16 @@
                     this.maxyearrealnum.splice(1)//таким образом в массиве всегда одно число и оно динамически меняется
                 }
             },
+
+            setMaxKiloRealNumber (val) {
+                if(val) {//устанавливает динамически цену для максимального инпута в компоненте цены
+                    this.maxkilorealnum.unshift(val)//все время пишет в начало массива и потом удаляет
+                    this.maxkilorealnum.splice(1)//таким образом в массиве всегда одно число и оно динамически меняется
+                }//инпут в данном случае один, нам не нужно выдерживать условия, сразу пишем данные если появились в переменную maxkilorealnum
+            },
             
-            selectedCARScomputed(val) { //вычисляемое свойство, которое динамически возвращает объекты из массива cars отобранные в ходе работы инпутов компонентов
-                
-                    this.calculatedcars = val
-                    
-                
-                
+            selectedCARScomputed(val) { //вычисляемое свойство, которое динамически возвращает объекты из массива cars отобранные в ходе работы инпутов компонентов         
+                this.calculatedcars = val                           
             }
                     
         },
@@ -429,51 +478,67 @@
                 return this.arrOfYears[b]
             },
 
+            setMaxKiloRealNumber () {//вычисляет динамически меняющееся значение максимального пробега авто по мере движения инпута
+                let b = this.kilocompdata - 1
+                return this.arrOfKilometers[b]
+            },
+
             
 
-            selectedCARScomputed() {//свойство выводит id элементов массива cars которые оказались между двумя ползунками компонента, отслеживающего года авто
+            selectedCARScomputed() {//свойство выводит id элементов массива cars 
                 
                 let w = []
-                let d = []             // отслеживаем какие годы авто из массива годов оказались между двумя ползунками 
+                let d = []             
                 let calculatedCARS = []
-                    for(let i = 0; i<this.arrOfYears.length;i++) {//дальше отслежваем какие id у элементов массива cars с такими годами 
-                    let a = this.arrOfYears[i]                   //все это хранится в виде массива в этом свойстве
-                        if(a<=this.maxyearrealnum[0]&&a>=this.minyearrealnum[0]) {//все сваливаем в массив d
-                            
-                            this.cars.forEach(el=>{//отслеживаем компонент Input-year
-                                let m = el
-                                if (m.year===a) { //все
-                                d.push(m.id)
+                    for(let i = 0; i<this.arrOfYears.length;i++) {//отслеживаем компонент Input-year, итерируем массив arrOfYears с уникальными годами авто
+                    let a = this.arrOfYears[i] //записываем в переменную элемент массива arrOfYears, по которому сейчас происходит итерация
+                        if(a<=this.maxyearrealnum[0]&&a>=this.minyearrealnum[0]) {//если этот элемент больше минимальной выведенной сейчас цены, 
+                                                            //но меньше выведенной сейчас цены инпутами компонентов, то принимается к рассмотрению
+                            this.cars.forEach(el=>{//итерируем главный массив со всеми авто на сайте 
+                                let m = el  //записываем в переменную элемент массива по которому происходит итерация
+                                if (m.year===a) { //если этот элемент со значением свойства year равен отобранному при итерации выше элементу массива arrOfYears
+                                d.push(m.id) //то его id записываем в массив d
                                 }
                             })
                         }
                     }
-                    for(let i = 0; i<this.arrOfPrices.length;i++) {//дальше отслежваем какие id у элементов с такими ценами 
-                    let a = this.arrOfPrices[i]                   //все это хранится в виде массива в этом же свойстве
-                        if(a<=this.maxpricerealnum[0]&&a>=this.minpricerealnum[0]) {//отслеживаем компонент Input-price
+                    for(let i = 0; i<this.arrOfPrices.length;i++) {//отслеживаем компонент Input-price, все аналогично указанному в комментариях выше
+                    let a = this.arrOfPrices[i]                 
+                        if(a<=this.maxpricerealnum[0]&&a>=this.minpricerealnum[0]) {
                             this.cars.forEach(el=>{
                                 let m = el
-                                if (m.price===a) {//так мы циклами проходимся по всем инпутным компонентам, при появлении нового компонента
-                                d.push(m.id)      //добавляем еще один цикл по этому компоненту
+                                if (m.price===a) {
+                                d.push(m.id)    
+                                }
+                            })
+                        }
+                    }
+                    for(let i = 0; i<this.arrOfKilometers.length;i++) {//отслеживаем компонент Single-input с одним инпутом, итерируем arrOfKilometers и на каждой итерации
+                    let a = this.arrOfKilometers[i]                   //записываем в переменную элемент массива, по которому сейчас проходит итерация
+                        if(a<=this.maxkilorealnum[0]) {//и если этот элемент соответствует условию, то есть он меньше выведенного инпутом сейчас километража
+                            this.cars.forEach(el=>{ //то он принимается к рассмотрению, дальше производим итерацию главного массива со всеми авто
+                                let m = el //записываем в переменную елемент по которому сейчас происходит итерация и если
+                                if (m.kilometers===a) {//значение свойства kilometers элемента равен элементу, выведенному ранее в итерации массива километражей, 
+                                d.push(m.id)      //то его id записываемв в массив d
                                 }
                             })
                         }
                     }
                     
 
-                for(let i=0; i<d.length;i++) {//итерируемся по массиву d и на каждой итерации сколько итый элемент встречается 
-                    let k = d[i]              //в массиве d если встречается столько же раз сколько инпутов компонентов включено в этот момент,
-                    let v = d.filter(el=>el===k).length //то записываем в массив w
-                    if (v===this.inputsAtWork.length) {
-                        w.push(k)
+                for(let i=0; i<d.length;i++) {//итерируемся по массиву d в котором вобрался весь сборняк выбранных ранее id элементов
+                    let k = d[i]              //записываем в переменную элемент массива по которому сейчас происходит итерация
+                    let v = d.filter(el=>el===k).length //выясняем сколько раз в массиве d встречается конкретный элемент массива d по которому сейчас происходит итерация
+                    if (v===this.inputsAtWork.length) { //устанавливаем, что если элемент встречается столько раз сколько открыто компонентов, то его 
+                        w.push(k)                       //записываем в массив w
                     }
                 }
-                
-                w = [...new Set(w)]//делаем массив состоящим из уникальных значений именно id выводимых после отбора компонентами авто
+           
+                w = [...new Set(w)]//делаем массив состоящим из уникальных значений id выводимых после отбора компонентами авто
                 w = Object.values(w)//на всякий случай делаем массив из значений имен объекта если это объект
 
-                w.forEach (el=>{//итерируем массив с id, прикаждой итерации итерируем массив cars и если есть совпадения
-                    let a = el // объукты с таким id заносим в массив calculatedCARS, котороый и возвращаем
+                w.forEach (el=>{//итерируем массив с id, при каждой итерации итерируем массив cars и если есть совпадения
+                    let a = el // объекты с таким id заносим в массив calculatedCARS, котороый и возвращаем
                     for(let i = 0; i<this.cars.length;i++) {//каждый раз при изменении инпутов компонентов все массивы становятся пустыми 
                         let b = this.cars[i] //и наполняются новыми значениями всякий раз при поступлении новых данных
                         let c = this.cars[i].id
@@ -485,8 +550,8 @@
 
                
                 
-                return calculatedCARS
-                
+                return calculatedCARS//!!!!КРАЙНЕ ВАЖНО ЭТО ДЕЛАТЬ В COMPUTED ТАК КАК ЭТИ СВОЙСТВА ПЕРЕСОЗДАЮТСЯ ПРИ КАЖДОМ ПОЯВЛЕНИИ
+                                        //НОВЫХ ДАННЫХ, ТАК У НАС ПОСТОЯННО АКТУАЛЬНЫЕ ДАННЫЕ
             },
         
         },
