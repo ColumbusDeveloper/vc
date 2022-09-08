@@ -125,6 +125,8 @@
 
                                 <inprange class="ma-mo__detailed-search-box-inprange-input-box-elem inp-box-component"
                                 :carspropsinprange="cars"
+                                @datafromsingleinput="kilocompdata=$event"
+                         
                                 >
 
                                 </inprange> 
@@ -228,44 +230,31 @@
             
 
                 yeardbinpform:false,
-                yearcompname:'year',
+                yearcompname:'yearslider',
                 minyear:null,
                 maxyear:null,
                 minyearrealnum:[],
                 maxyearrealnum:[],
                 arrOfYears:[],
             
-               
-            
-                
-
-              
-                
-               
-                
-               
-
-
 
                 pricedbinpform:false,//если true, то открывается компонент, устанавливаются стартовые значения в методе getStartedInpPrice()
-                pricecompname:'price',//наименование компонента
+                pricecompname:'priceslider',//наименование компонента
                 minprice:null,//номера, которые приходят из дочернего компонента и будут преобразовываться в значения реальных цен
                 maxprice:null,//номера, которые приходят из дочернего компонента и будут преобразовываться в значения реальных цен
                 minpricerealnum:[],//хранит реальные цены на авто
                 maxpricerealnum:[],//хранит реальные цены на авто         
                 arrOfPrices:[],//хранит уникальные цены на все представленные на сайте авто, в порядке возрастания
             
-              
-
-                
-
                 kiloinpform:false,
+                kilocompname:'kiloslider',
+                kilocompdata:null,
         
             }
 
         },
         methods: {
-            show () { //определяет состояние переменных
+            show () { //определяет состояние переменных и если хоть один компонент включен, то показывается итерация по массиву showcalculated
                 if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
@@ -326,11 +315,7 @@
                     this.inputsAtWork.splice(w,1) //чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                 }
 
-                
-                
-                
-
-                            
+                                      
             },
             
            
@@ -366,7 +351,6 @@
                 }                         // и поставляют данные для selectedCARScomputed()
 
 
-                
 
                 if(!this.inputsAtWork.includes(this.yearcompname)) {//если в переменной для отслеживания включенных в работу инпутов названия, этого
                     this.inputsAtWork.push(this.yearcompname)//если компонента по которому производится клик нет, то его имя добавляется
