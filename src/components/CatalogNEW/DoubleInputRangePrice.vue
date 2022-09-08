@@ -207,12 +207,12 @@
      }
 
       input[type="range"]::-webkit-slider-runnable-track {
-        -webkit-appearance: none;
+        appearance: none;
         height: 5px;
       }
 
       input[type="range"]::-moz-range-track {
-        -moz-appearance: none;
+        appearance: none;
         height: 5px;
       }
 
@@ -222,7 +222,7 @@
       }
 
       input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
+       appearance: none;
         height: 18px;
         width: 18px;
         background-color:#7481FF ;
@@ -233,7 +233,7 @@
       }
 
       input[type="range"]::-moz-range-thumb {
-        -webkit-appearance: none;
+        appearance: none;
         height: 18px;
         width: 18px;
         background-color:#7481FF ;
