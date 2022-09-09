@@ -152,7 +152,7 @@
 
                             </div>
 
-                            <div class="ma-mo__detailed-search-box-inprange-input-box inp-box">
+                            <div class="ma-mo__detailed-search-box-inprange-input-box inp-box" v-if="kiloinpforminput">
 
                                 <inprange class="ma-mo__detailed-search-box-inprange-input-box-elem inp-box-component"
                                 :carspropsinprange="cars"
@@ -164,7 +164,7 @@
 
                             </div>
 
-                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on">
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="kiloinpformcross">
 
                                     <cardkilo
                                     v-for="car in calculatedcars" :key="car"
@@ -495,8 +495,17 @@
                     this.kiloinpform = false
                     this.kiloformstatekeeper = []
                 }
+
+                if(this.kiloinpform ) {
+                    this.inputsAtWork.push(this.kilocompname)//если компонента по которому производится клик нет, то его имя добавляется
+                    this.inputsAtWork = [...new Set(this.inputsAtWork)]
+                }else {                                       //в противном случае удаляется, получился кликер, имя то появляется то удаляется
+                    let w = this.inputsAtWork.indexOf(this.kilocompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
+                } 
                 
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
+                
                 let a = []
                 this.cars.forEach(el => {
                 let b = el.kilometers
@@ -527,12 +536,7 @@
 
 
 
-                if(!this.inputsAtWork.includes(this.kilocompname)) {
-                    this.inputsAtWork.push(this.kilocompname)//если компонента по которому производится клик нет, то его имя добавляется
-                }else {                                       //в противном случае удаляется, получился кликер, имя то появляется то удаляется
-                    let w = this.inputsAtWork.indexOf(this.kilocompname)//нужно для использования в computed свойстве selectedCARScomputed()
-                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
-                } 
+                
             },
             undokilocomponent () {
                 let a = this.deletedkiloitemhistory[0]
