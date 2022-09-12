@@ -74,7 +74,7 @@
                                 :carspropsprice="cars"
                                 @minpricedata="minprice=$event"
                                 @maxpricedata="maxprice=$event"
-                               
+                                @input="addToTestArrPrice()"
                                 >
 
                                 </doubleinprangeprice> 
@@ -100,7 +100,7 @@
 
                         <div class="ma-mo__detailed-search-box-doubleinprange-year-box inp-cont-box" v-if="yeardbinpform">
 
-                            <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box inp-cont-box-content">
+                            <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box inp-cont-box-content" >
                                 <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-min inp-cont-box-content-min">
                                     {{minyearrealnum[0]}}
                                 </div>
@@ -129,6 +129,7 @@
                                 v-for="car in calculatedcars" :key="car"
                                 :caryear="car"
                                 @deletedyeartoparent="deletedyearitem=$event"
+                                
                                 >
 
 
@@ -136,7 +137,8 @@
                                 <div class="inp-box-cross-on-undo"
                                 @click="undoyearcomponent"
                                 >
-                                    <span>UNDO</span>
+                                    <span >UNDO</span>
+                                    <span >Click the arrow up to restart the searchfield</span>
                                 </div>
 
                             </div>
@@ -162,7 +164,7 @@
 
                         <div class="ma-mo__detailed-search-box-inprange-box inp-cont-box inp-cont-box" v-if="kiloinpform">
 
-                            <div class="ma-mo__detailed-search-box-inprange-box-text-box inp-cont-box-content">
+                            <div class="ma-mo__detailed-search-box-inprange-box-text-box inp-cont-box-content" >
                                 <div class="ma-mo__detailed-search-box-inprange-text inp-cont-box-content-elem">
                                     {{maxkilorealnum[0]}}   or less
                                 </div>
@@ -181,20 +183,23 @@
 
                             </div>
 
-                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="kiloinpformcross">
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="kiloinpformcross" >
 
                                     <cardkilo
                                     v-for="car in calculatedcars" :key="car"
                                     :carkilo="car"
                                     @deletedkilotoparent="deletedkiloitem=$event"
+                                  
                                     >
 
 
                                     </cardkilo>
                                     <div class="inp-box-cross-on-undo"
                                     @click="undokilocomponent"
+
                                     >
-                                        <span>UNDO</span>
+                                        <span >UNDO</span>
+                                        <span >Click the arrow up to restart the searchfield</span>
                                     </div>
 
                             </div>
@@ -298,6 +303,7 @@
                 calculatedcars:[],//объекты из массива cars, отобранные инпутами компонентов, из computed свойства selectedCARScomputed()
                 showcalculated:false,// поведение прописано в методе show (), если true то показывается массив showcalculated                     
                 showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
+               
 
 
 
@@ -324,6 +330,7 @@
                 arrOfYears:[],
                 deletedyearitem:[],
                 deletedyearitemhistory:[],
+             
             
 
                 pricedbinpform:false,//если true, то открывается компонент, устанавливаются стартовые значения в методе getStartedInpPrice()
@@ -336,12 +343,14 @@
 
                 pricetrigger:Boolean,
                 priceformstatekeeper:[],//вспомогательный массив, относительно которого идут вычисления значений переменных по открытию подформ
+                pricearrtest:[],
                 pricecompname:'priceslider',//наименование компонента
                 minprice:null,//номера, которые приходят из дочернего компонента и будут преобразовываться в значения реальных цен
                 maxprice:null,//номера, которые приходят из дочернего компонента и будут преобразовываться в значения реальных цен
                 minpricerealnum:[],//хранит реальные цены на авто
                 maxpricerealnum:[],//хранит реальные цены на авто         
                 arrOfPrices:[],//хранит уникальные цены на все представленные на сайте авто, в порядке возрастания
+           
                
 
 
@@ -364,6 +373,7 @@
                 arrOfKilometers:[],
                 deletedkiloitem:[],
                 deletedkiloitemhistory:[],
+         
         
             }
 
@@ -396,6 +406,16 @@
             addToTestArrYear() {
                 this.yeararrtest.push(1)
             },
+            addToTestArrPrice() {
+                this.pricearrtest.push(1)
+            },
+          
+
+
+
+            
+
+            
          
 
 
@@ -472,6 +492,9 @@
                     let w = this.inputsAtWork.indexOf(this.pricecompname)//нужно для использования в computed свойстве selectedCARScomputed()
                     this.inputsAtWork.splice(w,1) //чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                 }
+
+
+              
 
                                       
             },
@@ -559,7 +582,7 @@
                     this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                 }
 
-                                                // и поставляют данные для selectedCARScomput
+                              
                 
                 
                 
@@ -660,6 +683,8 @@
                 this.arrOfKilometers.sort(function(a,b){ //очень важно отсортировать массив по ворастанию, тогда можно легко брать минимумы и максимумы
                     return a-b
                 })
+
+               
                             
             },
             undokilocomponent () {
