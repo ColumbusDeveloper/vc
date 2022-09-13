@@ -1,11 +1,11 @@
 <template>
 
-    <div class="cardkilo">    
-        <div class="cardkilo__item"
-        @click="deletekilo()"
+    <div class="cardyear">    
+        <div class="cardyear__item"
+        @click="deletyear()"
         >
-            <i class="fa-solid fa-xmark cardkilo__xmark"></i>
-            <span>{{carkilodata.kilometers}}</span>
+            <i class="fa-solid fa-xmark cardyear__xmark"></i>
+            <span>{{caryeardata.year}}</span>
         </div>     
         
     </div>
@@ -19,23 +19,23 @@
     
 
     export default {
-        name: 'ca-catalog',
-        props:['carkilo'],
+        name: 'ca-year',
+        props:['caryear'],
         components: {
 
         },
         data() {
             return {
 
-            carkilodata:this.carkilo,
+            caryeardata:this.caryear,
  
             }
 
         },
         methods: {
             
-            deletekilo() {
-                this.$emit('deletedkilotoparent', this.carkilodata)
+            deletyear() {
+                this.$emit('deletedyeartoparent', this.caryeardata)
             }
                                   
         },
@@ -44,10 +44,10 @@
 
            
 
-            carkilo (val) {
+            caryear (val) {
                 
-                this.carkilodata = val
-                this.carkilodata = [...new Set(this.carkilodata)]
+                this.caryeardata = val
+                this.caryeardata = [...new Set(this.caryeardata)]
             },
            
 
@@ -70,7 +70,7 @@
    
     
 
-    .cardkilo {
+    .cardyear {
         &__item {
             display: inline-block;
             align-items: center;
@@ -80,7 +80,6 @@
             margin-right: 5px;
             margin-bottom: 3px;
             margin-top: 3px;
-            
             cursor: pointer;
             &:hover {
                 color: #7481FF;
