@@ -76,7 +76,8 @@
             align-items: center;
             background-color: aqua;
             @include letterH4HeadingBurgerMenuTextNumbersDarkBlue;
-            margin-right: 7px;
+            margin-left: 5px;
+            margin-right: 5px;
             margin-bottom: 3px;
             margin-top: 3px;
             cursor: pointer;
