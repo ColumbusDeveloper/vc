@@ -19,7 +19,7 @@
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
                                 Transmission
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedInpTrans(),clearcrosshistoryarrs()">
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedInpTrans()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="transinpform"></i></div>
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="transinpform===false"></i></div>
                             </div>
@@ -50,7 +50,7 @@
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
                                 Price
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedInpPrice(),clearcrosshistoryarrs()">
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedInpPrice()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="pricedbinpform"></i></div>
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="pricedbinpform===false"></i></div>
                             </div>
@@ -91,7 +91,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Year
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),clearcrosshistoryarrs()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarning ()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="yeardbinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="yeardbinpform===false"></i></div>
                             </div>
@@ -126,19 +126,21 @@
                             <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="yearinpformcross">
 
                                 <cardyear
-                                v-for="car in calculatedcars" :key="car"
+                                v-for="(car,index) in calculatedcars" :key="car"
+
+                                :class="{arrfirstitem:index===this.calculatedcarsyearactualmaxvalindexmax,minitemclass:index===this.calculatedcarsyearactualmaxvalindexmin}"
                                 :caryear="car"
                                 @deletedyeartoparent="deletedyearitem=$event"
-                                
+                          
                                 >
 
 
                                 </cardyear>
                                 <div class="inp-box-cross-on-undo"
-                                @click="undoyearcomponent"
+                            
                                 >
-                                    <div class="inp-box-cross-on-undo__text-undo-box">
-                                        <span class="inp-box-cross-on-undo__text-undo-box-text">UNDO</span> 
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningyear" @click="undoyearcomponent" >
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
                                     </div>
                                     <div class="inp-box-cross-on-undo__text-statement-box">
                                         <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -160,7 +162,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Kilometers
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarning ()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="kiloinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="kiloinpform===false"></i></div>
                             </div>
@@ -195,18 +197,18 @@
                                     :class="{arrfirstitem:index===this.calculatedcarskiloactualmaxvalindex}"
                                     :carkilo="car"
                                     @deletedkilotoparent="deletedkiloitem=$event"
-                                    @click="getactualstate()"
+                              
                                   
                                     >
                                    
 
                                     </cardkilo>
                                     <div class="inp-box-cross-on-undo"
-                                    @click="getactualstate()"
+                          
                                   
                                     >
                                         <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarning" @click="undokilocomponent" >
-                                            <span class="inp-box-cross-on-undo__text-undo-box-text" @click="getactualstate()" >UNDO</span> 
+                                            <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
                                         </div>
                                         <div class="inp-box-cross-on-undo__text-statement-box">
                                             <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -314,7 +316,7 @@
                 calculatedcars:[],//объекты из массива cars, отобранные инпутами компонентов, из computed свойства selectedCARScomputed()
                 showcalculated:false,// поведение прописано в методе show (), если true то показывается массив showcalculated                     
                 showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
-                unduwarning:false,
+                
 
 
 
@@ -341,6 +343,7 @@
                 arrOfYears:[],
                 deletedyearitem:[],
                 deletedyearitemhistory:[],
+                unduwarningyear:false,
              
             
 
@@ -384,8 +387,7 @@
                 arrOfKilometers:[],
                 deletedkiloitem:[],
                 deletedkiloitemhistory:[],
-                calculatedcarskiloactual:[],
-                calculatedcarskiloactualmaxvalindex:13,
+                unduwarning:false,
          
         
             }
@@ -423,28 +425,26 @@
                 this.pricearrtest.push(1)
             },
             setunduwarning () {
-                if (this.calculatedcars.length<14) {
-                    this.unduwarning = true
-                }else {
+                if (this.calculatedcars.length===14 ) {
+                    this.unduwarningyear = false
                     this.unduwarning = false
-               
+                }
+                
+                
+                if (this.deletedyearitemhistory.length!=0) {
+                    this.unduwarningyear = true           
+                }else  {
+                    this.unduwarningyear = false
+                }
+
+                if (this.deletedkiloitemhistory.length!=0) {
+                    this.unduwarning = true           
+                }else  {
+                    this.unduwarning = false
                 }
              
             },
-            getactualstate() {
-                if (this.calculatedcars.length<=14) {
-                    this.calculatedcarskiloactual = this.calculatedcars
-                    let a =  this.calculatedcarskiloactual.map(el=>{
-                        return el.kilometers
-                    })
-                    
-                    let m = Math.max.apply(null, a)
-                    let c = this.calculatedcarskiloactual.findIndex(el=>el.kilometers===m)
-                    this.calculatedcarskiloactualmaxvalindex = c
-                }
-                
-               
-            },
+            
           
 
 
@@ -563,12 +563,15 @@
                     this.yearinpforminput = false
                     this.yearinpformcross = false
                     this.yeardbinpform = false
+                    this.yeartrigger = true
                     this.yearinputopen=false
                     this.yearcrossopen=false
                     this.yearcomponentclosed=true
                     this.yearformstatekeeper = []
-                    this.yeartrigger = true
+                    
                 }
+
+                this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
 
                 let a = []
                 this.cars.forEach(el => {
@@ -589,14 +592,15 @@
                     return a-b
                 })
 
-                this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
-
 
                 if(this.yearinputopen) {
                     this.minyearrealnum.unshift(this.arrOfYears[0]) //устанавливает стартовый минимум инпута по умолчанию уже в цифрах реального минимального пробега реального авто
                     this.maxyearrealnum.unshift(this.arrOfYears[this.arrOfYears.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
                     this.inputsAtWork.push(this.yearcompname)//если компонента по которому производится клик нет, то его имя добавляется
                     this.inputsAtWork = [...new Set(this.inputsAtWork)]
+                    
+                    
+
                 }else if (this.yearcrossopen && !this.yeararrtest.length===0) {
                     let a = this.calculatedcars.map(car =>{
                         return car.year
@@ -609,25 +613,29 @@
                     let z = a[0]
                     this.minyearrealnum.unshift(z)
                     this.maxyearrealnum.unshift(b)
-                    this.getactualstate()
+                    this.setunduwarning ()
+                   
+               
+                  
                 } else if (this.yearcomponentclosed) {
                     this.minyearrealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
                     this.maxyearrealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
-                    this.deletedyearitemhistory=[]
+                    this.deletedyearitemhistory=[] 
                     this.yeararrtest = []
                     let w = this.inputsAtWork.indexOf(this.yearcompname)//нужно для использования в computed свойстве selectedCARScomputed()
                     this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
+                  
+                  
+                    
+                   
                 }
 
-                              
-                
-                
                 
 
-                   
+                  
             },
             undoyearcomponent () {
-                if (this.deletedyearitemhistory.length!==0) {
+                if (this.calculatedcars.length<14) {
                     let a = this.deletedyearitemhistory[0]
                     let b = this.cars.find(el=>el.id===a)
                     this.calculatedcars.unshift(b)
@@ -635,6 +643,7 @@
                     let w = this.calculatedcars
                     w = [...new Set(w)]
                     this.calculatedcars = w
+                    this.unduwarningyear = true
                 }
     
             },
@@ -643,6 +652,7 @@
 
 
             getStartedInpKilo() {
+                
 
                 this.kiloformstatekeeper.push(1)//описывает в какой последовательности открывать и закрывать форму и части формы
                 if (this.kiloformstatekeeper.length===1) {
@@ -671,37 +681,6 @@
                     this.kiloformstatekeeper = []
                 }
 
-               
-
-                if(this.kiloinputopen) {
-                    this.minkilorealnum.unshift(this.arrOfKilometers[0]) //устанавливает стартовый минимум инпута по умолчанию уже в цифрах реального минимального пробега реального авто
-                    this.maxkilorealnum.unshift(this.arrOfKilometers[this.arrOfKilometers.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
-                    this.inputsAtWork.push(this.kilocompname)//если компонента по которому производится клик нет, то его имя добавляется
-                    this.inputsAtWork = [...new Set(this.inputsAtWork)]
-                }else if (this.kilocrossopen && !this.kiloarrtest.length===0) {
-                    let a = this.calculatedcars.map(car =>{
-                        return car.kilometers
-                    })
-                    a = [...new Set(a)]
-                    a.sort(function(a,b) {
-                        a-b
-                    })
-                    let b = a[a.length-1]
-                    this.maxkilorealnum.unshift(b)
-                    this.getactualstate()
-                } else if (this.kilocomponentclosed) {
-                    this.minkilorealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
-                    this.maxkilorealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
-                    this.deletedkiloitemhistory=[]
-                    this.kiloarrtest = []
-                    let w = this.inputsAtWork.indexOf(this.kilocompname)//нужно для использования в computed свойстве selectedCARScomputed()
-                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
-                } 
-
-                
-
-                
-             
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
                 
                 
@@ -725,10 +704,51 @@
                 })
 
                
-                            
+
+                if(this.kiloinputopen) {
+                    this.minkilorealnum.unshift(this.arrOfKilometers[0]) //устанавливает стартовый минимум инпута по умолчанию уже в цифрах реального минимального пробега реального авто
+                    this.maxkilorealnum.unshift(this.arrOfKilometers[this.arrOfKilometers.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
+                    this.inputsAtWork.push(this.kilocompname)//если компонента по которому производится клик нет, то его имя добавляется
+                    this.inputsAtWork = [...new Set(this.inputsAtWork)]
+                
+
+                   
+                }else if (this.kilocrossopen && !this.kiloarrtest.length===0) {
+                    let a = this.calculatedcars.map(car =>{
+                        return car.kilometers
+                    })
+                    a = [...new Set(a)]
+                    a.sort(function(a,b) {
+                        a-b
+                    })
+                    let b = a[a.length-1]
+                    this.maxkilorealnum.unshift(b)
+                    this.setunduwarning ()
+
+                  
+                } else if (this.kilocomponentclosed) {
+                    this.minkilorealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
+                    this.maxkilorealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
+                    this.deletedkiloitemhistory=[]
+                    this.kiloarrtest = []
+                    let w = this.inputsAtWork.indexOf(this.kilocompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
+                    
+                    
+
+                    
+                } 
+
+                
+
+                
+             
+                
+
+                      
             },
             undokilocomponent () {
-                if (this.deletedkiloitemhistory.length!==0) {
+                if (this.deletedkiloitemhistory.length!=0 && this.calculatedcars.length<=14) {
                     let a = this.deletedkiloitemhistory[0]
                     let b = this.cars.find(el=>el.id===a)
                     this.calculatedcars.unshift(b)
@@ -737,8 +757,7 @@
                     w = [...new Set(w)]
                     this.calculatedcars = w
                 }
-              
-    
+   
             },
 
             
@@ -924,7 +943,11 @@
                 w = [...new Set(w)]//делаем массив состоящим из уникальных значений id выводимых после отбора компонентами авто
                 w = Object.values(w)//на всякий случай делаем массив из значений имен объекта если это объект
 
-                w.forEach (el=>{//итерируем массив с id, при каждой итерации итерируем массив cars и если есть совпадения
+                let z = w.sort(function(a,b){
+                    return a-b
+                })
+
+                z.forEach (el=>{//итерируем массив с id, при каждой итерации итерируем массив cars и если есть совпадения
                     let a = el // объекты с таким id заносим в массив calculatedCARS, котороый и возвращаем
                     for(let i = 0; i<this.cars.length;i++) {//каждый раз при изменении инпутов компонентов все массивы становятся пустыми 
                         let b = this.cars[i] //и наполняются новыми значениями всякий раз при поступлении новых данных
@@ -949,6 +972,7 @@
         mounted () {
             
             this.SetAllId ()
+           
             
             
         },
@@ -1142,6 +1166,10 @@
         }
         .arrfirstitem {
             background-color: $colorTitleBurgerBlueDark;
+            border-radius: 5px;
+        }
+        .minitemclass {
+            background-color: red;
             border-radius: 5px;
         }
 
