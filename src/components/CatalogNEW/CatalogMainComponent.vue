@@ -91,7 +91,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Year
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarning ()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarningyear ()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="yeardbinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="yeardbinpform===false"></i></div>
                             </div>
@@ -100,7 +100,7 @@
 
                         <div class="ma-mo__detailed-search-box-doubleinprange-year-box inp-cont-box" v-if="yeardbinpform">
 
-                            <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box inp-cont-box-content" >
+                            <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box inp-cont-box-content" v-if="yearnumstartpoints">
                                 <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-min inp-cont-box-content-min">
                                     {{minyearrealnum[0]}}
                                 </div>
@@ -131,16 +131,16 @@
                                 :class="{arrfirstitem:index===this.calculatedcarsyearactualmaxvalindexmax,minitemclass:index===this.calculatedcarsyearactualmaxvalindexmin}"
                                 :caryear="car"
                                 @deletedyeartoparent="deletedyearitem=$event"
-                          
+                                @click="setunduwarningyear ()"
                                 >
 
 
                                 </cardyear>
                                 <div class="inp-box-cross-on-undo"
-                            
+                                @click="setunduwarningyear ()"
                                 >
                                     <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningyear" @click="undoyearcomponent" >
-                                        <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningyear ()"  >UNDO</span> 
                                     </div>
                                     <div class="inp-box-cross-on-undo__text-statement-box">
                                         <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -162,7 +162,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Kilometers
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarning ()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarningkilo ()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="kiloinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="kiloinpform===false"></i></div>
                             </div>
@@ -170,7 +170,7 @@
 
                         <div class="ma-mo__detailed-search-box-inprange-box inp-cont-box inp-cont-box" v-if="kiloinpform">
 
-                            <div class="ma-mo__detailed-search-box-inprange-box-text-box inp-cont-box-content" >
+                            <div class="ma-mo__detailed-search-box-inprange-box-text-box inp-cont-box-content" v-if="kilonumstartpoints">
                                 <div class="ma-mo__detailed-search-box-inprange-text inp-cont-box-content-elem">
                                     {{maxkilorealnum[0]}}   or less
                                 </div>
@@ -197,18 +197,18 @@
                                     :class="{arrfirstitem:index===this.calculatedcarskiloactualmaxvalindex}"
                                     :carkilo="car"
                                     @deletedkilotoparent="deletedkiloitem=$event"
-                              
+                                    @click="setunduwarningkilo ()"
                                   
                                     >
                                    
 
                                     </cardkilo>
                                     <div class="inp-box-cross-on-undo"
-                          
+                                    @click="setunduwarningkilo ()"
                                   
                                     >
                                         <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarning" @click="undokilocomponent" >
-                                            <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
+                                            <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningkilo ()"  >UNDO</span> 
                                         </div>
                                         <div class="inp-box-cross-on-undo__text-statement-box">
                                             <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -331,6 +331,7 @@
                 yearinputopen:Boolean,
                 yearcrossopen:Boolean,
                 yearcomponentclosed:Boolean,
+                yearnumstartpoints:true,
 
                 yeartrigger:Boolean,
                 yearformstatekeeper:[],//вспомогательный массив, относительно которого идут вычисления значений переменных по открытию подформ
@@ -376,6 +377,7 @@
                 kiloinputopen:Boolean,
                 kilocrossopen:Boolean,
                 kilocomponentclosed:Boolean,
+                kilonumstartpoints:true,
 
                 kilotrigger:Boolean,
                 kiloformstatekeeper:[], 
@@ -424,25 +426,24 @@
             addToTestArrPrice() {
                 this.pricearrtest.push(1)
             },
-            setunduwarning () {
-                if (this.calculatedcars.length===14 ) {
+            setunduwarningyear () {
+                if (this.deletedyearitemhistory.length>0 ) {
+                    this.unduwarningyear = true  
+                    this.yearnumstartpoints = false            
+                }else {
                     this.unduwarningyear = false
-                    this.unduwarning = false
-                }
+                    this.yearnumstartpoints = true   
+                }            
+            },
+            setunduwarningkilo () {
                 
-                
-                if (this.deletedyearitemhistory.length!=0) {
-                    this.unduwarningyear = true           
-                }else  {
-                    this.unduwarningyear = false
-                }
-
-                if (this.deletedkiloitemhistory.length!=0) {
-                    this.unduwarning = true           
-                }else  {
+                if (this.deletedkiloitemhistory.length>0) {
+                    this.unduwarning = true  
+                    this.kilonumstartpoints = false
+                } else  {
                     this.unduwarning = false
-                }
-             
+                    this.kilonumstartpoints = true
+                }         
             },
             
           
@@ -598,7 +599,7 @@
                     this.maxyearrealnum.unshift(this.arrOfYears[this.arrOfYears.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
                     this.inputsAtWork.push(this.yearcompname)//если компонента по которому производится клик нет, то его имя добавляется
                     this.inputsAtWork = [...new Set(this.inputsAtWork)]
-                    
+                    this.yearnumstartpoints = true  
                     
 
                 }else if (this.yearcrossopen && !this.yeararrtest.length===0) {
@@ -613,15 +614,19 @@
                     let z = a[0]
                     this.minyearrealnum.unshift(z)
                     this.maxyearrealnum.unshift(b)
-                    this.setunduwarning ()
+                    this.yearnumstartpoints = true
                    
-               
-                  
+                } else if (this.yearcrossopen && this.yeararrtest.length===0) {
+                    this.deletedkiloitemhistory = []
+                    this.unduwarning = false  
+                    this.yearnumstartpoints = false   
                 } else if (this.yearcomponentclosed) {
                     this.minyearrealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
                     this.maxyearrealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
                     this.deletedyearitemhistory=[] 
                     this.yeararrtest = []
+                    this.unduwarning=false
+                    this.deletedkiloitemhistory=[]
                     let w = this.inputsAtWork.indexOf(this.yearcompname)//нужно для использования в computed свойстве selectedCARScomputed()
                     this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                   
@@ -710,6 +715,7 @@
                     this.maxkilorealnum.unshift(this.arrOfKilometers[this.arrOfKilometers.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
                     this.inputsAtWork.push(this.kilocompname)//если компонента по которому производится клик нет, то его имя добавляется
                     this.inputsAtWork = [...new Set(this.inputsAtWork)]
+                    this.kilonumstartpoints = true
                 
 
                    
@@ -723,19 +729,26 @@
                     })
                     let b = a[a.length-1]
                     this.maxkilorealnum.unshift(b)
-                    this.setunduwarning ()
+                    this.kilonumstartpoints = true
+                   
+                }else if (this.kilocrossopen && this.kiloarrtest.length===0) {
 
+                    this.deletedyearitemhistory = []
+                    this.unduwarningyear=false
+                    this.kilonumstartpoints = false
                   
                 } else if (this.kilocomponentclosed) {
                     this.minkilorealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
                     this.maxkilorealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
                     this.deletedkiloitemhistory=[]
                     this.kiloarrtest = []
+                    this.unduwarningyear=false
+                    this.deletedyearitemhistory=[]
                     let w = this.inputsAtWork.indexOf(this.kilocompname)//нужно для использования в computed свойстве selectedCARScomputed()
                     this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                     
                     
-
+                    
                     
                 } 
 
