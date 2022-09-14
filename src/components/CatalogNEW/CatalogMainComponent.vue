@@ -68,7 +68,7 @@
                                 </div>
                             </div>
 
-                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box" v-if="pricenumstartpoints">
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box" v-if="priceinpforminput">
 
                                 <doubleinprangeprice class="ma-mo__detailed-search-box-doubleinprange-price-elem inp-box-component"
                                 :carspropsprice="cars"
@@ -94,7 +94,7 @@
                                 <div class="inp-box-cross-on-undo"
                                 @click="setunduwarningprice ()"
                                 >
-                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="setunduwarningprice" @click="undopricecomponent" >
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningprice" @click="undopricecomponent" >
                                         <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningprice ()"  >UNDO</span> 
                                     </div>
                                     <div class="inp-box-cross-on-undo__text-statement-box">
@@ -133,7 +133,7 @@
                                 </div>
                             </div>
 
-                            <div class="ma-mo__detailed-search-box-doubleinprange-year-input-box inp-box" v-if="yearnumstartpoints">
+                            <div class="ma-mo__detailed-search-box-doubleinprange-year-input-box inp-box" v-if="yearinpforminput">
 
                                 <doubleinprangeyear class="ma-mo__detailed-search-box-doubleinprange-year-elem inp-box-component"
                                 :carspropsyear="cars"
@@ -503,8 +503,8 @@
                     this.pricecrossopen=false
                     this.pricecomponentclosed=false                  
                 }else if (this.priceformstatekeeper.length===2) {
-                    this.kiloinpforminput = false
-                    this.kiloinpformcross = true
+                    this.priceinpforminput = false
+                    this.priceinpformcross = true
                     this.pricetrigger = false
                     this.priceinputopen=false
                     this.pricecrossopen=true
@@ -545,8 +545,8 @@
                 })
 
                 if(this.priceinputopen) {
-                    this.minpricerealnum.unshift(this.arrOfYears[0]) //устанавливает стартовый минимум инпута по умолчанию уже в цифрах реального минимального пробега реального авто
-                    this.maxpricerealnum.unshift(this.arrOfYears[this.arrOfYears.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
+                    this.minpricerealnum.unshift(this.arrOfPrices[0]) //устанавливает стартовый минимум инпута по умолчанию уже в цифрах реального минимального пробега реального авто
+                    this.maxpricerealnum.unshift(this.arrOfPrices[this.arrOfPrices.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
                     this.inputsAtWork.push(this.pricecompname)//если компонента по которому производится клик нет, то его имя добавляется
                     this.inputsAtWork = [...new Set(this.inputsAtWork)]
                     this.pricenumstartpoints = true  
@@ -555,7 +555,7 @@
 
                 }else if (this.pricecrossopen && !this.pricearrtest.length===0) {
                     let a = this.calculatedcars.map(car =>{
-                        return car.year
+                        return car.price
                     })
                     a = [...new Set(a)]
                     a.sort(function(a,b) {
@@ -667,8 +667,9 @@
                     this.inputsAtWork.push(this.yearcompname)//если компонента по которому производится клик нет, то его имя добавляется
                     this.inputsAtWork = [...new Set(this.inputsAtWork)]
                     this.yearnumstartpoints = true  
-                    this.unduwarning = false
-                    
+
+                    this.unduwarning = false//!!!!!!!
+                    this.unduwarningprice = false//!!!!!!!
 
                 }else if (this.yearcrossopen && !this.yeararrtest.length===0) {
                     let a = this.calculatedcars.map(car =>{
@@ -684,20 +685,28 @@
                     this.maxyearrealnum.unshift(b)
                     this.yearnumstartpoints = true
                    
-                } else if (this.yearcrossopen && this.yeararrtest.length===0) {
+                } else if (this.yearcrossopen && this.yeararrtest.length===0 ) {
                     this.deletedkiloitemhistory = []
+                    this.deletedpriceitemhistory = []
+
                     this.unduwarning = false  
-                    this.yearnumstartpoints = false   
+                    this.unduwarningprice = false
+
+                    this.yearnumstartpoints = false
                 } else if (this.yearcomponentclosed) {
                     this.minyearrealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
                     this.maxyearrealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
                     this.deletedyearitemhistory=[] 
                     this.yeararrtest = []
+
                     this.unduwarning=false
+                    this.unduwarningprice=false
+
                     this.deletedkiloitemhistory=[]
+                    this.deletedpriceitemhistory=[]
+                    
                     let w = this.inputsAtWork.indexOf(this.yearcompname)//нужно для использования в computed свойстве selectedCARScomputed()
-                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
-                                 
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars                     
                 }
 
                             
@@ -779,8 +788,9 @@
                     this.inputsAtWork.push(this.kilocompname)//если компонента по которому производится клик нет, то его имя добавляется
                     this.inputsAtWork = [...new Set(this.inputsAtWork)]
                     this.kilonumstartpoints = true
-                    this.unduwarningyear=false
 
+                    this.unduwarningyear=false//!!!!!!!
+                    this.unduwarningprice = false//!!!!!!!
                    
                 }else if (this.kilocrossopen && !this.kiloarrtest.length===0) {
                     let a = this.calculatedcars.map(car =>{
@@ -797,22 +807,26 @@
                 }else if (this.kilocrossopen && this.kiloarrtest.length===0) {
 
                     this.deletedyearitemhistory = []
+                    this.deletedpriceitemhistory = []
+
                     this.unduwarningyear=false
-                    this.kilonumstartpoints = false
-                  
+                    this.unduwarningprice = false
+
+                    this.kilonumstartpoints = false    
                 } else if (this.kilocomponentclosed) {
                     this.minkilorealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
                     this.maxkilorealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
                     this.deletedkiloitemhistory=[]
                     this.kiloarrtest = []
+
                     this.unduwarningyear=false
+                    this.unduwarningprice=false
+
                     this.deletedyearitemhistory=[]
+                    this.deletedpriceitemhistory=[]
+
                     let w = this.inputsAtWork.indexOf(this.kilocompname)//нужно для использования в computed свойстве selectedCARScomputed()
-                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
-                    
-                    
-                    
-                    
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars               
                 } 
 
                 
@@ -876,7 +890,7 @@
                 let a = val.id  
                 this.deletedpriceitemhistory.unshift(a)
 
-                this.deletedpriceitemhistory = [...new Set(this.deletedyearitemhistory)]
+                this.deletedpriceitemhistory = [...new Set(this.deletedpriceitemhistory)]
                 let b = this.deletedpriceitemhistory[0]
                 let c = this.calculatedcars.findIndex(el=>el.id===b)
                 this.calculatedcars.splice(c,1)
