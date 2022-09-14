@@ -45,12 +45,12 @@
                         
                     </div>
 
-                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinpprice:pricedbinpform}">
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinpprice:pricedbinpform,activecross:priceinpformcross}">
                         <div class="ma-mo__open-arrow-box arr-box">
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
                                 Price
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedInpPrice()">
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedInpPrice(),setunduwarningprice ()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="pricedbinpform"></i></div>
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="pricedbinpform===false"></i></div>
                             </div>
@@ -58,7 +58,7 @@
 
                         <div class="ma-mo__detailed-search-box-doubleinprange-price-box inp-cont-box" v-if="pricedbinpform">
 
-                            <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box inp-cont-box-content">
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box inp-cont-box-content" v-if="pricenumstartpoints">
                                 <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-min inp-cont-box-content-min">
                                     {{minpricerealnum[0]}} 
                                 </div>
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
 
-                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box">
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box" v-if="priceinpforminput">
 
                                 <doubleinprangeprice class="ma-mo__detailed-search-box-doubleinprange-price-elem inp-box-component"
                                 :carspropsprice="cars"
@@ -78,6 +78,29 @@
                                 >
 
                                 </doubleinprangeprice> 
+
+                            </div>
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="priceinpformcross">
+
+                                <cardprice
+                                v-for="car in calculatedcars" :key="car"
+                                :carprice="car"
+                                @deletedpricetoparent="deletedpriceitem=$event"
+                                @click="setunduwarningprice ()"
+                                >
+
+
+                                </cardprice>
+                                <div class="inp-box-cross-on-undo"
+                                @click="setunduwarningprice ()"
+                                >
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningprice" @click="undopricecomponent" >
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningprice ()"  >UNDO</span> 
+                                    </div>
+                                    <div class="inp-box-cross-on-undo__text-statement-box">
+                                        <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
+                                    </div>  
+                                </div>
 
                             </div>
 
@@ -91,7 +114,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Year
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarning ()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarningyear ()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="yeardbinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="yeardbinpform===false"></i></div>
                             </div>
@@ -100,7 +123,7 @@
 
                         <div class="ma-mo__detailed-search-box-doubleinprange-year-box inp-cont-box" v-if="yeardbinpform">
 
-                            <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box inp-cont-box-content" >
+                            <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box inp-cont-box-content" v-if="yearnumstartpoints">
                                 <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-min inp-cont-box-content-min">
                                     {{minyearrealnum[0]}}
                                 </div>
@@ -126,21 +149,19 @@
                             <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="yearinpformcross">
 
                                 <cardyear
-                                v-for="(car,index) in calculatedcars" :key="car"
-
-                                :class="{arrfirstitem:index===this.calculatedcarsyearactualmaxvalindexmax,minitemclass:index===this.calculatedcarsyearactualmaxvalindexmin}"
+                                v-for="car in calculatedcars" :key="car"
                                 :caryear="car"
                                 @deletedyeartoparent="deletedyearitem=$event"
-                          
+                                @click="setunduwarningyear ()"
                                 >
 
 
                                 </cardyear>
                                 <div class="inp-box-cross-on-undo"
-                            
+                                @click="setunduwarningyear ()"
                                 >
                                     <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningyear" @click="undoyearcomponent" >
-                                        <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningyear ()"  >UNDO</span> 
                                     </div>
                                     <div class="inp-box-cross-on-undo__text-statement-box">
                                         <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -162,7 +183,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Kilometers
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarning ()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarningkilo ()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="kiloinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="kiloinpform===false"></i></div>
                             </div>
@@ -170,7 +191,7 @@
 
                         <div class="ma-mo__detailed-search-box-inprange-box inp-cont-box inp-cont-box" v-if="kiloinpform">
 
-                            <div class="ma-mo__detailed-search-box-inprange-box-text-box inp-cont-box-content" >
+                            <div class="ma-mo__detailed-search-box-inprange-box-text-box inp-cont-box-content" v-if="kilonumstartpoints">
                                 <div class="ma-mo__detailed-search-box-inprange-text inp-cont-box-content-elem">
                                     {{maxkilorealnum[0]}}   or less
                                 </div>
@@ -197,18 +218,18 @@
                                     :class="{arrfirstitem:index===this.calculatedcarskiloactualmaxvalindex}"
                                     :carkilo="car"
                                     @deletedkilotoparent="deletedkiloitem=$event"
-                              
+                                    @click="setunduwarningkilo ()"
                                   
                                     >
                                    
 
                                     </cardkilo>
                                     <div class="inp-box-cross-on-undo"
-                          
+                                    @click="setunduwarningkilo ()"
                                   
                                     >
                                         <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarning" @click="undokilocomponent" >
-                                            <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
+                                            <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningkilo ()"  >UNDO</span> 
                                         </div>
                                         <div class="inp-box-cross-on-undo__text-statement-box">
                                             <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -288,6 +309,7 @@
     import ca from '@/components/CatalogNEW/Card.vue'
     import cardkilo from '@/components/CatalogNEW/CardKilo.vue'
     import cardyear from '@/components/CatalogNEW/CardYear.vue'
+    import cardprice from '@/components/CatalogNEW/CardPrice.vue'
     import doubleinprangeprice from '@/components/CatalogNEW/DoubleInputRangePrice.vue'
     import doubleinprangeyear from '@/components/CatalogNEW/DoubleInputRangeYear.vue'
     import inprange from '@/components/CatalogNEW/InputRange.vue'
@@ -302,6 +324,7 @@
             ca,
             cardkilo,
             cardyear,
+            cardprice,
             doubleinprangeprice,
             doubleinprangeyear,
             inprange,
@@ -327,11 +350,10 @@
                 yeardbinpform:false,
                 yearinpforminput:false, //если true то в форме открывается подформа, показывающая инпут
                 yearinpformcross:false,//если true то в форме открывается подформа, показывающая кроссы
-
                 yearinputopen:Boolean,
                 yearcrossopen:Boolean,
                 yearcomponentclosed:Boolean,
-
+                yearnumstartpoints:true,
                 yeartrigger:Boolean,
                 yearformstatekeeper:[],//вспомогательный массив, относительно которого идут вычисления значений переменных по открытию подформ
                 yeararrtest:[],  
@@ -350,11 +372,10 @@
                 pricedbinpform:false,//если true, то открывается компонент, устанавливаются стартовые значения в методе getStartedInpPrice()
                 priceinpforminput:false, //если true то в форме открывается подформа, показывающая инпут
                 priceinpformcross:false,//если true то в форме открывается подформа, показывающая кроссы
-
                 priceinputopen:Boolean,
                 pricecrossopen:Boolean,
                 pricecomponentclosed:Boolean,
-
+                pricenumstartpoints:true,
                 pricetrigger:Boolean,
                 priceformstatekeeper:[],//вспомогательный массив, относительно которого идут вычисления значений переменных по открытию подформ
                 pricearrtest:[],
@@ -364,7 +385,9 @@
                 minpricerealnum:[],//хранит реальные цены на авто
                 maxpricerealnum:[],//хранит реальные цены на авто         
                 arrOfPrices:[],//хранит уникальные цены на все представленные на сайте авто, в порядке возрастания
-           
+                deletedpriceitem:[],
+                deletedpriceitemhistory:[],
+                unduwarningprice:false,
                
 
 
@@ -376,6 +399,7 @@
                 kiloinputopen:Boolean,
                 kilocrossopen:Boolean,
                 kilocomponentclosed:Boolean,
+                kilonumstartpoints:true,
 
                 kilotrigger:Boolean,
                 kiloformstatekeeper:[], 
@@ -424,25 +448,33 @@
             addToTestArrPrice() {
                 this.pricearrtest.push(1)
             },
-            setunduwarning () {
-                if (this.calculatedcars.length===14 ) {
+            setunduwarningprice () {
+                if (this.deletedpriceitemhistory.length>0 ) {
+                    this.unduwarningprice = true  
+                    this.pricenumstartpoints = false            
+                }else {
+                    this.unduwarningprice = false
+                    this.pricenumstartpoints = true   
+                }            
+            },
+            setunduwarningyear () {
+                if (this.deletedyearitemhistory.length>0 ) {
+                    this.unduwarningyear = true  
+                    this.yearnumstartpoints = false            
+                }else {
                     this.unduwarningyear = false
-                    this.unduwarning = false
-                }
+                    this.yearnumstartpoints = true   
+                }            
+            },
+            setunduwarningkilo () {
                 
-                
-                if (this.deletedyearitemhistory.length!=0) {
-                    this.unduwarningyear = true           
-                }else  {
-                    this.unduwarningyear = false
-                }
-
-                if (this.deletedkiloitemhistory.length!=0) {
-                    this.unduwarning = true           
-                }else  {
+                if (this.deletedkiloitemhistory.length>0) {
+                    this.unduwarning = true  
+                    this.kilonumstartpoints = false
+                } else  {
                     this.unduwarning = false
-                }
-             
+                    this.kilonumstartpoints = true
+                }         
             },
             
           
@@ -469,11 +501,10 @@
                     this.pricetrigger = true //нужен для определения промежуточного состояния, когда форма открыта, но последующий клик не перезапускает форму
                     this.priceinputopen=true
                     this.pricecrossopen=false
-                    this.pricecomponentclosed=false
-                    
+                    this.pricecomponentclosed=false                  
                 }else if (this.priceformstatekeeper.length===2) {
-                    this.kiloinpforminput = false
-                    this.kiloinpformcross = true
+                    this.priceinpforminput = false
+                    this.priceinpformcross = true
                     this.pricetrigger = false
                     this.priceinputopen=false
                     this.pricecrossopen=true
@@ -493,6 +524,7 @@
 
 
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
+                
                 let a = []
                 this.cars.forEach(el => {
                 let b = el.price
@@ -512,27 +544,63 @@
                     return a-b
                 })
 
-                if(this.pricedbinpform) {
-                    this.minpricerealnum.unshift(this.arrOfPrices[0]) //устанавливает минимум инпута по умолчанию уже в цифрах реальной цены
-                    this.maxpricerealnum.unshift(this.arrOfPrices[this.arrOfPrices.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реальной цены
-                }else{
+                if(this.priceinputopen) {
+                    this.minpricerealnum.unshift(this.arrOfPrices[0]) //устанавливает стартовый минимум инпута по умолчанию уже в цифрах реального минимального пробега реального авто
+                    this.maxpricerealnum.unshift(this.arrOfPrices[this.arrOfPrices.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
+                    this.inputsAtWork.push(this.pricecompname)//если компонента по которому производится клик нет, то его имя добавляется
+                    this.inputsAtWork = [...new Set(this.inputsAtWork)]
+                    this.pricenumstartpoints = true  
+                    this.unduwarning = false
+                    this.unduwarningyear = false
+
+                }else if (this.pricecrossopen && !this.pricearrtest.length===0) {
+                    let a = this.calculatedcars.map(car =>{
+                        return car.price
+                    })
+                    a = [...new Set(a)]
+                    a.sort(function(a,b) {
+                        a-b
+                    })
+                    let b = a[a.length-1]
+                    let z = a[0]
+                    this.minpricerealnum.unshift(z)
+                    this.maxpricerealnum.unshift(b)
+                    this.pricenumstartpoints = true
+                   
+                } else if (this.pricecrossopen && this.pricearrtest.length===0) {
+                    this.deletedkiloitemhistory = []
+                    this.deletedyearitemhistory = []
+                    this.unduwarning = false  
+                    this.unduwarningyear = false
+                    this.pricenumstartpoints = false   
+                } else if (this.pricecomponentclosed) {
                     this.minpricerealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
                     this.maxpricerealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
-                }                          // и поставляют данные для selectedCARScomputed()
-                
-               
-
-                if(!this.inputsAtWork.includes(this.pricecompname)) {//если в переменной для отслеживания включенных в работу инпутов названия, этого
-                    this.inputsAtWork.push(this.pricecompname)//если компонента по которому производится клик нет, то его имя добавляется
-                }else {                                       //в противном случае удаляется, получился кликер, имя то появляется то удаляется
+                    this.deletedpriceitemhistory=[] 
+                    this.pricearrtest = []
+                    this.unduwarning=false
+                    this.unduwarningyear=false
+                    this.deletedkiloitemhistory=[]
+                    this.deletedyearitemhistory=[]
                     let w = this.inputsAtWork.indexOf(this.pricecompname)//нужно для использования в computed свойстве selectedCARScomputed()
-                    this.inputsAtWork.splice(w,1) //чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
+                                 
                 }
 
-
-              
-
-                                      
+                                                   
+            },
+            undopricecomponent () {
+                if (this.calculatedcars.length<14) {
+                    let a = this.deletedpriceitemhistory[0]
+                    let b = this.cars.find(el=>el.id===a)
+                    this.calculatedcars.unshift(b)
+                    this.deletedpriceitemhistory.splice(0,1)
+                    let w = this.calculatedcars
+                    w = [...new Set(w)]
+                    this.calculatedcars = w
+                    this.unduwarningprice = true
+                }
+    
             },
 
 
@@ -598,8 +666,10 @@
                     this.maxyearrealnum.unshift(this.arrOfYears[this.arrOfYears.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
                     this.inputsAtWork.push(this.yearcompname)//если компонента по которому производится клик нет, то его имя добавляется
                     this.inputsAtWork = [...new Set(this.inputsAtWork)]
-                    
-                    
+                    this.yearnumstartpoints = true  
+
+                    this.unduwarning = false//!!!!!!!
+                    this.unduwarningprice = false//!!!!!!!
 
                 }else if (this.yearcrossopen && !this.yeararrtest.length===0) {
                     let a = this.calculatedcars.map(car =>{
@@ -613,26 +683,33 @@
                     let z = a[0]
                     this.minyearrealnum.unshift(z)
                     this.maxyearrealnum.unshift(b)
-                    this.setunduwarning ()
+                    this.yearnumstartpoints = true
                    
-               
-                  
+                } else if (this.yearcrossopen && this.yeararrtest.length===0 ) {
+                    this.deletedkiloitemhistory = []
+                    this.deletedpriceitemhistory = []
+
+                    this.unduwarning = false  
+                    this.unduwarningprice = false
+
+                    this.yearnumstartpoints = false
                 } else if (this.yearcomponentclosed) {
                     this.minyearrealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
                     this.maxyearrealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
                     this.deletedyearitemhistory=[] 
                     this.yeararrtest = []
-                    let w = this.inputsAtWork.indexOf(this.yearcompname)//нужно для использования в computed свойстве selectedCARScomputed()
-                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
-                  
-                  
+
+                    this.unduwarning=false
+                    this.unduwarningprice=false
+
+                    this.deletedkiloitemhistory=[]
+                    this.deletedpriceitemhistory=[]
                     
-                   
+                    let w = this.inputsAtWork.indexOf(this.yearcompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars                     
                 }
 
-                
-
-                  
+                            
             },
             undoyearcomponent () {
                 if (this.calculatedcars.length<14) {
@@ -710,8 +787,10 @@
                     this.maxkilorealnum.unshift(this.arrOfKilometers[this.arrOfKilometers.length-1]) //устанавливает максимум инпута по умолчанию уже в цифрах реального пробега
                     this.inputsAtWork.push(this.kilocompname)//если компонента по которому производится клик нет, то его имя добавляется
                     this.inputsAtWork = [...new Set(this.inputsAtWork)]
-                
+                    this.kilonumstartpoints = true
 
+                    this.unduwarningyear=false//!!!!!!!
+                    this.unduwarningprice = false//!!!!!!!
                    
                 }else if (this.kilocrossopen && !this.kiloarrtest.length===0) {
                     let a = this.calculatedcars.map(car =>{
@@ -723,29 +802,35 @@
                     })
                     let b = a[a.length-1]
                     this.maxkilorealnum.unshift(b)
-                    this.setunduwarning ()
+                    this.kilonumstartpoints = true
+                   
+                }else if (this.kilocrossopen && this.kiloarrtest.length===0) {
 
-                  
+                    this.deletedyearitemhistory = []
+                    this.deletedpriceitemhistory = []
+
+                    this.unduwarningyear=false
+                    this.unduwarningprice = false
+
+                    this.kilonumstartpoints = false    
                 } else if (this.kilocomponentclosed) {
                     this.minkilorealnum=[]//если эта переменная пустой массив, то в computed свойство selectedCARScomputed() не могут попасть
                     this.maxkilorealnum=[]//данные для рассчетов по инпуту касательно этого компонента, рассчет идет по тем компонентам, что включены 
                     this.deletedkiloitemhistory=[]
                     this.kiloarrtest = []
-                    let w = this.inputsAtWork.indexOf(this.kilocompname)//нужно для использования в computed свойстве selectedCARScomputed()
-                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
-                    
-                    
 
-                    
+                    this.unduwarningyear=false
+                    this.unduwarningprice=false
+
+                    this.deletedyearitemhistory=[]
+                    this.deletedpriceitemhistory=[]
+
+                    let w = this.inputsAtWork.indexOf(this.kilocompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars               
                 } 
 
                 
-
-                
-             
-                
-
-                      
+                    
             },
             undokilocomponent () {
                 if (this.deletedkiloitemhistory.length!=0 && this.calculatedcars.length<=14) {
@@ -800,6 +885,16 @@
                     this.maxpricerealnum.unshift(val)//все время пишет в начало массива и потом удаляет
                     this.maxpricerealnum.splice(1)//таким образом в массиве всегда одно число и оно динамически меняется
                 }
+            },
+            deletedpriceitem (val) {
+                let a = val.id  
+                this.deletedpriceitemhistory.unshift(a)
+
+                this.deletedpriceitemhistory = [...new Set(this.deletedpriceitemhistory)]
+                let b = this.deletedpriceitemhistory[0]
+                let c = this.calculatedcars.findIndex(el=>el.id===b)
+                this.calculatedcars.splice(c,1)
+
             },
 
 
