@@ -600,6 +600,7 @@
                     this.inputsAtWork.push(this.yearcompname)//если компонента по которому производится клик нет, то его имя добавляется
                     this.inputsAtWork = [...new Set(this.inputsAtWork)]
                     this.yearnumstartpoints = true  
+                    this.unduwarning = false
                     
 
                 }else if (this.yearcrossopen && !this.yeararrtest.length===0) {
@@ -716,7 +717,7 @@
                     this.inputsAtWork.push(this.kilocompname)//если компонента по которому производится клик нет, то его имя добавляется
                     this.inputsAtWork = [...new Set(this.inputsAtWork)]
                     this.kilonumstartpoints = true
-                
+                    this.unduwarningyear=false
 
                    
                 }else if (this.kilocrossopen && !this.kiloarrtest.length===0) {
