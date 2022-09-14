@@ -1,11 +1,11 @@
 <template>
 
-    <div class="cardyear">    
-        <div class="cardyear__item"
-        @click="deletyear()"
+    <div class="cardprice">    
+        <div class="cardprice__item"
+        @click="deletprice()"
         >
-            <i class="fa-solid fa-xmark cardyear__xmark"></i>
-            <span>{{caryeardata.year}}</span>
+            <i class="fa-solid fa-xmark cardprice__xmark"></i>
+            <span>{{carpricedata.price}}</span>
         </div>     
         
     </div>
@@ -19,23 +19,23 @@
     
 
     export default {
-        name: 'ca-year',
-        props:['caryear'],
+        name: 'ca-price',
+        props:['carprice'],
         components: {
 
         },
         data() {
             return {
 
-            caryeardata:this.caryear,
+            carpricedata:this.carprice,
  
             }
 
         },
         methods: {
             
-            deletyear() {
-                this.$emit('deletedyeartoparent', this.caryeardata)
+            deletprice() {
+                this.$emit('deletedpricetoparent', this.carpricedata)
             }
                                   
         },
@@ -44,10 +44,10 @@
 
            
 
-            caryear (val) {
+            carprice (val) {
                 
-                this.caryeardata = val
-                this.caryeardata = [...new Set(this.caryeardata)]
+                this.carpricedata = val
+                this.carpricedata = [...new Set(this.carpricedata)]
             },
            
 
@@ -70,7 +70,7 @@
    
     
 
-    .cardyear {
+    .cardprice {
         &__item {
             display: inline-block;
             align-items: center;
