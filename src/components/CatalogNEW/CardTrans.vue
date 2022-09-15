@@ -1,11 +1,10 @@
 <template>
 
-    <div class="cardkilo">    
-        <div class="cardkilo__item"
-        @click="deletekilo()"
+    <div class="cardtrans">    
+        <div class="cardtrans__item"
         >
-            <i class="fa-solid fa-xmark cardkilo__xmark"></i>
-            <span>{{carkilodata.kilometers}}</span>
+            <i class="fa-solid fa-xmark cardtrans__xmark"></i>
+            <span>{{cartransdata.transmission}}</span>
         </div>     
         
     </div>
@@ -19,24 +18,22 @@
     
 
     export default {
-        name: 'ca-kilo',
-        props:['carkilo'],
+        name: 'ca-trans',
+        props:['cartrans'],
         components: {
 
         },
         data() {
             return {
 
-            carkilodata:this.carkilo,
+            cartransdata:this.cartrans,
  
             }
 
         },
         methods: {
             
-            deletekilo() {
-                this.$emit('deletedkilotoparent', this.carkilodata)
-            }
+            
                                   
         },
         
@@ -44,10 +41,10 @@
 
            
 
-            carkilo (val) {
+            cartrans (val) {
                 
-                this.carkilodata = val
-                this.carkilodata = [...new Set(this.carkilodata)]
+                this.cartransdata = val
+                this.cartransdata = [...new Set(this.cartransdata)]
             },
            
 
@@ -70,7 +67,7 @@
    
     
 
-    .cardkilo {
+    .cardtrans {
         &__item {
             display: inline-block;
             align-items: center;

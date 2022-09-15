@@ -33,13 +33,19 @@
                             
                             <div class="ma-mo__detailed-search-box-trans-input-box inp-cont-box-content inp-cont-box-result">                   
                                 <transmission
-                                
-                                
+                                @transchoicetoparent="transchoice=$event"                              
                                 >
-
-
                                 </transmission>
                             </div>
+
+                        </div>
+                        <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="transinpformcross">
+
+                            <cardtrans
+                            v-for="car in calculatedcars" :key="car"
+                            :cartrans="car"                          
+                            >
+                            </cardtrans>                   
 
                         </div>
                         
