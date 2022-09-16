@@ -25,29 +25,37 @@
                             </div>
                         </div>
 
-                        <div class="ma-mo__detailed-search-box-trans-items-box inp-cont-box" v-if="transinpform">
+                        <div class="transmission-choice-block" v-if="transinpform" >
 
-                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box">
-                                
+                            <div class="transmission-choice-block__checkboxes" v-if="transinpformcheckboxes">
+                                <div class="transmission-choice-block__checkboxes_item">
+                                    <input type="checkbox" id="checkbox-trans" v-model="automatic">
+                                    <label for="checkbox-trans">Automatic</label>
+                                </div>
+                                <div class="transmission-choice-block__checkboxes_item">
+                                    <input type="checkbox" id="checkbox-trans" v-model="manual">
+                                    <label for="checkbox-trans">Manual</label>
+                                </div>                         
+                            </div>
+
+                            
+                            <div class="transmission-choice-block__result" v-if="transinpformcross">
+
+                                <div class="transmission-choice-block__result-item" v-if="manualtransinpformcross">
+                                    <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
+                                    <span class="transmission-choice-block__result-item-text">Manual</span>
+                                </div> 
+
+                                <div class="transmission-choice-block__result-item" v-if="automatictransinpformcross">
+                                    <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
+                                    <span class="transmission-choice-block__result-item-text">Automatic</span>
+                                </div>
+
                             </div>
                             
-                            <div class="ma-mo__detailed-search-box-trans-input-box inp-cont-box-content inp-cont-box-result">                   
-                                <transmission
-                                @transchoicetoparent="transchoice=$event"                              
-                                >
-                                </transmission>
-                            </div>
 
                         </div>
-                        <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="transinpformcross">
-
-                            <cardtrans
-                            v-for="car in calculatedcars" :key="car"
-                            :cartrans="car"                          
-                            >
-                            </cardtrans>                   
-
-                        </div>
+                        
                         
                     </div>
 
@@ -319,7 +327,7 @@
     import doubleinprangeprice from '@/components/CatalogNEW/DoubleInputRangePrice.vue'
     import doubleinprangeyear from '@/components/CatalogNEW/DoubleInputRangeYear.vue'
     import inprange from '@/components/CatalogNEW/InputRange.vue'
-    import transmission from '@/components/CatalogNEW/Transmission.vue'
+  
     
 
     export default {
@@ -334,7 +342,7 @@
             doubleinprangeprice,
             doubleinprangeyear,
             inprange,
-            transmission,
+ 
         },
         data() {
             return {
@@ -346,12 +354,20 @@
                 showcalculated:false,// поведение прописано в методе show (), если true то показывается массив showcalculated                     
                 showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
                 
-
-
-
+                
+                
                 transinpform:false,
                 transcompname:'transcheck',
-            
+                transinpformcheckboxes:true,
+                transinpformcross:false,
+                manualtransinpformcross:Boolean,
+                automatictransinpformcross:Boolean,
+                transcheck:Boolean,
+                transcross:Boolean,
+                transclosed:Boolean,
+                transformstatekeeper:[],
+
+
 
                 yeardbinpform:false,
                 yearinpforminput:false, //если true то в форме открывается подформа, показывающая инпут
@@ -483,7 +499,33 @@
                 }         
             },
             
-          
+            getStartedInpTrans() {
+                this.transformstatekeeper.push(1)
+                if (this.transformstatekeeper.length===1) {
+                    this.transinpform = true
+                    this.transinpformcheckboxes=true
+                    this.transcheck = true
+                    this.transcross = false
+                    this.transclosed = false
+                } else if (this.transformstatekeeper.length===2) {
+                    this.transinpformcross = true
+                    this.transinpformcheckboxes=false
+                    this.transcheck = false
+                    this.transcross = true
+                    this.transclosed = false
+                }else {
+                    this.transinpform = false
+                    this.transinpformcross = false
+                    this.transinpformcheckboxes=false
+                    this.transcheck = false
+                    this.transcross = false
+                    this.transclosed = true
+                    this.transformstatekeeper = []
+                }
+
+                
+
+            },
 
 
 
@@ -1273,6 +1315,37 @@
             background-color: red;
             border-radius: 5px;
         }
+        .transmission-choice-block {
+
+            &__checkboxes {
+
+                &_item {
+
+                }
+            }
+
+            &__result {
+
+            }
+
+            &__result-item {
+                display: flex;
+                align-items: center;
+            }
+
+            &__result-item-xmark {
+
+            }
+
+            &__result-item-text {
+
+            }
+
+        }
+            
+
+
+
 
        
 
@@ -1280,6 +1353,7 @@
 
 
     }
+
 
     
     
