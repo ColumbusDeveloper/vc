@@ -27,26 +27,32 @@
 
                         <div class="transmission-choice-block" v-if="transinpform" >
 
-                            <div class="transmission-choice-block__checkboxes" v-if="transinpformcheckboxes">
-                                <div class="transmission-choice-block__checkboxes_item">
-                                    <input type="checkbox" id="checkbox-trans" v-model="automatic">
-                                    <label for="checkbox-trans">Automatic</label>
+                            <div class="transmission-choice-block__checkboxes" v-if="transinpformcheckboxes" :class="{activeinptrans:transinpform}">
+                                <div class="transmission-choice-block__checkboxes_item" >
+                                    <div class="transmission-choice-block__checkboxes_item-icon-bloc" :class="{visible:automatictrans}">
+                                        <i class="fa-solid fa-check transmission-choice-block__checkboxes_item-icon-bloc-icon"></i>
+                                    </div>
+                                    <input type="checkbox" class="transmission-choice-block__checkboxes_item-icon-bloc-input" id="checkbox-trans1" v-model="automatictrans">
+                                    <label for="checkbox-trans1" class="transmission-choice-block__checkboxes_item-icon-bloc-input-label" @click="setAutomatictransinpformcross">Automatic</label>
                                 </div>
-                                <div class="transmission-choice-block__checkboxes_item">
-                                    <input type="checkbox" id="checkbox-trans" v-model="manual">
-                                    <label for="checkbox-trans">Manual</label>
+                                <div class="transmission-choice-block__checkboxes_item" >
+                                    <div class="transmission-choice-block__checkboxes_item-icon-bloc" :class="{visible:manualtrans}">
+                                        <i class="fa-solid fa-check transmission-choice-block__checkboxes_item-icon-bloc-icon"></i>
+                                    </div>
+                                    <input type="checkbox" class="transmission-choice-block__checkboxes_item-icon-bloc-input" id="checkbox-trans2" v-model="manualtrans">
+                                    <label for="checkbox-trans2" class="transmission-choice-block__checkboxes_item-icon-bloc-input-label" @click="setManualtransinpformcross">Manual</label>
                                 </div>                         
                             </div>
 
                             
-                            <div class="transmission-choice-block__result" v-if="transinpformcross">
+                            <div class="transmission-choice-block__result" v-if="transinpformcross" :class="{activecross:transinpformcross}">
 
-                                <div class="transmission-choice-block__result-item" v-if="manualtransinpformcross">
+                                <div class="transmission-choice-block__result-item" v-if="manualtransinpformcross" @click="setManualtrans">
                                     <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
                                     <span class="transmission-choice-block__result-item-text">Manual</span>
                                 </div> 
 
-                                <div class="transmission-choice-block__result-item" v-if="automatictransinpformcross">
+                                <div class="transmission-choice-block__result-item" v-if="automatictransinpformcross" @click="setAutomatictrans">
                                     <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
                                     <span class="transmission-choice-block__result-item-text">Automatic</span>
                                 </div>
@@ -357,6 +363,8 @@
                 
                 
                 transinpform:false,
+                automatictrans:false,
+                manualtrans:false,
                 transcompname:'transcheck',
                 transinpformcheckboxes:true,
                 transinpformcross:false,
@@ -523,9 +531,40 @@
                     this.transformstatekeeper = []
                 }
 
-                
-
             },
+            setManualtransinpformcross () {
+                if (this.manualtrans) {
+                    this.manualtransinpformcross = false
+                }else {
+                    this.manualtransinpformcross = true
+                }
+            },
+            setAutomatictransinpformcross () {
+                if (this.automatictrans) {
+                    this.automatictransinpformcross = false
+                }else {
+                    this.automatictransinpformcross = true
+                }
+            },
+            setManualtrans () {
+                this.automatictrans = true
+                this.manualtrans = false
+            },
+            setAutomatictrans () {
+                this.automatictrans = false
+                this.manualtrans = true
+            },
+
+
+
+            
+
+
+
+         
+            
+            
+            
 
 
 
@@ -1291,9 +1330,13 @@
         }
    
 
-        .activeinpprice {
+        .activeinptrans {
              height: 123px;
              padding-bottom: 25px;
+        }
+        .activeinpprice {
+            height: 123px;
+            padding-bottom: 25px; 
         }
         .activeinpyear {
              height: 123px;
@@ -1303,6 +1346,7 @@
              height: 123px;
              padding-bottom: 25px;
         }
+        
         .activecross {
             height: fit-content;
     
@@ -1315,33 +1359,72 @@
             background-color: red;
             border-radius: 5px;
         }
+        
+
         .transmission-choice-block {
 
             &__checkboxes {
 
                 &_item {
+                    display: flex;
+                    align-items: center;
+                }
+
+                &_item-icon-bloc {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 2px;
+                    border-width:1px;
+                    border-style: solid;
+                    border-color: #D7D7D7;
+                    position: relative;
+                    opacity: 0;
+
+                }
+
+                &_item-icon-bloc-icon {
+                    color: #7481FF;
+                    font-size: 15px;
+                    position:absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+
+                }
+
+                &_item-icon-bloc-input {
+                    appearance: none;
+                }
+                &_item-icon-bloc-input-label {
+                    @include   letterSemiboldDarkBlue   ;
+                    font-size: 1.5rem;
+                }
+            }
+            .visible {
+                opacity: 1;
+            }
+
+            
+
+            &__result {
+            
+
+                &__result-item {
+
+                }
+
+                &__result-item-xmark {
+
+                }
+
+                &__result-item-text {
 
                 }
             }
-
-            &__result {
-
-            }
-
-            &__result-item {
-                display: flex;
-                align-items: center;
-            }
-
-            &__result-item-xmark {
-
-            }
-
-            &__result-item-text {
-
-            }
-
         }
+
+
+        
             
 
 
