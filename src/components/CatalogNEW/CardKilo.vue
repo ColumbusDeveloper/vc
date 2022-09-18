@@ -19,7 +19,7 @@
     
 
     export default {
-        name: 'ca-catalog',
+        name: 'ca-kilo',
         props:['carkilo'],
         components: {
 
