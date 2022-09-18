@@ -459,15 +459,17 @@
                 let a = this.catalogpropscars
                 if (!this.testarr.includes('automatic') && this.testarr.includes('manual')) {
                     this.cars = a.filter(el=>el.transmission==='Manual')
+                    this.calculatedcars = a.filter(el=>el.transmission==='Manual')
                 } else if (this.testarr.includes('automatic') && !this.testarr.includes('manual')) {
                     this.cars = a
                     this.cars = this.cars.filter(el=>el.transmission==='Automatic')
+                    this.calculatedcars = this.cars.filter(el=>el.transmission==='Automatic')
                 } else if (this.testarr.includes('automatic') && this.testarr.includes('manual')) {
                     this.cars = a
-             
+                    this.calculatedcars = this.cars
                 } else if (!this.testarr.includes('automatic') && !this.testarr.includes('manual')) {
                     this.cars = a
-               
+                    this.calculatedcars = this.cars
                 } 
                 
                
