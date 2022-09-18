@@ -452,11 +452,26 @@
                 if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
-                }else {
+                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform) {
                     this.showcars=true
-                    this.showcalculated=false
-                  
+                    this.showcalculated=false                
                 }
+                let a = this.catalogpropscars
+                if (!this.testarr.includes('automatic') && this.testarr.includes('manual')) {
+                    this.cars = a.filter(el=>el.transmission==='Manual')
+                } else if (this.testarr.includes('automatic') && !this.testarr.includes('manual')) {
+                    this.cars = a
+                    this.cars = this.cars.filter(el=>el.transmission==='Automatic')
+                } else if (this.testarr.includes('automatic') && this.testarr.includes('manual')) {
+                    this.cars = a
+             
+                } else if (!this.testarr.includes('automatic') && !this.testarr.includes('manual')) {
+                    this.cars = a
+               
+                } 
+                
+               
+                    
             },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
                 let a = this.cars.slice()
@@ -507,19 +522,7 @@
                 }         
             },
 
-            setInpAtWorkByTrans () {
-                if (this.testarr.length===2) {
-                    this.inputsAtWork.unshift(this.transcompname)  
-                    this.inputsAtWork = [...new Set(this.inputsAtWork)]
-                      
-                } else {
-                    let a = this.inputsAtWork.indexOf('transcheck')
-                    this.inputsAtWork.splice(a,1)
-                    
-                }
-
-                
-            },
+            
            
             getStartedInpTrans() {
                 this.transformstatekeeper.push(1)
@@ -553,19 +556,14 @@
                     this.manualtrans=true
                     this.automatictransinpformcross = true
                     this.manualtransinpformcross = true
-                    let x = this.testarr.indexOf(this.automaticstatename)//нужно для использования в computed свойстве selectedCARScomputed()
+                    let x = this.testarr.indexOf('automatic')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(x,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
-                    let z = this.testarr.indexOf(this.manualstatename)//нужно для использования в computed свойстве selectedCARScomputed()
+                    let z = this.testarr.indexOf('manual')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(z,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                 }
 
-                 
-
                 this.show ()
-                this.setInpAtWorkByTrans ()
-                
-               
-              
+           
             },
 
 
@@ -575,33 +573,21 @@
                     this.automatictransinpformcross = false
                     let w = this.testarr.indexOf('automatic')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(w,1)
-                    let a = this.inputsAtWork.indexOf('transcheck')
-                    this.inputsAtWork.splice(a,1)
-                    let b = this.inputsAtWork.indexOf('automatic')
-                    this.inputsAtWork.splice(b,1)
                 }else if(!this.automatictrans) {     
                     this.automatictransinpformcross = true
                     this.testarr.unshift(this.automaticstatename)
                     this.testarr = [...new Set(this.testarr)]   
-                    this.inputsAtWork.unshift(this.automaticstatename)
-                    this.inputsAtWork = [...new Set(this.inputsAtWork)]   
-                }
-                
-                if (this.inputsAtWork.includes('automatic') && this.inputsAtWork.includes('manual')) {
-                    this.inputsAtWork = []
-                    this.inputsAtWork.unshift(this.transcompname)
-                    this.inputsAtWork = [...new Set(this.inputsAtWork)]                     
                 }
 
-                if (this.testarr.includes('manual')) {
-                    this.inputsAtWork.unshift(this.manualstatename)
+                if (!this.testarr.includes('automatic') && !this.testarr.includes('manual')) {
+                    this.transinpform = false
+                    this.transformstatekeeper = [1,1,1]
+                    this.transcheck = false
                 }
 
-                if (this.inputsAtWork.includes('transcheck') && this.inputsAtWork.includes('manual')) {
-                    let b = this.inputsAtWork.indexOf('manual')
-                    this.inputsAtWork.splice(b,1)                
-                }
-                            
+
+                this.show ()
+                          
             },
 
             manualModelChange () {
@@ -610,33 +596,19 @@
                     this.manualtransinpformcross = false
                     let w = this.testarr.indexOf('manual')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars                 
-                    let a = this.inputsAtWork.indexOf('transcheck')
-                    this.inputsAtWork.splice(a,1)
-                    let b = this.inputsAtWork.indexOf('manual')
-                    this.inputsAtWork.splice(b,1)
                 }else if (!this.manualtrans) {     
                     this.manualtransinpformcross = true
                     this.testarr.unshift(this.manualstatename)//если компонента по которому производится клик нет, то его имя добавляется
                     this.testarr = [...new Set(this.testarr)]   
-                    this.inputsAtWork.unshift(this.manualstatename)
-                    this.inputsAtWork = [...new Set(this.inputsAtWork)]  
-                }
+                } 
 
-                if (this.inputsAtWork.includes('automatic') && this.inputsAtWork.includes('manual')) {
-                    this.inputsAtWork = []
-                    this.inputsAtWork.unshift(this.transcompname)
-                    this.inputsAtWork = [...new Set(this.inputsAtWork)]                     
-                }
+                if (!this.testarr.includes('automatic') && !this.testarr.includes('manual')) {
+                    this.transinpform = false
+                    this.transformstatekeeper = [1,1,1]
+                    this.transcheck = false
+                } 
 
-                if (this.testarr.includes('automatic')) {
-                    this.inputsAtWork.unshift(this.automaticstatename)
-                }
-
-                if (this.inputsAtWork.includes('transcheck') && this.inputsAtWork.includes('automatic')) {
-                    let b = this.inputsAtWork.indexOf('automatic')
-                    this.inputsAtWork.splice(b,1)                
-                }
-              
+                this.show ()
             },
             
             setTransModelAutomatic () {
@@ -655,14 +627,15 @@
                     this.manualtransinpformcross = true
                     this.testarr.unshift(this.manualstatename)//если компонента по которому производится клик нет, то его имя добавляется
                     this.testarr.unshift(this.manualstatename)//если компонента по которому производится клик нет, то его имя добавляется
-                    let w = this.testarr.indexOf(this.automaticstatename)//нужно для использования в computed свойстве selectedCARScomputed()
+                    let w = this.testarr.indexOf('automatic')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
-                    let v = this.testarr.indexOf(this.transcompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    let v = this.testarr.indexOf('transcheck')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(v,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                     this.testarr = [...new Set(this.testarr)]  
                 }
 
-          
+                this.show ()
+      
             },
             setTransModelManual () {
                 if (!this.automatictransinpformcross && this.manualtransinpformcross ) {
@@ -680,47 +653,18 @@
                     this.manualtransinpformcross = false
                     this.testarr.unshift(this.automaticstatename)//если компонента по которому производится клик нет, то его имя добавляется           
                     this.testarr.unshift(this.automaticstatename)//если компонента по которому производится клик нет, то его имя добавляется
-                    let w = this.testarr.indexOf(this.manualstatename)//нужно для использования в computed свойстве selectedCARScomputed()
+                    let w = this.testarr.indexOf('manual')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                     let v = this.testarr.indexOf(this.transcompname)//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(v,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                     this.testarr = [...new Set(this.testarr)] 
                 }
 
-                
+                this.show ()
 
-
-              
-               
-                
-
-                
+                          
             },
           
-
-
-
-
-
-            
-
-
-
-         
-            
-            
-            
-
-
-
-            
-
-            
-         
-
-
-
-
 
             getStartedInpPrice() { //при клике на стрелку компонента запускается функция
 
@@ -750,10 +694,11 @@
                     this.pricecrossopen=false
                     this.pricecomponentclosed=true
                     this.priceformstatekeeper = []
+                   
                 }
 
                 
-
+                
 
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
                 
@@ -814,7 +759,7 @@
                     this.unduwarningyear=false
                     this.deletedkiloitemhistory=[]
                     this.deletedyearitemhistory=[]
-                    let w = this.inputsAtWork.indexOf(this.pricecompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    let w = this.inputsAtWork.indexOf('priceslider')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                                  
                 }
@@ -870,6 +815,8 @@
                     this.yearformstatekeeper = []
                     
                 }
+
+                
 
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
 
@@ -937,7 +884,7 @@
                     this.deletedkiloitemhistory=[]
                     this.deletedpriceitemhistory=[]
                     
-                    let w = this.inputsAtWork.indexOf(this.yearcompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    let w = this.inputsAtWork.indexOf('yearslider')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars                     
                 }
 
@@ -993,6 +940,7 @@
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
                 
                 
+
                 let a = []
                 this.cars.forEach(el => {
                 let b = el.kilometers
@@ -1057,7 +1005,7 @@
                     this.deletedyearitemhistory=[]
                     this.deletedpriceitemhistory=[]
 
-                    let w = this.inputsAtWork.indexOf(this.kilocompname)//нужно для использования в computed свойстве selectedCARScomputed()
+                    let w = this.inputsAtWork.indexOf('kiloslider')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars               
                 } 
 
@@ -1228,34 +1176,7 @@
                 let w = []
                 let d = []             
                 let calculatedCARS = []
-
-                    
-
-                    if (this.inputsAtWork.includes('automatic') && this.testarr.length===0) {
-                        this.cars.forEach(el=>{//итерируем главный массив со всеми авто на сайте 
-                                let m = el  //записываем в переменную элемент массива по которому происходит итерация
-                                if (m.transmission==='Automatic') { //если этот элемент со значением свойства year равен отобранному при итерации выше элементу массива arrOfYears
-                                d.push(m.id) //то его id записываем в массив d
-                                }
-                            })
-                            
-                    } else if (this.inputsAtWork.includes('manual') && this.testarr.length===0) {
-                        this.cars.forEach(el=>{//итерируем главный массив со всеми авто на сайте 
-                                let m = el  //записываем в переменную элемент массива по которому происходит итерация
-                                if (m.transmission==='Manual') { //если этот элемент со значением свойства year равен отобранному при итерации выше элементу массива arrOfYears
-                                d.push(m.id) //то его id записываем в массив d
-                                }
-                            })
-                            
-                    } else if (this.testarr[0]==='transcheck') {
-                        this.cars.forEach(el=>{//итерируем главный массив со всеми авто на сайте 
-                                let m = el.id  //записываем в переменную элемент массива по которому происходит итерация                              
-                                d.push(m) //то его id записываем в массив d
-                        })
-                       
-                    }
-                    
-                    
+       
                     for(let i = 0; i<this.arrOfYears.length;i++) {//отслеживаем компонент Input-year, итерируем массив arrOfYears с уникальными годами авто
                     let a = this.arrOfYears[i] //записываем в переменную элемент массива arrOfYears, по которому сейчас происходит итерация
                         if(a<=this.maxyearrealnum[0]&&a>=this.minyearrealnum[0]) {//если этот элемент больше минимальной выведенной сейчас цены, 
