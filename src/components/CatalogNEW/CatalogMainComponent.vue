@@ -569,12 +569,6 @@
             },
 
 
-            
-
-            
-
-            
-
             automaticModelChange () {
                 
                 if (this.automatictrans) {        
@@ -607,10 +601,7 @@
                     let b = this.inputsAtWork.indexOf('manual')
                     this.inputsAtWork.splice(b,1)                
                 }
-                
-                
-                
-             
+                            
             },
 
             manualModelChange () {
@@ -634,9 +625,7 @@
                 if (this.inputsAtWork.includes('automatic') && this.inputsAtWork.includes('manual')) {
                     this.inputsAtWork = []
                     this.inputsAtWork.unshift(this.transcompname)
-                    this.inputsAtWork = [...new Set(this.inputsAtWork)]   
-                   
-                    
+                    this.inputsAtWork = [...new Set(this.inputsAtWork)]                     
                 }
 
                 if (this.testarr.includes('automatic')) {
@@ -647,17 +636,7 @@
                     let b = this.inputsAtWork.indexOf('automatic')
                     this.inputsAtWork.splice(b,1)                
                 }
-
-                
-
-                
-
-               
-
-                
-                
-
-               
+              
             },
             
             setTransModelAutomatic () {
@@ -683,15 +662,7 @@
                     this.testarr = [...new Set(this.testarr)]  
                 }
 
-                
-
-              
-
-                
-                
-
-                
-              
+          
             },
             setTransModelManual () {
                 if (!this.automatictransinpformcross && this.manualtransinpformcross ) {
