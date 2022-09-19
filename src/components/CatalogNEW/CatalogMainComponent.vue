@@ -14,6 +14,50 @@
             </div>   
 
             <div class="ma-mo__detailed-search-box-calk-container" @click="setunduwarning">
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinpbody:bodyform,activecross:bodyinpformcross}">
+                        <div class="ma-mo__open-arrow-box arr-box">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text">
+                                Body type
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedBodyType(),setunduwarningBody ()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="bodyform"></i></div>
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="bodyform===false"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="ma-mo__detailed-search-box-doubleinprange-price-box inp-cont-box" v-if="bodyform">
+
+                            
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box" v-if="bodyforminput">
+    
+                                <div class="bodymake">
+                                    <span class="bodymake__text">Make</span>
+                                    <div class="bodymake__input-box make" >
+                                        <input type="text" v-model="modelsearchmake" id="make" @input="setBodyTypeShowOrder (),clearModel()"  placeholder="Search Make..." >
+                                        <i class="fa-sharp fa-solid fa-magnifying-glass bodymake__input-box-glass"></i>
+                                    </div>
+                                </div>
+
+                                <div class="bodymodel">
+                                    <span class="bodymodel__text">Model</span>
+                                    <div class="bodymodel__input-box">
+                                        <input type="text" v-model="modelsearchmodel" id="model" @input="setBodyTypeShowOrder ()"  placeholder="Search Model..." class="bodymodel__input-box-inp">
+                                        <i class="fa-sharp fa-solid fa-magnifying-glass bodymodel__input-box-glass"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="bodyinpformcross">
+
+                                cross
+
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
                     <div class="ma-mo__detailed-search-box-trans inp-container"  :class="{activeinptrans:transinpform}">
                         <div class="ma-mo__open-arrow-box arr-box">
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
@@ -359,6 +403,24 @@
                 
                 
                 
+                bodyform:false,
+                bodyforminput:true,
+                bodyinpformcross:false,
+                bodycheck:Boolean,
+                bodycross:Boolean,
+                bodyclosed:Boolean,
+                bodystatekeeper:[],
+                modelsearchmake:'',
+                modelsearchmodel:'',
+                varmake:[],
+                varmodel:[],
+                varconcat:[],
+                toshowbodymodel:[],
+                bodytwoinputsarr:Boolean,
+                test:[],
+
+
+                
                 transinpform:false,
                 automatictrans:true,
                 manualtrans:true,
@@ -523,6 +585,80 @@
                     this.kilonumstartpoints = true
                 }         
             },
+
+            getStartedBodyType() {
+              
+                this.bodystatekeeper.push(1)
+                if (this.bodystatekeeper.length===1) {
+                    this.bodyform = true
+                    this.bodyforminput = true
+                    this.bodycheck=true
+                    this.bodycross=false
+                    this.bodyclosed=false
+                
+                } else if (this.bodystatekeeper.length===2) {
+                    this.bodyforminput = false
+                    this.bodyinpformcross=true
+                    this.bodycheck=false
+                    this.bodycross=true
+                    this.bodyclosed=false
+                    
+                }else {
+                    this.bodyform = false
+                    this.bodyforminput = false
+                    this.bodyinpformcross=false
+                    this.bodycheck=false
+                    this.bodycross=false
+                    this.bodyclosed=true   
+                    this.bodystatekeeper = []                 
+                }
+
+            },
+
+            setBodyTypeShowOrder () {
+                this.varconcat = []
+                if (this.varmake.length>0 && this.varmodel.length>0) {
+                    this.toshowbodymodel = []
+                    this.bodytwoinputsarr = true            
+                    this.varconcat = this.varmake.concat(this.varmodel)
+                    for (let i = 0; i<this.varconcat.length;i++) {
+                        let a = this.varconcat[i]
+                        let b = this.varconcat.filter(el=>el===a).length
+                        this.test = b
+                        if (b===2) {
+                            this.toshowbodymodel.push(a)
+                            this.toshowbodymodel = [...new Set(this.toshowbodymodel)]
+                        }
+                    }
+
+                }else {
+                    this.bodytwoinputsarr = false
+                    let a = this.varmake.concat(this.varmodel)
+                    this.toshowbodymodel = a
+                    this.toshowbodymodel = [...new Set(this.toshowbodymodel)]
+                }
+
+                if (this.modelsearchmake==='' && this.modelsearchmodel==='') {
+                    this.toshowbodymodel = []
+                }
+
+                
+            },
+
+            clearModel () {
+ 
+                this.modelsearchmodel = ''
+            },
+            
+
+            // for(let i=0; i<d.length;i++) {//итерируемся по массиву d в котором вобрался весь сборняк выбранных ранее id элементов
+            //         let k = d[i]              //записываем в переменную элемент массива по которому сейчас происходит итерация
+            //         let v = d.filter(el=>el===k).length //выясняем сколько раз в массиве d встречается конкретный элемент массива d по которому сейчас происходит итерация
+            //         if (v===this.inputsAtWork.length) { //устанавливаем, что если элемент встречается столько раз сколько открыто компонентов, то его 
+            //             w.push(k)                       //записываем в массив w
+            //         }
+                  
+            //     }
 
             
            
@@ -1053,7 +1189,13 @@
             },
 
 
+            modelSearchMakeSource (val) {
+                this.varmake = val
+            },
 
+            modelSearchModelSource (val) {
+                this.varmodel = val
+            },
 
             setMinPriceRealNumber (val) {//берет соответствующего названия computed свойство и в зависимости от приходящих данных
                 
@@ -1131,10 +1273,33 @@
            
                     
         },
-        automatictrans:false,
-                manualtrans:false,
+      
 
         computed: {   
+            modelSearchMakeSource () {
+                let a = []
+                let b = []
+                b = this.cars.filter(car=>{
+                    return car.make.toUpperCase().indexOf(this.modelsearchmake.toUpperCase()) !== -1
+                }) 
+                for (let i = 0; i<b.length; i++) {
+                    let c = b[i].id
+                    a.push(c)
+                }
+                return a
+            },
+            modelSearchModelSource () {    
+                let a = []
+                let b = []        
+                b = this.cars.filter(car=>{
+                    return car.model.toUpperCase().indexOf(this.modelsearchmodel.toUpperCase()) !== -1
+                }) 
+                for (let i = 0; i<b.length; i++) {
+                    let c = b[i].id
+                    a.push(c)
+                }
+                return a
+            },
               
             setMinPriceRealNumber () {
                 let a = this.minprice - 1//массив arrOfPrices отсортирован по возрастанию (это очень важно), соответственно, цифры в модели будут 
@@ -1273,6 +1438,49 @@
 
     .ma-mo {
         display: flex;
+        
+
+        .bodymake {
+
+            &__text {
+               
+            }
+
+            &__input-box {
+                position: relative;
+            }
+
+            &__input-box-inp {
+            }
+
+            &__input-box-glass {
+                position:absolute;
+                left: 160px;
+                top: 8px;
+            }
+
+        }
+
+        .bodymodel {
+
+            &__text {
+            }
+
+            &__input-box {
+                position: relative;
+            }
+
+            &__input-box-inp {
+            }
+
+            &__input-box-glass {
+                position:absolute;
+                left: 160px;
+                top: 8px;
+            }
+        }
+
+      
 		&__detailed-search-box {
             display: flex;
             flex-direction: column;
@@ -1438,6 +1646,10 @@
             height: 123px;
             padding-bottom: 25px; 
         }
+        .activeinpbody {
+            height: 180px;
+            padding-bottom: 25px; 
+        }
         .activeinpyear {
              height: 123px;
              padding-bottom: 25px;
@@ -1537,7 +1749,10 @@
         
 
 
-    }
+}
+
+
+
 
 
     
