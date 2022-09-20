@@ -34,7 +34,7 @@
                                 <div class="bodymake">
                                     <span class="bodymake__text">Make</span>
                                     <div class="bodymake__input-box make" >
-                                        <input type="text" v-model="modelsearchmake" id="make" @input="setBodyTypeShowOrder (),clearModel()"  placeholder="Search Make..." >
+                                        <input type="text" v-model="modelsearchmake" id="make" @input="setBodyTypeShowOrderCars (),setBodyTypeShowOrderCalculated (),clearModel()"  placeholder="Search Make..." >
                                         <i class="fa-sharp fa-solid fa-magnifying-glass bodymake__input-box-glass"></i>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                 <div class="bodymodel">
                                     <span class="bodymodel__text">Model</span>
                                     <div class="bodymodel__input-box">
-                                        <input type="text" v-model="modelsearchmodel" id="model" @input="setBodyTypeShowOrder ()"  placeholder="Search Model..." class="bodymodel__input-box-inp">
+                                        <input type="text" v-model="modelsearchmodel" id="model" @input="setBodyTypeShowOrderCars (),setBodyTypeShowOrderCalculated ()"  placeholder="Search Model..." class="bodymodel__input-box-inp">
                                         <i class="fa-sharp fa-solid fa-magnifying-glass bodymodel__input-box-glass"></i>
                                     </div>
                                 </div>
@@ -90,11 +90,11 @@
 
                             
                             <div class="transmission-choice-block__result" v-if="transinpformcross" :class="{activecross:transinpformcross}">
-                                <div class="transmission-choice-block__result-item" v-if="automatictransinpformcross" @click="setTransModelAutomatic">
+                                <div class="transmission-choice-block__result-item" v-if="automatictransinpformcross" @click="setTransModelAutomatic,addToMakeModelCalc">
                                     <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
                                     <span class="transmission-choice-block__result-item-text">Automatic</span>
                                 </div>
-                                <div class="transmission-choice-block__result-item" v-if="manualtransinpformcross" @click="setTransModelManual">
+                                <div class="transmission-choice-block__result-item" v-if="manualtransinpformcross" @click="setTransModelManual,addToMakeModelCalc">
                                     <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
                                     <span class="transmission-choice-block__result-item-text">Manual</span>
                                 </div> 
@@ -135,7 +135,7 @@
                                 :carspropsprice="cars"
                                 @minpricedata="minprice=$event"
                                 @maxpricedata="maxprice=$event"
-                                @input="addToTestArrPrice()"
+                                @input="addToTestArrPrice(),addToMakeModelCalc()"
                                 >
 
                                 </doubleinprangeprice> 
@@ -147,16 +147,16 @@
                                 v-for="car in calculatedcars" :key="car"
                                 :carprice="car"
                                 @deletedpricetoparent="deletedpriceitem=$event"
-                                @click="setunduwarningprice ()"
+                                @click="setunduwarningprice (),addToMakeModelCalc()"
                                 >
 
 
                                 </cardprice>
                                 <div class="inp-box-cross-on-undo"
-                                @click="setunduwarningprice ()"
+                                @click="setunduwarningprice (),addToMakeModelCalc()"
                                 >
                                     <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningprice" @click="undopricecomponent" >
-                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningprice ()"  >UNDO</span> 
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningprice (),addToMakeModelCalc()"  >UNDO</span> 
                                     </div>
                                     <div class="inp-box-cross-on-undo__text-statement-box">
                                         <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -175,7 +175,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Year
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarningyear ()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarningyear (),addToMakeModelCalc()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="yeardbinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="yeardbinpform===false"></i></div>
                             </div>
@@ -200,7 +200,7 @@
                                 :carspropsyear="cars"
                                 @minyeardata="minyear=$event"
                                 @maxyeardata="maxyear=$event"
-                                @input="addToTestArrYear()"
+                                @input="addToTestArrYear(),addToMakeModelCalc()"
     
                                 >
 
@@ -213,16 +213,16 @@
                                 v-for="car in calculatedcars" :key="car"
                                 :caryear="car"
                                 @deletedyeartoparent="deletedyearitem=$event"
-                                @click="setunduwarningyear ()"
+                                @click="setunduwarningyear (),addToMakeModelCalc()"
                                 >
 
 
                                 </cardyear>
                                 <div class="inp-box-cross-on-undo"
-                                @click="setunduwarningyear ()"
+                                @click="setunduwarningyear (),addToMakeModelCalc()"
                                 >
                                     <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningyear" @click="undoyearcomponent" >
-                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningyear ()"  >UNDO</span> 
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningyear (),addToMakeModelCalc()"  >UNDO</span> 
                                     </div>
                                     <div class="inp-box-cross-on-undo__text-statement-box">
                                         <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -244,7 +244,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Kilometers
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarningkilo ()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarningkilo (),addToMakeModelCalc()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="kiloinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="kiloinpform===false"></i></div>
                             </div>
@@ -264,7 +264,7 @@
                                 <inprange class="ma-mo__detailed-search-box-inprange-input-box-elem inp-box-component"
                                 :carspropsinprange="cars"
                                 @datafromsingleinput="kilocompdata=$event"
-                                @input="addToTestArrKilo()"
+                                @input="addToTestArrKilo(),addToMakeModelCalc()"
                                 >
 
                                 </inprange> 
@@ -279,18 +279,18 @@
                                     :class="{arrfirstitem:index===this.calculatedcarskiloactualmaxvalindex}"
                                     :carkilo="car"
                                     @deletedkilotoparent="deletedkiloitem=$event"
-                                    @click="setunduwarningkilo ()"
+                                    @click="setunduwarningkilo (),addToMakeModelCalc()"
                                   
                                     >
                                    
 
                                     </cardkilo>
                                     <div class="inp-box-cross-on-undo"
-                                    @click="setunduwarningkilo ()"
+                                    @click="setunduwarningkilo (),addToMakeModelCalc()"
                                   
                                     >
                                         <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarning" @click="undokilocomponent" >
-                                            <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningkilo ()"  >UNDO</span> 
+                                            <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningkilo (),addToMakeModelCalc()"  >UNDO</span> 
                                         </div>
                                         <div class="inp-box-cross-on-undo__text-statement-box">
                                             <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -339,7 +339,19 @@
                     >
 
                     </ca>
+                </div >
+
+                <div class="ma-mo__card-box ma-mo__card-box-body" v-if="bodyform">
+                    <div class="ma-mo__card-box ma-mo__card-box-body-calc" v-if="bodycalcshow">
+                        BodyCalc
+                    </div>
+
+                    <div class="ma-mo__card-box ma-mo__card-box-body-cars" v-if="bodycarsshow">
+                        BodyCars
+                    </div>
                 </div>
+
+                
 
 
 
@@ -414,10 +426,15 @@
                 modelsearchmodel:'',
                 varmake:[],
                 varmodel:[],
+                varmakecalculated:[],
+                varmodelcalculated:[],
                 varconcat:[],
                 toshowbodymodel:[],
+                toshowbodymodelcalculated:[],
                 bodytwoinputsarr:Boolean,
-                test:[],
+                bodycalcshow:Boolean,
+                bodycarsshow:Boolean,
+                
 
 
                 
@@ -511,14 +528,23 @@
         },
         methods: {
             show () { //определяет состояние переменных и если хоть один компонент включен, то показывается итерация по массиву showcalculated
-                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform) {//если хоть один инпут включенный
+                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform && !this.bodyform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
-                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform) {
+                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
                     this.showcars=true
                     this.showcalculated=false                
+                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && this.bodyform) {
+                    this.showcars=false
+                    this.showcalculated=false         
+                    this.bodycalcshow = false
+                    this.bodycarsshow = true       
+                    this.toshowbodymodel = this.allid
                 }
+
+
                 let a = this.catalogpropscars
+
                 if (!this.testarr.includes('automatic') && this.testarr.includes('manual')) {
                     this.cars = a.filter(el=>el.transmission==='Manual')
                     this.calculatedcars = a.filter(el=>el.transmission==='Manual')
@@ -533,9 +559,21 @@
                     this.cars = a
                     this.calculatedcars = this.cars
                 } 
+
+                
+                
+                
+
                 
                
                     
+            },
+
+            addToMakeModelCalc() {
+                
+               
+                this.modelsearchmake = ''
+                this.modelsearchmodel = ''
             },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
                 let a = this.cars.slice()
@@ -589,12 +627,15 @@
             getStartedBodyType() {
               
                 this.bodystatekeeper.push(1)
+                this.toshowbodymodel = this.cars.slice()
+                this.toshowbodymodelcalculated = this.cars.slice()
                 if (this.bodystatekeeper.length===1) {
                     this.bodyform = true
                     this.bodyforminput = true
                     this.bodycheck=true
                     this.bodycross=false
                     this.bodyclosed=false
+                    
                 
                 } else if (this.bodystatekeeper.length===2) {
                     this.bodyforminput = false
@@ -610,13 +651,39 @@
                     this.bodycheck=false
                     this.bodycross=false
                     this.bodyclosed=true   
-                    this.bodystatekeeper = []                 
+                    this.bodystatekeeper = [] 
+                    this.modelsearchmake = ''
+                    this.modelsearchmodel = ''
+                    this.toshowbodymodel = this.allid
+                    this.toshowbodymodelcalculated = this.allid               
                 }
+
+                if (this.bodyform && this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform) {
+                    this.bodycalcshow = true
+                    this.bodycarsshow = false
+                    this.showcalculated=false
+                    this.showcars=false 
+                } else if (this.bodyform && !this.yeardbinpform||!this.pricedbinpform||!this.kiloinpform||!this.transinpform) {
+                    this.bodycalcshow = false
+                    this.bodycarsshow = true
+                    this.showcalculated=false
+                    this.showcars=false 
+                }
+
+                if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
+                    this.showcars=true
+                    this.showcalculated=false                
+                }
+
+                
+
+                
 
             },
 
-            setBodyTypeShowOrder () {
+            setBodyTypeShowOrderCars () {
                 this.varconcat = []
+               
                 if (this.varmake.length>0 && this.varmodel.length>0) {
                     this.toshowbodymodel = []
                     this.bodytwoinputsarr = true            
@@ -624,25 +691,146 @@
                     for (let i = 0; i<this.varconcat.length;i++) {
                         let a = this.varconcat[i]
                         let b = this.varconcat.filter(el=>el===a).length
-                        this.test = b
-                        if (b===2) {
-                            this.toshowbodymodel.push(a)
-                            this.toshowbodymodel = [...new Set(this.toshowbodymodel)]
+                        for (let i = 0; i<this.cars.length; i++) {
+                            let z = this.cars[i].id
+                            let t = this.cars[i]
+                            if (b===2 && a===z) {
+                                this.toshowbodymodel.push(t)
+                                this.toshowbodymodel = [...new Set(this.toshowbodymodel)]
+                            }
                         }
+                      
+                        
                     }
 
-                }else {
+                }else if (this.varmake.length>0 && this.varmodel.length===0) {
                     this.bodytwoinputsarr = false
-                    let a = this.varmake.concat(this.varmodel)
-                    this.toshowbodymodel = a
-                    this.toshowbodymodel = [...new Set(this.toshowbodymodel)]
-                }
-
-                if (this.modelsearchmake==='' && this.modelsearchmodel==='') {
                     this.toshowbodymodel = []
+                    
+                    for (let i = 0; i<this.varmake.length;i++) {
+                        let a = this.varmake[i]
+                   
+                        for (let i = 0; i<this.cars.length; i++) {
+                            let z = this.cars[i].id
+                            let t = this.cars[i]
+                            if (a===z) {
+                                this.toshowbodymodel.push(t)
+                                this.toshowbodymodel = [...new Set(this.toshowbodymodel)]
+                            }
+                        }
+                      
+                        
+                    }
+                }else if (this.varmake.length===0 && this.varmodel.length>0) {
+                    this.bodytwoinputsarr = false
+                    this.toshowbodymodel = []
+                    
+                    for (let i = 0; i<this.varmodel.length;i++) {
+                        let a = this.varmodel[i]
+                   
+                        for (let i = 0; i<this.cars.length; i++) {
+                            let z = this.cars[i].id
+                            let t = this.cars[i]
+                            if (a===z) {
+                                this.toshowbodymodel.push(t)
+                                this.toshowbodymodel = [...new Set(this.toshowbodymodel)]
+                            }
+                        }
+                      
+                        
+                    }
                 }
 
                 
+
+                if (0<this.toshowbodymodelcalculated.length<13) {
+                    this.bodycalcshow = true
+                    this.bodycarsshow = false
+                    this.showcalculated=false
+                } else if (this.toshowbodymodelcalculated.length===0 && this.bodyform) {
+                    this.bodycalcshow = false
+                    this.bodycarsshow = false
+                    this.showcalculated=true
+                } 
+
+
+
+               
+            },
+            setBodyTypeShowOrderCalculated () {
+                this.varconcat = []
+                
+                
+                if (this.varmakecalculated.length>0 && this.varmodelcalculated.length>0) {
+                    this.toshowbodymodelcalculated = []
+                    this.bodytwoinputsarr = true            
+                    this.varconcat = this.varmakecalculated.concat(this.varmodelcalculated)
+                    for (let i = 0; i<this.varconcat.length;i++) {
+                        let a = this.varconcat[i]
+                        let b = this.varconcat.filter(el=>el===a).length
+                        for (let i = 0; i<this.calculatedcars.length; i++) {
+                            let z = this.calculatedcars[i].id
+                            let t = this.calculatedcars[i]
+                            if (b===2 && a===z) {
+                                this.toshowbodymodelcalculated.push(t)
+                                this.toshowbodymodelcalculated = [...new Set(this.toshowbodymodelcalculated)]
+                            }
+                        }
+                    
+                       
+                    }
+
+                }else if (this.varmakecalculated.length>0 && this.varmodelcalculated.length===0) {
+                    this.bodytwoinputsarr = false
+                    this.toshowbodymodelcalculated = []
+                    
+                    for (let i = 0; i<this.varmakecalculated.length;i++) {
+                        let a = this.varmakecalculated[i]
+                   
+                        for (let i = 0; i<this.cars.length; i++) {
+                            let z = this.cars[i].id
+                            let t = this.cars[i]
+                            if (a===z) {
+                                this.toshowbodymodelcalculated.push(t)
+                                this.toshowbodymodelcalculated = [...new Set(this.toshowbodymodelcalculated)]
+                            }
+                        }
+                      
+                        
+                    }
+                }else if (this.varmakecalculated.length===0 && this.varmodelcalculated.length>0) {
+                    this.bodytwoinputsarr = false
+                    this.toshowbodymodelcalculated = []
+                    
+                    for (let i = 0; i<this.varmodelcalculated.length;i++) {
+                        let a = this.varmodelcalculated[i]
+                   
+                        for (let i = 0; i<this.cars.length; i++) {
+                            let z = this.cars[i].id
+                            let t = this.cars[i]
+                            if (a===z) {
+                                this.toshowbodymodelcalculated.push(t)
+                                this.toshowbodymodelcalculated = [...new Set(this.toshowbodymodelcalculated)]
+                            }
+                        }
+                      
+                        
+                    }
+                }
+
+                
+
+                if (0<this.toshowbodymodelcalculated.length<13) {
+                    this.bodycalcshow = true
+                    this.bodycarsshow = false
+                    this.showcalculated=false
+                } else if (this.toshowbodymodelcalculated.length===0 && this.bodyform) {
+                    this.bodycalcshow = false
+                    this.bodycarsshow = false
+                    this.showcalculated=true
+                }
+
+               
             },
 
             clearModel () {
@@ -651,18 +839,16 @@
             },
             
 
-            // for(let i=0; i<d.length;i++) {//итерируемся по массиву d в котором вобрался весь сборняк выбранных ранее id элементов
-            //         let k = d[i]              //записываем в переменную элемент массива по которому сейчас происходит итерация
-            //         let v = d.filter(el=>el===k).length //выясняем сколько раз в массиве d встречается конкретный элемент массива d по которому сейчас происходит итерация
-            //         if (v===this.inputsAtWork.length) { //устанавливаем, что если элемент встречается столько раз сколько открыто компонентов, то его 
-            //             w.push(k)                       //записываем в массив w
-            //         }
-                  
-            //     }
+           
 
             
            
             getStartedInpTrans() {
+
+                
+                this.modelsearchmake = ''
+                this.modelsearchmodel = ''
+
                 this.transformstatekeeper.push(1)
                    
                 if (this.transformstatekeeper.length===1) {
@@ -725,6 +911,7 @@
 
 
                 this.show ()
+                this.addToMakeModelCalc()
                           
             },
 
@@ -747,9 +934,11 @@
                 } 
 
                 this.show ()
+                this.addToMakeModelCalc()
             },
             
             setTransModelAutomatic () {
+                
                 if (this.automatictransinpformcross && !this.manualtransinpformcross ) {
                     this.automatictrans = true
                     this.automatictransinpformcross = true
@@ -773,6 +962,7 @@
                 }
 
                 this.show ()
+                this.addToMakeModelCalc()
       
             },
             setTransModelManual () {
@@ -799,6 +989,7 @@
                 }
 
                 this.show ()
+                this.addToMakeModelCalc()
 
                           
             },
@@ -806,7 +997,10 @@
 
             getStartedInpPrice() { //при клике на стрелку компонента запускается функция
 
-
+               
+                this.modelsearchmake = ''
+                this.modelsearchmodel = ''
+                
                 this.priceformstatekeeper.push(1)//описывает в какой последовательности открывать и закрывать форму и части формы
                 if (this.priceformstatekeeper.length===1) {
                     this.pricedbinpform = true
@@ -925,7 +1119,10 @@
 
 
             getStartedInpYear() {//при клике на стрелку компонента запускается функция, аналогично указанному выше, только для другого компонента
-
+              
+                this.modelsearchmake = ''
+                this.modelsearchmodel = ''
+                
                 this.yearformstatekeeper.push(1)//описывает в какой последовательности открывать и закрывать форму и части формы
                 if (this.yearformstatekeeper.length===1) {
                     this.yeardbinpform = true
@@ -1046,6 +1243,9 @@
 
 
             getStartedInpKilo() {
+             
+                this.modelsearchmake = ''
+                this.modelsearchmodel = ''
                 
 
                 this.kiloformstatekeeper.push(1)//описывает в какой последовательности открывать и закрывать форму и части формы
@@ -1189,13 +1389,23 @@
             },
 
 
-            modelSearchMakeSource (val) {
-                this.varmake = val
-            },
+            // modelSearchMakeSource (val) {
+            //     this.varmake = val
+            // },
 
-            modelSearchModelSource (val) {
-                this.varmodel = val
-            },
+            // modelSearchModelSource (val) {
+            //     this.varmodel = val
+            // },
+
+            // modelSearchMakeSourceCalculated (val) {
+            //     this.varmakecalculated = val
+            // },
+
+            // modelSearchModelSourceCalculated (val) {
+            //     this.varmodelcalculated = val
+            // },
+
+          
 
             setMinPriceRealNumber (val) {//берет соответствующего названия computed свойство и в зависимости от приходящих данных
                 
@@ -1276,30 +1486,54 @@
       
 
         computed: {   
-            modelSearchMakeSource () {
-                let a = []
-                let b = []
-                b = this.cars.filter(car=>{
-                    return car.make.toUpperCase().indexOf(this.modelsearchmake.toUpperCase()) !== -1
-                }) 
-                for (let i = 0; i<b.length; i++) {
-                    let c = b[i].id
-                    a.push(c)
-                }
-                return a
-            },
-            modelSearchModelSource () {    
-                let a = []
-                let b = []        
-                b = this.cars.filter(car=>{
-                    return car.model.toUpperCase().indexOf(this.modelsearchmodel.toUpperCase()) !== -1
-                }) 
-                for (let i = 0; i<b.length; i++) {
-                    let c = b[i].id
-                    a.push(c)
-                }
-                return a
-            },
+            // modelSearchMakeSourceCalculated () {
+            //     let a = []
+            //     let b = []
+            //     b = this.calculatedcars.filter(car=>{
+            //         return car.make.toUpperCase().indexOf(this.modelsearchmake.toUpperCase()) !== -1
+            //     }) 
+            //     for (let i = 0; i<b.length; i++) {
+            //         let c = b[i].id
+            //         a.push(c)
+            //     }
+            //     return a
+            // },
+            // modelSearchModelSourceCalculated () {    
+            //     let a = []
+            //     let b = []        
+            //     b = this.calculatedcars.filter(car=>{
+            //         return car.model.toUpperCase().indexOf(this.modelsearchmodel.toUpperCase()) !== -1
+            //     }) 
+            //     for (let i = 0; i<b.length; i++) {
+            //         let c = b[i].id
+            //         a.push(c)
+            //     }
+            //     return a
+            // },
+            // modelSearchMakeSource () {
+            //     let a = []
+            //     let b = []
+            //     b = this.cars.filter(car=>{
+            //         return car.make.toUpperCase().indexOf(this.modelsearchmake.toUpperCase()) !== -1
+            //     }) 
+            //     for (let i = 0; i<b.length; i++) {
+            //         let c = b[i].id
+            //         a.push(c)
+            //     }
+            //     return a
+            // },
+            // modelSearchModelSource () {    
+            //     let a = []
+            //     let b = []        
+            //     b = this.cars.filter(car=>{
+            //         return car.model.toUpperCase().indexOf(this.modelsearchmodel.toUpperCase()) !== -1
+            //     }) 
+            //     for (let i = 0; i<b.length; i++) {
+            //         let c = b[i].id
+            //         a.push(c)
+            //     }
+            //     return a
+            // },
               
             setMinPriceRealNumber () {
                 let a = this.minprice - 1//массив arrOfPrices отсортирован по возрастанию (это очень важно), соответственно, цифры в модели будут 
@@ -1411,6 +1645,7 @@
                                         //НОВЫХ ДАННЫХ, ТАК У НАС ПОСТОЯННО АКТУАЛЬНЫЕ ДАННЫЕ
             },
             
+            
 
         
         },
@@ -1419,7 +1654,7 @@
         mounted () {
             
             this.SetAllId ()
-            
+           
             
             
         },
