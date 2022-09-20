@@ -34,7 +34,7 @@
                                 <div class="bodymake">
                                     <span class="bodymake__text">Make</span>
                                     <div class="bodymake__input-box make" >
-                                        <input type="text" v-model="modelsearchmake" id="make" @input="setBodyTypeShowOrderCars (),setBodyTypeShowOrderCalculated (),clearModel()"  placeholder="Search Make..." >
+                                        <input type="text" v-model="modelsearchmake" id="make" @input="setBodyTypeShowOrderCars (),clearModel()"  placeholder="Search Make..." >
                                         <i class="fa-sharp fa-solid fa-magnifying-glass bodymake__input-box-glass"></i>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                 <div class="bodymodel">
                                     <span class="bodymodel__text">Model</span>
                                     <div class="bodymodel__input-box">
-                                        <input type="text" v-model="modelsearchmodel" id="model" @input="setBodyTypeShowOrderCars (),setBodyTypeShowOrderCalculated ()"  placeholder="Search Model..." class="bodymodel__input-box-inp">
+                                        <input type="text" v-model="modelsearchmodel" id="model" @input="setBodyTypeShowOrderCars ()"  placeholder="Search Model..." class="bodymodel__input-box-inp">
                                         <i class="fa-sharp fa-solid fa-magnifying-glass bodymodel__input-box-glass"></i>
                                     </div>
                                 </div>
@@ -416,7 +416,7 @@
                 
                 
                 bodyform:false,
-                bodyforminput:true,
+                
                 bodyinpformcross:false,
                 bodycheck:Boolean,
                 bodycross:Boolean,
@@ -424,16 +424,14 @@
                 bodystatekeeper:[],
                 modelsearchmake:'',
                 modelsearchmodel:'',
-                varmake:[],
-                varmodel:[],
-                varmakecalculated:[],
-                varmodelcalculated:[],
                 varconcat:[],
-                toshowbodymodel:[],
-                toshowbodymodelcalculated:[],
-                bodytwoinputsarr:Boolean,
-                bodycalcshow:Boolean,
-                bodycarsshow:Boolean,
+                bodyarrtoshow:[],
+                toshowobjects:[],
+                
+               
+                
+               
+                
                 
 
 
@@ -528,19 +526,16 @@
         },
         methods: {
             show () { //определяет состояние переменных и если хоть один компонент включен, то показывается итерация по массиву showcalculated
-                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform && !this.bodyform) {//если хоть один инпут включенный
+                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
+                    this.bodyarrtoshow = this.cars.slice()
                 }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
                     this.showcars=true
-                    this.showcalculated=false                
-                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && this.bodyform) {
-                    this.showcars=false
-                    this.showcalculated=false         
-                    this.bodycalcshow = false
-                    this.bodycarsshow = true       
-                    this.toshowbodymodel = this.allid
-                }
+                    this.showcalculated=false
+                    this.bodyarrtoshow = this.cars.slice()                
+                } 
+                
 
 
                 let a = this.catalogpropscars
@@ -562,6 +557,8 @@
 
                 
                 
+                this.bodyarrtoshow = this.cars.slice()
+                
                 
 
                 
@@ -569,9 +566,7 @@
                     
             },
 
-            addToMakeModelCalc() {
-                
-               
+            addToMakeModelCalc() {      
                 this.modelsearchmake = ''
                 this.modelsearchmodel = ''
             },
@@ -627,8 +622,7 @@
             getStartedBodyType() {
               
                 this.bodystatekeeper.push(1)
-                this.toshowbodymodel = this.cars.slice()
-                this.toshowbodymodelcalculated = this.cars.slice()
+               
                 if (this.bodystatekeeper.length===1) {
                     this.bodyform = true
                     this.bodyforminput = true
@@ -654,26 +648,11 @@
                     this.bodystatekeeper = [] 
                     this.modelsearchmake = ''
                     this.modelsearchmodel = ''
-                    this.toshowbodymodel = this.allid
-                    this.toshowbodymodelcalculated = this.allid               
+                          
                 }
+                
 
-                if (this.bodyform && this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform) {
-                    this.bodycalcshow = true
-                    this.bodycarsshow = false
-                    this.showcalculated=false
-                    this.showcars=false 
-                } else if (this.bodyform && !this.yeardbinpform||!this.pricedbinpform||!this.kiloinpform||!this.transinpform) {
-                    this.bodycalcshow = false
-                    this.bodycarsshow = true
-                    this.showcalculated=false
-                    this.showcars=false 
-                }
-
-                if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
-                    this.showcars=true
-                    this.showcalculated=false                
-                }
+                
 
                 
 
@@ -682,156 +661,74 @@
             },
 
             setBodyTypeShowOrderCars () {
-                this.varconcat = []
-               
-                if (this.varmake.length>0 && this.varmodel.length>0) {
-                    this.toshowbodymodel = []
-                    this.bodytwoinputsarr = true            
-                    this.varconcat = this.varmake.concat(this.varmodel)
-                    for (let i = 0; i<this.varconcat.length;i++) {
-                        let a = this.varconcat[i]
-                        let b = this.varconcat.filter(el=>el===a).length
-                        for (let i = 0; i<this.cars.length; i++) {
-                            let z = this.cars[i].id
-                            let t = this.cars[i]
-                            if (b===2 && a===z) {
-                                this.toshowbodymodel.push(t)
-                                this.toshowbodymodel = [...new Set(this.toshowbodymodel)]
-                            }
-                        }
-                      
-                        
-                    }
-
-                }else if (this.varmake.length>0 && this.varmodel.length===0) {
-                    this.bodytwoinputsarr = false
-                    this.toshowbodymodel = []
-                    
-                    for (let i = 0; i<this.varmake.length;i++) {
-                        let a = this.varmake[i]
-                   
-                        for (let i = 0; i<this.cars.length; i++) {
-                            let z = this.cars[i].id
-                            let t = this.cars[i]
-                            if (a===z) {
-                                this.toshowbodymodel.push(t)
-                                this.toshowbodymodel = [...new Set(this.toshowbodymodel)]
-                            }
-                        }
-                      
-                        
-                    }
-                }else if (this.varmake.length===0 && this.varmodel.length>0) {
-                    this.bodytwoinputsarr = false
-                    this.toshowbodymodel = []
-                    
-                    for (let i = 0; i<this.varmodel.length;i++) {
-                        let a = this.varmodel[i]
-                   
-                        for (let i = 0; i<this.cars.length; i++) {
-                            let z = this.cars[i].id
-                            let t = this.cars[i]
-                            if (a===z) {
-                                this.toshowbodymodel.push(t)
-                                this.toshowbodymodel = [...new Set(this.toshowbodymodel)]
-                            }
-                        }
-                      
-                        
-                    }
-                }
-
+                    this.varconcat = this.modelSearchMakeSource.concat(this.modelSearchModelSource) 
                 
+                    if (this.modelSearchMakeSource.length>0 && this.modelSearchModelSource.length>0) {
+                                let x = []
+                                for (let i = 0; i<this.varconcat.length; i++) {
+                                    let a = this.varconcat[i] 
+                                    let b = this.varconcat.filter(el=>el===a).length
+                                    if (b===2) {
 
-                if (0<this.toshowbodymodelcalculated.length<13) {
-                    this.bodycalcshow = true
-                    this.bodycarsshow = false
-                    this.showcalculated=false
-                } else if (this.toshowbodymodelcalculated.length===0 && this.bodyform) {
-                    this.bodycalcshow = false
-                    this.bodycarsshow = false
-                    this.showcalculated=true
-                } 
+                                        this.cars.forEach(el=>{
+                                                let s = el
+                                                let q = el.id 
+                                                if (a===q) {
+                                                    x.push(s)
+                                                }
+                                        })
+                                    
+                                }
+                                this.toshowobjects = x
+                                this.toshowobjects = [...new Set(this.toshowobjects)]
+                        }
 
+                    }
+                    
+                    if (this.modelSearchMakeSource.length>0 && !this.modelSearchModelSource.length>0) {
+                            let x = []
+                            for (let i = 0; i<this.modelSearchMakeSource.length; i++) {
+                                let a = this.modelSearchMakeSource[i] 
+                                
+                                this.cars.forEach(el=>{
+                                        let s = el
+                                        let w = el.id
+                                        if (a===w) {
+                                            x.push(s)
+                                        }
+                                })
+                                
+                            
+                                this.toshowobjects = x
+                                this.toshowobjects = [...new Set(this.toshowobjects)]
+                            }
 
+                    }
 
-               
+                    if (!this.modelSearchMakeSource.length>0 && this.modelSearchModelSource.length>0) {
+                            let x = []
+                            for (let i = 0; i<this.modelSearchModelSource.length; i++) {
+                                let a = this.this.modelSearchModelSource[i] 
+                                
+                                this.cars.forEach(el=>{
+                                        let s = el
+                                        let w = el.id
+                                        if (a===w) {
+                                            x.push(s)
+                                        }
+                                })
+                                
+                            
+                                this.toshowobjects = x
+                                this.toshowobjects = [...new Set(this.toshowobjects)]
+                            }
+
+                    }
+                   
             },
-            setBodyTypeShowOrderCalculated () {
-                this.varconcat = []
-                
-                
-                if (this.varmakecalculated.length>0 && this.varmodelcalculated.length>0) {
-                    this.toshowbodymodelcalculated = []
-                    this.bodytwoinputsarr = true            
-                    this.varconcat = this.varmakecalculated.concat(this.varmodelcalculated)
-                    for (let i = 0; i<this.varconcat.length;i++) {
-                        let a = this.varconcat[i]
-                        let b = this.varconcat.filter(el=>el===a).length
-                        for (let i = 0; i<this.calculatedcars.length; i++) {
-                            let z = this.calculatedcars[i].id
-                            let t = this.calculatedcars[i]
-                            if (b===2 && a===z) {
-                                this.toshowbodymodelcalculated.push(t)
-                                this.toshowbodymodelcalculated = [...new Set(this.toshowbodymodelcalculated)]
-                            }
-                        }
-                    
-                       
-                    }
 
-                }else if (this.varmakecalculated.length>0 && this.varmodelcalculated.length===0) {
-                    this.bodytwoinputsarr = false
-                    this.toshowbodymodelcalculated = []
-                    
-                    for (let i = 0; i<this.varmakecalculated.length;i++) {
-                        let a = this.varmakecalculated[i]
-                   
-                        for (let i = 0; i<this.cars.length; i++) {
-                            let z = this.cars[i].id
-                            let t = this.cars[i]
-                            if (a===z) {
-                                this.toshowbodymodelcalculated.push(t)
-                                this.toshowbodymodelcalculated = [...new Set(this.toshowbodymodelcalculated)]
-                            }
-                        }
-                      
-                        
-                    }
-                }else if (this.varmakecalculated.length===0 && this.varmodelcalculated.length>0) {
-                    this.bodytwoinputsarr = false
-                    this.toshowbodymodelcalculated = []
-                    
-                    for (let i = 0; i<this.varmodelcalculated.length;i++) {
-                        let a = this.varmodelcalculated[i]
-                   
-                        for (let i = 0; i<this.cars.length; i++) {
-                            let z = this.cars[i].id
-                            let t = this.cars[i]
-                            if (a===z) {
-                                this.toshowbodymodelcalculated.push(t)
-                                this.toshowbodymodelcalculated = [...new Set(this.toshowbodymodelcalculated)]
-                            }
-                        }
-                      
-                        
-                    }
-                }
-
-                
-
-                if (0<this.toshowbodymodelcalculated.length<13) {
-                    this.bodycalcshow = true
-                    this.bodycarsshow = false
-                    this.showcalculated=false
-                } else if (this.toshowbodymodelcalculated.length===0 && this.bodyform) {
-                    this.bodycalcshow = false
-                    this.bodycarsshow = false
-                    this.showcalculated=true
-                }
-
-               
-            },
+            
+           
 
             clearModel () {
  
@@ -1385,25 +1282,12 @@
                 this.cars = val
             },
             selectedCARScomputed(val) { //вычисляемое свойство, которое динамически возвращает объекты из массива cars отобранные в ходе работы инпутов компонентов         
-                this.calculatedcars = val                           
+                this.calculatedcars = val  
+                this.bodyarrtoshow = val                         
             },
 
 
-            // modelSearchMakeSource (val) {
-            //     this.varmake = val
-            // },
-
-            // modelSearchModelSource (val) {
-            //     this.varmodel = val
-            // },
-
-            // modelSearchMakeSourceCalculated (val) {
-            //     this.varmakecalculated = val
-            // },
-
-            // modelSearchModelSourceCalculated (val) {
-            //     this.varmodelcalculated = val
-            // },
+            
 
           
 
@@ -1486,54 +1370,31 @@
       
 
         computed: {   
-            // modelSearchMakeSourceCalculated () {
-            //     let a = []
-            //     let b = []
-            //     b = this.calculatedcars.filter(car=>{
-            //         return car.make.toUpperCase().indexOf(this.modelsearchmake.toUpperCase()) !== -1
-            //     }) 
-            //     for (let i = 0; i<b.length; i++) {
-            //         let c = b[i].id
-            //         a.push(c)
-            //     }
-            //     return a
-            // },
-            // modelSearchModelSourceCalculated () {    
-            //     let a = []
-            //     let b = []        
-            //     b = this.calculatedcars.filter(car=>{
-            //         return car.model.toUpperCase().indexOf(this.modelsearchmodel.toUpperCase()) !== -1
-            //     }) 
-            //     for (let i = 0; i<b.length; i++) {
-            //         let c = b[i].id
-            //         a.push(c)
-            //     }
-            //     return a
-            // },
-            // modelSearchMakeSource () {
-            //     let a = []
-            //     let b = []
-            //     b = this.cars.filter(car=>{
-            //         return car.make.toUpperCase().indexOf(this.modelsearchmake.toUpperCase()) !== -1
-            //     }) 
-            //     for (let i = 0; i<b.length; i++) {
-            //         let c = b[i].id
-            //         a.push(c)
-            //     }
-            //     return a
-            // },
-            // modelSearchModelSource () {    
-            //     let a = []
-            //     let b = []        
-            //     b = this.cars.filter(car=>{
-            //         return car.model.toUpperCase().indexOf(this.modelsearchmodel.toUpperCase()) !== -1
-            //     }) 
-            //     for (let i = 0; i<b.length; i++) {
-            //         let c = b[i].id
-            //         a.push(c)
-            //     }
-            //     return a
-            // },
+            
+            modelSearchMakeSource () {
+                let a = []
+                let b = []
+                b = this.bodyarrtoshow.filter(car=>{
+                    return car.make.toUpperCase().indexOf(this.modelsearchmake.toUpperCase()) !== -1
+                }) 
+                for (let i = 0; i<b.length; i++) {
+                    let c = b[i].id
+                    a.push(c)
+                }
+                return a
+            },
+            modelSearchModelSource () {    
+                let a = []
+                let b = []        
+                b = this.bodyarrtoshow.filter(car=>{
+                    return car.model.toUpperCase().indexOf(this.modelsearchmodel.toUpperCase()) !== -1
+                }) 
+                for (let i = 0; i<b.length; i++) {
+                    let c = b[i].id
+                    a.push(c)
+                }
+                return a
+            },
               
             setMinPriceRealNumber () {
                 let a = this.minprice - 1//массив arrOfPrices отсортирован по возрастанию (это очень важно), соответственно, цифры в модели будут 
@@ -1654,7 +1515,7 @@
         mounted () {
             
             this.SetAllId ()
-           
+            this.bodyarrtoshow = this.cars.slice()
             
             
         },
