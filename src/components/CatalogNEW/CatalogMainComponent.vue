@@ -48,9 +48,22 @@
                                 </div>
 
                             </div>
-                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="bodyinpformcross">
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="bodycross">
 
-                                cross
+                                <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="bodycross">
+
+                                    <cardbodydelete
+                                    v-for="car in bodyfinal" :key="car"
+                                    :carbody="car"
+                                    @deletedbodytoparent="deletedbodyitem=$event"
+                                    @click="setunduwarningprice (),addToMakeModelCalc()"
+                                    >
+
+
+                                    </cardbodydelete>
+                                    
+
+                                    </div>
 
                             </div>
 
@@ -397,6 +410,7 @@
     import cardprice from '@/components/CatalogNEW/CardPrice.vue'
     import cardbodyfinal from '@/components/CatalogNEW/CardBodyFinal.vue'
     import cardbodyshow from '@/components/CatalogNEW/CardBodyShow.vue'
+    import cardbodydelete from '@/components/CatalogNEW/CardBodyDelete.vue'
     import doubleinprangeprice from '@/components/CatalogNEW/DoubleInputRangePrice.vue'
     import doubleinprangeyear from '@/components/CatalogNEW/DoubleInputRangeYear.vue'
     import inprange from '@/components/CatalogNEW/InputRange.vue'
@@ -414,6 +428,7 @@
             cardprice,
             cardbodyfinal,
             cardbodyshow,
+            cardbodydelete,
             doubleinprangeprice,
             doubleinprangeyear,
             inprange,
@@ -446,6 +461,7 @@
                 toshowobjects:[],
                 bodyarrtoshowvar:Boolean,
                 bodyfinalvar:Boolean,
+                deletedbodyitem:[],
                 
                
                 
@@ -559,16 +575,31 @@
                     this.showcars=true
                     this.showcalculated=false
                            
-                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && this.bodyform) {
-                    if (this.bodyarrtoshow.length===0 || this.bodyarrtoshow.length <= 14) {
-                        this.showcars=true
-                    }else {
+                }else if (!this.yeardbinpform || !this.pricedbinpform || !this.kiloinpform || this.transinpform && this.bodyform) {
+                    this.showcars=true
+                    this.showcalculated=false
+                    this.bodyarrtoshowvar=true
+                }else if (!this.yeardbinpform || !this.pricedbinpform || !this.kiloinpform || !this.transinpform && this.bodyform) {
+                    if (this.bodyarrtoshow.length===0 || this.bodyarrtoshow.length <= 14 && !this.bodyarrtoshow.length===0) {
+                        this.bodyarrtoshow = this.cars.slice()
+                        this.bodyfinalvar=true
+                        this.showcalculated=false
                         this.showcars=false
+                    }else  {
+                        this.showcars=true
                     }                 
                     
                 }
-                
 
+                if (this.bodyinpformcross && !this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform) {
+                    this.bodyfinalvar=true
+                    this.showcars=false
+                    this.showcalculated=false    
+                    this.bodyarrtoshowvar=false
+                    this.bodyfinalvar=true
+                }
+                
+                
 
                 let a = this.catalogpropscars
 
@@ -605,6 +636,10 @@
                 }
 
                 
+
+                
+
+                
                 
                 
                 
@@ -631,6 +666,7 @@
                 if (this.calculatedcars.length>0) {
                     this.bodyarrtoshow = this.calculatedcars
                 } else this.bodyarrtoshow = this.cars.slice()
+                
             },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
                 let a = this.cars.slice()
@@ -682,7 +718,7 @@
             },
 
             getStartedBodyType() {
-                
+                this.show ()
                 this.bodystatekeeper.push(1)
                
                 if (this.bodystatekeeper.length===1) {
@@ -701,6 +737,11 @@
                     this.bodycheck=false
                     this.bodycross=true
                     this.bodyclosed=false
+                    this.bodyfinalvar=true
+                    this.showcars=false
+                    this.showcalculated=false    
+                    this.bodyarrtoshowvar=false
+                    
                     
                 }else {
                     this.bodyform = false
@@ -716,7 +757,7 @@
                  
                 }
 
-                this.show ()
+               
                 
                 
                 
@@ -814,6 +855,27 @@
                         this.bodyarrtoshowvar = true
                         this.showcalculated=false
                     }
+
+                    if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && this.bodyform) {
+                       
+                            this.bodyfinalvar=true
+                        
+                            this.showcars=false
+                                      
+                    
+                    }
+
+                    if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && this.transinpform && this.bodyform) {
+                       
+                       this.bodyfinalvar=true
+                   
+                       this.showcars=false
+                       this.showcalculated = false
+                                 
+               
+                    }
+
+                    
                     
                    
             },
@@ -902,6 +964,7 @@
 
                 this.show ()
                 this.addToMakeModelCalc()
+                this.bodyarrtoshowvar = false
                           
             },
 
@@ -925,6 +988,7 @@
 
                 this.show ()
                 this.addToMakeModelCalc()
+                this.bodyarrtoshowvar = false
             },
             
             setTransModelAutomatic () {

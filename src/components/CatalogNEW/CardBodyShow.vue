@@ -39,7 +39,7 @@
     
 
     export default {
-        name: 'ca-carddatashow',
+        name: 'ca-cardbodyshow',
         props:['car'],
         components: {
 
