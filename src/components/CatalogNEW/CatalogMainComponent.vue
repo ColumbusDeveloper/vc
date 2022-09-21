@@ -341,25 +341,27 @@
                     </ca>
                 </div >
 
-                <div class="ma-mo__card-box ma-mo__card-box-body" v-if="bodyform">
-                    <div class="ma-mo__card-box ma-mo__card-box-body-calc" v-if="bodyfinalvar">
-                        <cardbodyfinal
-                        
-                        >
-
-                        </cardbodyfinal>
                
-                    </div>
-                        <cardbodyshow
-                        
-                        >
+                <div class="ma-mo__card-box ma-mo__card-box-body-calc" v-if="bodyfinalvar">
+                    <cardbodyfinal
+                    v-for="car in bodyfinal" :key="car"
+                    :car="car"
+                    >
 
-                        </cardbodyshow>
-
-                    <div class="ma-mo__card-box ma-mo__card-box-body-cars" v-if="bodyarrtoshowvar">
-               
-                    </div>
+                    </cardbodyfinal>
+            
                 </div>
+                        
+
+                <div class="ma-mo__card-box ma-mo__card-box-body-cars" v-if="bodyarrtoshowvar">
+                    <cardbodyshow
+                    v-for="car in bodyarrtoshow" :key="car"
+                    :car="car"
+                    >
+
+                    </cardbodyshow>
+                </div>
+                
 
                 
 
@@ -543,15 +545,28 @@
         },
         methods: {
             show () { //определяет состояние переменных и если хоть один компонент включен, то показывается итерация по массиву showcalculated
-                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform) {//если хоть один инпут включенный
+                
+                
+                
+                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform && !this.bodyform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
+                    
+                    this.bodyarrtoshowvar=false
+                    this.bodyfinalvar=false
                     
                 }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
                     this.showcars=true
                     this.showcalculated=false
                            
-                } 
+                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && this.bodyform) {
+                    if (this.bodyarrtoshow.length===0 || this.bodyarrtoshow.length <= 14) {
+                        this.showcars=true
+                    }else {
+                        this.showcars=false
+                    }                 
+                    
+                }
                 
 
 
@@ -573,9 +588,7 @@
                 } 
 
                 
-                if (!this.bodyarrtoshow>0) {
-                    this.bodyarrtoshow = this.cars.slice()
-                }
+                
 
                 if (this.bodyarrtoshow.length>0) {
                     this.bodyfinal = this.bodyarrtoshow
@@ -605,7 +618,7 @@
             addToMakeModelCalc() {      
                 this.modelsearchmake = ''
                 this.modelsearchmodel = ''
-                this.bodyarrtoshow = this.calculatedcars
+                
                 this.toshowobjects = []
                 this.bodyfinal = []
                 if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
@@ -615,6 +628,9 @@
                     this.bodyfinalvar = false
                     this.bodyarrtoshowvar = true
                 }
+                if (this.calculatedcars.length>0) {
+                    this.bodyarrtoshow = this.calculatedcars
+                } else this.bodyarrtoshow = this.cars.slice()
             },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
                 let a = this.cars.slice()
@@ -666,7 +682,7 @@
             },
 
             getStartedBodyType() {
-              
+                
                 this.bodystatekeeper.push(1)
                
                 if (this.bodystatekeeper.length===1) {
@@ -696,10 +712,12 @@
                     this.bodystatekeeper = [] 
                     this.modelsearchmake = ''
                     this.modelsearchmodel = ''
-                    
                     this.toshowobjects = []  
                  
                 }
+
+                this.show ()
+                
                 
                 
 
@@ -709,7 +727,7 @@
                     this.bodyfinal = this.toshowobjects
                 }
 
-                this.show ()
+                
 
                 
 
@@ -790,10 +808,13 @@
                     if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
                     this.bodyfinalvar = true
                     this.bodyarrtoshowvar = false
+                    this.showcalculated=false
                     } else {
                         this.bodyfinalvar = false
                         this.bodyarrtoshowvar = true
+                        this.showcalculated=false
                     }
+                    
                    
             },
 
@@ -852,6 +873,7 @@
                     this.testarr.splice(x,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                     let z = this.testarr.indexOf('manual')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(z,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
+               
                 }
 
                 this.show ()
@@ -965,7 +987,7 @@
 
             getStartedInpPrice() { //при клике на стрелку компонента запускается функция
 
-               
+                
                 this.modelsearchmake = ''
                 this.modelsearchmodel = ''
                 
@@ -986,7 +1008,7 @@
                     this.priceinputopen=false
                     this.pricecrossopen=true
                     this.pricecomponentclosed=false
-                } else {
+                } else if (this.priceformstatekeeper.length===3) {
                     this.priceinpforminput = false
                     this.priceinpformcross = false
                     this.pricedbinpform = false
@@ -995,8 +1017,12 @@
                     this.pricecrossopen=false
                     this.pricecomponentclosed=true
                     this.priceformstatekeeper = []
+                    
+                    
             
                 }
+
+                
 
                 
                 
@@ -1118,7 +1144,7 @@
                     this.yearcrossopen=false
                     this.yearcomponentclosed=true
                     this.yearformstatekeeper = []
-                 
+                   
                 }
 
                 
@@ -1244,7 +1270,7 @@
                     this.kilocrossopen=false
                     this.kilocomponentclosed=true
                     this.kiloformstatekeeper = []
-                   
+                  
                 }
 
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
@@ -1316,7 +1342,8 @@
                     this.deletedpriceitemhistory=[]
 
                     let w = this.inputsAtWork.indexOf('kiloslider')//нужно для использования в computed свойстве selectedCARScomputed()
-                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars               
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars   
+                            
                 } 
 
                 

@@ -1,13 +1,33 @@
 <template>
+    <div class="card">
 
-    <div class="cardbodyshow">    
-        <div class="cardbodyshow__item"
-        @click="deletebodyshow()"
-        >
-            <i class="fa-solid fa-xmark cardbodyshow__xmark"></i>
-            <span>{{carbodyshowdata.model}}</span>
-        </div>     
+        <div class="card__img-box ">
+            <div class="card__img-box-wrapper ">
+                <img :src="require('../../assets/images/'+ cardata.image)" alt="img" class="card__img" >
+            </div> 
+        </div>
+
+        <div class="card__text-box">
+            <div class="card__text-box-make-model">
+                {{cardata.make}} {{cardata.model}}
+            </div>
+            <div class="card__text-box-price">
+               $ {{cardata.price}}
+            </div>
+            <div class="card__text-box-values">
+                <p>{{cardata.year}} year</p>
+                <p>{{cardata.bodytype}}</p>
+                <p>{{cardata.transmission}}</p>
+                <p>{{cardata.kilometers}}</p>                
+            </div>
+        </div>
+
+
+         
         
+        
+            
+
     </div>
 
 </template>
@@ -19,24 +39,30 @@
     
 
     export default {
-        name: 'ca-bodyshow',
-        props:['cardbodyshow'],
+        name: 'ca-carddatashow',
+        props:['car'],
         components: {
 
         },
         data() {
             return {
 
-            carbodyshowdata:this.carbodyshow,
- 
+            cardata:this.car,
+           
+              
+
+
+                
+
+                
+          
+
             }
 
         },
         methods: {
             
-            deletebodyshow() {
-                this.$emit('deletedbodyshowtoparent', this.carbodyshowdata)
-            }
+       
                                   
         },
         
@@ -44,10 +70,10 @@
 
            
 
-            carbodyshow (val) {
+            car (val) {
                 
-                this.carbodyshowdata = val
-                this.carbodyshowdata = [...new Set(this.carbodyshowdata)]
+                this.cardata = val
+                this.cardata = [...new Set(this.cardata)]
             },
            
 
@@ -67,34 +93,59 @@
 
 <style lang="scss">
     @import '@/assets/varmix.scss';
-   
+   .card {
     
 
-    .cardbodyshow {
-        &__item {
-            display: inline-block;
-            align-items: center;
-            background-color: aqua;
-            @include letterH4HeadingBurgerMenuTextNumbersDarkBlue;
-            margin-left: 5px;
-            margin-right: 5px;
-            margin-bottom: 3px;
-            margin-top: 3px;
-            
-            cursor: pointer;
-            &:hover {
-                color: #7481FF;
-            }
+    display: flex;
+    flex-direction: column;
+
+		&__img-box {
+            padding-left: 5px;
+            padding-right: 5px;
+    
+		}
+
+        &__img-box-wrapper {
+            position: relative;
+            padding-top: 56.25%;
         }
+
+		&__img {
+           position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: auto;
+		}
+
+		&__text-box {
         
+            padding: 15px;
+		}
 
-    }    
+        &__text-box-make-model {
+            display: flex;
+            @include letterSemiboldDarkBlue;
 
-       
+        }
 
+        &__text-box-price {
+            @include letterSemiboldDarkBlue;
+            color: #7481FF;
+        }
 
-
-
+        &__text-box-values{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            @include letterContentSecondarySmallGrayClear;
+            p{
+                padding-right: 50px;
+                margin-bottom: 0;
+            }
+           
+        }
+}
 
 
 
