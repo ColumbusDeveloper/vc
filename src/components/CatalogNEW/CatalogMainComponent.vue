@@ -342,12 +342,22 @@
                 </div >
 
                 <div class="ma-mo__card-box ma-mo__card-box-body" v-if="bodyform">
-                    <div class="ma-mo__card-box ma-mo__card-box-body-calc" v-if="bodycalcshow">
-                        BodyCalc
-                    </div>
+                    <div class="ma-mo__card-box ma-mo__card-box-body-calc" v-if="bodyfinalvar">
+                        <cardbodyfinal
+                        
+                        >
 
-                    <div class="ma-mo__card-box ma-mo__card-box-body-cars" v-if="bodycarsshow">
-                        BodyCars
+                        </cardbodyfinal>
+               
+                    </div>
+                        <cardbodyshow
+                        
+                        >
+
+                        </cardbodyshow>
+
+                    <div class="ma-mo__card-box ma-mo__card-box-body-cars" v-if="bodyarrtoshowvar">
+               
                     </div>
                 </div>
 
@@ -383,6 +393,8 @@
     import cardkilo from '@/components/CatalogNEW/CardKilo.vue'
     import cardyear from '@/components/CatalogNEW/CardYear.vue'
     import cardprice from '@/components/CatalogNEW/CardPrice.vue'
+    import cardbodyfinal from '@/components/CatalogNEW/CardBodyFinal.vue'
+    import cardbodyshow from '@/components/CatalogNEW/CardBodyShow.vue'
     import doubleinprangeprice from '@/components/CatalogNEW/DoubleInputRangePrice.vue'
     import doubleinprangeyear from '@/components/CatalogNEW/DoubleInputRangeYear.vue'
     import inprange from '@/components/CatalogNEW/InputRange.vue'
@@ -398,6 +410,8 @@
             cardkilo,
             cardyear,
             cardprice,
+            cardbodyfinal,
+            cardbodyshow,
             doubleinprangeprice,
             doubleinprangeyear,
             inprange,
@@ -426,7 +440,10 @@
                 modelsearchmodel:'',
                 varconcat:[],
                 bodyarrtoshow:[],
+                bodyfinal:[],
                 toshowobjects:[],
+                bodyarrtoshowvar:Boolean,
+                bodyfinalvar:Boolean,
                 
                
                 
@@ -529,11 +546,11 @@
                 if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
-                    this.bodyarrtoshow = this.cars.slice()
+                    
                 }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
                     this.showcars=true
                     this.showcalculated=false
-                    this.bodyarrtoshow = this.cars.slice()                
+                           
                 } 
                 
 
@@ -556,8 +573,27 @@
                 } 
 
                 
+                if (!this.bodyarrtoshow>0) {
+                    this.bodyarrtoshow = this.cars.slice()
+                }
+
+                if (this.bodyarrtoshow.length>0) {
+                    this.bodyfinal = this.bodyarrtoshow
+                } else {
+                    this.bodyfinal = this.cars.slice()
+                }
+
+                if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
+                    this.bodyfinalvar = true
+                    this.bodyarrtoshowvar = false
+                } else {
+                    this.bodyfinalvar = false
+                    this.bodyarrtoshowvar = true
+                }
+
                 
-                this.bodyarrtoshow = this.cars.slice()
+                
+                
                 
                 
 
@@ -569,6 +605,16 @@
             addToMakeModelCalc() {      
                 this.modelsearchmake = ''
                 this.modelsearchmodel = ''
+                this.bodyarrtoshow = this.calculatedcars
+                this.toshowobjects = []
+                this.bodyfinal = []
+                if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
+                    this.bodyfinalvar = true
+                    this.bodyarrtoshowvar = false
+                } else {
+                    this.bodyfinalvar = false
+                    this.bodyarrtoshowvar = true
+                }
             },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
                 let a = this.cars.slice()
@@ -629,6 +675,8 @@
                     this.bodycheck=true
                     this.bodycross=false
                     this.bodyclosed=false
+                  
+                    
                     
                 
                 } else if (this.bodystatekeeper.length===2) {
@@ -648,11 +696,20 @@
                     this.bodystatekeeper = [] 
                     this.modelsearchmake = ''
                     this.modelsearchmodel = ''
-                          
+                    
+                    this.toshowobjects = []  
+                 
                 }
+                
                 
 
                 
+
+                if (this.toshowobjects.length>0) {
+                    this.bodyfinal = this.toshowobjects
+                }
+
+                this.show ()
 
                 
 
@@ -724,6 +781,19 @@
                             }
 
                     }
+
+                    this.bodyfinal = this.bodyarrtoshow
+                    if (this.toshowobjects.length>0) {
+                        this.bodyfinal = this.toshowobjects
+                    }
+
+                    if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
+                    this.bodyfinalvar = true
+                    this.bodyarrtoshowvar = false
+                    } else {
+                        this.bodyfinalvar = false
+                        this.bodyarrtoshowvar = true
+                    }
                    
             },
 
@@ -757,6 +827,7 @@
                     this.transcheck = true
                     this.transcross = false
                     this.transclosed = false
+                 
                 
                 } else if (this.transformstatekeeper.length===2) {
                    
@@ -906,7 +977,8 @@
                     this.pricetrigger = true //нужен для определения промежуточного состояния, когда форма открыта, но последующий клик не перезапускает форму
                     this.priceinputopen=true
                     this.pricecrossopen=false
-                    this.pricecomponentclosed=false                  
+                    this.pricecomponentclosed=false 
+                            
                 }else if (this.priceformstatekeeper.length===2) {
                     this.priceinpforminput = false
                     this.priceinpformcross = true
@@ -923,7 +995,7 @@
                     this.pricecrossopen=false
                     this.pricecomponentclosed=true
                     this.priceformstatekeeper = []
-                   
+            
                 }
 
                 
@@ -1029,6 +1101,7 @@
                     this.yearinputopen=true
                     this.yearcrossopen=false
                     this.yearcomponentclosed=false
+                 
                 }else if (this.yearformstatekeeper.length===2) {
                     this.yearinpforminput = false
                     this.yearinpformcross = true
@@ -1045,7 +1118,7 @@
                     this.yearcrossopen=false
                     this.yearcomponentclosed=true
                     this.yearformstatekeeper = []
-                    
+                 
                 }
 
                 
@@ -1154,6 +1227,7 @@
                     this.kiloinputopen=true
                     this.kilocrossopen=false
                     this.kilocomponentclosed=false
+                
                 }else if (this.kiloformstatekeeper.length===2) {
                     this.kiloinpforminput = false
                     this.kiloinpformcross = true
@@ -1170,6 +1244,7 @@
                     this.kilocrossopen=false
                     this.kilocomponentclosed=true
                     this.kiloformstatekeeper = []
+                   
                 }
 
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные

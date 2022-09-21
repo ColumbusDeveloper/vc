@@ -1,11 +1,11 @@
 <template>
 
-    <div class="cardkilo">    
-        <div class="cardkilo__item"
-        @click="deletekilo()"
+    <div class="cardbodyshow">    
+        <div class="cardbodyshow__item"
+        @click="deletebodyshow()"
         >
-            <i class="fa-solid fa-xmark cardkilo__xmark"></i>
-            <span>{{carkilodata.kilometers}}</span>
+            <i class="fa-solid fa-xmark cardbodyshow__xmark"></i>
+            <span>{{carbodyshowdata.model}}</span>
         </div>     
         
     </div>
@@ -19,23 +19,23 @@
     
 
     export default {
-        name: 'ca-kilo',
-        props:['carkilo'],
+        name: 'ca-bodyshow',
+        props:['cardbodyshow'],
         components: {
 
         },
         data() {
             return {
 
-            carkilodata:this.carkilo,
+            carbodyshowdata:this.carbodyshow,
  
             }
 
         },
         methods: {
             
-            deletekilo() {
-                this.$emit('deletedkilotoparent', this.carkilodata)
+            deletebodyshow() {
+                this.$emit('deletedbodyshowtoparent', this.carbodyshowdata)
             }
                                   
         },
@@ -44,10 +44,10 @@
 
            
 
-            carkilo (val) {
+            carbodyshow (val) {
                 
-                this.carkilodata = val
-                this.carkilodata = [...new Set(this.carkilodata)]
+                this.carbodyshowdata = val
+                this.carbodyshowdata = [...new Set(this.carbodyshowdata)]
             },
            
 
@@ -70,7 +70,7 @@
    
     
 
-    .cardkilo {
+    .cardbodyshow {
         &__item {
             display: inline-block;
             align-items: center;
