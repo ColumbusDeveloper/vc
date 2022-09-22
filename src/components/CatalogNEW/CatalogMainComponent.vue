@@ -14,6 +14,50 @@
             </div>   
 
             <div class="ma-mo__detailed-search-box-calk-container" @click="setunduwarning">
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinpbody:bodyform,activecross:bodyinpformcross}">
+                        <div class="ma-mo__open-arrow-box arr-box">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text">
+                                Body type
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedBodyType(),setunduwarningBody ()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="bodyform"></i></div>
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="bodyform===false"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="ma-mo__detailed-search-box-doubleinprange-price-box inp-cont-box" v-if="bodyform">
+
+                            
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box" v-if="bodyforminput">
+    
+                                <div class="bodymake">
+                                    <span class="bodymake__text">Make</span>
+                                    <div class="bodymake__input-box make" >
+                                        <input type="text" v-model="modelsearchmake" id="make" @input="setBodyTypeShowOrderCars (),clearModel()"  placeholder="Search Make..." >
+                                        <i class="fa-sharp fa-solid fa-magnifying-glass bodymake__input-box-glass"></i>
+                                    </div>
+                                </div>
+
+                                <div class="bodymodel">
+                                    <span class="bodymodel__text">Model</span>
+                                    <div class="bodymodel__input-box">
+                                        <input type="text" v-model="modelsearchmodel" id="model" @input="setBodyTypeShowOrderCars ()"  placeholder="Search Model..." class="bodymodel__input-box-inp">
+                                        <i class="fa-sharp fa-solid fa-magnifying-glass bodymodel__input-box-glass"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="bodyinpformcross">
+
+                                cross
+
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
                     <div class="ma-mo__detailed-search-box-trans inp-container"  :class="{activeinptrans:transinpform}">
                         <div class="ma-mo__open-arrow-box arr-box">
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
@@ -46,11 +90,11 @@
 
                             
                             <div class="transmission-choice-block__result" v-if="transinpformcross" :class="{activecross:transinpformcross}">
-                                <div class="transmission-choice-block__result-item" v-if="automatictransinpformcross" @click="setTransModelAutomatic">
+                                <div class="transmission-choice-block__result-item" v-if="automatictransinpformcross" @click="setTransModelAutomatic,addToMakeModelCalc">
                                     <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
                                     <span class="transmission-choice-block__result-item-text">Automatic</span>
                                 </div>
-                                <div class="transmission-choice-block__result-item" v-if="manualtransinpformcross" @click="setTransModelManual">
+                                <div class="transmission-choice-block__result-item" v-if="manualtransinpformcross" @click="setTransModelManual,addToMakeModelCalc">
                                     <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
                                     <span class="transmission-choice-block__result-item-text">Manual</span>
                                 </div> 
@@ -91,7 +135,7 @@
                                 :carspropsprice="cars"
                                 @minpricedata="minprice=$event"
                                 @maxpricedata="maxprice=$event"
-                                @input="addToTestArrPrice()"
+                                @input="addToTestArrPrice(),addToMakeModelCalc()"
                                 >
 
                                 </doubleinprangeprice> 
@@ -103,16 +147,16 @@
                                 v-for="car in calculatedcars" :key="car"
                                 :carprice="car"
                                 @deletedpricetoparent="deletedpriceitem=$event"
-                                @click="setunduwarningprice ()"
+                                @click="setunduwarningprice (),addToMakeModelCalc()"
                                 >
 
 
                                 </cardprice>
                                 <div class="inp-box-cross-on-undo"
-                                @click="setunduwarningprice ()"
+                                @click="setunduwarningprice (),addToMakeModelCalc()"
                                 >
                                     <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningprice" @click="undopricecomponent" >
-                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningprice ()"  >UNDO</span> 
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningprice (),addToMakeModelCalc()"  >UNDO</span> 
                                     </div>
                                     <div class="inp-box-cross-on-undo__text-statement-box">
                                         <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -131,7 +175,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Year
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarningyear ()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarningyear (),addToMakeModelCalc()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="yeardbinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="yeardbinpform===false"></i></div>
                             </div>
@@ -156,7 +200,7 @@
                                 :carspropsyear="cars"
                                 @minyeardata="minyear=$event"
                                 @maxyeardata="maxyear=$event"
-                                @input="addToTestArrYear()"
+                                @input="addToTestArrYear(),addToMakeModelCalc()"
     
                                 >
 
@@ -169,16 +213,16 @@
                                 v-for="car in calculatedcars" :key="car"
                                 :caryear="car"
                                 @deletedyeartoparent="deletedyearitem=$event"
-                                @click="setunduwarningyear ()"
+                                @click="setunduwarningyear (),addToMakeModelCalc()"
                                 >
 
 
                                 </cardyear>
                                 <div class="inp-box-cross-on-undo"
-                                @click="setunduwarningyear ()"
+                                @click="setunduwarningyear (),addToMakeModelCalc()"
                                 >
                                     <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningyear" @click="undoyearcomponent" >
-                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningyear ()"  >UNDO</span> 
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningyear (),addToMakeModelCalc()"  >UNDO</span> 
                                     </div>
                                     <div class="inp-box-cross-on-undo__text-statement-box">
                                         <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -200,7 +244,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Kilometers
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarningkilo ()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarningkilo (),addToMakeModelCalc()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="kiloinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="kiloinpform===false"></i></div>
                             </div>
@@ -220,7 +264,7 @@
                                 <inprange class="ma-mo__detailed-search-box-inprange-input-box-elem inp-box-component"
                                 :carspropsinprange="cars"
                                 @datafromsingleinput="kilocompdata=$event"
-                                @input="addToTestArrKilo()"
+                                @input="addToTestArrKilo(),addToMakeModelCalc()"
                                 >
 
                                 </inprange> 
@@ -235,18 +279,18 @@
                                     :class="{arrfirstitem:index===this.calculatedcarskiloactualmaxvalindex}"
                                     :carkilo="car"
                                     @deletedkilotoparent="deletedkiloitem=$event"
-                                    @click="setunduwarningkilo ()"
+                                    @click="setunduwarningkilo (),addToMakeModelCalc()"
                                   
                                     >
                                    
 
                                     </cardkilo>
                                     <div class="inp-box-cross-on-undo"
-                                    @click="setunduwarningkilo ()"
+                                    @click="setunduwarningkilo (),addToMakeModelCalc()"
                                   
                                     >
                                         <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarning" @click="undokilocomponent" >
-                                            <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningkilo ()"  >UNDO</span> 
+                                            <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningkilo (),addToMakeModelCalc()"  >UNDO</span> 
                                         </div>
                                         <div class="inp-box-cross-on-undo__text-statement-box">
                                             <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -295,7 +339,13 @@
                     >
 
                     </ca>
-                </div>
+                </div >
+
+               
+                
+                
+
+                
 
 
 
@@ -327,6 +377,7 @@
     import cardkilo from '@/components/CatalogNEW/CardKilo.vue'
     import cardyear from '@/components/CatalogNEW/CardYear.vue'
     import cardprice from '@/components/CatalogNEW/CardPrice.vue'
+   
     import doubleinprangeprice from '@/components/CatalogNEW/DoubleInputRangePrice.vue'
     import doubleinprangeyear from '@/components/CatalogNEW/DoubleInputRangeYear.vue'
     import inprange from '@/components/CatalogNEW/InputRange.vue'
@@ -342,6 +393,7 @@
             cardkilo,
             cardyear,
             cardprice,
+          
             doubleinprangeprice,
             doubleinprangeyear,
             inprange,
@@ -358,6 +410,29 @@
                 showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
                 
                 
+                
+                bodyform:false,
+                
+                bodyinpformcross:false,
+                bodycheck:Boolean,
+                bodycross:Boolean,
+                bodyclosed:Boolean,
+                bodystatekeeper:[],
+                modelsearchmake:'',
+                modelsearchmodel:'',
+                varconcat:[],
+                bodyarrtoshow:this.cars,
+                bodyfinal:[],
+                toshowobjects:[],
+                
+                
+               
+                
+               
+                
+                
+
+
                 
                 transinpform:false,
                 automatictrans:true,
@@ -449,14 +524,25 @@
         },
         methods: {
             show () { //определяет состояние переменных и если хоть один компонент включен, то показывается итерация по массиву showcalculated
-                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform) {//если хоть один инпут включенный
+                
+                
+                
+                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
-                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform) {
+                    
+ 
+                    
+                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
                     this.showcars=true
-                    this.showcalculated=false                
+                    this.showcalculated=false
+                           
                 }
+                
+
+
                 let a = this.catalogpropscars
+
                 if (!this.testarr.includes('automatic') && this.testarr.includes('manual')) {
                     this.cars = a.filter(el=>el.transmission==='Manual')
                     this.calculatedcars = a.filter(el=>el.transmission==='Manual')
@@ -471,9 +557,43 @@
                     this.cars = a
                     this.calculatedcars = this.cars
                 } 
+
+
+
+                
+                
+                
+                
+
+                
+
+                
+                
+                
+                
+                
+
                 
                
                     
+            },
+
+            addToMakeModelCalc() {      
+                this.modelsearchmake = ''
+                this.modelsearchmodel = ''
+                
+                this.toshowobjects = []
+                this.bodyfinal = []
+                // if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
+                //     this.bodyfinalvar = true
+                //     this.bodyarrtoshowvar = false
+                // } else {
+                //     this.bodyfinalvar = false
+                //     this.bodyarrtoshowvar = true
+                // }
+                // if (this.calculatedcars.length>0) {
+                //     this.bodyarrtoshow = this.calculatedcars
+                // } else this.bodyarrtoshow = this.cars.slice()
             },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
                 let a = this.cars.slice()
@@ -524,9 +644,157 @@
                 }         
             },
 
+            getStartedBodyType() {
+                
+                this.bodystatekeeper.push(1)
+               
+                if (this.bodystatekeeper.length===1) {
+                    this.bodyform = true
+                    this.bodyforminput = true
+                    this.bodycheck=true
+                    this.bodycross=false
+                    this.bodyclosed=false
+                  
+                    
+                    
+                
+                } else if (this.bodystatekeeper.length===2) {
+                    this.bodyforminput = false
+                    this.bodyinpformcross=true
+                    this.bodycheck=false
+                    this.bodycross=true
+                    this.bodyclosed=false
+                    
+                    
+                }else {
+                    this.bodyform = false
+                    this.bodyforminput = false
+                    this.bodyinpformcross=false
+                    this.bodycheck=false
+                    this.bodycross=false
+                    this.bodyclosed=true   
+                    this.bodystatekeeper = [] 
+                    this.modelsearchmake = ''
+                    this.modelsearchmodel = ''
+                    this.toshowobjects = []  
+                 
+                }
+
+                this.show ()
+                
+                
+                
+
+                
+
+                if (this.toshowobjects.length>0) {
+                    this.calculatedcars  = this.toshowobjects
+                }
+
+                
+
+                
+
+                
+
+            },
+
+            setBodyTypeShowOrderCars () {
+                    this.varconcat = this.modelSearchMakeSource.concat(this.modelSearchModelSource) 
+                
+                    if (this.modelSearchMakeSource.length>0 && this.modelSearchModelSource.length>0) {
+                                let x = []
+                                for (let i = 0; i<this.varconcat.length; i++) {
+                                    let a = this.varconcat[i] 
+                                    let b = this.varconcat.filter(el=>el===a).length
+                                    if (b===2) {
+
+                                        this.cars.forEach(el=>{
+                                                let s = el
+                                                let q = el.id 
+                                                if (a===q) {
+                                                    x.push(s)
+                                                }
+                                        })
+                                        this.toshowobjects = x
+                                        this.toshowobjects = [...new Set(this.toshowobjects)]
+                                        this.calculatedcars = this.toshowobjects
+                                    
+                                }
+                                
+                        }
+
+                    }
+                    
+                    if (this.modelSearchMakeSource.length>0 && !this.modelSearchModelSource.length>0) {
+                            let x = []
+                            for (let i = 0; i<this.modelSearchMakeSource.length; i++) {
+                                let a = this.modelSearchMakeSource[i] 
+                                
+                                this.cars.forEach(el=>{
+                                        let s = el
+                                        let w = el.id
+                                        if (a===w) {
+                                            x.push(s)
+                                        }
+                                }) 
+                                this.toshowobjects = x
+                                this.toshowobjects = [...new Set(this.toshowobjects)]
+                                this.calculatedcars = this.toshowobjects                 
+                                
+                            }
+                            
+
+                    }
+
+                    if (!this.modelSearchMakeSource.length>0 && this.modelSearchModelSource.length>0) {
+                            let x = []
+                            for (let i = 0; i<this.modelSearchModelSource.length; i++) {
+                                let a = this.this.modelSearchModelSource[i] 
+                                
+                                this.cars.forEach(el=>{
+                                        let s = el
+                                        let w = el.id
+                                        if (a===w) {
+                                            x.push(s)
+                                        }
+                                })
+
+                                this.toshowobjects = x
+                                this.toshowobjects = [...new Set(this.toshowobjects)]
+                                this.calculatedcars = this.toshowobjects
+                                
+                            
+                                
+                            }
+                            
+
+                    }
+
+                    
+                    
+                   
+            },
+
+            
+           
+
+            clearModel () {
+ 
+                this.modelsearchmodel = ''
+            },
+            
+
+           
+
             
            
             getStartedInpTrans() {
+
+                
+                this.modelsearchmake = ''
+                this.modelsearchmodel = ''
+
                 this.transformstatekeeper.push(1)
                    
                 if (this.transformstatekeeper.length===1) {
@@ -538,6 +806,7 @@
                     this.transcheck = true
                     this.transcross = false
                     this.transclosed = false
+                 
                 
                 } else if (this.transformstatekeeper.length===2) {
                    
@@ -562,6 +831,7 @@
                     this.testarr.splice(x,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                     let z = this.testarr.indexOf('manual')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(z,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
+               
                 }
 
                 this.show ()
@@ -589,6 +859,7 @@
 
 
                 this.show ()
+                this.addToMakeModelCalc()
                           
             },
 
@@ -611,9 +882,11 @@
                 } 
 
                 this.show ()
+                this.addToMakeModelCalc()
             },
             
             setTransModelAutomatic () {
+                
                 if (this.automatictransinpformcross && !this.manualtransinpformcross ) {
                     this.automatictrans = true
                     this.automatictransinpformcross = true
@@ -637,6 +910,7 @@
                 }
 
                 this.show ()
+                this.addToMakeModelCalc()
       
             },
             setTransModelManual () {
@@ -663,6 +937,7 @@
                 }
 
                 this.show ()
+                this.addToMakeModelCalc()
 
                           
             },
@@ -670,7 +945,10 @@
 
             getStartedInpPrice() { //при клике на стрелку компонента запускается функция
 
-
+                
+                this.modelsearchmake = ''
+                this.modelsearchmodel = ''
+                
                 this.priceformstatekeeper.push(1)//описывает в какой последовательности открывать и закрывать форму и части формы
                 if (this.priceformstatekeeper.length===1) {
                     this.pricedbinpform = true
@@ -679,7 +957,8 @@
                     this.pricetrigger = true //нужен для определения промежуточного состояния, когда форма открыта, но последующий клик не перезапускает форму
                     this.priceinputopen=true
                     this.pricecrossopen=false
-                    this.pricecomponentclosed=false                  
+                    this.pricecomponentclosed=false 
+                            
                 }else if (this.priceformstatekeeper.length===2) {
                     this.priceinpforminput = false
                     this.priceinpformcross = true
@@ -687,7 +966,7 @@
                     this.priceinputopen=false
                     this.pricecrossopen=true
                     this.pricecomponentclosed=false
-                } else {
+                } else if (this.priceformstatekeeper.length===3) {
                     this.priceinpforminput = false
                     this.priceinpformcross = false
                     this.pricedbinpform = false
@@ -696,8 +975,13 @@
                     this.pricecrossopen=false
                     this.pricecomponentclosed=true
                     this.priceformstatekeeper = []
-                   
+                    
+                    
+                    
+            
                 }
+
+                
 
                 
                 
@@ -789,7 +1073,10 @@
 
 
             getStartedInpYear() {//при клике на стрелку компонента запускается функция, аналогично указанному выше, только для другого компонента
-
+              
+                this.modelsearchmake = ''
+                this.modelsearchmodel = ''
+                
                 this.yearformstatekeeper.push(1)//описывает в какой последовательности открывать и закрывать форму и части формы
                 if (this.yearformstatekeeper.length===1) {
                     this.yeardbinpform = true
@@ -799,6 +1086,7 @@
                     this.yearinputopen=true
                     this.yearcrossopen=false
                     this.yearcomponentclosed=false
+                 
                 }else if (this.yearformstatekeeper.length===2) {
                     this.yearinpforminput = false
                     this.yearinpformcross = true
@@ -815,7 +1103,7 @@
                     this.yearcrossopen=false
                     this.yearcomponentclosed=true
                     this.yearformstatekeeper = []
-                    
+                   
                 }
 
                 
@@ -910,6 +1198,9 @@
 
 
             getStartedInpKilo() {
+             
+                this.modelsearchmake = ''
+                this.modelsearchmodel = ''
                 
 
                 this.kiloformstatekeeper.push(1)//описывает в какой последовательности открывать и закрывать форму и части формы
@@ -921,6 +1212,7 @@
                     this.kiloinputopen=true
                     this.kilocrossopen=false
                     this.kilocomponentclosed=false
+                
                 }else if (this.kiloformstatekeeper.length===2) {
                     this.kiloinpforminput = false
                     this.kiloinpformcross = true
@@ -937,6 +1229,7 @@
                     this.kilocrossopen=false
                     this.kilocomponentclosed=true
                     this.kiloformstatekeeper = []
+                  
                 }
 
                 this.show ()//запускает метод, который определяет, какой массив показывать, то ли все авто на сайте, то ли вычисленные
@@ -1008,7 +1301,8 @@
                     this.deletedpriceitemhistory=[]
 
                     let w = this.inputsAtWork.indexOf('kiloslider')//нужно для использования в computed свойстве selectedCARScomputed()
-                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars               
+                    this.inputsAtWork.splice(w,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars   
+                            
                 } 
 
                 
@@ -1049,11 +1343,14 @@
                 this.cars = val
             },
             selectedCARScomputed(val) { //вычисляемое свойство, которое динамически возвращает объекты из массива cars отобранные в ходе работы инпутов компонентов         
-                this.calculatedcars = val                           
+                this.calculatedcars = val  
+                this.bodyarrtoshow = val                         
             },
 
 
+            
 
+          
 
             setMinPriceRealNumber (val) {//берет соответствующего названия computed свойство и в зависимости от приходящих данных
                 
@@ -1131,10 +1428,34 @@
            
                     
         },
-        automatictrans:false,
-                manualtrans:false,
+      
 
         computed: {   
+            
+            modelSearchMakeSource () {
+                let a = []
+                let b = []
+                b = this.bodyarrtoshow.filter(car=>{
+                    return car.make.toUpperCase().indexOf(this.modelsearchmake.toUpperCase()) !== -1
+                }) 
+                for (let i = 0; i<b.length; i++) {
+                    let c = b[i].id
+                    a.push(c)
+                }
+                return a
+            },
+            modelSearchModelSource () {    
+                let a = []
+                let b = []        
+                b = this.bodyarrtoshow.filter(car=>{
+                    return car.model.toUpperCase().indexOf(this.modelsearchmodel.toUpperCase()) !== -1
+                }) 
+                for (let i = 0; i<b.length; i++) {
+                    let c = b[i].id
+                    a.push(c)
+                }
+                return a
+            },
               
             setMinPriceRealNumber () {
                 let a = this.minprice - 1//массив arrOfPrices отсортирован по возрастанию (это очень важно), соответственно, цифры в модели будут 
@@ -1246,6 +1567,7 @@
                                         //НОВЫХ ДАННЫХ, ТАК У НАС ПОСТОЯННО АКТУАЛЬНЫЕ ДАННЫЕ
             },
             
+            
 
         
         },
@@ -1254,7 +1576,7 @@
         mounted () {
             
             this.SetAllId ()
-            
+            this.bodyarrtoshow = this.cars.slice()
             
             
         },
@@ -1273,6 +1595,49 @@
 
     .ma-mo {
         display: flex;
+        
+
+        .bodymake {
+
+            &__text {
+               
+            }
+
+            &__input-box {
+                position: relative;
+            }
+
+            &__input-box-inp {
+            }
+
+            &__input-box-glass {
+                position:absolute;
+                left: 160px;
+                top: 8px;
+            }
+
+        }
+
+        .bodymodel {
+
+            &__text {
+            }
+
+            &__input-box {
+                position: relative;
+            }
+
+            &__input-box-inp {
+            }
+
+            &__input-box-glass {
+                position:absolute;
+                left: 160px;
+                top: 8px;
+            }
+        }
+
+      
 		&__detailed-search-box {
             display: flex;
             flex-direction: column;
@@ -1438,6 +1803,10 @@
             height: 123px;
             padding-bottom: 25px; 
         }
+        .activeinpbody {
+            height: 180px;
+            padding-bottom: 25px; 
+        }
         .activeinpyear {
              height: 123px;
              padding-bottom: 25px;
@@ -1537,7 +1906,10 @@
         
 
 
-    }
+}
+
+
+
 
 
     
