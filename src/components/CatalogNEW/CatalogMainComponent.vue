@@ -19,7 +19,7 @@
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
                                 Make,Model
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedBodyType(),setunduwarningBody ()">
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedBodyType()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="bodyform"></i></div>
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="bodyform===false"></i></div>
                             </div>
@@ -54,7 +54,7 @@
                                 v-for="car in calculatedcars" :key="car"
                                 :carbody="car"
                                 @deletedbodytoparent="deletedbodyitem=$event"
-                                @click="setunduwarningpbody (),addToMakeModelCalc()"
+                                @click="addToMakeModelCalc()"
                                 >
 
 
@@ -62,8 +62,8 @@
                                 <div class="inp-box-cross-on-undo"
                                 @click="addToMakeModelCalc()"
                                 >
-                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningbody" @click="undobodycomponent" >
-                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningpbody (),addToMakeModelCalc(),undobodycomponent"  >UNDO</span> 
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="this.deletedbodyitemhistory.length>0" @click="undobodycomponent" >
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
                                     </div>
                                     <div class="inp-box-cross-on-undo__text-statement-box">
                                         <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
@@ -419,7 +419,8 @@
         },
         data() {
             return {
-                cars: this.catalogpropscars,
+                reference:[],
+                cars:this.catalogpropscars,
                 allid:[],//все имеющиеся в массиве cars id
                 
                 inputsAtWork:[],//массив с формами всех включенных компонентов, отслеживаем длинну, для отрисовки calcID через повторения
@@ -439,7 +440,7 @@
                 modelsearchmake:'',
                 modelsearchmodel:'',
                 varconcat:[],
-                bodyarrtoshow:this.cars,
+                bodyarrtoshow:[],
                 bodyfinal:[],
                 toshowobjects:[],
                 deletedbodyitem:[],
@@ -559,8 +560,17 @@
                     this.showcalculated=false
                            
                 }
-                
 
+                if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform) {
+                    this.showcars=true
+                    this.showcalculated=false
+                    
+
+                }
+
+              
+                
+                
 
                 let a = this.catalogpropscars
 
@@ -581,9 +591,9 @@
 
 
                 if (this.calculatedcars.length>0) {
-                    this.bodyarrtoshow = this.calculatedcars
+                    this.bodyarrtoshow = this.calculatedcars.slice()
                 } else {
-                    this.bodyarrtoshow = this.cars
+                    this.bodyarrtoshow = this.cars.slice()
                 }
                 
                 
@@ -672,6 +682,8 @@
             getStartedBodyType() {
                 
                 this.bodystatekeeper.push(1)
+
+                
                
                 if (this.bodystatekeeper.length===1) {
                     this.bodyform = true
@@ -702,7 +714,8 @@
                     this.modelsearchmake = ''
                     this.modelsearchmodel = ''
                     this.toshowobjects = []  
-                 
+                    this.deletedbodyitemhistory = []
+                    this.bodyarrtoshow = this.cars.slice()
                 }
 
                 this.show ()
@@ -725,6 +738,10 @@
             },
 
             setBodyTypeShowOrderCars () {
+                    this.showcars=false
+                    this.showcalculated=true
+                  
+
                     this.varconcat = this.modelSearchMakeSource.concat(this.modelSearchModelSource) 
                 
                     if (this.modelSearchMakeSource.length>0 && this.modelSearchModelSource.length>0) {
@@ -743,7 +760,7 @@
                                         })
                                         this.toshowobjects = x
                                         this.toshowobjects = [...new Set(this.toshowobjects)]
-                                        this.calculatedcars = this.toshowobjects
+                                        this.calculatedcars = this.toshowobjects.slice()
                                     
                                 }
                                 
@@ -765,7 +782,7 @@
                                 }) 
                                 this.toshowobjects = x
                                 this.toshowobjects = [...new Set(this.toshowobjects)]
-                                this.calculatedcars = this.toshowobjects                 
+                                this.calculatedcars = this.toshowobjects.slice()                 
                                 
                             }
                             
@@ -787,7 +804,7 @@
 
                                 this.toshowobjects = x
                                 this.toshowobjects = [...new Set(this.toshowobjects)]
-                                this.calculatedcars = this.toshowobjects
+                                this.calculatedcars = this.toshowobjects.slice()
                                 
                             
                                 
@@ -810,6 +827,8 @@
             },
 
             undobodycomponent () {
+                this.cars = this.reference.slice()
+           
                 if (this.calculatedcars.length<14) {
                     let a = this.deletedbodyitemhistory[0]
                     let b = this.cars.find(el=>el.id===a)
@@ -820,6 +839,9 @@
                     this.calculatedcars = w
                
                 }
+
+                this.showcars=false
+                this.showcalculated=true
     
             },
             
@@ -1014,6 +1036,8 @@
                     this.pricecrossopen=false
                     this.pricecomponentclosed=true
                     this.priceformstatekeeper = []
+
+                    
                     
                     
                     
@@ -1484,6 +1508,7 @@
             modelSearchMakeSource () {
                 let a = []
                 let b = []
+                
                 b = this.bodyarrtoshow.filter(car=>{
                     return car.make.toUpperCase().indexOf(this.modelsearchmake.toUpperCase()) !== -1
                 }) 
@@ -1625,8 +1650,8 @@
         mounted () {
             
             this.SetAllId ()
-            this.bodyarrtoshow = this.cars.slice()
-            
+          
+            this.reference = this.catalogpropscars.slice()
             
         },
         created() {
