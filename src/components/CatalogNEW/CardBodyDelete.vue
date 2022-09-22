@@ -5,7 +5,7 @@
         @click="deletebody()"
         >
             <i class="fa-solid fa-xmark cardbody__xmark"></i>
-            <span>{{carbohydrate.model}}</span>
+            <span>{{carbodydata.model}}</span>
         </div>     
         
     </div>

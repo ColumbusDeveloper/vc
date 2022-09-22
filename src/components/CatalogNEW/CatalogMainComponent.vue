@@ -17,9 +17,9 @@
                     <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinpbody:bodyform,activecross:bodyinpformcross}">
                         <div class="ma-mo__open-arrow-box arr-box">
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
-                                Body type
+                                Make,Model
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedBodyType(),setunduwarningBody ()">
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedBodyType()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="bodyform"></i></div>
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="bodyform===false"></i></div>
                             </div>
@@ -50,7 +50,25 @@
                             </div>
                             <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="bodyinpformcross">
 
-                                cross
+                                <cardbodydelete
+                                v-for="car in calculatedcars" :key="car"
+                                :carbody="car"
+                                @deletedbodytoparent="deletedbodyitem=$event"
+                                @click="addToMakeModelCalc()"
+                                >
+
+
+                                </cardbodydelete>
+                                <div class="inp-box-cross-on-undo"
+                                @click="addToMakeModelCalc()"
+                                >
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="this.deletedbodyitemhistory.length>0" @click="undobodycomponent" >
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
+                                    </div>
+                                    <div class="inp-box-cross-on-undo__text-statement-box">
+                                        <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
+                                    </div>  
+                                </div>
 
                             </div>
 
@@ -377,7 +395,7 @@
     import cardkilo from '@/components/CatalogNEW/CardKilo.vue'
     import cardyear from '@/components/CatalogNEW/CardYear.vue'
     import cardprice from '@/components/CatalogNEW/CardPrice.vue'
-   
+    import cardbodydelete from '@/components/CatalogNEW/CardBodyDelete.vue'
     import doubleinprangeprice from '@/components/CatalogNEW/DoubleInputRangePrice.vue'
     import doubleinprangeyear from '@/components/CatalogNEW/DoubleInputRangeYear.vue'
     import inprange from '@/components/CatalogNEW/InputRange.vue'
@@ -393,7 +411,7 @@
             cardkilo,
             cardyear,
             cardprice,
-          
+            cardbodydelete,
             doubleinprangeprice,
             doubleinprangeyear,
             inprange,
@@ -401,7 +419,8 @@
         },
         data() {
             return {
-                cars: this.catalogpropscars,
+                reference:[],
+                cars:this.catalogpropscars,
                 allid:[],//все имеющиеся в массиве cars id
                 
                 inputsAtWork:[],//массив с формами всех включенных компонентов, отслеживаем длинну, для отрисовки calcID через повторения
@@ -421,9 +440,12 @@
                 modelsearchmake:'',
                 modelsearchmodel:'',
                 varconcat:[],
-                bodyarrtoshow:this.cars,
+                bodyarrtoshow:[],
                 bodyfinal:[],
                 toshowobjects:[],
+                deletedbodyitem:[],
+                deletedbodyitemhistory:[],
+                unduwarningbody:false,
                 
                 
                
@@ -538,8 +560,17 @@
                     this.showcalculated=false
                            
                 }
-                
 
+                if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform) {
+                    this.showcars=true
+                    this.showcalculated=false
+                    
+
+                }
+
+              
+                
+                
 
                 let a = this.catalogpropscars
 
@@ -559,7 +590,11 @@
                 } 
 
 
-
+                if (this.calculatedcars.length>0) {
+                    this.bodyarrtoshow = this.calculatedcars.slice()
+                } else {
+                    this.bodyarrtoshow = this.cars.slice()
+                }
                 
                 
                 
@@ -584,16 +619,7 @@
                 
                 this.toshowobjects = []
                 this.bodyfinal = []
-                // if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
-                //     this.bodyfinalvar = true
-                //     this.bodyarrtoshowvar = false
-                // } else {
-                //     this.bodyfinalvar = false
-                //     this.bodyarrtoshowvar = true
-                // }
-                // if (this.calculatedcars.length>0) {
-                //     this.bodyarrtoshow = this.calculatedcars
-                // } else this.bodyarrtoshow = this.cars.slice()
+              
             },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
                 let a = this.cars.slice()
@@ -614,6 +640,15 @@
             },
             addToTestArrPrice() {
                 this.pricearrtest.push(1)
+            },
+            setunduwarningbody () {
+                if (this.deletedbodyitemhistory.length>0 ) {
+                    this.unduwarningbody = true  
+             
+                }else {
+                    this.unduwarningbody = false
+         
+                }            
             },
             setunduwarningprice () {
                 if (this.deletedpriceitemhistory.length>0 ) {
@@ -647,6 +682,8 @@
             getStartedBodyType() {
                 
                 this.bodystatekeeper.push(1)
+
+                
                
                 if (this.bodystatekeeper.length===1) {
                     this.bodyform = true
@@ -677,7 +714,8 @@
                     this.modelsearchmake = ''
                     this.modelsearchmodel = ''
                     this.toshowobjects = []  
-                 
+                    this.deletedbodyitemhistory = []
+                    this.bodyarrtoshow = this.cars.slice()
                 }
 
                 this.show ()
@@ -700,6 +738,10 @@
             },
 
             setBodyTypeShowOrderCars () {
+                    this.showcars=false
+                    this.showcalculated=true
+                  
+
                     this.varconcat = this.modelSearchMakeSource.concat(this.modelSearchModelSource) 
                 
                     if (this.modelSearchMakeSource.length>0 && this.modelSearchModelSource.length>0) {
@@ -718,7 +760,7 @@
                                         })
                                         this.toshowobjects = x
                                         this.toshowobjects = [...new Set(this.toshowobjects)]
-                                        this.calculatedcars = this.toshowobjects
+                                        this.calculatedcars = this.toshowobjects.slice()
                                     
                                 }
                                 
@@ -740,7 +782,7 @@
                                 }) 
                                 this.toshowobjects = x
                                 this.toshowobjects = [...new Set(this.toshowobjects)]
-                                this.calculatedcars = this.toshowobjects                 
+                                this.calculatedcars = this.toshowobjects.slice()                 
                                 
                             }
                             
@@ -762,7 +804,7 @@
 
                                 this.toshowobjects = x
                                 this.toshowobjects = [...new Set(this.toshowobjects)]
-                                this.calculatedcars = this.toshowobjects
+                                this.calculatedcars = this.toshowobjects.slice()
                                 
                             
                                 
@@ -782,6 +824,25 @@
             clearModel () {
  
                 this.modelsearchmodel = ''
+            },
+
+            undobodycomponent () {
+                this.cars = this.reference.slice()
+           
+                if (this.calculatedcars.length<14) {
+                    let a = this.deletedbodyitemhistory[0]
+                    let b = this.cars.find(el=>el.id===a)
+                    this.calculatedcars.unshift(b)
+                    this.deletedbodyitemhistory.splice(0,1)
+                    let w = this.calculatedcars
+                    w = [...new Set(w)]
+                    this.calculatedcars = w
+               
+                }
+
+                this.showcars=false
+                this.showcalculated=true
+    
             },
             
 
@@ -975,6 +1036,8 @@
                     this.pricecrossopen=false
                     this.pricecomponentclosed=true
                     this.priceformstatekeeper = []
+
+                    
                     
                     
                     
@@ -1348,7 +1411,17 @@
             },
 
 
-            
+            deletedbodyitem (val) {
+                let a = val.id  
+                this.deletedbodyitemhistory.unshift(a)
+
+                this.deletedbodyitemhistory = [...new Set(this.deletedbodyitemhistory)]
+                let b = this.deletedbodyitemhistory[0]
+                let c = this.calculatedcars.findIndex(el=>el.id===b)
+                this.calculatedcars.splice(c,1)
+                
+                
+            },
 
           
 
@@ -1435,6 +1508,7 @@
             modelSearchMakeSource () {
                 let a = []
                 let b = []
+                
                 b = this.bodyarrtoshow.filter(car=>{
                     return car.make.toUpperCase().indexOf(this.modelsearchmake.toUpperCase()) !== -1
                 }) 
@@ -1576,8 +1650,8 @@
         mounted () {
             
             this.SetAllId ()
-            this.bodyarrtoshow = this.cars.slice()
-            
+          
+            this.reference = this.catalogpropscars.slice()
             
         },
         created() {
