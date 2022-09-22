@@ -572,7 +572,7 @@
                 
                 
 
-                let a = this.catalogpropscars
+                let a = this.catalogpropscars.slice()
 
                 if (!this.testarr.includes('automatic') && this.testarr.includes('manual')) {
                     this.cars = a.filter(el=>el.transmission==='Manual')
@@ -582,11 +582,11 @@
                     this.cars = this.cars.filter(el=>el.transmission==='Automatic')
                     this.calculatedcars = this.cars.filter(el=>el.transmission==='Automatic')
                 } else if (this.testarr.includes('automatic') && this.testarr.includes('manual')) {
-                    this.cars = a
-                    this.calculatedcars = this.cars
+                    this.cars = this.catalogpropscars.slice()
+                    this.calculatedcars = this.catalogpropscars.slice()
                 } else if (!this.testarr.includes('automatic') && !this.testarr.includes('manual')) {
-                    this.cars = a
-                    this.calculatedcars = this.cars
+                    this.cars = this.catalogpropscars.slice()
+                    this.calculatedcars = this.catalogpropscars.slice()
                 } 
 
 
@@ -852,7 +852,7 @@
            
             getStartedInpTrans() {
 
-                
+                this.show ()
                 this.modelsearchmake = ''
                 this.modelsearchmodel = ''
 
@@ -888,6 +888,8 @@
                     this.manualtrans=true
                     this.automatictransinpformcross = true
                     this.manualtransinpformcross = true
+                    this.calculatedcars = this.catalogpropscars.slice()
+                    this.cars = this.catalogpropscars.slice()
                     let x = this.testarr.indexOf('automatic')//нужно для использования в computed свойстве selectedCARScomputed()
                     this.testarr.splice(x,1)//чтобы знать по какому количеству повторений id отбирать для формирования calculatedcars
                     let z = this.testarr.indexOf('manual')//нужно для использования в computed свойстве selectedCARScomputed()
@@ -895,7 +897,7 @@
                
                 }
 
-                this.show ()
+                
            
             },
 
