@@ -76,6 +76,90 @@
                         
                     </div>
 
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinptype:typeform,activecross:typeinpformcross}">
+                        <div class="ma-mo__open-arrow-box arr-box">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text">
+                                Body type
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedType()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="typeform"></i></div>
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="typeform===false"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="ma-mo__detailed-search-box-doubleinprange-price-box inp-cont-box" v-if="typeform">
+
+                            
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box inp-box-type-inp" v-if="typeforminput">
+    
+                                <div class="inp-box-type-inp__trucks tib" >
+                                    <i class="fa-solid fa-check inp-box-type-inp__trucks-icon tib__icon" v-if="typetruck" ></i>                             
+                                    <div class="inp-box-type-inp__trucks-img tib__img" ><img src="@/assets/images/Truck_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__trucks-text tib__text">Trucks</span>
+                                </div>
+                                <div class="inp-box-type-inp__suv tib" >
+                                    <i class="fa-solid fa-check inp-box-type-inp__suv-icon tib__icon" v-if="typesuv"></i>                             
+                                    <div class="inp-box-type-inp__suv-img tib__img" ><img src="@/assets/images/SUV_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__suv-text tib__text">SUV</span>
+                                </div>
+                                <div class="inp-box-type-inp__sedan tib" >
+                                    <i class="fa-solid fa-check inp-box-type-inp__sedan-icon tib__icon" v-if="typesedan"></i>                             
+                                    <div class="inp-box-type-inp__sedan-img tib__img" ><img src="@/assets/images/Sedan_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__sedan-text tib__text">Sedan</span>
+                                </div>
+                                <div class="inp-box-type-inp__hatchback tib" >
+                                    <i class="fa-solid fa-check inp-box-type-inp__hatchback-icon tib__icon" v-if="typehatchback"></i>                             
+                                    <div class="inp-box-type-inp__hatchback-img tib__img" ><img src="@/assets/images/Sedan_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__hatchback-text tib__text">Hatchback</span>
+                                </div>
+                                <div class="inp-box-type-inp__coupe tib" >
+                                    <i class="fa-solid fa-check inp-box-type-inp__coupe-icon tib__icon" v-if="typecoupe"></i>                             
+                                    <div class="inp-box-type-inp__coupe-img tib__img" ><img src="@/assets/images/Coupe_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__coupe-text tib__text">Coupe</span>
+                                </div>
+                                <div class="inp-box-type-inp__convertiable tib" >
+                                    <i class="fa-solid fa-check inp-box-type-inp__convertiable-icon tib__icon" v-if="typeconvertiable"></i>                             
+                                    <div class="inp-box-type-inp__convertiable-img tib__img" ><img src="@/assets/images/Convertiable_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__convertiable-text tib__text">Convertiable</span>
+                                </div>
+                                <div class="inp-box-type-inp__van tib" >
+                                    <i class="fa-solid fa-check inp-box-type-inp__van-icon tib__icon" v-if="typevan"></i>                             
+                                    <div class="inp-box-type-inp__van-img tib__img" ><img src="@/assets/images/Convertiable_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__van-text tib__text">VAN</span>
+                                </div>
+
+                               
+
+                            </div>
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="typeinpformcross">
+                                Cross
+                                <!-- <cardbodydelete
+                                v-for="car in calculatedcars" :key="car"
+                                :carbody="car"
+                                @deletedbodytoparent="deletedbodyitem=$event"
+                                @click="addToMakeModelCalc()"
+                                >
+
+
+                                </cardbodydelete>
+                                <div class="inp-box-cross-on-undo"
+                                @click="addToMakeModelCalc()"
+                                >
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="this.deletedbodyitemhistory.length>0" @click="undobodycomponent" >
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
+                                    </div>
+                                    <div class="inp-box-cross-on-undo__text-statement-box">
+                                        <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
+                                    </div>  
+                                </div> -->
+
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
                     <div class="ma-mo__detailed-search-box-trans inp-container"  :class="{activeinptrans:transinpform}">
                         <div class="ma-mo__open-arrow-box arr-box">
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
@@ -430,8 +514,7 @@
                 
                 
                 
-                bodyform:false,
-                
+                bodyform:false,   
                 bodyinpformcross:false,
                 bodycheck:Boolean,
                 bodycross:Boolean,
@@ -446,16 +529,26 @@
                 deletedbodyitem:[],
                 deletedbodyitemhistory:[],
                 unduwarningbody:false,
-                
-                
-               
-                
-               
-                
-                
 
 
+
+                typeform:false,   
+                typeforminput:true,
+                typeinpformcross:false,
+                typecheck:Boolean,
+                typecross:Boolean,
+                typeclosed:Boolean,
+                typestatekeeper:[],
+                typesearchmodel:'',               
+                typevarconcat:[],               
+                typetoshowobjects:[],
+                deletedtypeitem:[],
+                deletedtypeitemhistory:[],
+                unduwarningtype:false,
+
                 
+                
+            
                 transinpform:false,
                 automatictrans:true,
                 manualtrans:true,
@@ -678,6 +771,57 @@
                     this.kilonumstartpoints = true
                 }         
             },
+            getStartedType() {
+                this.typestatekeeper.push(1)
+
+  
+
+                if (this.typestatekeeper.length===1) {
+
+                    this.typeform = true
+
+                    this.typeforminput = true
+
+                    this.typecheck=true
+
+                    this.typecross=false
+
+                    this.typeclosed=false
+
+                } else if (this.typestatekeeper.length===2) {
+
+                    this.typeforminput = false
+
+                    this.typeinpformcross=true
+
+                    this.typecheck=false
+
+                    this.typecross=true
+
+                    this.typeclosed=false
+
+                }else {
+
+                    this.typeform = false
+
+                    this.typeforminput = false
+
+                    this.typeinpformcross=false
+
+                    this.typecheck=false
+
+                    this.typecross=false
+
+                    this.typeclosed=true 
+
+                    this.typestatekeeper = []
+
+                    this.typetoshowobjects = [] 
+
+                    this.deletedtypeitemhistory = []
+
+                }
+            },
 
             getStartedBodyType() {
                 
@@ -716,7 +860,10 @@
                     this.toshowobjects = []  
                     this.deletedbodyitemhistory = []
                     this.bodyarrtoshow = this.cars.slice()
+
                 }
+
+                
 
                 this.show ()
                 
@@ -725,9 +872,7 @@
 
                 
 
-                if (this.toshowobjects.length>0) {
-                    this.calculatedcars  = this.toshowobjects
-                }
+                
 
                 
 
@@ -1671,6 +1816,114 @@
 
     .ma-mo {
         display: flex;
+
+        
+
+
+        .inp-box-type-inp {
+
+            &__trucks {
+            }
+
+            &__trucks-icon {
+            }
+
+            &__trucks-img {
+            }
+
+            &__trucks-text {
+            }
+
+            &__suv {
+            }
+
+            &__suv-icon {
+            }
+
+            &__suv-img {
+            }
+
+            &__suv-text {
+            }
+
+            &__sedan {
+            }
+
+            &__sedan-icon {
+            }
+
+            &__sedan-img {
+            }
+
+            &__sedan-text {
+            }
+
+            &__hatchback {
+            }
+
+            &__hatchback-icon {
+            }
+
+            &__hatchback-img {
+            }
+
+            &__hatchback-text {
+            }
+
+            &__coupe {
+            }
+
+            &__coupe-icon {
+            }
+
+            &__coupe-img {
+            }
+
+            &__coupe-text {
+            }
+
+            &__convertiable {
+            }
+
+            &__convertiable-icon {
+            }
+
+            &__convertiable-img {
+            }
+
+            &__convertiable-text {
+            }
+
+            &__van {
+            }
+
+            &__van-icon {
+            }
+
+            &__van-img {
+            }
+
+            &__van-text {
+            }
+        }
+        .tib {
+            display: flex;
+            align-items: center;
+
+            &__icon {
+                margin-right: 5px;
+            }
+
+            &__img {
+                margin-right: 5px;
+            }
+
+            &__text {
+                margin-right: 5px;
+            }
+        }
+
+
         
 
         .bodymake {
@@ -1889,6 +2142,10 @@
         }
         .activeinpkilo {
              height: 123px;
+             padding-bottom: 25px;
+        }
+        .activeinptype {
+             height: 220px;
              padding-bottom: 25px;
         }
         
