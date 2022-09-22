@@ -342,25 +342,7 @@
                 </div >
 
                
-                <div class="ma-mo__card-box ma-mo__card-box-body-calc" v-if="bodyfinalvar">
-                    <cardbodyfinal
-                    v-for="car in bodyfinal" :key="car"
-                    :car="car"
-                    >
-
-                    </cardbodyfinal>
-            
-                </div>
-                        
-
-                <div class="ma-mo__card-box ma-mo__card-box-body-cars" v-if="bodyarrtoshowvar">
-                    <cardbodyshow
-                    v-for="car in bodyarrtoshow" :key="car"
-                    :car="car"
-                    >
-
-                    </cardbodyshow>
-                </div>
+                
                 
 
                 
@@ -395,8 +377,7 @@
     import cardkilo from '@/components/CatalogNEW/CardKilo.vue'
     import cardyear from '@/components/CatalogNEW/CardYear.vue'
     import cardprice from '@/components/CatalogNEW/CardPrice.vue'
-    import cardbodyfinal from '@/components/CatalogNEW/CardBodyFinal.vue'
-    import cardbodyshow from '@/components/CatalogNEW/CardBodyShow.vue'
+   
     import doubleinprangeprice from '@/components/CatalogNEW/DoubleInputRangePrice.vue'
     import doubleinprangeyear from '@/components/CatalogNEW/DoubleInputRangeYear.vue'
     import inprange from '@/components/CatalogNEW/InputRange.vue'
@@ -412,8 +393,7 @@
             cardkilo,
             cardyear,
             cardprice,
-            cardbodyfinal,
-            cardbodyshow,
+          
             doubleinprangeprice,
             doubleinprangeyear,
             inprange,
@@ -441,11 +421,10 @@
                 modelsearchmake:'',
                 modelsearchmodel:'',
                 varconcat:[],
-                bodyarrtoshow:[],
+                bodyarrtoshow:this.cars,
                 bodyfinal:[],
                 toshowobjects:[],
-                bodyarrtoshowvar:Boolean,
-                bodyfinalvar:Boolean,
+                
                 
                
                 
@@ -548,24 +527,16 @@
                 
                 
                 
-                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform && !this.bodyform) {//если хоть один инпут включенный
+                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
                     
-                    this.bodyarrtoshowvar=false
-                    this.bodyfinalvar=false
+ 
                     
                 }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
                     this.showcars=true
                     this.showcalculated=false
                            
-                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && this.bodyform) {
-                    if (this.bodyarrtoshow.length===0 || this.bodyarrtoshow.length <= 14) {
-                        this.showcars=true
-                    }else {
-                        this.showcars=false
-                    }                 
-                    
                 }
                 
 
@@ -587,22 +558,14 @@
                     this.calculatedcars = this.cars
                 } 
 
+
+
+                
+                
                 
                 
 
-                if (this.bodyarrtoshow.length>0) {
-                    this.bodyfinal = this.bodyarrtoshow
-                } else {
-                    this.bodyfinal = this.cars.slice()
-                }
-
-                if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
-                    this.bodyfinalvar = true
-                    this.bodyarrtoshowvar = false
-                } else {
-                    this.bodyfinalvar = false
-                    this.bodyarrtoshowvar = true
-                }
+                
 
                 
                 
@@ -621,16 +584,16 @@
                 
                 this.toshowobjects = []
                 this.bodyfinal = []
-                if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
-                    this.bodyfinalvar = true
-                    this.bodyarrtoshowvar = false
-                } else {
-                    this.bodyfinalvar = false
-                    this.bodyarrtoshowvar = true
-                }
-                if (this.calculatedcars.length>0) {
-                    this.bodyarrtoshow = this.calculatedcars
-                } else this.bodyarrtoshow = this.cars.slice()
+                // if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
+                //     this.bodyfinalvar = true
+                //     this.bodyarrtoshowvar = false
+                // } else {
+                //     this.bodyfinalvar = false
+                //     this.bodyarrtoshowvar = true
+                // }
+                // if (this.calculatedcars.length>0) {
+                //     this.bodyarrtoshow = this.calculatedcars
+                // } else this.bodyarrtoshow = this.cars.slice()
             },
             SetAllId () {//определяем все имеющиеся на сайте уникальные id объектов с машинами, отсортированы по возрастанию
                 let a = this.cars.slice()
@@ -702,6 +665,7 @@
                     this.bodycross=true
                     this.bodyclosed=false
                     
+                    
                 }else {
                     this.bodyform = false
                     this.bodyforminput = false
@@ -724,7 +688,7 @@
                 
 
                 if (this.toshowobjects.length>0) {
-                    this.bodyfinal = this.toshowobjects
+                    this.calculatedcars  = this.toshowobjects
                 }
 
                 
@@ -752,10 +716,12 @@
                                                     x.push(s)
                                                 }
                                         })
+                                        this.toshowobjects = x
+                                        this.toshowobjects = [...new Set(this.toshowobjects)]
+                                        this.calculatedcars = this.toshowobjects
                                     
                                 }
-                                this.toshowobjects = x
-                                this.toshowobjects = [...new Set(this.toshowobjects)]
+                                
                         }
 
                     }
@@ -771,12 +737,13 @@
                                         if (a===w) {
                                             x.push(s)
                                         }
-                                })
-                                
-                            
+                                }) 
                                 this.toshowobjects = x
                                 this.toshowobjects = [...new Set(this.toshowobjects)]
+                                this.calculatedcars = this.toshowobjects                 
+                                
                             }
+                            
 
                     }
 
@@ -792,28 +759,19 @@
                                             x.push(s)
                                         }
                                 })
-                                
-                            
+
                                 this.toshowobjects = x
                                 this.toshowobjects = [...new Set(this.toshowobjects)]
+                                this.calculatedcars = this.toshowobjects
+                                
+                            
+                                
                             }
+                            
 
                     }
 
-                    this.bodyfinal = this.bodyarrtoshow
-                    if (this.toshowobjects.length>0) {
-                        this.bodyfinal = this.toshowobjects
-                    }
-
-                    if (this.bodyfinal.length<this.bodyarrtoshow.length && this.bodyfinal.length>0) {
-                    this.bodyfinalvar = true
-                    this.bodyarrtoshowvar = false
-                    this.showcalculated=false
-                    } else {
-                        this.bodyfinalvar = false
-                        this.bodyarrtoshowvar = true
-                        this.showcalculated=false
-                    }
+                    
                     
                    
             },
@@ -1017,6 +975,7 @@
                     this.pricecrossopen=false
                     this.pricecomponentclosed=true
                     this.priceformstatekeeper = []
+                    
                     
                     
             
