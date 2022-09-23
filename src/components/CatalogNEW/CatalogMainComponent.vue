@@ -93,38 +93,38 @@
 
                             <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box inp-box-type-inp" v-if="typeforminput">
     
-                                <div class="inp-box-type-inp__trucks tib" >
-                                    <i class="fa-solid fa-check inp-box-type-inp__trucks-icon tib__icon" v-if="typetruck" ></i>                             
+                                <div class="inp-box-type-inp__trucks tib" @click="setTypeTRUCK">
+                                    <i class="fa-solid fa-check inp-box-type-inp__trucks-icon tib__icon" :class="{visible:typetruck}"  ></i>                             
                                     <div class="inp-box-type-inp__trucks-img tib__img" ><img src="@/assets/images/Truck_icon.png" alt='truck'></div>
                                     <span class="inp-box-type-inp__trucks-text tib__text">Trucks</span>
                                 </div>
-                                <div class="inp-box-type-inp__suv tib" >
-                                    <i class="fa-solid fa-check inp-box-type-inp__suv-icon tib__icon" v-if="typesuv"></i>                             
+                                <div class="inp-box-type-inp__suv tib" @click="setTypeSUV">
+                                    <i class="fa-solid fa-check inp-box-type-inp__suv-icon tib__icon"  :class="{visible:typesuv}"></i>                             
                                     <div class="inp-box-type-inp__suv-img tib__img" ><img src="@/assets/images/SUV_icon.png" alt='truck'></div>
                                     <span class="inp-box-type-inp__suv-text tib__text">SUV</span>
                                 </div>
-                                <div class="inp-box-type-inp__sedan tib" >
-                                    <i class="fa-solid fa-check inp-box-type-inp__sedan-icon tib__icon" v-if="typesedan"></i>                             
+                                <div class="inp-box-type-inp__sedan tib" @click="setTypeSEDAN">
+                                    <i class="fa-solid fa-check inp-box-type-inp__sedan-icon tib__icon"  :class="{visible:typesedan}"></i>                             
                                     <div class="inp-box-type-inp__sedan-img tib__img" ><img src="@/assets/images/Sedan_icon.png" alt='truck'></div>
                                     <span class="inp-box-type-inp__sedan-text tib__text">Sedan</span>
                                 </div>
-                                <div class="inp-box-type-inp__hatchback tib" >
-                                    <i class="fa-solid fa-check inp-box-type-inp__hatchback-icon tib__icon" v-if="typehatchback"></i>                             
+                                <div class="inp-box-type-inp__hatchback tib" @click="setTypeHATCHBACK">
+                                    <i class="fa-solid fa-check inp-box-type-inp__hatchback-icon tib__icon"  :class="{visible:typehatchback}"></i>                             
                                     <div class="inp-box-type-inp__hatchback-img tib__img" ><img src="@/assets/images/Sedan_icon.png" alt='truck'></div>
                                     <span class="inp-box-type-inp__hatchback-text tib__text">Hatchback</span>
                                 </div>
-                                <div class="inp-box-type-inp__coupe tib" >
-                                    <i class="fa-solid fa-check inp-box-type-inp__coupe-icon tib__icon" v-if="typecoupe"></i>                             
+                                <div class="inp-box-type-inp__coupe tib" @click="setTypeCOUPE">
+                                    <i class="fa-solid fa-check inp-box-type-inp__coupe-icon tib__icon"  :class="{visible:typecoupe}"></i>                             
                                     <div class="inp-box-type-inp__coupe-img tib__img" ><img src="@/assets/images/Coupe_icon.png" alt='truck'></div>
                                     <span class="inp-box-type-inp__coupe-text tib__text">Coupe</span>
                                 </div>
-                                <div class="inp-box-type-inp__convertiable tib" >
-                                    <i class="fa-solid fa-check inp-box-type-inp__convertiable-icon tib__icon" v-if="typeconvertiable"></i>                             
+                                <div class="inp-box-type-inp__convertiable tib" @click="setTypeCONVERTIABLE">
+                                    <i class="fa-solid fa-check inp-box-type-inp__convertiable-icon tib__icon"  :class="{visible:typeconvertiable}"></i>                             
                                     <div class="inp-box-type-inp__convertiable-img tib__img" ><img src="@/assets/images/Convertiable_icon.png" alt='truck'></div>
                                     <span class="inp-box-type-inp__convertiable-text tib__text">Convertiable</span>
                                 </div>
-                                <div class="inp-box-type-inp__van tib" >
-                                    <i class="fa-solid fa-check inp-box-type-inp__van-icon tib__icon" v-if="typevan"></i>                             
+                                <div class="inp-box-type-inp__van tib" @click="setTypeVAN">
+                                    <i class="fa-solid fa-check inp-box-type-inp__van-icon tib__icon" :class="{visible:typevan}"></i>                             
                                     <div class="inp-box-type-inp__van-img tib__img" ><img src="@/assets/images/Convertiable_icon.png" alt='truck'></div>
                                     <span class="inp-box-type-inp__van-text tib__text">VAN</span>
                                 </div>
@@ -442,6 +442,14 @@
 
                     </ca>
                 </div >
+                <div class="ma-mo__card-box ma-mo__card-box-main-screen" v-if="typeformon">
+                    <catype
+                    v-for="car in typeComputed" :key="car"
+                    :car="car"
+                    >
+
+                    </catype>
+                </div >
 
                
                 
@@ -483,6 +491,9 @@
     import doubleinprangeprice from '@/components/CatalogNEW/DoubleInputRangePrice.vue'
     import doubleinprangeyear from '@/components/CatalogNEW/DoubleInputRangeYear.vue'
     import inprange from '@/components/CatalogNEW/InputRange.vue'
+    import catype from '@/components/CatalogNEW/CardTypeMain.vue'
+
+    catype
   
     
 
@@ -499,6 +510,7 @@
             doubleinprangeprice,
             doubleinprangeyear,
             inprange,
+            catype,
  
         },
         data() {
@@ -532,16 +544,27 @@
 
 
 
-                typeform:false,   
+                typeform:false, 
+                
+                typetruck:false,
+                typesuv:false,
+                typesedan:false,
+                typehatchback:false,
+                typecoupe:false,
+                typeconvertiable:false,
+                typevan:false,
+
+                typeformon:false,
+                typearrtofilter:this.catalogpropscars,
                 typeforminput:true,
                 typeinpformcross:false,
                 typecheck:Boolean,
                 typecross:Boolean,
                 typeclosed:Boolean,
                 typestatekeeper:[],
-                typesearchmodel:'',               
+                typesearchmodel:[],               
                 typevarconcat:[],               
-                typetoshowobjects:[],
+                typecollector:[],
                 deletedtypeitem:[],
                 deletedtypeitemhistory:[],
                 unduwarningtype:false,
@@ -661,9 +684,33 @@
 
                 }
 
-              
+                if (this.typeform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
+                    this.showcars=false
+                    this.showcalculated=false 
+                    this.typeformon = true
+                }else if (!this.typeform && this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform) {
+                    this.typeformon = false
+                    this.showcalculated=true
+                    this.showcars=false
+                }else if (!this.typeform && !this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
+                    this.typeformon = false
+                    this.showcalculated=false
+                    this.showcars=true
+                }
+
+                if (this.typecollector.length>0) {
+                    this.showcars=false
+                    this.showcalculated=false 
+                    this.typeformon = true
+                } else if (!this.typecollector.length>0) {
+                    this.showcars=true
+                    this.showcalculated=false 
+                    this.typeformon = false 
+                }
+
                 
-                
+
+               
 
                 let a = this.catalogpropscars.slice()
 
@@ -788,6 +835,11 @@
 
                     this.typeclosed=false
 
+
+
+          
+
+
                 } else if (this.typestatekeeper.length===2) {
 
                     this.typeforminput = false
@@ -820,8 +872,196 @@
 
                     this.deletedtypeitemhistory = []
 
+                    this.typecollector = []
+
+                    this.typetruck=false
+                    this.typesuv=false
+                    this.typesedan=false
+                    this.typehatchback=false
+                    this.typecoupe=false
+                    this.typeconvertiable=false
+                    this.typevan=false
+
+                }
+
+                this.show ()
+            },
+
+
+           
+
+            setTypeTRUCK () {
+                
+                this.typetruck=!this.typetruck
+                if(!this.typecollector.includes('Trucks')) {
+                    this.typecollector.push('Trucks')
+                }else {
+                    let a = this.typecollector.indexOf('Trucks') 
+                    this.typecollector.splice(a,1)
+                }
+
+                if (this.typecollector.length>0) {
+                    this.showcars=false
+                    this.showcalculated=false 
+                    this.typeformon = true
+                } else if (!this.typecollector.length>0) {
+                    this.showcars=true
+                    this.showcalculated=false 
+                    this.typeformon = false 
                 }
             },
+            setTypeSUV () {
+                this.typesuv=!this.typesuv
+                if(!this.typecollector.includes('SUV')) {
+                    this.typecollector.push('SUV')
+                }else {
+                    let a = this.typecollector.indexOf('SUV') 
+                    this.typecollector.splice(a,1)
+                }
+
+                if (this.typecollector.length>0) {
+                    this.showcars=false
+                    this.showcalculated=false 
+                    this.typeformon = true
+                } else if (!this.typecollector.length>0) {
+                    this.showcars=true
+                    this.showcalculated=false 
+                    this.typeformon = false 
+                }
+            },
+            setTypeSEDAN () {
+                this.typesedan=!this.typesedan
+                if(!this.typecollector.includes('Sedan')) {
+                    this.typecollector.push('Sedan')
+                }else {
+                    let a = this.typecollector.indexOf('Sedan') 
+                    this.typecollector.splice(a,1)
+                }
+
+                if (this.typecollector.length>0) {
+                    this.showcars=false
+                    this.showcalculated=false 
+                    this.typeformon = true
+                } else if (!this.typecollector.length>0) {
+                    this.showcars=true
+                    this.showcalculated=false 
+                    this.typeformon = false 
+                }
+            },
+            setTypeHATCHBACK () {
+                this.typehatchback = !this.typehatchback
+                if(!this.typecollector.includes('Hatchback')) {
+                    this.typecollector.push('Hatchback')
+                }else {
+                    let a = this.typecollector.indexOf('Hatchback') 
+                    this.typecollector.splice(a,1)
+                }
+
+                if (this.typecollector.length>0) {
+                    this.showcars=false
+                    this.showcalculated=false 
+                    this.typeformon = true
+                } else if (!this.typecollector.length>0) {
+                    this.showcars=true
+                    this.showcalculated=false 
+                    this.typeformon = false 
+                }
+            },
+            setTypeCOUPE () {
+                this.typecoupe=!this.typecoupe
+                if(!this.typecollector.includes('Coupe')) {
+                    this.typecollector.push('Coupe')
+                }else {
+                    let a = this.typecollector.indexOf('Coupe') 
+                    this.typecollector.splice(a,1)
+                }
+
+                if (this.typecollector.length>0) {
+                    this.showcars=false
+                    this.showcalculated=false 
+                    this.typeformon = true
+                } else if (!this.typecollector.length>0) {
+                    this.showcars=true
+                    this.showcalculated=false 
+                    this.typeformon = false 
+                }
+            },
+            setTypeCONVERTIABLE () {
+                this.typeconvertiable=!this.typeconvertiable
+                if(!this.typecollector.includes('Convertiable')) {
+                    this.typecollector.push('Convertiable')
+                }else {
+                    let a = this.typecollector.indexOf('Convertiable') 
+                    this.typecollector.splice(a,1)
+                }
+
+                if (this.typecollector.length>0) {
+                    this.showcars=false
+                    this.showcalculated=false 
+                    this.typeformon = true
+                } else if (!this.typecollector.length>0) {
+                    this.showcars=true
+                    this.showcalculated=false 
+                    this.typeformon = false 
+                }
+            },
+            setTypeVAN () {
+                this.typevan=!this.typevan
+                if(!this.typecollector.includes('VAN')) {
+                    this.typecollector.push('VAN')
+                }else {
+                    let a = this.typecollector.indexOf('VAN') 
+                    this.typecollector.splice(a,1)
+                }
+
+                if (this.typecollector.length>0) {
+                    this.showcars=false
+                    this.showcalculated=false 
+                    this.typeformon = true
+                } else if (!this.typecollector.length>0) {
+                    this.showcars=true
+                    this.showcalculated=false 
+                    this.typeformon = false 
+                }
+            },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             getStartedBodyType() {
                 
@@ -1551,6 +1791,7 @@
             
             catalogpropscars (val) {//получает от родительского компонента массив со всеми авто
                 this.cars = val
+                this.typearrtofilter = val
             },
             selectedCARScomputed(val) { //вычисляемое свойство, которое динамически возвращает объекты из массива cars отобранные в ходе работы инпутов компонентов         
                 this.calculatedcars = val  
@@ -1651,6 +1892,22 @@
       
 
         computed: {   
+
+            typeComputed () { 
+                let a = []
+                for (let i=0;i<this.typecollector.length; i++) {
+                    let b = this.typecollector[i]
+                    for(let i=0;i<this.typearrtofilter.length; i++) {
+                        let c = this.typearrtofilter[i]
+                        let s = this.typearrtofilter[i].bodytype 
+                        if (b===s) {
+                            a.push(c)
+                        }
+                    }
+                }
+
+                return a
+            },
             
             modelSearchMakeSource () {
                 let a = []
@@ -1912,6 +2169,7 @@
 
             &__icon {
                 margin-right: 5px;
+                opacity: 0;
             }
 
             &__img {
@@ -1921,6 +2179,9 @@
             &__text {
                 margin-right: 5px;
             }
+        }
+        .visible {
+            opacity: 1;
         }
 
 
