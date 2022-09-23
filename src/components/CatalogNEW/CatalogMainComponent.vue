@@ -133,26 +133,26 @@
 
                             </div>
                             <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="typeinpformcross">
-                                Cross
-                                <!-- <cardbodydelete
-                                v-for="car in calculatedcars" :key="car"
-                                :carbody="car"
-                                @deletedbodytoparent="deletedbodyitem=$event"
+                                
+                                <catypedelete
+                                v-for="car in typecollector" :key="car"
+                                :cartype="car"
+                                @deletedtypetoparent="deletedtypeitem=$event"
                                 @click="addToMakeModelCalc()"
                                 >
 
 
-                                </cardbodydelete>
+                                </catypedelete>
                                 <div class="inp-box-cross-on-undo"
                                 @click="addToMakeModelCalc()"
                                 >
-                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="this.deletedbodyitemhistory.length>0" @click="undobodycomponent" >
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="this.deletedtypeitemhistory.length>0" @click="undotypecomponent" >
                                         <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
                                     </div>
                                     <div class="inp-box-cross-on-undo__text-statement-box">
                                         <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
                                     </div>  
-                                </div> -->
+                                </div>
 
                             </div>
 
@@ -492,6 +492,7 @@
     import doubleinprangeyear from '@/components/CatalogNEW/DoubleInputRangeYear.vue'
     import inprange from '@/components/CatalogNEW/InputRange.vue'
     import catype from '@/components/CatalogNEW/CardTypeMain.vue'
+    import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
 
     catype
   
@@ -511,6 +512,7 @@
             doubleinprangeyear,
             inprange,
             catype,
+            catypedelete,
  
         },
         data() {
@@ -568,6 +570,7 @@
                 deletedtypeitem:[],
                 deletedtypeitemhistory:[],
                 unduwarningtype:false,
+
 
                 
                 
@@ -1023,6 +1026,20 @@
                     this.showcalculated=false 
                     this.typeformon = false 
                 }
+            },
+
+            undotypecomponent () {
+                if (this.typecollector.length<=7) {
+                    let a = this.deletedtypeitemhistory[0]
+                  
+                    this.typecollector.unshift(a)
+                    this.deletedtypeitemhistory.splice(0,1)
+                    let w = this.typecollector
+                    w = [...new Set(w)]
+                    this.typecollector = w
+                    
+                }
+    
             },
 
 
@@ -1796,6 +1813,17 @@
             selectedCARScomputed(val) { //вычисляемое свойство, которое динамически возвращает объекты из массива cars отобранные в ходе работы инпутов компонентов         
                 this.calculatedcars = val  
                 this.bodyarrtoshow = val                         
+            },
+
+            deletedtypeitem (val) {
+                let a = val
+                this.deletedtypeitemhistory.unshift(a)
+
+                this.deletedtypeitemhistory = [...new Set(this.deletedtypeitemhistory)]
+                let b = this.deletedtypeitemhistory[0]
+                let c = this.typecollector.indexOf(b)
+                this.typecollector.splice(c,1)
+
             },
 
 

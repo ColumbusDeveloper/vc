@@ -5,7 +5,7 @@
         @click="deletetype()"
         >
             <i class="fa-solid fa-xmark cardtype__xmark"></i>
-            <span>{{cartypedata.bodytype}}</span>
+            <span>{{cartypedata}}</span>
         </div>     
         
     </div>
@@ -84,6 +84,10 @@
             cursor: pointer;
             &:hover {
                 color: #7481FF;
+            }
+
+            span {
+                margin-left: 5px;
             }
         }
         
