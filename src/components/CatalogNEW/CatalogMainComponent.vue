@@ -415,6 +415,39 @@
         <div class="ma-mo__global-search-and-card-box">
                 <div class="ma-mo__global-search">
                     <div class="ma-mo__global-search-item-left">
+
+
+
+
+
+                        <div class="ma-mo__global-search-item-left-magnifying magtop">
+                            <input type="text" v-model="modelmagtop" placeholder="Find a dream car..." class="magtop__input">
+                            <i class="fa-sharp fa-solid fa-magnifying-glass magtop__glass"></i>
+                            <div class="magtop__show-window" v-if="modelmagtopComputed.length<10">
+                                <magtopshowitem
+                                v-for="make in modelmagtopComputed" :key="make"
+                                :carmagtop="make"
+                                >
+
+                                </magtopshowitem>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         <div class="ma-mo__global-search-item-left-arrow magtoparrow" >
+                            <img src="@/assets/images/Share.png" alt="share" class="magtoparrow__arr">
+                         </div>
                         
                     </div>
 
@@ -493,6 +526,7 @@
     import inprange from '@/components/CatalogNEW/InputRange.vue'
     import catype from '@/components/CatalogNEW/CardTypeMain.vue'
     import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
+    import magtopshowitem from '@/components/CatalogNEW/CardMagTop.vue'
 
     catype
   
@@ -513,6 +547,7 @@
             inprange,
             catype,
             catypedelete,
+            magtopshowitem,
  
         },
         data() {
@@ -546,8 +581,15 @@
 
 
 
-                typeform:false, 
+
+                magtoparrtofilter:[],
+                magtoparrforoperationsobj:this.catalogpropscars,
+                modelmagtop:'',
                 
+
+
+
+                typeform:false,                
                 typetruck:false,
                 typesuv:false,
                 typesedan:false,
@@ -555,7 +597,6 @@
                 typecoupe:false,
                 typeconvertiable:false,
                 typevan:false,
-
                 typeformon:false,
                 typearrtofilter:this.catalogpropscars,
                 typeforminput:true,
@@ -1808,7 +1849,8 @@
             
             catalogpropscars (val) {//получает от родительского компонента массив со всеми авто
                 this.cars = val
-                this.typearrtofilter = val
+                this.typearrtofilter = val           
+                this.magtoparrforoperationsobj = val
             },
             selectedCARScomputed(val) { //вычисляемое свойство, которое динамически возвращает объекты из массива cars отобранные в ходе работы инпутов компонентов         
                 this.calculatedcars = val  
@@ -1920,6 +1962,17 @@
       
 
         computed: {   
+           
+
+            modelmagtopComputed () {
+                
+                
+                let b = this.magtoparrtofilter.filter(make=>{
+                    return make.toUpperCase().indexOf(this.modelmagtop.toUpperCase()) !== -1
+                }) 
+                
+                return b
+            },
 
             typeComputed () { 
                 let a = []
@@ -2084,6 +2137,10 @@
             this.SetAllId ()
           
             this.reference = this.catalogpropscars.slice()
+            this.magtoparrtofilter = this.catalogpropscars.map(function(car){
+                    return car.make
+                })
+            this.magtoparrtofilter = [...new Set(this.magtoparrtofilter)]
             
         },
         created() {
@@ -2102,7 +2159,60 @@
     .ma-mo {
         display: flex;
 
-        
+      
+        .magtop {
+            position: relative;
+            width: 80%;
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+            input[type=text]{
+            width:100%;
+            }
+
+            &__input {
+                
+            }
+
+            &__glass {
+                position: absolute;
+                left: 90%;
+                top:20%;
+            }
+            &__show-window {
+                position: absolute;
+                z-index: 5;
+                top:40px;
+                border-width:2px;
+                border-style: solid;
+                border-color: #000;
+                width:100%;
+                background-color: #fff;
+            }
+        }
+        .magtoparrow {
+            position: relative;
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+            width: 20%;
+            height: 100%;
+            &__arr {
+                position:absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+            }
+        }
+
+
+
+        &__global-search-item-left {
+            display: flex;
+            align-items: center;
+            padding-left: 5px;
+        }
+
 
 
         .inp-box-type-inp {
