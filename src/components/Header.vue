@@ -3,7 +3,7 @@
           <div class="container">
             <div class="row">
               <div class="col mycontainer">
-                <div class="topLine">
+                <div class="topLine" @click="clearMagTopInput()">
                   <div class="topLineNavBar">
                     <navbar v-on:click="$router.push('/')"/>
                     <div class="header-btnwhite-substitute" v-if="btnclicked">
@@ -58,13 +58,15 @@ export default {
     return {
       
       liclicked:this.liclickedtextoff,
+      modelmagtop: '',
       btnclicked:false,
       is:false,
+
       
 
     }
   },
-
+  
   
   watch:{
 
@@ -87,6 +89,9 @@ export default {
   methods:{
     compositbtntrulitru () {
       return this.is = this.liclicked * this.btnclicked
+    },
+    clearMagTopInput() {
+      this.$emit('clearmagtopform', this.modelmagtop)
     }
   },
 

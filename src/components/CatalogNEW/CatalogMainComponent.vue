@@ -415,6 +415,45 @@
         <div class="ma-mo__global-search-and-card-box">
                 <div class="ma-mo__global-search">
                     <div class="ma-mo__global-search-item-left">
+
+
+
+
+
+                        <div class="ma-mo__global-search-item-left-magnifying magtop">
+                            <input type="text" @input="magtopchangeshow" v-model="modelmagtop" placeholder="Find a dream car..." class="magtop__input">
+                            <i class="fa-sharp fa-solid fa-magnifying-glass magtop__glass"></i>
+                            <div class="magtop__show-window" v-if="modelmagtopComputed.length<10">
+                                <magtopshowitem class="magtop__show-window-item"
+                                v-for="(make,index) in modelmagtopComputed" :key="index"
+                                :carmagtop="make"
+                                @magtopsharedata ='setmagtopchoicearr'
+                                @click="getIndexModelmagtopComputed(index)"
+                                :clicked="magtopindexofckickedelement"
+                                :index="index"
+                                >
+
+                                </magtopshowitem>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         <div class="ma-mo__global-search-item-left-arrow magtoparrow" 
+                         @click="magtopshare"
+                         >
+                            <img src="@/assets/images/Share.png" alt="share" class="magtoparrow__arr">
+                         </div>
                         
                     </div>
 
@@ -449,6 +488,14 @@
                     >
 
                     </catype>
+                </div >
+                <div class="ma-mo__card-box ma-mo__card-box-main-screen" v-if="magtopform">
+                    <camag
+                    v-for="car in modelmagtopComputedFinalShow" :key="car"
+                    :car="car"
+                    >
+
+                    </camag>
                 </div >
 
                
@@ -493,8 +540,10 @@
     import inprange from '@/components/CatalogNEW/InputRange.vue'
     import catype from '@/components/CatalogNEW/CardTypeMain.vue'
     import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
+    import magtopshowitem from '@/components/CatalogNEW/CardMagTop.vue'
+    import camag from '@/components/CatalogNEW/CardMagTopMainShow.vue'
 
-    catype
+   
   
     
 
@@ -513,6 +562,8 @@
             inprange,
             catype,
             catypedelete,
+            magtopshowitem,
+            camag,
  
         },
         data() {
@@ -546,8 +597,18 @@
 
 
 
-                typeform:false, 
-                
+                magtopform:false,
+                magtoparrtofilter:[],//все имеющиеся на сайте торговые марки авто
+                magtoparrforoperationsobj:this.catalogpropscars,//все объекты автомобилей для итерации именно этим компонентом
+                modelmagtop:'',
+                magtopchoicearr:[], //собирает кликнутые марки машин по мере кликанья клиента
+                magtopchoicearrfinal:[],//после клика формирование окончательного массива производителей для формирования окончательного кейса
+                magtopindexofckickedelement:[],//собирает индексы кликнутых элементов, нужен для подсветки кликнутого
+              
+
+
+
+                typeform:false,                
                 typetruck:false,
                 typesuv:false,
                 typesedan:false,
@@ -555,7 +616,6 @@
                 typecoupe:false,
                 typeconvertiable:false,
                 typevan:false,
-
                 typeformon:false,
                 typearrtofilter:this.catalogpropscars,
                 typeforminput:true,
@@ -671,19 +731,19 @@
                 if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
-                    
+                    this.magtopform=false
  
                     
                 }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
                     this.showcars=true
                     this.showcalculated=false
-                           
+                    this.magtopform=false       
                 }
 
                 if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform) {
                     this.showcars=true
                     this.showcalculated=false
-                    
+                    this.magtopform=false
 
                 }
 
@@ -821,6 +881,55 @@
                     this.kilonumstartpoints = true
                 }         
             },
+
+            setmagtopchoicearr (val) {
+                let a = val
+                if (!this.magtopchoicearr.includes(a)) {
+                    this.magtopchoicearr.push(a)
+                } else {
+                    let b = this.magtopchoicearr.indexOf(a)
+                    this.magtopchoicearr.splice(b,1)
+                }      
+                
+                this.magtopchoicearr = [...new Set(this.magtopchoicearr)]
+                
+            },
+
+            getIndexModelmagtopComputed(ind) {
+                let a = ind
+                if(!this.magtopindexofckickedelement.includes(a)) {
+                    this.magtopindexofckickedelement.unshift(a)
+                }else {
+                    let b = this.magtopindexofckickedelement.indexOf(a)
+                    this.magtopindexofckickedelement.splice(b,1)
+                }
+                
+            },
+
+            magtopshare () {
+               if (this.magtopchoicearr.length>0) {
+                this.magtopchoicearrfinal=this.magtopchoicearr.slice()
+               }else {
+                this.magtopchoicearrfinal=this.magtoparrtofilter.slice()
+               }
+              
+               this.magtopform = true
+               this.magtopchoicearr = []
+               this.modelmagtop=''
+               this.magtopindexofckickedelement=[]
+               this.showcalculated=false             
+               this.showcars=false
+               this.typeformon = false
+            },
+
+            magtopchangeshow () {
+                this.magtopform = false 
+                this.showcalculated=false             
+                this.showcars=true
+            },
+
+
+
             getStartedType() {
                 this.typestatekeeper.push(1)
 
@@ -1808,7 +1917,8 @@
             
             catalogpropscars (val) {//получает от родительского компонента массив со всеми авто
                 this.cars = val
-                this.typearrtofilter = val
+                this.typearrtofilter = val           
+                this.magtoparrforoperationsobj = val
             },
             selectedCARScomputed(val) { //вычисляемое свойство, которое динамически возвращает объекты из массива cars отобранные в ходе работы инпутов компонентов         
                 this.calculatedcars = val  
@@ -1920,6 +2030,34 @@
       
 
         computed: {   
+           
+            modelmagtopComputedFinalShow () {
+                let  t = []
+                this.magtopchoicearrfinal.forEach(el=>{
+                    let b = el
+                    for (let i=0;i<this.magtoparrforoperationsobj.length; i++) {
+                        let n = this.magtoparrforoperationsobj[i]
+                        let d = this.magtoparrforoperationsobj[i].make
+                        if (b===d) {
+                            t.push(n)
+                        }
+                    }
+
+                })
+
+                return t
+
+            },
+
+            modelmagtopComputed () {
+                
+                
+                let b = this.magtoparrtofilter.filter(make=>{
+                    return make.toUpperCase().indexOf(this.modelmagtop.toUpperCase()) !== -1
+                }) 
+                
+                return b
+            },
 
             typeComputed () { 
                 let a = []
@@ -2084,6 +2222,10 @@
             this.SetAllId ()
           
             this.reference = this.catalogpropscars.slice()
+            this.magtoparrtofilter = this.catalogpropscars.map(function(car){
+                    return car.make
+                })
+            this.magtoparrtofilter = [...new Set(this.magtoparrtofilter)]
             
         },
         created() {
@@ -2102,7 +2244,60 @@
     .ma-mo {
         display: flex;
 
+      
+        .magtop {
+            position: relative;
+            width: 80%;
+            border-width:1px;
+            border-style: solid;
+            border-color: #D7D7D7;
+            input[type=text]{
+            width:100%;
+            }
+
+            &__input {
+                
+            }
+
+            &__glass {
+                position: absolute;
+                left: 90%;
+                top:20%;
+            }
+            &__show-window {
+                position: absolute;
+                z-index: 5;
+                top:40px;
+              
+                width:100%;
+                background-color: #fff;
+                
+            }
+            
+        }
         
+        
+        .magtoparrow {
+            position: relative;
+            
+            width: 20%;
+            height: 100%;
+            &__arr {
+                position:absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+            }
+        }
+
+
+
+        &__global-search-item-left {
+            display: flex;
+            align-items: center;
+            padding-left: 5px;
+        }
+
 
 
         .inp-box-type-inp {
@@ -2449,6 +2644,9 @@
         .minitemclass {
             background-color: red;
             border-radius: 5px;
+        }
+        .clicked {
+                color: #7481FF;
         }
         
 

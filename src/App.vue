@@ -4,7 +4,7 @@
         <div class="d-flex flex-column min-vh-100">
           <div class="container">
             <div class="row">
-                <div class="col header">
+                <div class="col header" @clearmagtopform="setMagtopformInventoryComponent">
                   <Headerone  class="center" :liclickedtextoff="navliclicktextoffstate"  />
                   <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
                   <transition name="menu">
@@ -16,7 +16,11 @@
               
           <main class="flex-fill">
           
-            <router-view />
+            <router-view
+            
+            >
+              
+            </router-view>
           </main>
 
           <Footer class="center" />
@@ -32,19 +36,21 @@
   import burgerbtn from '@/components/primitives/BurgerBtn.vue'
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
 
+
   export default {
     components: {
       Headerone,
       Footer,
       burgerbtn,
       burgerlist,
+    
     },
     data() {
       return {
         iscross: false,
         navliclicktextoffstate:false,
-
         
+
         
 
       }
@@ -52,7 +58,8 @@
     methods: {
      changenavliclicktextoffstate (newVal) {
         this.navliclicktextoffstate = newVal
-     }
+     },
+     
     },
     watch: {
       iscross (newVal) {
