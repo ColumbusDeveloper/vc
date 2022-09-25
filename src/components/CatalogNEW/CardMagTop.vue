@@ -5,7 +5,10 @@
         @click="deletemagtop()"
         >
             
-            <span>{{carmagtopdata}}</span>
+            <span class="cardmagtop__item-text"
+
+            :class="{active:clicked.includes(index)}"
+            >{{carmagtopdata}}</span>
         </div>     
         
     </div>
@@ -20,7 +23,7 @@
 
     export default {
         name: 'ca-magtop',
-        props:['carmagtop'],
+        props:['carmagtop','clicked','index'],
         components: {
 
         },
@@ -83,6 +86,10 @@
             
             cursor: pointer;
             &:hover {
+                color: #7481FF;
+            }
+
+            .active {
                 color: #7481FF;
             }
         }
