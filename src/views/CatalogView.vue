@@ -6,6 +6,7 @@
               
               <catalog
               :catalogpropscars="cars"
+          
               ></catalog>
 
               
@@ -61,11 +62,12 @@ import catalog from '../components/CatalogNEW/CatalogMainComponent.vue'
 
 export default {
   name: 'CatalogView',
+  props:['magtopvar'],
   data () {
     return {
       cars:cars,
       
-      
+     
   
     }
   },
@@ -74,7 +76,7 @@ export default {
    
   },
   watch:{
-   
+    
   },
   methods:{
       

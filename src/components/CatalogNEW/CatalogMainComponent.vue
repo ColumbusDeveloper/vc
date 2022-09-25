@@ -528,7 +528,7 @@
     import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
     import magtopshowitem from '@/components/CatalogNEW/CardMagTop.vue'
 
-    catype
+   
   
     
 
@@ -862,6 +862,11 @@
                     this.kilonumstartpoints = true
                 }         
             },
+
+            clearMagTopInput () {
+                this.modelmagtop = ''
+            },
+
             getStartedType() {
                 this.typestatekeeper.push(1)
 
