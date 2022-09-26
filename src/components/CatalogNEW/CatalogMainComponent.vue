@@ -436,19 +436,6 @@
                                 </magtopshowitem>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
                          <div class="ma-mo__global-search-item-left-arrow magtoparrow" 
                          @click="magtopshare"
                          >
@@ -457,7 +444,32 @@
                         
                     </div>
 
-                    <div class="ma-mo__global-search-item-right">
+                    <div class="ma-mo__global-search-item-right drophometopright">
+
+                        <div class="ma-mo__global-search-item-right-textbox drophometopright__textbox">
+                            <span class="ma-mo__global-search-item-right-textbox-text drophometopright__textbox-text">Sorted by</span>
+                        </div>
+
+                        <div class="ma-mo__global-search-item-right-dropdown drophometopright__dropdown">
+
+                            <div class="drophometopright__dropdown-textarrowbox">
+                                <div class="drophometopright__dropdown-textarrowbox-text">
+                                    <span class="drophometopright__dropdown-textarrowbox-text-span">Recommendations </span>
+                                </div>
+
+                                <div class="drophometopright__dropdown-textarrowbox-arrowbox" @click="getStartedDropHomeTopRight()">
+                                    <div class="drophometopright__dropdown-textarrowbox-arrowbox-arrowup"><i class="fa-solid fa-angle-up" v-if="dropform"></i></div>
+                                    <div class="drophometopright__dropdown-textarrowbox-arrowbox-arrowdown"><i class="fa-solid fa-angle-down" v-if="dropform===false"></i></div>
+                                </div>
+
+                            </div>
+
+                            
+                            <div class="drophometopright__dropdown-showbox" v-if="dropform">
+
+                            </div>
+
+                        </div>
                         
                     </div>
                     
@@ -606,6 +618,9 @@
                 magtopindexofckickedelement:[],//собирает индексы кликнутых элементов, нужен для подсветки кликнутого
               
 
+
+                dropform:false,
+                droparr:['Recommendations','Newest inventory','Lowest price','Highest prices'],
 
 
                 typeform:false,                
@@ -893,6 +908,11 @@
                 
                 this.magtopchoicearr = [...new Set(this.magtopchoicearr)]
                 
+            },
+
+
+            getStartedDropHomeTopRight() {
+                this.dropform = !this.dropform
             },
 
             getIndexModelmagtopComputed(ind) {
@@ -2243,6 +2263,76 @@
 
     .ma-mo {
         display: flex;
+
+       
+        .drophometopright {
+            display: flex;
+            align-items: center;
+            border-width:2px;
+            border-style: solid;
+            border-color: #000;
+            justify-content: space-between;
+            &__dropdown {
+               width: 60%; 
+               position: relative;
+            }
+
+            &__textbox {
+                width: 40%;
+               
+                
+                background-color: #7481FF;
+                text-align: right;
+            }
+
+            &__textbox-text {
+               
+            }
+
+            &__dropdown-textarrowbox {
+                display: flex;
+                align-items: center;
+                border-width:1px;
+                border-style: solid;
+                border-color: #D7D7D7;
+                background-color: yellow;
+                justify-content: flex-end;
+            }
+
+            &__dropdown-textarrowbox-text {
+
+            }
+
+            &__dropdown-textarrowbox-text-span {
+                margin-right: 30px;
+            }
+
+            &__dropdown-textarrowbox-arrowbox {
+                margin-right: 10px;
+            }
+
+            &__dropdown-textarrowbox-arrowbox-arrowup {
+
+            }
+
+            &__dropdown-textarrowbox-arrowbox-arrowdown {
+
+            }
+
+            &__dropdown-showbox {
+                border-width:2px;
+                border-style: solid;
+                border-color: #000;
+                height: 100px;
+                width: 100%;
+                background-color: #fff;
+                position: absolute;
+                z-index: 5;
+                padding: 10px;
+            }
+        }
+
+
 
       
         .magtop {
