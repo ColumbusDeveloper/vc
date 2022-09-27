@@ -778,21 +778,23 @@
                 this.tabletfiltericonon = true
                 this.magnifyingglasson = true
                 this.recommendationfilteron = true
+                let a = document.querySelector('div.ma-mo__global-search-item-left')
+                a.classList.remove('w100')
+                let b = document.querySelector('div.ma-mo__global-search-item-left-search-vertical-trigger')
+                b.classList.remove('w100')
+               
             },
             togglecrossicon () {
                 this.tabletcrosson = true
                 this.tabletfiltericonon = false
                 this.magnifyingglasson = false
                 this.recommendationfilteron = false
-                let a = document.querySelector('div.ma-mo__global-search')
-                a.style.justifyContent='space-around'
-                let b = document.querySelector('div.ma-mo__global-search-item-left-search-vertical-trigger-cross-icon-part1')
-                let c = document.querySelector('div.ma-mo__global-search-item-left-search-vertical-trigger-cross-icon-part2')
-                b.classList.add('cross-tablet-on')
-                c.classList.add('cross-tablet-on')
-                let v = document.querySelector('ma-mo__global-search-item-left')
-                v.classList.add('width100')
-            },
+                let a = document.querySelector('div.ma-mo__global-search-item-left')
+                a.classList.add('w100')
+                let b = document.querySelector('div.ma-mo__global-search-item-left-search-vertical-trigger')
+                b.classList.add('w100')                
+              
+          },
             show () { //определяет состояние переменных и если хоть один компонент включен, то показывается итерация по массиву showcalculated
                 
                 
@@ -2930,6 +2932,8 @@
             @media (max-width:992px) {
                display: flex;
                align-items: center;
+               justify-content: center;
+               position: relative;
             }
         }
         &__global-search-item-left-search-vertical-trigger-span {
@@ -2939,24 +2943,34 @@
         }
         &__global-search-item-left-search-vertical-trigger-cross-icon {
             position: relative;
+      
             display: none;
             @media (max-width:992px) {
                display: block;
+               position: static;
             }
         }
         &__global-search-item-left-search-vertical-trigger-cross-icon-part1 {
             position: absolute;
+            left:8px;
+            top: 8px;
         }
         &__global-search-item-left-search-vertical-trigger-cross-icon-part2 {
             position: absolute;
+            left:8px;
+            top: 8px;
         }
-        .cross-tablet-on {
-            position: absolute;
-            left: 0;
+        &__global-search-item-left-search-vertical-trigger-span {
+            white-space: nowrap;
+       
         }
-        .width100 {
+        .w100 {
             width: 100%;
         }
+        .mr200 {
+            margin-right: 50px;
+        }
+        
 
 
         
