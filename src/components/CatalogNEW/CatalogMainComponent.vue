@@ -192,11 +192,11 @@
 
                             
                             <div class="transmission-choice-block__result" v-if="transinpformcross" :class="{activecross:transinpformcross}">
-                                <div class="transmission-choice-block__result-item" v-if="automatictransinpformcross" @click="setTransModelAutomatic,addToMakeModelCalc">
+                                <div class="transmission-choice-block__result-item" v-if="automatictransinpformcross" @click="setTransModelAutomatic()">
                                     <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
                                     <span class="transmission-choice-block__result-item-text">Automatic</span>
                                 </div>
-                                <div class="transmission-choice-block__result-item" v-if="manualtransinpformcross" @click="setTransModelManual,addToMakeModelCalc">
+                                <div class="transmission-choice-block__result-item" v-if="manualtransinpformcross" @click="setTransModelManual()">
                                     <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
                                     <span class="transmission-choice-block__result-item-text">Manual</span>
                                 </div> 
@@ -773,36 +773,36 @@
                     this.magtopform=false       
                 }
 
-                if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform) {
-                    this.showcars=true
-                    this.showcalculated=false
-                    this.magtopform=false
+                // if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform) {
+                //     this.showcars=true
+                //     this.showcalculated=false
+                //     this.magtopform=false
 
-                }
+                // }
 
-                if (this.typeform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
-                    this.showcars=false
-                    this.showcalculated=false 
-                    this.typeformon = true
-                }else if (!this.typeform && this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform) {
-                    this.typeformon = false
-                    this.showcalculated=true
-                    this.showcars=false
-                }else if (!this.typeform && !this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
-                    this.typeformon = false
-                    this.showcalculated=false
-                    this.showcars=true
-                }
+                // if (this.typeform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
+                //     this.showcars=false
+                //     this.showcalculated=false 
+                //     this.typeformon = true
+                // }else if (!this.typeform && this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform) {
+                //     this.typeformon = false
+                //     this.showcalculated=true
+                //     this.showcars=false
+                // }else if (!this.typeform && !this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
+                //     this.typeformon = false
+                //     this.showcalculated=false
+                //     this.showcars=true
+                // }
 
-                if (this.typecollector.length>0) {
-                    this.showcars=false
-                    this.showcalculated=false 
-                    this.typeformon = true
-                } else if (!this.typecollector.length>0) {
-                    this.showcars=true
-                    this.showcalculated=false 
-                    this.typeformon = false 
-                }
+                // if (this.typecollector.length>0) {
+                //     this.showcars=false
+                //     this.showcalculated=false 
+                //     this.typeformon = true
+                // } else if (!this.typecollector.length>0) {
+                //     this.showcars=true
+                //     this.showcalculated=false 
+                //     this.typeformon = false 
+                // }
 
                 
 
@@ -826,28 +826,16 @@
                 } 
 
 
+
                 if (this.calculatedcars.length>0) {
                     this.bodyarrtoshow = this.calculatedcars.slice()
                 } else {
                     this.bodyarrtoshow = this.cars.slice()
                 }
-                
-                
-                
-                
-
-                
-
-                
-                
-                
-                
-                
-
-                
-               
-                    
+                                  
             },
+
+
 
             addToMakeModelCalc() {      
                 this.modelsearchmake = ''
