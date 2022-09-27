@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-unused-components -->
 <template>
     <div class="ma-mo"
-   
+  
     >
     
 
@@ -436,19 +436,6 @@
                                 </magtopshowitem>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
                          <div class="ma-mo__global-search-item-left-arrow magtoparrow" 
                          @click="magtopshare"
                          >
@@ -457,7 +444,45 @@
                         
                     </div>
 
-                    <div class="ma-mo__global-search-item-right">
+                    <div class="ma-mo__global-search-item-right drophometopright">
+
+                        <div class="ma-mo__global-search-item-right-textbox drophometopright__textbox">
+                            <span class="ma-mo__global-search-item-right-textbox-text drophometopright__textbox-text">Sorted by</span>
+                        </div>
+
+                        <div class="ma-mo__global-search-item-right-dropdown drophometopright__dropdown">
+
+                            <div class="drophometopright__dropdown-textarrowbox">
+                                <div class="drophometopright__dropdown-textarrowbox-text">
+                                    <span class="drophometopright__dropdown-textarrowbox-text-span">{{droparr[0]}}</span>
+                                </div>
+
+                                <div class="drophometopright__dropdown-textarrowbox-arrowbox" @click="getStartedDropHomeTopRight()" ref="arrowbox">
+                                    <div class="drophometopright__dropdown-textarrowbox-arrowbox-arrowup"><i class="fa-solid fa-angle-up"  v-if="dropform"></i></div>
+                                    <div class="drophometopright__dropdown-textarrowbox-arrowbox-arrowdown"><i class="fa-solid fa-angle-down"  v-if="dropform===false"></i></div>
+                                </div>
+
+                            </div>
+
+                            
+                            <div class="drophometopright__dropdown-showbox " id="showbox" ref="dropdown" v-if="dropshowboxform">
+                                <div class="drophometopright__dropdown-showbox-iteration "
+                                v-for="(item,index) in droparr" :key="index"
+                                
+                                >
+                                    <div class="drophometopright__dropdown-showbox-iteration-item "
+                                    @click="getdropindex(index)"
+                                    
+                                    >
+                                        {{item}}
+                                    </div>
+                            
+                                </div>
+                            </div>
+
+                            
+
+                        </div>
                         
                     </div>
                     
@@ -605,6 +630,14 @@
                 magtopchoicearrfinal:[],//после клика формирование окончательного массива производителей для формирования окончательного кейса
                 magtopindexofckickedelement:[],//собирает индексы кликнутых элементов, нужен для подсветки кликнутого
               
+
+
+                dropform:false,
+                droparr:['Recommendations','Newest inventory','Lowest price','Highest prices'],
+                dropindex:'',
+                dropauxiliaryarr:[],
+                dropshowboxform:false,
+                hide:[],
 
 
 
@@ -894,6 +927,55 @@
                 this.magtopchoicearr = [...new Set(this.magtopchoicearr)]
                 
             },
+
+            getdropindex(val) {
+                let a = val
+                this.dropindex=a
+                let b = this.droparr[a]
+                this.dropauxiliaryarr.unshift(b)
+                this.droparr.splice(a,1)
+                this.droparr.unshift(this.dropauxiliaryarr[0])
+                this.dropauxiliaryarr = []
+            },
+
+           
+
+
+
+            getStartedDropHomeTopRight() {
+                this.dropform = !this.dropform
+                if(this.dropform) {
+                    this.dropshowboxform = true
+                } else {
+                    this.dropshowboxform = false
+                }
+
+            },
+
+            dropdown(e){
+                let el = this.$refs.dropdown
+                let elarrow = this.$refs.arrowbox
+                let a = e.composedPath().includes(el)
+                let b = e.composedPath().includes(elarrow)
+         
+                if (a){
+                    this.dropshowboxform = false
+                    this.dropform = false
+                    this.dropauxiliaryarr = []
+                }
+
+                if (this.dropform && this.dropshowboxform && b) {
+                    this.dropshowboxform = true
+                    this.dropform = true
+                }else if (this.dropform && this.dropshowboxform && !b) {
+                    this.dropshowboxform = false
+                    this.dropform = false
+                    this.dropauxiliaryarr = []
+                }
+                
+            }, 
+ 
+            
 
             getIndexModelmagtopComputed(ind) {
                 let a = ind
@@ -2226,11 +2308,15 @@
                     return car.make
                 })
             this.magtoparrtofilter = [...new Set(this.magtoparrtofilter)]
-            
+          
         },
         created() {
+            document.addEventListener('click', this.dropdown)
            
-        }
+        },
+        unmounted () {
+            document.removeEventListener('click', this.dropdown)
+        }, 
         
 
 
@@ -2243,6 +2329,84 @@
 
     .ma-mo {
         display: flex;
+
+       
+        .drophometopright {
+            display: flex;
+            align-items: center;
+           
+            justify-content: space-between;
+            &__dropdown {
+               width: 60%; 
+               position: relative;
+            }
+
+            &__textbox {
+                width: 40%;
+               
+                
+               
+                text-align: right;
+            }
+
+            &__textbox-text {
+               margin-right: 20px;
+            }
+
+            &__dropdown-textarrowbox {
+               
+                align-items: center;
+                border-width:1px;
+                border-style: solid;
+                border-color: #D7D7D7;
+                
+                justify-content: flex-end;
+                position: relative;
+                height: 22px;
+               
+            }
+
+            &__dropdown-textarrowbox-text {
+
+            }
+
+            &__dropdown-textarrowbox-text-span {
+                
+                position: absolute;
+                top:0;
+                left:20px;
+            }
+
+            &__dropdown-textarrowbox-arrowbox {
+                right: 10px;
+                position: absolute;
+                z-index: 2;
+                top:0;
+            }
+
+            &__dropdown-textarrowbox-arrowbox-arrowup {
+
+            }
+
+            &__dropdown-textarrowbox-arrowbox-arrowdown {
+
+            }
+
+            &__dropdown-showbox {
+                
+                height: 110px;
+                width: 100%;
+                background-color: #fff;
+                position: absolute;
+                z-index: 1;
+                padding: 10px;
+                padding-left: 21px;
+                padding-top: 1px;
+                top:0;
+            }
+        }
+
+
 
       
         .magtop {
