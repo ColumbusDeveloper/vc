@@ -415,12 +415,21 @@
         <div class="ma-mo__global-search-and-card-box">
                 <div class="ma-mo__global-search">
                     <div class="ma-mo__global-search-item-left">
+                        <div class="ma-mo__global-search-item-left-search-vertical-trigger">
 
-
-
-
-
-                        <div class="ma-mo__global-search-item-left-magnifying magtop">
+                            <div class="ma-mo__global-search-item-left-search-vertical-trigger-icon" v-if="tabletfiltericonon" @click="togglecrossicon">
+                                <img src="@/assets/images/vertical_filter_icon.png" alt="vertical_filter_icon" class="ma-mo__global-search-item-left-search-vertical-trigger-icon-img">
+                            </div>
+                            <div class="ma-mo__global-search-item-left-search-vertical-trigger-cross-icon" v-if="tabletcrosson" @click="togglefiltericon">
+                                <img src="@/assets/images/Cross_1_part.png" alt="tablet-cross" class="ma-mo__global-search-item-left-search-vertical-trigger-cross-icon-part1">
+                                <img src="@/assets/images/Cross_2_part.png" alt="tablet-cross" class="ma-mo__global-search-item-left-search-vertical-trigger-cross-icon-part2">
+                            </div>
+                            <div >
+                                <span class="ma-mo__global-search-item-left-search-vertical-trigger-span">Search Filter</span>
+                            </div>
+                            
+                        </div>
+                        <div class="ma-mo__global-search-item-left-magnifying magtop" v-if="magnifyingglasson">
                             <input type="text" @input="magtopchangeshow" v-model="modelmagtop" placeholder="Find a dream car..." class="magtop__input">
                             <i class="fa-sharp fa-solid fa-magnifying-glass magtop__glass"></i>
                             <div class="magtop__show-window" v-if="modelmagtopComputed.length<10">
@@ -436,15 +445,16 @@
                                 </magtopshowitem>
                             </div>
                         </div>
-                         <div class="ma-mo__global-search-item-left-arrow magtoparrow" 
+                         <div class="ma-mo__global-search-item-left-arrow magtoparrow " 
                          @click="magtopshare"
+                         v-if="magnifyingglasson"
                          >
                             <img src="@/assets/images/Share.png" alt="share" class="magtoparrow__arr">
                          </div>
                         
                     </div>
 
-                    <div class="ma-mo__global-search-item-right drophometopright">
+                    <div class="ma-mo__global-search-item-right drophometopright" v-if="recommendationfilteron"> 
 
                         <div class="ma-mo__global-search-item-right-textbox drophometopright__textbox">
                             <span class="ma-mo__global-search-item-right-textbox-text drophometopright__textbox-text">Sorted by</span>
@@ -603,6 +613,12 @@
                 showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
                 
                 
+                tabletfiltericonon:true,
+                tabletcrosson:false,
+                magnifyingglasson:true,
+                recommendationfilteron:true,
+
+
                 
                 bodyform:false,   
                 bodyinpformcross:false,
@@ -757,6 +773,26 @@
 
         },
         methods: {
+            togglefiltericon () {
+                this.tabletcrosson = false
+                this.tabletfiltericonon = true
+                this.magnifyingglasson = true
+                this.recommendationfilteron = true
+            },
+            togglecrossicon () {
+                this.tabletcrosson = true
+                this.tabletfiltericonon = false
+                this.magnifyingglasson = false
+                this.recommendationfilteron = false
+                let a = document.querySelector('div.ma-mo__global-search')
+                a.style.justifyContent='space-around'
+                let b = document.querySelector('div.ma-mo__global-search-item-left-search-vertical-trigger-cross-icon-part1')
+                let c = document.querySelector('div.ma-mo__global-search-item-left-search-vertical-trigger-cross-icon-part2')
+                b.classList.add('cross-tablet-on')
+                c.classList.add('cross-tablet-on')
+                let v = document.querySelector('ma-mo__global-search-item-left')
+                v.classList.add('width100')
+            },
             show () { //определяет состояние переменных и если хоть один компонент включен, то показывается итерация по массиву showcalculated
                 
                 
@@ -1271,10 +1307,7 @@
                     this.bodycheck=true
                     this.bodycross=false
                     this.bodyclosed=false
-                  
-                    
-                    
-                
+                                 
                 } else if (this.bodystatekeeper.length===2) {
                     this.bodyforminput = false
                     this.bodyinpformcross=true
@@ -2315,10 +2348,14 @@
 <style lang="scss">
     @import '@/assets/varmix.scss';
 
+   
     .ma-mo {
         display: flex;
+        
+        
+        
 
-       
+
         .drophometopright {
             display: flex;
             align-items: center;
@@ -2398,13 +2435,17 @@
 
       
         .magtop {
-            position: relative;
-            width: 80%;
-            border-width:1px;
-            border-style: solid;
-            border-color: #D7D7D7;
-            input[type=text]{
-            width:100%;
+                position: relative;
+                width: 80%;
+                border-width:1px;
+                border-style: solid;
+                border-color: #D7D7D7;
+                @media (max-width:992px) {
+                     width: 45%;
+                }
+                input[type=text]{
+                width:100%;
+                
             }
 
             &__input {
@@ -2415,6 +2456,10 @@
                 position: absolute;
                 left: 90%;
                 top:20%;
+                color: #D7D7D7;
+                @media (max-width:992px) {
+                    left: 84%;
+                }
             }
             &__show-window {
                 position: absolute;
@@ -2439,6 +2484,9 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%,-50%);
+            }
+            @media (max-width:992px) {
+               width: 0;
             }
         }
 
@@ -2623,6 +2671,9 @@
             width: 70%;
             display: flex;
             flex-direction: column;
+            @media (max-width:992px) {
+                width: 100%;
+            }
 		}
 
 		&__global-search {
@@ -2635,7 +2686,7 @@
           
             display: grid;
             grid-template-columns: 1fr 1fr;
-            @media (max-width:768px) {
+            @media (max-width:576px) {
                grid-template-columns: 1fr;
             }
 		}
@@ -2864,6 +2915,47 @@
                 background-color: aqua;
             }
             
+        }
+
+        &__detailed-search-box {
+            @media (max-width:992px) {
+               display: none;
+            }
+        }
+        &__global-search-item-left {
+            justify-content: space-around;
+        }
+        &__global-search-item-left-search-vertical-trigger {
+            display: none;
+            @media (max-width:992px) {
+               display: flex;
+               align-items: center;
+            }
+        }
+        &__global-search-item-left-search-vertical-trigger-span {
+            @media (max-width:992px) {
+               margin-left: 10px;
+            }
+        }
+        &__global-search-item-left-search-vertical-trigger-cross-icon {
+            position: relative;
+            display: none;
+            @media (max-width:992px) {
+               display: block;
+            }
+        }
+        &__global-search-item-left-search-vertical-trigger-cross-icon-part1 {
+            position: absolute;
+        }
+        &__global-search-item-left-search-vertical-trigger-cross-icon-part2 {
+            position: absolute;
+        }
+        .cross-tablet-on {
+            position: absolute;
+            left: 0;
+        }
+        .width100 {
+            width: 100%;
         }
 
 
