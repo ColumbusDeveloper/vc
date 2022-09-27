@@ -819,7 +819,7 @@
                     this.calculatedcars = this.cars.filter(el=>el.transmission==='Automatic')
                 } else if (this.testarr.includes('automatic') && this.testarr.includes('manual')) {
                     this.cars = this.catalogpropscars.slice()
-                    this.calculatedcars = this.catalogpropscars.slice()
+                    // this.calculatedcars = this.catalogpropscars.slice()
                 } else if (!this.testarr.includes('automatic') && !this.testarr.includes('manual')) {
                     this.cars = this.catalogpropscars.slice()
                     this.calculatedcars = this.catalogpropscars.slice()
@@ -827,7 +827,7 @@
 
 
 
-                if (this.calculatedcars.length>0) {
+                if (0<this.calculatedcars.length<14) {
                     this.bodyarrtoshow = this.calculatedcars.slice()
                 } else {
                     this.bodyarrtoshow = this.cars.slice()
@@ -1260,9 +1260,9 @@
 
 
             getStartedBodyType() {
-                
+                this.show ()
                 this.bodystatekeeper.push(1)
-
+                
                 
                
                 if (this.bodystatekeeper.length===1) {
@@ -1281,7 +1281,7 @@
                     this.bodycheck=false
                     this.bodycross=true
                     this.bodyclosed=false
-                    
+                    this.calculatedcars = this.toshowobjects.slice()
                     
                 }else {
                     this.bodyform = false
@@ -1301,7 +1301,7 @@
 
                 
 
-                this.show ()
+                
                 
                 
                 
