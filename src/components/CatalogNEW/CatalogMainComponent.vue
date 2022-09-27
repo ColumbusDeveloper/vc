@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-unused-components -->
 <template>
     <div class="ma-mo"
-   
+  
     >
     
 
@@ -454,20 +454,33 @@
 
                             <div class="drophometopright__dropdown-textarrowbox">
                                 <div class="drophometopright__dropdown-textarrowbox-text">
-                                    <span class="drophometopright__dropdown-textarrowbox-text-span">Recommendations </span>
+                                    <span class="drophometopright__dropdown-textarrowbox-text-span">{{droparr[0]}}</span>
                                 </div>
 
-                                <div class="drophometopright__dropdown-textarrowbox-arrowbox" @click="getStartedDropHomeTopRight()">
-                                    <div class="drophometopright__dropdown-textarrowbox-arrowbox-arrowup"><i class="fa-solid fa-angle-up" v-if="dropform"></i></div>
-                                    <div class="drophometopright__dropdown-textarrowbox-arrowbox-arrowdown"><i class="fa-solid fa-angle-down" v-if="dropform===false"></i></div>
+                                <div class="drophometopright__dropdown-textarrowbox-arrowbox" @click="getStartedDropHomeTopRight()" ref="arrowbox">
+                                    <div class="drophometopright__dropdown-textarrowbox-arrowbox-arrowup"><i class="fa-solid fa-angle-up"  v-if="dropform"></i></div>
+                                    <div class="drophometopright__dropdown-textarrowbox-arrowbox-arrowdown"><i class="fa-solid fa-angle-down"  v-if="dropform===false"></i></div>
                                 </div>
 
                             </div>
 
                             
-                            <div class="drophometopright__dropdown-showbox" v-if="dropform">
-
+                            <div class="drophometopright__dropdown-showbox " id="showbox" ref="dropdown" v-if="dropshowboxform">
+                                <div class="drophometopright__dropdown-showbox-iteration "
+                                v-for="(item,index) in droparr" :key="index"
+                                
+                                >
+                                    <div class="drophometopright__dropdown-showbox-iteration-item "
+                                    @click="getdropindex(index)"
+                                    
+                                    >
+                                        {{item}}
+                                    </div>
+                            
+                                </div>
                             </div>
+
+                            
 
                         </div>
                         
@@ -621,6 +634,11 @@
 
                 dropform:false,
                 droparr:['Recommendations','Newest inventory','Lowest price','Highest prices'],
+                dropindex:'',
+                dropauxiliaryarr:[],
+                dropshowboxform:false,
+                hide:[],
+
 
 
                 typeform:false,                
@@ -910,10 +928,54 @@
                 
             },
 
+            getdropindex(val) {
+                let a = val
+                this.dropindex=a
+                let b = this.droparr[a]
+                this.dropauxiliaryarr.unshift(b)
+                this.droparr.splice(a,1)
+                this.droparr.unshift(this.dropauxiliaryarr[0])
+                this.dropauxiliaryarr = []
+            },
+
+           
+
+
 
             getStartedDropHomeTopRight() {
                 this.dropform = !this.dropform
+                if(this.dropform) {
+                    this.dropshowboxform = true
+                } else {
+                    this.dropshowboxform = false
+                }
+
             },
+
+            dropdown(e){
+                let el = this.$refs.dropdown
+                let elarrow = this.$refs.arrowbox
+                let a = e.composedPath().includes(el)
+                let b = e.composedPath().includes(elarrow)
+         
+                if (a){
+                    this.dropshowboxform = false
+                    this.dropform = false
+                    this.dropauxiliaryarr = []
+                }
+
+                if (this.dropform && this.dropshowboxform && b) {
+                    this.dropshowboxform = true
+                    this.dropform = true
+                }else if (this.dropform && this.dropshowboxform && !b) {
+                    this.dropshowboxform = false
+                    this.dropform = false
+                    this.dropauxiliaryarr = []
+                }
+                
+            }, 
+ 
+            
 
             getIndexModelmagtopComputed(ind) {
                 let a = ind
@@ -2246,11 +2308,15 @@
                     return car.make
                 })
             this.magtoparrtofilter = [...new Set(this.magtoparrtofilter)]
-            
+          
         },
         created() {
+            document.addEventListener('click', this.dropdown)
            
-        }
+        },
+        unmounted () {
+            document.removeEventListener('click', this.dropdown)
+        }, 
         
 
 
@@ -2268,9 +2334,7 @@
         .drophometopright {
             display: flex;
             align-items: center;
-            border-width:2px;
-            border-style: solid;
-            border-color: #000;
+           
             justify-content: space-between;
             &__dropdown {
                width: 60%; 
@@ -2281,22 +2345,25 @@
                 width: 40%;
                
                 
-                background-color: #7481FF;
+               
                 text-align: right;
             }
 
             &__textbox-text {
-               
+               margin-right: 20px;
             }
 
             &__dropdown-textarrowbox {
-                display: flex;
+               
                 align-items: center;
                 border-width:1px;
                 border-style: solid;
                 border-color: #D7D7D7;
-                background-color: yellow;
+                
                 justify-content: flex-end;
+                position: relative;
+                height: 22px;
+               
             }
 
             &__dropdown-textarrowbox-text {
@@ -2304,11 +2371,17 @@
             }
 
             &__dropdown-textarrowbox-text-span {
-                margin-right: 30px;
+                
+                position: absolute;
+                top:0;
+                left:20px;
             }
 
             &__dropdown-textarrowbox-arrowbox {
-                margin-right: 10px;
+                right: 10px;
+                position: absolute;
+                z-index: 2;
+                top:0;
             }
 
             &__dropdown-textarrowbox-arrowbox-arrowup {
@@ -2320,15 +2393,16 @@
             }
 
             &__dropdown-showbox {
-                border-width:2px;
-                border-style: solid;
-                border-color: #000;
-                height: 100px;
+                
+                height: 110px;
                 width: 100%;
                 background-color: #fff;
                 position: absolute;
-                z-index: 5;
+                z-index: 1;
                 padding: 10px;
+                padding-left: 21px;
+                padding-top: 1px;
+                top:0;
             }
         }
 
