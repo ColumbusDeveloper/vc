@@ -417,6 +417,8 @@
                     <div class="ma-mo__global-search-item-left">
                         <div class="ma-mo__global-search-item-left-search-vertical-trigger">
 
+                            <div v-if="tabletcrosson" class="ma-mo__global-search-item-left-search-vertical-trigger-mobile-cross-on"><span>Detailed search</span></div>
+
                             <div class="ma-mo__global-search-item-left-search-vertical-trigger-icon" v-if="tabletfiltericonon" @click="togglecrossicon">
                                 <img src="@/assets/images/vertical_filter_icon.png" alt="vertical_filter_icon" class="ma-mo__global-search-item-left-search-vertical-trigger-icon-img">
                             </div>
@@ -2366,6 +2368,9 @@
             &__dropdown {
                width: 60%; 
                position: relative;
+               @media (max-width:768px) {
+                  width: 100%;
+               }
             }
 
             &__textbox {
@@ -2390,6 +2395,7 @@
                 justify-content: flex-end;
                 position: relative;
                 height: 22px;
+                
                
             }
 
@@ -2402,6 +2408,9 @@
                 position: absolute;
                 top:0;
                 left:20px;
+                @media (max-width:768px) {
+                   left: 0;
+                }
             }
 
             &__dropdown-textarrowbox-arrowbox {
@@ -2409,6 +2418,9 @@
                 position: absolute;
                 z-index: 2;
                 top:0;
+                @media (max-width:768px) {
+                    right: 4px;
+                }
             }
 
             &__dropdown-textarrowbox-arrowbox-arrowup {
@@ -2488,8 +2500,10 @@
                 transform: translate(-50%,-50%);
             }
             @media (max-width:992px) {
-               width: 0;
+                width: 24px;
+
             }
+           
         }
 
 
@@ -2926,6 +2940,16 @@
         }
         &__global-search-item-left {
             justify-content: space-around;
+            @media (max-width:768px) {
+               width: 100%;
+               justify-content: space-between;
+           
+            }
+        }
+        &__global-search-item-right {
+            @media (max-width:768px) {
+               width: 100%;
+            }
         }
         &__global-search-item-left-search-vertical-trigger {
             display: none;
@@ -2939,6 +2963,14 @@
         &__global-search-item-left-search-vertical-trigger-span {
             @media (max-width:992px) {
                margin-left: 10px;
+            }
+            @media (max-width:768px) {
+               display: none;
+            }
+        }
+        &__global-search-item-right-textbox-text {
+            @media (max-width:768px) {
+                display: none;
             }
         }
         &__global-search-item-left-search-vertical-trigger-cross-icon {
@@ -2954,22 +2986,49 @@
             position: absolute;
             left:8px;
             top: 8px;
+            @media (max-width:768px) {
+                left: 0;
+                top: 13px;
+            }
         }
         &__global-search-item-left-search-vertical-trigger-cross-icon-part2 {
             position: absolute;
             left:8px;
             top: 8px;
+            @media (max-width:768px) {
+                left: 0;
+                top: 13px;
+            }
         }
         &__global-search-item-left-search-vertical-trigger-span {
             white-space: nowrap;
        
         }
+        &__global-search {
+            @media (max-width:768px) {
+               flex-direction: column;
+            }
+        }
+        &__global-search-item-left-search-vertical-trigger-mobile-cross-on {
+            display: none;
+            @media (max-width:768px) {
+               display: block;
+               margin-left: 30px;
+               margin-top: 12px;
+            }
+            
+        }
         .w100 {
             width: 100%;
+            @media (max-width:768px) {
+               height: 110px;
+               display: flex;
+               align-items: flex-start;
+               justify-content: flex-start;
+            }
+            
         }
-        .mr200 {
-            margin-right: 50px;
-        }
+        
         
 
 
