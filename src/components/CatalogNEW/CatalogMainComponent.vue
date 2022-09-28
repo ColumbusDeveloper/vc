@@ -427,7 +427,7 @@
                                 <img src="@/assets/images/Cross_2_part.png" alt="tablet-cross" class="ma-mo__global-search-item-left-search-vertical-trigger-cross-icon-part2">
                             </div>
                             <div >
-                                <span class="ma-mo__global-search-item-left-search-vertical-trigger-span">Search Filter</span>
+                                <span class="ma-mo__global-search-item-left-search-vertical-trigger-span" v-if="tabletcrosson">Search Filter</span>
                             </div>
                             
                         </div>
@@ -2986,6 +2986,10 @@
             position: absolute;
             left:8px;
             top: 8px;
+            @media (max-width:992px) {
+                left: 19px;
+                top: 5px;
+            }
             @media (max-width:768px) {
                 left: 0;
                 top: 13px;
@@ -2995,6 +2999,10 @@
             position: absolute;
             left:8px;
             top: 8px;
+            @media (max-width:992px) {
+                left: 19px;
+                top: 5px;
+            }
             @media (max-width:768px) {
                 left: 0;
                 top: 13px;
@@ -3002,6 +3010,7 @@
         }
         &__global-search-item-left-search-vertical-trigger-span {
             white-space: nowrap;
+            margin-left: -207px;
        
         }
         &__global-search {
@@ -3014,12 +3023,13 @@
             @media (max-width:768px) {
                display: block;
                margin-left: 30px;
-               margin-top: 12px;
+               margin-top: 4px;
             }
             
         }
         .w100 {
             width: 100%;
+            padding-top: 9px;
             @media (max-width:768px) {
                height: 110px;
                display: flex;
