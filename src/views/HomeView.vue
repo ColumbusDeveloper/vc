@@ -1,162 +1,184 @@
 <template>
-  <div>
-    <div class="container-fluid page">
+  <div class="d-flex flex-column min-vh-100">
+    <div class="container">
       <div class="row">
         <div class="col">
-          <div class="container">
-            <div class="row">
-              <div class="col back">
-                <div class="back__text">The easiest way to buy a car in Canada</div>
-                <div class="back__btn"><btnreqcar/></div>
-                <div class="back__carousel">
-                  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img src="../assets/images/Car_carusel.png" class="d-block w-100" alt="img">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="../assets/images/Car_carusel.png" class="d-block w-100" alt="img">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="../assets/images/Car_carusel.png" class="d-block w-100" alt="img">
-                          </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
-                          <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
-                          <span class="visually-hidden">Next</span>
-                        </button>
-                  </div>
-                </div> 
-              </div>
-            </div>
+
+          <div class="col header" @clearmagtopform="setMagtopformInventoryComponent">
+            <Headerone  class="center" :liclickedtextoff="navliclicktextoffstate"  />
+            <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
+            <transition name="menu">
+              <burgerlist v-if="iscross" class="burgerlist" :listate="navliclicktextoffstate" v-on:click="iscross=!iscross" v-on:navliclicktextoffevent="changenavliclicktextoffstate"  />
+            </transition>
           </div>
+
         </div>
-        
       </div>
-      
-      
     </div>
-    <div class="container-fluid">
-      <div class="row">
-                            <div class="howDoesPlusImg col">
-                              
-                              <div class="howDoesPlusImg__leftPart">
-                                <img src="../assets/images/Honda_Accord.png"  alt="honda">
-                              </div>
 
-                              <div class="howDoesPlusImg__rightPart">
-                                <img src="../assets/images/Lexus.png"  alt="lexus">
-                              </div>
-
-                              <div class="howDoesPlusImg__central">
-
-                                <div class="howDoesPlusImg__headingBox">
-                                  <h2 class="howDoesPlusImg__headingBoxH2">
-                                    How does it work?
-                                  </h2>
-                                  <h3 class="howDoesPlusImg__headingBoxH3">
-                                    From your Phone to your Home
-                                  </h3>
+    <main class="flex-fill">
+          <div class="container-fluid page">
+              <div class="row">
+                <div class="col">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col back">
+                        <div class="back__text">The easiest way to buy a car in Canada</div>
+                        <div class="back__btn"><btnreqcar/></div>
+                        <div class="back__carousel">
+                          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active">
+                                    <img src="../assets/images/Car_carusel.png" class="d-block w-100" alt="img">
+                                  </div>
+                                  <div class="carousel-item">
+                                    <img src="../assets/images/Car_carusel.png" class="d-block w-100" alt="img">
+                                  </div>
+                                  <div class="carousel-item">
+                                    <img src="../assets/images/Car_carusel.png" class="d-block w-100" alt="img">
+                                  </div>
                                 </div>
-
-                                <div class="howDoesPlusImg__contentBox">
-                                  <p class="howDoesPlusImg__contentBoxP">
-                                    We make it easy for you to buy your dream car from
-                                    your phone without ever having to step into a dealership! 
-                                    We deliver your vehicle to your home for you to test drive 
-                                    before you sign anything.
-                                  </p>
-                                </div>
-
-                              </div>
-
-                            </div>
-                            
-      </div>
-
-      <div class="container">
-          <div class="row ">
-              <div class="col perfCarBlok">
-                <perfcar/>
-              </div>
-          </div>
-      </div>
-
-     <div class="container">
-          <div class="row ">
-              <div class="col advantages">
-                <advantages/>
-              </div>
-          </div>
-     </div> 
-
-     <div class="container">
-          <div class="row ">
-              <div class="col choose">
-                <choose/>
-              </div>
-          </div>
-     </div> 
-
-     <div class="container">
-          <div class="row ">
-              <div class="col happy">
-               <happy/>
-              </div>
-          </div>
-     </div> 
-
-     <div class="container">
-          <div class="row ">
-              <div class="col what">
-               <what/>
-              </div>
-          </div>
-     </div> 
-
-     <div class="container">
-          <div class="row ">
-              <div class="col letH">
-                <letblock />
-                
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
+                                  <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
+                                  <span class="visually-hidden">Next</span>
+                                </button>
+                          </div>
+                        </div> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 
               </div>
-          </div>
-     </div> 
+              
+              
+            </div>
+            <div class="container-fluid">
+              <div class="row">
+                                    <div class="howDoesPlusImg col">
+                                      
+                                      <div class="howDoesPlusImg__leftPart">
+                                        <img src="../assets/images/Honda_Accord.png"  alt="honda">
+                                      </div>
 
-     <div class="container">
-          <div class="row ">
-              <div class="col progressH">
-                <progblock />
-                
-                
+                                      <div class="howDoesPlusImg__rightPart">
+                                        <img src="../assets/images/Lexus.png"  alt="lexus">
+                                      </div>
+
+                                      <div class="howDoesPlusImg__central">
+
+                                        <div class="howDoesPlusImg__headingBox">
+                                          <h2 class="howDoesPlusImg__headingBoxH2">
+                                            How does it work?
+                                          </h2>
+                                          <h3 class="howDoesPlusImg__headingBoxH3">
+                                            From your Phone to your Home
+                                          </h3>
+                                        </div>
+
+                                        <div class="howDoesPlusImg__contentBox">
+                                          <p class="howDoesPlusImg__contentBoxP">
+                                            We make it easy for you to buy your dream car from
+                                            your phone without ever having to step into a dealership! 
+                                            We deliver your vehicle to your home for you to test drive 
+                                            before you sign anything.
+                                          </p>
+                                        </div>
+
+                                      </div>
+
+                                    </div>
+                                    
               </div>
-          </div>
-     </div> 
 
-     <div class="container">
-          <div class="row ">
-              <div class="col interestH">
-                <interest />
-                
-                
+              <div class="container">
+                  <div class="row ">
+                      <div class="col perfCarBlok">
+                        <perfcar/>
+                      </div>
+                  </div>
               </div>
+
+            <div class="container">
+                  <div class="row ">
+                      <div class="col advantages">
+                        <advantages/>
+                      </div>
+                  </div>
+            </div> 
+
+            <div class="container">
+                  <div class="row ">
+                      <div class="col choose">
+                        <choose/>
+                      </div>
+                  </div>
+            </div> 
+
+            <div class="container">
+                  <div class="row ">
+                      <div class="col happy">
+                      <happy/>
+                      </div>
+                  </div>
+            </div> 
+
+            <div class="container">
+                  <div class="row ">
+                      <div class="col what">
+                      <what/>
+                      </div>
+                  </div>
+            </div> 
+
+            <div class="container">
+                  <div class="row ">
+                      <div class="col letH">
+                        <letblock />
+                        
+                        
+                      </div>
+                  </div>
+            </div> 
+
+            <div class="container">
+                  <div class="row ">
+                      <div class="col progressH">
+                        <progblock />
+                        
+                        
+                      </div>
+                  </div>
+            </div> 
+
+            <div class="container">
+                  <div class="row ">
+                      <div class="col interestH">
+                        <interest />
+                        
+                        
+                      </div>
+                  </div>
+            </div> 
+            
+
+            
+
+
+              
+
+
+
           </div>
-     </div> 
-     
+    
+    </main>
+    <Footer class="center" />
 
-     
-
-
-      
-
-
-
-    </div>
+    
   </div>
   
 
@@ -174,6 +196,10 @@
   import progblock from '@/components/HOME/ProginputblockH.vue'
   import letblock from '@/components/HOME/LetP.vue'
   import interest from '@/components/HOME/InterestHome.vue'
+  import Headerone from '@/components/Header.vue'
+  import Footer from '@/components/Footer.vue'
+  import burgerbtn from '@/components/primitives/BurgerBtn.vue'
+  import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
 
   export default {
     name: 'HomeView',
@@ -186,23 +212,64 @@
       what,
       progblock,
       letblock,
-      interest
+      interest,
+      Headerone,
+      Footer,
+      burgerbtn,
+      burgerlist,
+      
     },
     data () {
       return {
+        iscross: false,
+        navliclicktextoffstate:false,
+
+
+
          
         
       }
     },
     methods:{
-     
+        changenavliclicktextoffstate (newVal) {
+          this.navliclicktextoffstate = newVal
+        }
+    },
+    watch: {
+        iscross (newVal) {
+          this.navliclicktextoffstate = newVal 
+        }
+    },
 
-    }
+    
   }
 </script>
 
 <style lang="scss" scoped>
   @import '../assets/varmix.scss';
+
+    .wrapper {
+    max-width: 1440px;
+
+
+    }
+    .header {
+    display: flex;
+    justify-content: space-between;
+    }
+    .burgerlist {
+    position: absolute;
+    }
+
+    .menu-enter-active,
+    .menu-leave-active {
+    transition: all .5s;
+    }
+    .menu-enter,
+    .menu-leave-to {
+    opacity: 0;
+
+    }
 
   .page {
     
