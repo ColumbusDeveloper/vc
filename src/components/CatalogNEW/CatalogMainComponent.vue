@@ -406,7 +406,7 @@
 
                         
                     </div>
-
+                
             </div>
             
             
@@ -427,7 +427,7 @@
                                 <img src="@/assets/images/Cross_2_part.png" alt="tablet-cross" class="ma-mo__global-search-item-left-search-vertical-trigger-cross-icon-part2">
                             </div>
                             <div >
-                                <span class="ma-mo__global-search-item-left-search-vertical-trigger-span" v-if="tabletcrosson">Search Filter</span>
+                                <span class="ma-mo__global-search-item-left-search-vertical-trigger-span" v-if="tabletcrosson">Detailed search</span>
                             </div>
                             
                         </div>
@@ -499,6 +499,401 @@
                     </div>
                     
                    
+                </div>
+                <div class="ma-mo__detailed-search-box-calk-container calk-container-tablet" @click="setunduwarning" v-if="tabletcrosson">
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinpbody:bodyform,activecross:bodyinpformcross}">
+                        <div class="ma-mo__open-arrow-box arr-box">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text">
+                                Make,Model
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedBodyType()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="bodyform"></i></div>
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="bodyform===false"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="ma-mo__detailed-search-box-doubleinprange-price-box inp-cont-box" v-if="bodyform">
+
+                            
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box" v-if="bodyforminput">
+    
+                                <div class="bodymake">
+                                    <span class="bodymake__text">Make</span>
+                                    <div class="bodymake__input-box make" >
+                                        <input type="text" v-model="modelsearchmake" id="make" @input="setBodyTypeShowOrderCars (),clearModel()"  placeholder="Search Make..." >
+                                        <i class="fa-sharp fa-solid fa-magnifying-glass bodymake__input-box-glass"></i>
+                                    </div>
+                                </div>
+
+                                <div class="bodymodel">
+                                    <span class="bodymodel__text">Model</span>
+                                    <div class="bodymodel__input-box">
+                                        <input type="text" v-model="modelsearchmodel" id="model" @input="setBodyTypeShowOrderCars ()"  placeholder="Search Model..." class="bodymodel__input-box-inp">
+                                        <i class="fa-sharp fa-solid fa-magnifying-glass bodymodel__input-box-glass"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="bodyinpformcross">
+
+                                <cardbodydelete
+                                v-for="car in calculatedcars" :key="car"
+                                :carbody="car"
+                                @deletedbodytoparent="deletedbodyitem=$event"
+                                @click="addToMakeModelCalc()"
+                                >
+
+
+                                </cardbodydelete>
+                                <div class="inp-box-cross-on-undo"
+                                @click="addToMakeModelCalc()"
+                                >
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="this.deletedbodyitemhistory.length>0" @click="undobodycomponent" >
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
+                                    </div>
+                                    <div class="inp-box-cross-on-undo__text-statement-box">
+                                        <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
+                                    </div>  
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinptype:typeform,activecross:typeinpformcross}">
+                        <div class="ma-mo__open-arrow-box arr-box">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text">
+                                Body type
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedType()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="typeform"></i></div>
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="typeform===false"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="ma-mo__detailed-search-box-doubleinprange-price-box inp-cont-box" v-if="typeform">
+
+                            
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box inp-box-type-inp" v-if="typeforminput">
+    
+                                <div class="inp-box-type-inp__trucks tib" @click="setTypeTRUCK">
+                                    <i class="fa-solid fa-check inp-box-type-inp__trucks-icon tib__icon" :class="{visible:typetruck}"  ></i>                             
+                                    <div class="inp-box-type-inp__trucks-img tib__img" ><img src="@/assets/images/Truck_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__trucks-text tib__text">Trucks</span>
+                                </div>
+                                <div class="inp-box-type-inp__suv tib" @click="setTypeSUV">
+                                    <i class="fa-solid fa-check inp-box-type-inp__suv-icon tib__icon"  :class="{visible:typesuv}"></i>                             
+                                    <div class="inp-box-type-inp__suv-img tib__img" ><img src="@/assets/images/SUV_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__suv-text tib__text">SUV</span>
+                                </div>
+                                <div class="inp-box-type-inp__sedan tib" @click="setTypeSEDAN">
+                                    <i class="fa-solid fa-check inp-box-type-inp__sedan-icon tib__icon"  :class="{visible:typesedan}"></i>                             
+                                    <div class="inp-box-type-inp__sedan-img tib__img" ><img src="@/assets/images/Sedan_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__sedan-text tib__text">Sedan</span>
+                                </div>
+                                <div class="inp-box-type-inp__hatchback tib" @click="setTypeHATCHBACK">
+                                    <i class="fa-solid fa-check inp-box-type-inp__hatchback-icon tib__icon"  :class="{visible:typehatchback}"></i>                             
+                                    <div class="inp-box-type-inp__hatchback-img tib__img" ><img src="@/assets/images/Sedan_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__hatchback-text tib__text">Hatchback</span>
+                                </div>
+                                <div class="inp-box-type-inp__coupe tib" @click="setTypeCOUPE">
+                                    <i class="fa-solid fa-check inp-box-type-inp__coupe-icon tib__icon"  :class="{visible:typecoupe}"></i>                             
+                                    <div class="inp-box-type-inp__coupe-img tib__img" ><img src="@/assets/images/Coupe_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__coupe-text tib__text">Coupe</span>
+                                </div>
+                                <div class="inp-box-type-inp__convertiable tib" @click="setTypeCONVERTIABLE">
+                                    <i class="fa-solid fa-check inp-box-type-inp__convertiable-icon tib__icon"  :class="{visible:typeconvertiable}"></i>                             
+                                    <div class="inp-box-type-inp__convertiable-img tib__img" ><img src="@/assets/images/Convertiable_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__convertiable-text tib__text">Convertiable</span>
+                                </div>
+                                <div class="inp-box-type-inp__van tib" @click="setTypeVAN">
+                                    <i class="fa-solid fa-check inp-box-type-inp__van-icon tib__icon" :class="{visible:typevan}"></i>                             
+                                    <div class="inp-box-type-inp__van-img tib__img" ><img src="@/assets/images/Convertiable_icon.png" alt='truck'></div>
+                                    <span class="inp-box-type-inp__van-text tib__text">VAN</span>
+                                </div>
+
+                               
+
+                            </div>
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="typeinpformcross">
+                                
+                                <catypedelete
+                                v-for="car in typecollector" :key="car"
+                                :cartype="car"
+                                @deletedtypetoparent="deletedtypeitem=$event"
+                                @click="addToMakeModelCalc()"
+                                >
+
+
+                                </catypedelete>
+                                <div class="inp-box-cross-on-undo"
+                                @click="addToMakeModelCalc()"
+                                >
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="this.deletedtypeitemhistory.length>0" @click="undotypecomponent" >
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text"  >UNDO</span> 
+                                    </div>
+                                    <div class="inp-box-cross-on-undo__text-statement-box">
+                                        <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
+                                    </div>  
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="ma-mo__detailed-search-box-trans inp-container"  :class="{activeinptrans:transinpform}">
+                        <div class="ma-mo__open-arrow-box arr-box">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text">
+                                Transmission
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedInpTrans()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="transinpform"></i></div>
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="transinpform===false"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="transmission-choice-block" v-if="transinpform" >
+
+                            <div class="transmission-choice-block__checkboxes" v-if="transinpformcheckboxes" :class="{activeinptrans:transinpform}">
+                                <div class="transmission-choice-block__checkboxes_item" >
+                                    <div class="transmission-choice-block__checkboxes_item-icon-bloc" :class="{visible:automatictrans}">
+                                        <i class="fa-solid fa-check transmission-choice-block__checkboxes_item-icon-bloc-icon"></i>
+                                    </div>
+                                    <input type="checkbox" checked class="transmission-choice-block__checkboxes_item-icon-bloc-input" id="checkbox-trans1" v-model="automatictrans">
+                                    <label for="checkbox-trans1" class="transmission-choice-block__checkboxes_item-icon-bloc-input-label" @click="automaticModelChange">Automatic</label>
+                                </div>
+                                <div class="transmission-choice-block__checkboxes_item" >
+                                    <div class="transmission-choice-block__checkboxes_item-icon-bloc" :class="{visible:manualtrans}">
+                                        <i class="fa-solid fa-check transmission-choice-block__checkboxes_item-icon-bloc-icon"></i>
+                                    </div>
+                                    <input type="checkbox" checked class="transmission-choice-block__checkboxes_item-icon-bloc-input" id="checkbox-trans2" v-model="manualtrans">
+                                    <label for="checkbox-trans2" class="transmission-choice-block__checkboxes_item-icon-bloc-input-label" @click="manualModelChange">Manual</label>
+                                </div>                         
+                            </div>
+
+                            
+                            <div class="transmission-choice-block__result" v-if="transinpformcross" :class="{activecross:transinpformcross}">
+                                <div class="transmission-choice-block__result-item" v-if="automatictransinpformcross" @click="setTransModelAutomatic()">
+                                    <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
+                                    <span class="transmission-choice-block__result-item-text">Automatic</span>
+                                </div>
+                                <div class="transmission-choice-block__result-item" v-if="manualtransinpformcross" @click="setTransModelManual()">
+                                    <i class="fa-solid fa-xmark transmission-choice-block__result-item-xmark"></i>
+                                    <span class="transmission-choice-block__result-item-text">Manual</span>
+                                </div> 
+                            </div>
+                            
+
+                        </div>
+                        
+                        
+                    </div>
+
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinpprice:pricedbinpform,activecross:priceinpformcross}">
+                        <div class="ma-mo__open-arrow-box arr-box">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text">
+                                Price
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedInpPrice(),setunduwarningprice ()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up arr-box-arrows-box-el1"><i class="fa-solid fa-angle-up" v-if="pricedbinpform"></i></div>
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Down arr-box-arrows-box-el2"><i class="fa-solid fa-angle-down" v-if="pricedbinpform===false"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="ma-mo__detailed-search-box-doubleinprange-price-box inp-cont-box" v-if="pricedbinpform">
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box inp-cont-box-content" v-if="pricenumstartpoints">
+                                <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-min inp-cont-box-content-min">
+                                    {{minpricerealnum[0]}} 
+                                </div>
+
+                                <div class="ma-mo__detailed-search-box-doubleinprange-price-text-box-max inp-cont-box-content-max">
+                                    {{maxpricerealnum[0]}}
+                                </div>
+                            </div>
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-price-input-box inp-box" v-if="priceinpforminput">
+
+                                <doubleinprangeprice class="ma-mo__detailed-search-box-doubleinprange-price-elem inp-box-component"
+                                :carspropsprice="cars"
+                                @minpricedata="minprice=$event"
+                                @maxpricedata="maxprice=$event"
+                                @input="addToTestArrPrice(),addToMakeModelCalc()"
+                                >
+
+                                </doubleinprangeprice> 
+
+                            </div>
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="priceinpformcross">
+
+                                <cardprice
+                                v-for="car in calculatedcars" :key="car"
+                                :carprice="car"
+                                @deletedpricetoparent="deletedpriceitem=$event"
+                                @click="setunduwarningprice (),addToMakeModelCalc()"
+                                >
+
+
+                                </cardprice>
+                                <div class="inp-box-cross-on-undo"
+                                @click="setunduwarningprice (),addToMakeModelCalc()"
+                                >
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningprice" @click="undopricecomponent" >
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningprice (),addToMakeModelCalc()"  >UNDO</span> 
+                                    </div>
+                                    <div class="inp-box-cross-on-undo__text-statement-box">
+                                        <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
+                                    </div>  
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="ma-mo__detailed-search-box-doubleinprange-year inp-container" :class="{activeinpyear:yeardbinpform,activecross:yearinpformcross}">
+
+                        <div class="ma-mo__open-arrow-box">
+                            <p class="ma-mo__open-arrow-box-text">
+                                Year
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarningyear (),addToMakeModelCalc()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="yeardbinpform"></i></div>
+                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="yeardbinpform===false"></i></div>
+                            </div>
+                        </div>
+                       
+
+                        <div class="ma-mo__detailed-search-box-doubleinprange-year-box inp-cont-box" v-if="yeardbinpform">
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box inp-cont-box-content" v-if="yearnumstartpoints">
+                                <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-min inp-cont-box-content-min">
+                                    {{minyearrealnum[0]}}
+                                </div>
+
+                                <div class="ma-mo__detailed-search-box-doubleinprange-year-text-box-max inp-cont-box-content-max">
+                                    {{maxyearrealnum[0]}}
+                                </div>
+                            </div>
+
+                            <div class="ma-mo__detailed-search-box-doubleinprange-year-input-box inp-box" v-if="yearinpforminput">
+
+                                <doubleinprangeyear class="ma-mo__detailed-search-box-doubleinprange-year-elem inp-box-component"
+                                :carspropsyear="cars"
+                                @minyeardata="minyear=$event"
+                                @maxyeardata="maxyear=$event"
+                                @input="addToTestArrYear(),addToMakeModelCalc()"
+    
+                                >
+
+                                </doubleinprangeyear> 
+
+                            </div>
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="yearinpformcross">
+
+                                <cardyear
+                                v-for="car in calculatedcars" :key="car"
+                                :caryear="car"
+                                @deletedyeartoparent="deletedyearitem=$event"
+                                @click="setunduwarningyear (),addToMakeModelCalc()"
+                                >
+
+
+                                </cardyear>
+                                <div class="inp-box-cross-on-undo"
+                                @click="setunduwarningyear (),addToMakeModelCalc()"
+                                >
+                                    <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarningyear" @click="undoyearcomponent" >
+                                        <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningyear (),addToMakeModelCalc()"  >UNDO</span> 
+                                    </div>
+                                    <div class="inp-box-cross-on-undo__text-statement-box">
+                                        <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
+                                    </div>  
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    
+
+                    <div class="ma-mo__detailed-search-box-inprange inp-container" :class="{activeinpkilo:kiloinpform,activecross:kiloinpformcross}">  
+
+                        <div class="ma-mo__open-arrow-box">
+                            <p class="ma-mo__open-arrow-box-text">
+                                Kilometers
+                            </p>
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarningkilo (),addToMakeModelCalc()">
+                                <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="kiloinpform"></i></div>
+                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="kiloinpform===false"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="ma-mo__detailed-search-box-inprange-box inp-cont-box inp-cont-box" v-if="kiloinpform">
+
+                            <div class="ma-mo__detailed-search-box-inprange-box-text-box inp-cont-box-content" v-if="kilonumstartpoints">
+                                <div class="ma-mo__detailed-search-box-inprange-text inp-cont-box-content-elem">
+                                    {{maxkilorealnum[0]}}   or less
+                                </div>
+
+                            </div>
+
+                            <div class="ma-mo__detailed-search-box-inprange-input-box inp-box" v-if="kiloinpforminput">
+
+                                <inprange class="ma-mo__detailed-search-box-inprange-input-box-elem inp-box-component"
+                                :carspropsinprange="cars"
+                                @datafromsingleinput="kilocompdata=$event"
+                                @input="addToTestArrKilo(),addToMakeModelCalc()"
+                                >
+
+                                </inprange> 
+
+                            </div>
+
+                            <div class="ma-mo__detailed-search-box-inprange-input-box-closed-cross-on inp-box inp-box-cross-on" v-if="kiloinpformcross" >
+
+                                    <cardkilo
+                                    v-for="(car,index) in calculatedcars" :key="car"
+                                    
+                                    :class="{arrfirstitem:index===this.calculatedcarskiloactualmaxvalindex}"
+                                    :carkilo="car"
+                                    @deletedkilotoparent="deletedkiloitem=$event"
+                                    @click="setunduwarningkilo (),addToMakeModelCalc()"
+                                  
+                                    >
+                                   
+
+                                    </cardkilo>
+                                    <div class="inp-box-cross-on-undo"
+                                    @click="setunduwarningkilo (),addToMakeModelCalc()"
+                                  
+                                    >
+                                        <div class="inp-box-cross-on-undo__text-undo-box" v-if="unduwarning" @click="undokilocomponent" >
+                                            <span class="inp-box-cross-on-undo__text-undo-box-text" @click="setunduwarningkilo (),addToMakeModelCalc()"  >UNDO</span> 
+                                        </div>
+                                        <div class="inp-box-cross-on-undo__text-statement-box">
+                                            <span class="inp-box-cross-on-undo__text-statement-box-text">Click the arrow up right until the searchfield restarted</span>
+                                        </div>                                     
+                                    </div>
+
+                            </div>
+
+                        </div>
+
+
+                        
+                    </div>
+                
                 </div>
 
                 <div class="ma-mo__card-box ma-mo__card-box-calc" v-if="showcalculated">
@@ -2773,10 +3168,10 @@
                 width: 275px;
             }
             @media (max-width:992px) {
-                width: 200px;
+                width: 60%;
             }
             @media (max-width:768px) {
-                width: 150px;
+                width: 100%;
             }
             
 
@@ -3023,20 +3418,26 @@
             @media (max-width:768px) {
                display: block;
                margin-left: 30px;
-               margin-top: 4px;
+               margin-top: 12px;
             }
             
         }
         .w100 {
             width: 100%;
-            padding-top: 9px;
+           
             @media (max-width:768px) {
-               height: 110px;
+               height: 80px;
                display: flex;
                align-items: flex-start;
                justify-content: flex-start;
             }
             
+        }
+        .calk-container-tablet {
+            display: none;
+            @media (max-width:992px) {
+               display: flex;
+            }
         }
         
         
