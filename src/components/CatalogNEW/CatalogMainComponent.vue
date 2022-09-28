@@ -9,14 +9,14 @@
 
             
             <div class="ma-mo__global-search-header">
-                    <p class="ma-mo__global-search-header-stable">Detailed search</p>
+                    <p class="ma-mo__global-search-header-stable" v-on:click="$router.push('/catalog/carpage'),delMainHeader" >Detailed search</p>
                     <p class="ma-mo__global-search-header-changeable">Clear filters</p>
             </div>   
 
             <div class="ma-mo__detailed-search-box-calk-container" @click="setunduwarning">
                     <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinpbody:bodyform,activecross:bodyinpformcross}">
                         <div class="ma-mo__open-arrow-box arr-box">
-                            <p class="ma-mo__open-arrow-box-text arr-box-text">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text" >
                                 Make,Model
                             </p>
                             <div class="ma-mo__open-arrow-box-arrows arr-box-arrows-box" @click="getStartedBodyType()">
@@ -1008,6 +1008,7 @@
                 calculatedcars:[],//объекты из массива cars, отобранные инпутами компонентов, из computed свойства selectedCARScomputed()
                 showcalculated:false,// поведение прописано в методе show (), если true то показывается массив showcalculated                     
                 showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
+                headermainon:false,
                 
                 
                 tabletfiltericonon:true,
@@ -1170,6 +1171,9 @@
 
         },
         methods: {
+            delMainHeader () {
+                this.headermainon = true
+            },
             togglefiltericon () {
                 this.tabletcrosson = false
                 this.tabletfiltericonon = true
