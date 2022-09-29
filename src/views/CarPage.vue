@@ -68,6 +68,7 @@
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
   import carpageswiper from '@/components/CatalogNEW/CarPageSwiper.vue'
   import itemforpage from '@/components/CatalogNEW/CardForPage.vue'
+  
 
 export default {
       name: 'Car-page',
@@ -98,6 +99,8 @@ export default {
         this.navliclicktextoffstate = newVal
       },
 
+
+
     },
     watch: {
       iscross (newVal) {
@@ -107,7 +110,8 @@ export default {
 
     computed: {
 
-    }
+    },
+    
 }
 
 </script>

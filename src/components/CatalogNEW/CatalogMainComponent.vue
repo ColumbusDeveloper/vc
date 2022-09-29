@@ -912,11 +912,11 @@
                     >
 
                     </ca>
-                    <cardforpage
+                    <!-- <cardforpage
                     :cardforpage="cars"
                     >
 
-                    </cardforpage>
+                    </cardforpage> -->
                 </div >
                 <div class="ma-mo__card-box ma-mo__card-box-main-screen" v-if="typeformon">
                     <catype
@@ -982,7 +982,8 @@
     import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
     import magtopshowitem from '@/components/CatalogNEW/CardMagTop.vue'
     import camag from '@/components/CatalogNEW/CardMagTopMainShow.vue'
-    import cardforpage from '@/components/CatalogNEW/CardForPage.vue'
+    // import cardforpage from '@/components/CatalogNEW/CardForPage.vue'
+    
    
   
     
@@ -1004,7 +1005,7 @@
             catypedelete,
             magtopshowitem,
             camag,
-            cardforpage,
+            // cardforpage,
            
  
         },
@@ -1284,6 +1285,8 @@
                 }
                                   
             },
+
+            
 
 
 

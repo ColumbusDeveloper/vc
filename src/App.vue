@@ -7,6 +7,9 @@
             >
               
             </router-view>
+
+            
+            
   </div>
 
   
@@ -19,18 +22,18 @@
 </template>
 
 <script>
- 
+
 
 
   export default {
     components: {
-      
+     
     
     },
     data() {
       return {
         
-        
+        dataforcarpage:[]
 
         
 
@@ -38,6 +41,7 @@
     },
     methods: {
      
+      
      
     },
     watch: {
@@ -46,6 +50,9 @@
 
     computed: {
       
+    },
+    created () {
+     
     }
   }
 </script>

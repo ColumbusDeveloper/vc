@@ -30,7 +30,7 @@
 
             itemclickedforpage:this.cardforpage,
            
-              
+            data:2,  
 
 
                 
@@ -43,7 +43,10 @@
         },
         methods: {
             
-       
+            emit () {
+                this.$emit('getitemforpage',this.data)
+                
+            }
                                   
         },
         
@@ -51,11 +54,11 @@
 
            
 
-            cardforpage (val) {
+            // cardforpage (val) {
                 
-                this.itemclickedforpage = val
-                this.itemclickedforpage = [...new Set(this.itemclickedforpage)]
-            },
+            //     this.itemclickedforpage = val
+            //     this.itemclickedforpage = [...new Set(this.itemclickedforpage)]
+            // },
            
 
 
@@ -66,8 +69,9 @@
            
 
         },
-        mounted () {
-            this.$emit('getitemforpage',this.itemclickedforpage)
+        created () {
+            this.emit ()
+            
         }
 
 
