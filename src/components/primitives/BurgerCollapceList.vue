@@ -155,6 +155,7 @@
     box-shadow: inset 0px 0px 10px rgba(116, 129, 255, 0.3);
     right: 0;
     background-color: #e0e0e0;
+    
     @include letterH4HeadingBurgerMenuTextNumbersDarkBlue;
 
     @media (max-width:576px) {

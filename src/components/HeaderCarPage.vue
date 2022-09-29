@@ -3,7 +3,7 @@
           <div class="container">
             <div class="row">
               <div class="col mycontainer">
-                <div class="topLine" @click="clearMagTopInput()">
+                <div class="topLine" >
                   <div class="topLineNavBar">
                     <navbar v-on:click="$router.push('/')"/>
                     <div class="header-btnwhite-substitute" v-if="btnclicked">
@@ -90,9 +90,7 @@ export default {
     compositbtntrulitru () {
       return this.is = this.liclicked * this.btnclicked
     },
-    clearMagTopInput() {
-      this.$emit('clearmagtopform', this.modelmagtop)
-    }
+    
   },
 
   computed:{
