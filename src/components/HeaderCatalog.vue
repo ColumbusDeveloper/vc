@@ -59,7 +59,7 @@ export default {
       
       liclicked:this.liclickedtextoff,
       modelmagtop: '',
-      btnclicked:false,
+      btnclicked:true,
       is:false,
 
       

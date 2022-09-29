@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import Headerone from '@/components/Header.vue'
+  import Headerone from '@/components/HeaderCarPage.vue'
   import Footer from '@/components/Footer.vue'
   import burgerbtn from '@/components/primitives/BurgerBtn.vue'
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'

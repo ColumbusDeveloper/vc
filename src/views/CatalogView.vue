@@ -66,7 +66,7 @@ const cars = [
 
 
 import catalog from '../components/CatalogNEW/CatalogMainComponent.vue'
-import Headerone from '@/components/Header.vue'
+import Headerone from '@/components/HeaderCatalog.vue'
 import Footer from '@/components/Footer.vue'
 import burgerbtn from '@/components/primitives/BurgerBtn.vue'
 import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
