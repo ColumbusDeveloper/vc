@@ -15,7 +15,18 @@
     </div>
         
     <main class="flex-fill">
-    
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <carpageswiper>
+
+            </carpageswiper>
+          </div>
+        </div>
+
+      </div>
+      
       <div>CarPage</div>
     </main>
 
@@ -31,14 +42,16 @@
   import Footer from '@/components/Footer.vue'
   import burgerbtn from '@/components/primitives/BurgerBtn.vue'
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
-
+  import carpageswiper from '@/components/CatalogNEW/CarPageSwiper.vue'
 
 export default {
+      name: 'Car-page',
       components: {
         Headerone,
         Footer,
         burgerbtn,
         burgerlist,
+        carpageswiper,
 
       },
       data() {
