@@ -912,6 +912,11 @@
                     >
 
                     </ca>
+                    <cardforpage
+                    :cardforpage="cars"
+                    >
+
+                    </cardforpage>
                 </div >
                 <div class="ma-mo__card-box ma-mo__card-box-main-screen" v-if="typeformon">
                     <catype
@@ -928,7 +933,9 @@
                     >
 
                     </camag>
+                    
                 </div >
+                
              
 
                
@@ -975,7 +982,7 @@
     import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
     import magtopshowitem from '@/components/CatalogNEW/CardMagTop.vue'
     import camag from '@/components/CatalogNEW/CardMagTopMainShow.vue'
-   
+    import cardforpage from '@/components/CatalogNEW/CardForPage.vue'
    
   
     
@@ -997,6 +1004,7 @@
             catypedelete,
             magtopshowitem,
             camag,
+            cardforpage,
            
  
         },
@@ -1202,13 +1210,14 @@
                 
                 
                 
-                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform) {//если хоть один инпут включенный
+                if (this.yeardbinpform||this.pricedbinpform||this.kiloinpform||this.transinpform ||this.bodyform||this.typeform) {//если хоть один инпут включенный
                     this.showcars=false
                     this.showcalculated=true
                     this.magtopform=false
+                    
  
                     
-                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform) {
+                }else if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform && !this.transinpform && !this.bodyform && !this.typeform) {
                     this.showcars=true
                     this.showcalculated=false
                     this.magtopform=false       
@@ -1246,7 +1255,7 @@
                 // }
 
                 
-
+                
                
 
                 let a = this.catalogpropscars.slice()
@@ -1442,6 +1451,7 @@
 
 
             getStartedType() {
+                
                 this.typestatekeeper.push(1)
 
   
@@ -1458,7 +1468,9 @@
 
                     this.typeclosed=false
 
-
+                 
+                    this.showcalculated=true
+                    this.magtopform=false
 
           
 
@@ -1474,6 +1486,10 @@
                     this.typecross=true
 
                     this.typeclosed=false
+
+                    this.showcars=false
+                    this.showcalculated=true
+                    this.magtopform=false
 
                 }else {
 
@@ -1505,9 +1521,13 @@
                     this.typeconvertiable=false
                     this.typevan=false
 
+                    this.showcars=true
+                    this.showcalculated=false
+                    this.magtopform=false
+
                 }
 
-                this.show ()
+                
             },
 
 

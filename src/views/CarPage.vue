@@ -33,7 +33,11 @@
             </div>
 
             <div class="swiper-part__text">
+              <itemforpage
+              @getitemforpage="from=$event"
+              >
 
+              </itemforpage>
             </div>
 
           </div>
@@ -63,6 +67,7 @@
   import burgerbtn from '@/components/primitives/BurgerBtn.vue'
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
   import carpageswiper from '@/components/CatalogNEW/CarPageSwiper.vue'
+  import itemforpage from '@/components/CatalogNEW/CardForPage.vue'
 
 export default {
       name: 'Car-page',
@@ -72,12 +77,15 @@ export default {
         burgerbtn,
         burgerlist,
         carpageswiper,
+        itemforpage,
 
       },
       data() {
         return {
           iscross: false,
           navliclicktextoffstate:false,
+
+          from:[],
           
 
           
