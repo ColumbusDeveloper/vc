@@ -18,16 +18,36 @@
 
       <div class="container">
         <div class="row">
-          <div class="col">
-            <carpageswiper>
+          <div class="col  banner">
+            <h2 class="banner__h2">Porsche Panamera 4S</h2>
+            <span class="banner__title">Watching now 8 people</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col swiper-part">
 
-            </carpageswiper>
+            <div class="swiper-part__swiper">
+              <carpageswiper>
+
+              </carpageswiper>
+            </div>
+
+            <div class="swiper-part__text">
+
+            </div>
+
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            
           </div>
         </div>
 
       </div>
       
-      <div>CarPage</div>
+      
     </main>
 
     <Footer class="center" />
@@ -88,28 +108,70 @@ export default {
 <style lang="scss">
 @import '../assets/varmix.scss';
 
-    .wrapper {
-        max-width: 1440px;
+
+  .swiper-part {
+    border-width:2px;
+    border-style: solid;
+    border-color: #000;
+    width: 100%;
+    display: flex;
+
+      &__swiper {
+        width: 50%;
+        border-width:2px;
+        border-style: solid;
+        border-color: #000;
+      }
+
+      &__text {
+        width: 50%;
+        border-width:2px;
+        border-style: solid;
+        border-color: #000;
+      }
+  }
+
+  .banner {
+    border-width:2px;
+    border-style: solid;
+    border-color: #000;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 60px;
+    margin-bottom: 60px;
+
+      &__h2 {
+      }
+
+      &__title {
+      }
+  }
 
 
-    }
-    .header {
-        display: flex;
-        justify-content: space-between;
-    }
-    .burgerlist {
-        position: absolute;
-    }
+  .wrapper {
+      max-width: 1440px;
 
-    .menu-enter-active,
-    .menu-leave-active {
-        transition: all .5s;
-    }
-    .menu-enter,
-    .menu-leave-to {
-        opacity: 0;
 
-    }
+  }
+  .header {
+      display: flex;
+      justify-content: space-between;
+  }
+  .burgerlist {
+      position: absolute;
+  }
+
+  .menu-enter-active,
+  .menu-leave-active {
+      transition: all .5s;
+  }
+  .menu-enter,
+  .menu-leave-to {
+      opacity: 0;
+
+  }
 
 
 </style>

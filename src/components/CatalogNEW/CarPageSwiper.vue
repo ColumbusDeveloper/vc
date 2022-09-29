@@ -60,6 +60,7 @@
               class="parallax-slider swiper-min"
               :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
               :slides-per-view="4"
+              :space-between="5"
               grabCursor
               :modules="[Thumbs]"
               watch-slides-progress
@@ -68,14 +69,16 @@
               >
               <div class="parallax-slider-navigation">
                 <div class="nav-indicator prevArrow">
-                  <i class="fa-solid fa-chevron-left"></i>
+                  <i class="fa-solid fa-chevron-left nav-indicator-arrow"></i>
                 </div>
                 <div class="nav-indicator nextArrow">
-                <i class="fa-solid fa-chevron-right"></i>
+                <i class="fa-solid fa-chevron-right nav-indicator-arrow"></i>
                 </div>
               </div>
 
-              <swiper-slide  class="parallax-slide">
+              <i class="fa-solid fa-check"></i>
+
+              <swiper-slide  class="parallax-slide parallax-slide-min">
                 <div class="parallax-slide-image">
                 
                   <img src="../../assets/images/SwiperImgMini_1.png" alt='img'>
@@ -84,7 +87,7 @@
               </swiper-slide>
 
 
-              <swiper-slide  class="parallax-slide">
+              <swiper-slide  class="parallax-slide parallax-slide-min">
                 <div class="parallax-slide-image">
                 
                   <img src="../../assets/images/SwiperImgMini_2.png" alt='img'>
@@ -93,7 +96,7 @@
               </swiper-slide>
 
 
-              <swiper-slide  class="parallax-slide">
+              <swiper-slide  class="parallax-slide parallax-slide-min">
                 <div class="parallax-slide-image">
                 
                   <img src="../../assets/images/SwiperImgMini_3.png" alt='img'>
@@ -101,7 +104,7 @@
                 </div>
               </swiper-slide>
 
-              <swiper-slide  class="parallax-slide">
+              <swiper-slide  class="parallax-slide parallax-slide-min">
                 <div class="parallax-slide-image">
                 
                   <img src="../../assets/images/SwiperImgMini_1.png" alt='img'>
@@ -233,8 +236,11 @@ export default {
 .parallax-slider {
   position: relative;
 }
+
+
+
 .parallax-slide {
-  height: 550px !important;
+  height: 320px !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -305,5 +311,9 @@ export default {
   position: relative;
   transform: translateY(-50%);
 }
+.parallax-slide-min {
+  height: 100px !important;
+}
+
 </style>
 
