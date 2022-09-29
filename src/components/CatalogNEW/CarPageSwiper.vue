@@ -76,7 +76,7 @@
                 </div>
               </div>
 
-              <i class="fa-solid fa-check"></i>
+           
 
               <swiper-slide  class="parallax-slide parallax-slide-min">
                 <div class="parallax-slide-image">
@@ -158,7 +158,7 @@ export default {
         thumbsSwiper,
         setThumbsSwiper,
       };
-    },
+  },
 };
 </script>
 

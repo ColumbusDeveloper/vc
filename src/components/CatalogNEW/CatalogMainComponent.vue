@@ -929,6 +929,7 @@
 
                     </camag>
                 </div >
+             
 
                
                 
@@ -974,7 +975,7 @@
     import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
     import magtopshowitem from '@/components/CatalogNEW/CardMagTop.vue'
     import camag from '@/components/CatalogNEW/CardMagTopMainShow.vue'
-
+   
    
   
     
@@ -996,6 +997,7 @@
             catypedelete,
             magtopshowitem,
             camag,
+           
  
         },
         data() {
