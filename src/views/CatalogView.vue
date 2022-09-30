@@ -108,10 +108,11 @@ export default {
       changenavliclicktextoffstate (newVal) {
         this.navliclicktextoffstate = newVal
       },
-
       emittoapp () {
         this.$emit('emittoapp',this.data)
-      },
+      }
+
+      
       
   },
 
@@ -123,7 +124,7 @@ export default {
 
   created () {
           
-          this.emittoapp ()
+       this.emittoapp ()
   }
    
      

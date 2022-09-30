@@ -931,6 +931,13 @@
                     </camag>
                     
                 </div >
+                <div class="carpage" v-show="carpage">
+                    <carpage
+                    :dt="calculatedcars"
+                    >
+
+                    </carpage>
+                </div>
                 
              
 
@@ -978,6 +985,7 @@
     import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
     import magtopshowitem from '@/components/CatalogNEW/CardMagTop.vue'
     import camag from '@/components/CatalogNEW/CardMagTopMainShow.vue'
+    import carpage from '@/views/CarPage.vue'
    
     
    
@@ -1001,6 +1009,7 @@
             catypedelete,
             magtopshowitem,
             camag,
+            carpage,
           
            
  
@@ -1017,6 +1026,7 @@
                 showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
                 headermainon:false,
                 test:5,
+                carpage:false,
                 
                 tabletfiltericonon:true,
                 tabletcrosson:false,

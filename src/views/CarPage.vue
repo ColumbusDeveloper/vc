@@ -72,7 +72,7 @@
 
 export default {
       name: 'Car-page',
-      props:['dt'],
+   
       components: {
         Headerone,
         Footer,
@@ -87,8 +87,8 @@ export default {
           iscross: false,
           navliclicktextoffstate:false,
 
-          from:[],
-          
+          from:5,
+          f:3,
 
           
 
@@ -96,17 +96,24 @@ export default {
     },
     methods: {
 
-      
+      // emittoapp () {
+      //   this.$emit('emittoapp',this.f)
+      // }
 
 
     },
     watch: {
-      
+      // dt(val) {
+      //   this.from = val
+      // }
     },
 
     computed: {
-
+      
     },
+    created () {
+      // this.emittoapp ()
+    }
     
 }
 

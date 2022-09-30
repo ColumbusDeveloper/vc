@@ -30,7 +30,7 @@
 
             itemclickedforpage:this.cardforpage,
            
-           
+            data:3,
 
 
                 
@@ -43,7 +43,7 @@
         },
         methods: {
             
-            
+           
                                    
         },
         
@@ -66,6 +66,10 @@
            
 
         },
+
+        created () {
+            
+        }
         
 
 

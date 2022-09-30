@@ -3,8 +3,8 @@
   
   <div>
             <router-view
-            @emittoapp = "setdataforcarpage"
-            :dt="dataforcarpage"
+            @emittoapp= "setdataforcarpage"
+            
             >
               
             </router-view>
