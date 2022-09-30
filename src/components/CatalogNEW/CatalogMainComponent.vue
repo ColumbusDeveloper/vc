@@ -901,7 +901,7 @@
                     v-for="car in calculatedcars" :key="car"
                     :car="car"
                     >
-
+              
                     </card>
                 </div>
 
@@ -912,11 +912,7 @@
                     >
 
                     </ca>
-                    <!-- <cardforpage
-                    :cardforpage="cars"
-                    >
-
-                    </cardforpage> -->
+                    
                 </div >
                 <div class="ma-mo__card-box ma-mo__card-box-main-screen" v-if="typeformon">
                     <catype
@@ -982,7 +978,7 @@
     import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
     import magtopshowitem from '@/components/CatalogNEW/CardMagTop.vue'
     import camag from '@/components/CatalogNEW/CardMagTopMainShow.vue'
-    // import cardforpage from '@/components/CatalogNEW/CardForPage.vue'
+   
     
    
   
@@ -1005,7 +1001,7 @@
             catypedelete,
             magtopshowitem,
             camag,
-            // cardforpage,
+          
            
  
         },
@@ -1020,7 +1016,7 @@
                 showcalculated:false,// поведение прописано в методе show (), если true то показывается массив showcalculated                     
                 showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
                 headermainon:false,
-                
+                test:5,
                 
                 tabletfiltericonon:true,
                 tabletcrosson:false,
@@ -1182,6 +1178,9 @@
 
         },
         methods: {
+            emitToPage () {
+                this.$emit('emitToPage',this.calculatedcars)
+            },
             delMainHeader () {
                 this.headermainon = true
             },
@@ -2761,11 +2760,12 @@
         },
         created() {
             document.addEventListener('click', this.dropdown)
-           
+            this.emitToPage ()
         },
         unmounted () {
             document.removeEventListener('click', this.dropdown)
         }, 
+        
         
 
 

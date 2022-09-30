@@ -34,7 +34,7 @@
 
             <div class="swiper-part__text">
               <itemforpage
-              @getitemforpage="from=$event"
+              
               >
 
               </itemforpage>
@@ -72,6 +72,7 @@
 
 export default {
       name: 'Car-page',
+      props:['dt'],
       components: {
         Headerone,
         Footer,
@@ -95,17 +96,12 @@ export default {
     },
     methods: {
 
-      changenavliclicktextoffstate (newVal) {
-        this.navliclicktextoffstate = newVal
-      },
-
+      
 
 
     },
     watch: {
-      iscross (newVal) {
-        this.navliclicktextoffstate = newVal 
-      }
+      
     },
 
     computed: {

@@ -3,7 +3,8 @@
   
   <div>
             <router-view
-            
+            @emittoapp = "setdataforcarpage"
+            :dt="dataforcarpage"
             >
               
             </router-view>
@@ -25,9 +26,13 @@
 
 
 
+
+
+
+
   export default {
     components: {
-     
+      
     
     },
     data() {
@@ -41,7 +46,10 @@
     },
     methods: {
      
-      
+      setdataforcarpage (val) {
+        
+        this.dataforcarpage = val
+      }
      
     },
     watch: {
@@ -52,7 +60,7 @@
       
     },
     created () {
-     
+     this.setdataforcarpage ()
     }
   }
 </script>

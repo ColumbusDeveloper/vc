@@ -18,7 +18,7 @@
                 
                 <catalog
                 :catalogpropscars="cars"
-
+                @emitToPage="getEmitToPage"
                 ></catalog>
 
               </div>
@@ -85,6 +85,7 @@ export default {
 
       cars:cars,
       
+      data:5,
      
   
     }
@@ -107,6 +108,10 @@ export default {
       changenavliclicktextoffstate (newVal) {
         this.navliclicktextoffstate = newVal
       },
+
+      emittoapp () {
+        this.$emit('emittoapp',this.data)
+      },
       
   },
 
@@ -114,6 +119,11 @@ export default {
   
   computed:{
         
+  },
+
+  created () {
+          
+          this.emittoapp ()
   }
    
      
