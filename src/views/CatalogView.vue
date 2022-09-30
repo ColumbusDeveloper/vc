@@ -85,7 +85,7 @@ export default {
 
       cars:cars,
       
-      data:5,
+      
      
   
     }
@@ -101,16 +101,16 @@ export default {
   watch:{
       iscross (newVal) {
         this.navliclicktextoffstate = newVal 
-      }
+      },
+      
   },
   methods:{
       
       changenavliclicktextoffstate (newVal) {
         this.navliclicktextoffstate = newVal
       },
-      emittoapp () {
-        this.$emit('emittoapp',this.data)
-      }
+      
+      
 
       
       
@@ -124,7 +124,7 @@ export default {
 
   created () {
           
-       this.emittoapp ()
+     
   }
    
      

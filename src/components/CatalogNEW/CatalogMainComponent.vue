@@ -931,12 +931,12 @@
                     </camag>
                     
                 </div >
-                <div class="carpage" v-show="carpage">
-                    <carpage
-                    :dt="calculatedcars"
+                <div class="pass" >
+                    <pass
+                    :dt="test"
                     >
 
-                    </carpage>
+                </pass>
                 </div>
                 
              
@@ -985,7 +985,7 @@
     import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
     import magtopshowitem from '@/components/CatalogNEW/CardMagTop.vue'
     import camag from '@/components/CatalogNEW/CardMagTopMainShow.vue'
-    import carpage from '@/views/CarPage.vue'
+    import pass from '@/views/Pass.vue'
    
     
    
@@ -1009,7 +1009,7 @@
             catypedelete,
             magtopshowitem,
             camag,
-            carpage,
+            pass,
           
            
  
