@@ -931,13 +931,7 @@
                     </camag>
                     
                 </div >
-                <div class="pass" >
-                    <pass
-                    :dt="test"
-                    >
-
-                </pass>
-                </div>
+                
                 
              
 
@@ -985,7 +979,7 @@
     import catypedelete from '@/components/CatalogNEW/CardTypeDelete.vue'
     import magtopshowitem from '@/components/CatalogNEW/CardMagTop.vue'
     import camag from '@/components/CatalogNEW/CardMagTopMainShow.vue'
-    import pass from '@/views/Pass.vue'
+   
    
     
    
@@ -1009,7 +1003,7 @@
             catypedelete,
             magtopshowitem,
             camag,
-            pass,
+          
           
            
  
@@ -1189,7 +1183,7 @@
         },
         methods: {
             emitToPage () {
-                this.$emit('emitToPage',this.calculatedcars)
+                this.$emit('emitToPage',this.test)
             },
             delMainHeader () {
                 this.headermainon = true
@@ -2769,8 +2763,9 @@
           
         },
         created() {
-            document.addEventListener('click', this.dropdown)
             this.emitToPage ()
+            document.addEventListener('click', this.dropdown)
+            
         },
         unmounted () {
             document.removeEventListener('click', this.dropdown)

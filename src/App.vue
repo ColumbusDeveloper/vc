@@ -3,7 +3,7 @@
   
   <div>
             <router-view
-            @emittoapp= "setdataforcarpage"
+            @fromcatalog="getappdata"
             
             >
               
@@ -38,7 +38,7 @@
     data() {
       return {
         
-        dataforcarpage:[]
+       appdata:Number,
 
         
 
@@ -46,11 +46,9 @@
     },
     methods: {
      
-      setdataforcarpage (val) {
-        
-        this.dataforcarpage = val
+      getappdata (val) {
+        this.appdata = val
       }
-     
     },
     watch: {
       
@@ -60,8 +58,9 @@
       
     },
     created () {
-     this.setdataforcarpage ()
+      this.getappdata ()
     }
+   
   }
 </script>
 

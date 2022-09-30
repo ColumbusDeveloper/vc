@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import CatalogView from '../views/CatalogView.vue'
 import CarPage from '../views/CarPage.vue'
-import Pass from '../views/Pass.vue'
+
 
 const routes = [
   {
@@ -38,15 +38,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     // component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
-  {
-    path: '/catalog/pass',
-    name: 'pass',
-    component: Pass
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
+  
 ]
 
 const router = createRouter({

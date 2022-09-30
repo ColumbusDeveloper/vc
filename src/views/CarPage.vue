@@ -67,7 +67,7 @@
   import burgerbtn from '@/components/primitives/BurgerBtn.vue'
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
   import carpageswiper from '@/components/CatalogNEW/CarPageSwiper.vue'
-  import itemforpage from '@/components/CatalogNEW/CardForPage.vue'
+  
   
 
 export default {
@@ -79,7 +79,7 @@ export default {
         burgerbtn,
         burgerlist,
         carpageswiper,
-        itemforpage,
+   
 
       },
       data() {
@@ -96,24 +96,17 @@ export default {
     },
     methods: {
 
-      // emittoapp () {
-      //   this.$emit('emittoapp',this.f)
-      // }
-
+      
 
     },
     watch: {
-      // dt(val) {
-      //   this.from = val
-      // }
+  
     },
 
     computed: {
       
     },
-    created () {
-      // this.emittoapp ()
-    }
+    
     
 }
 

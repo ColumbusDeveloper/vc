@@ -85,7 +85,7 @@ export default {
 
       cars:cars,
       
-      
+      datatest:Number,
      
   
     }
@@ -110,7 +110,13 @@ export default {
         this.navliclicktextoffstate = newVal
       },
       
-      
+      getEmitToPage (val) {
+        this.datatest = val
+      },
+      toApp () {
+        this.$emit("fromcatalog",this.datatest)
+      }
+
 
       
       
@@ -123,9 +129,12 @@ export default {
   },
 
   created () {
-          
-     
+          this.getEmitToPage ()      
+  },
+  mounted () {
+    this.toApp ()
   }
+
    
      
 }
