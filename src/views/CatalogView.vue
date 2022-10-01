@@ -84,6 +84,7 @@ export default {
 
 
       cars:cars,
+
       
       data:5,
      
@@ -112,6 +113,11 @@ export default {
       emittoapp () {
         this.$emit('emittoapp',this.data)
       },
+
+      setCars () {
+        this.$store.state.storecars = this.cars
+      },
+
       
   },
 
@@ -124,6 +130,7 @@ export default {
   created () {
           
           this.emittoapp ()
+          this.setCars ()
   }
    
      
