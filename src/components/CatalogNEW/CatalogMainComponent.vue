@@ -948,7 +948,7 @@
         </div>
 
         
-
+        
         
 
                      
@@ -1016,7 +1016,7 @@
                 showcalculated:false,// поведение прописано в методе show (), если true то показывается массив showcalculated                     
                 showcars:true, //поведение прописано в методе show (), если true то показывается массив cars
                 headermainon:false,
-                test:5,
+                test:4,
                 
                 tabletfiltericonon:true,
                 tabletcrosson:false,
