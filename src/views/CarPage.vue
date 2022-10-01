@@ -32,12 +32,84 @@
               </carpageswiper>
             </div>
 
-            <div class="swiper-part__text">
-              <itemforpage
-              
-              >
+            <div class="swiper-part__text spt">
 
-              </itemforpage>
+              <div class="spt__top-part">
+
+                <div class="spt__top-part-item">
+
+                    <div class="spt__top-part-item-left">
+                      <div class="spt__top-part-item-left-info-box">
+                        <span class="spt__top-part-item-left-info-box-text">Price</span>
+                        <span class="spt__top-part-item-left-info-box-value_blue">{{price}} $</span>
+                      </div>
+                      <div class="spt__top-part-item-left-info-box">
+                        <span class="spt__top-part-item-left-info-box-text">Body</span>
+                        <span class="spt__top-part-item-left-info-box-value">{{body}}</span>
+                      </div>
+                      <div class="spt__top-part-item-left-info-box">
+                        <span class="spt__top-part-item-left-info-box-text">Transmission</span>
+                        <span class="spt__top-part-item-left-info-box-value">{{transmission}} </span>
+                      </div>
+                      
+                    </div>
+
+                    <div class="spt__top-part-item-right">
+
+                      <div class="spt__top-part-item-right-info-box">
+                        <span class="spt__top-part-item-right-info-box-text">Year</span>
+                        <span class="spt__top-part-item-right-info-box-value">{{year}}</span>
+                      </div>
+                      <div class="spt__top-part-item-right-info-box">
+                        <span class="spt__top-part-item-right-info-box-text">Kilometers</span>
+                        <span class="spt__top-part-item-right-info-box-value">{{kilometers}} </span>
+                      </div>
+
+                    </div>
+
+                </div>
+
+                <div class="spt__top-part-item">
+
+                    <div class="spt__top-part-item-left">
+                      <span class="spt__top-part-item-left-info-box-text">Detail</span>
+                      <span class="spt__top-part-item-left-info-box-text-semibold">Rear wheel drive</span>
+                      <span class="spt__top-part-item-left-info-box-text-semibold">6 cylinders</span>
+                      <span class="spt__top-part-item-left-info-box-text-semibold">11 l. per 100 km.</span>
+                      <span class="spt__top-part-item-left-info-box-text-semibold">Rear wheel drive</span>
+                    </div>
+
+                    <div class="spt__top-part-item-right">
+                      <span class="spt__top-part-item-right-info-box-text-semibold">2500-4000 rpm</span>
+                      <span class="spt__top-part-item-right-info-box-text-semibold">0-100 in 2.7 s.</span>
+                      <span class="spt__top-part-item-right-info-box-text-semibold">Power steering</span>
+                      <span class="spt__top-part-item-right-info-box-text-semibold">2500-4000 rpm</span>
+                    </div>
+
+                </div>
+
+              </div>
+
+              <div class="spt__bottom-part">
+                <span class="spt__bottom-part-title spt__top-part-item-left-info-box-text">Detail</span>
+                <div class="spt__bottom-part-content-box">
+                  <p class="spt__bottom-part-content-box-content">
+                    Porsche 911 - a sports car manufactured by the German company Porsche AG in the
+                     back of a two-door coupe or a convertible based on it, produced
+                      in different generations from 1964 to the present day.
+                      The 911 index was not originally planned for the timeless designation 
+                      of different generations of the same car, and was no more than one of 
+                      many similar in the through three-digit internal factory numbering 
+                      of all Porsche models assigned to a very specific 1964 model.
+                  </p>
+                </div>
+                <div class="spt__bottom-part-btn-box">
+                  <btnreqinfo>
+                    Request more information
+                  </btnreqinfo>
+                </div>
+              </div>
+              
             </div>
 
           </div>
@@ -67,7 +139,8 @@
   import burgerbtn from '@/components/primitives/BurgerBtn.vue'
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
   import carpageswiper from '@/components/CatalogNEW/CarPageSwiper.vue'
-  import itemforpage from '@/components/CatalogNEW/CardForPage.vue'
+  import btnreqinfo from '@/components/primitives/BTN/btnBlueSlot.vue'
+  
   
 
 export default {
@@ -79,7 +152,8 @@ export default {
         burgerbtn,
         burgerlist,
         carpageswiper,
-        itemforpage,
+        btnreqinfo,
+      
 
       },
       data() {
@@ -89,11 +163,13 @@ export default {
 
           from:[],
           
+          carpagedataid:this.$store.state.carpageid,
+          cars:this.$store.state.storecars
 
           
 
         }
-    },
+      },
     methods: {
 
       
@@ -105,6 +181,62 @@ export default {
     },
 
     computed: {
+
+      price () {
+        let a 
+        this.cars.forEach(el=>{
+          let b = el.id
+          let c = el.price
+          if (b===this.carpagedataid) {
+            a = c
+          }
+        })
+        return a  
+      },
+      body () {
+        let a
+        this.cars.forEach(el=>{
+          let b = el.id
+          let c = el.bodytype
+          if (b===this.carpagedataid) {
+            a=c
+          }
+        })
+        return a  
+      },
+      year () {
+        let a 
+        this.cars.forEach(el=>{
+          let b = el.id
+          let c = el.year
+          if (b===this.carpagedataid) {
+            a = c
+          }
+        })
+        return a  
+      },
+      transmission () {
+        let a
+        this.cars.forEach(el=>{
+          let b = el.id
+          let c = el.transmission
+          if (b===this.carpagedataid) {
+            a = c
+          }
+        })
+        return a  
+      },
+      kilometers () {
+        let a 
+        this.cars.forEach(el=>{
+          let b = el.id
+          let c = el.kilometers
+          if (b===this.carpagedataid) {
+            a = c
+          }
+        })
+        return a  
+      },
 
     },
     
