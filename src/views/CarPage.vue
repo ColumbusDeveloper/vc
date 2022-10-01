@@ -249,6 +249,88 @@ export default {
 @import '../assets/varmix.scss';
 
 
+ 
+  .spt {
+
+      &__top-part {
+        background-color: yellow;
+      }
+
+      &__top-part-item {
+        border-width:2px;
+        border-style: solid;
+        border-color: #000;
+        display: flex;
+      }
+
+      &__top-part-item-left {
+        background-color: aqua;
+        width: 50%;
+        border-width:2px;
+        border-style: solid;
+        border-color: #000;
+      }
+
+      &__top-part-item-left-info-box {
+      }
+
+      &__top-part-item-left-info-box-text {
+        display: block;
+      }
+
+      &__top-part-item-left-info-box-value {
+
+        &_blue {
+        }
+      }
+
+      &__top-part-item-right {
+        width: 50%;
+        align-self: flex-end;
+        display: block;
+        border-width:2px;
+        border-style: solid;
+        border-color: #000;
+      }
+
+      &__top-part-item-right-info-box {
+      }
+
+      &__top-part-item-right-info-box-text {
+        display: block;
+      }
+
+      &__top-part-item-right-info-box-value {
+      }
+
+      &__top-part-item-left-info-box-text-semibold {
+        display: block;
+      }
+
+      &__top-part-item-right-info-box-text-semibold {
+        display: block;
+      }
+
+      &__bottom-part {
+        background-color: red;
+      }
+
+      &__bottom-part-title {
+        display: block;
+      }
+
+      &__bottom-part-content-box {
+      }
+
+      &__bottom-part-content-box-content {
+      }
+
+      &__bottom-part-btn-box {
+      }
+  }
+
+
+
   .swiper-part {
     border-width:2px;
     border-style: solid;
