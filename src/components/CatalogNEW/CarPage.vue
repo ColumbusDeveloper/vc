@@ -2,6 +2,7 @@
 
   
   <div class="d-flex flex-column min-vh-100">
+    
     <div class="container">
       <div class="row">
           <div class="col header" @clearmagtopform="setMagtopformInventoryComponent">
@@ -46,6 +47,7 @@
         <div class="row">
           <div class="col">
             
+
           </div>
         </div>
 
@@ -67,18 +69,20 @@
   import burgerbtn from '@/components/primitives/BurgerBtn.vue'
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
   import carpageswiper from '@/components/CatalogNEW/CarPageSwiper.vue'
-  
+ 
   
 
 export default {
       name: 'Car-page',
-   
+      props:['td'],
       components: {
         Headerone,
         Footer,
         burgerbtn,
         burgerlist,
         carpageswiper,
+    
+        
    
 
       },
@@ -89,7 +93,8 @@ export default {
 
           from:5,
           f:3,
-
+          getfromapp:this.td,
+        
           
 
         }
@@ -100,7 +105,9 @@ export default {
 
     },
     watch: {
-  
+      td(val) {
+        this.getfromapp = val
+      }
     },
 
     computed: {
@@ -114,7 +121,7 @@ export default {
 
 
 <style lang="scss">
-@import '../assets/varmix.scss';
+@import '../../assets/varmix.scss';
 
 
   .swiper-part {

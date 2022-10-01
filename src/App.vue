@@ -4,7 +4,7 @@
   <div>
             <router-view
             @fromcatalog="getappdata"
-            
+            :td="appdata"
             >
               
             </router-view>

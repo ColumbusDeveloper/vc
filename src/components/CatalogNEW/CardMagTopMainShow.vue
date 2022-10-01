@@ -1,5 +1,7 @@
 <template>
-    <div class="card">
+    <div class="card"
+    @click="passToCarPage()"
+    >
 
         <div class="card__img-box ">
             <div class="card__img-box-wrapper ">
@@ -62,7 +64,9 @@
         },
         methods: {
             
-       
+            passToCarPage() {
+                this.$emit('passtocarpage',this.cardata)
+            }
                                   
         },
         

@@ -1,16 +1,6 @@
 <template>
     <div class="d-flex flex-column min-vh-100">
-        <div class="container">
-          <div class="row">
-              <div class="col header" @clearmagtopform="setMagtopformInventoryComponent">
-                <Headerone  class="center" :liclickedtextoff="navliclicktextoffstate"  />
-                <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
-                <transition name="menu">
-                  <burgerlist v-if="iscross" class="burgerlist" :listate="navliclicktextoffstate" v-on:click="iscross=!iscross" v-on:navliclicktextoffevent="changenavliclicktextoffstate"  />
-                </transition>
-              </div>
-          </div>
-      </div>
+        
       <main class="flex-fill">
         <div class="container">
           <div class="row">
@@ -66,10 +56,9 @@ const cars = [
 
 
 import catalog from '../components/CatalogNEW/CatalogMainComponent.vue'
-import Headerone from '@/components/HeaderCatalog.vue'
+
 import Footer from '@/components/Footer.vue'
-import burgerbtn from '@/components/primitives/BurgerBtn.vue'
-import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
+
 
 
 
@@ -92,10 +81,9 @@ export default {
   },
   components: {
     catalog,
-    Headerone,
+    
     Footer,
-    burgerbtn,
-    burgerlist,
+    
    
   },
   watch:{
