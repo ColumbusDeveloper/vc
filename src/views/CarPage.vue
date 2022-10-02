@@ -40,6 +40,15 @@
 
                                           </carpageswiperin>
 
+                                          <div class="swiper-part__swiper-btn-box">
+                                            <btnswiperex class="swiper-part__swiper-btn-box-btn">
+                                              Exterior
+                                            </btnswiperex>
+                                            <btnswiperin class="swiper-part__swiper-btn-box-btn">
+                                              Interior
+                                            </btnswiperin>
+                                          </div>
+
                                         </div>
 
                                         <div class="swiper-part__text spt">
@@ -177,6 +186,8 @@
   import carpageswiper from '@/components/CatalogNEW/CarPageSwiper.vue'
   import carpageswiperin from '@/components/CatalogNEW/CarPageSwiperIn.vue'
   import btnreqinfo from '@/components/primitives/BTN/btnBlueSlot.vue'
+  import btnswiperex from '@/components/primitives/BTN/btnSwiperClickableSlotEX .vue'
+  import btnswiperin from '@/components/primitives/BTN/btnSwiperClickableSlotIN  copy.vue'
   
   
 
@@ -191,6 +202,8 @@ export default {
         carpageswiper,
         carpageswiperin,
         btnreqinfo,
+        btnswiperex,
+        btnswiperin,
       
 
       },
@@ -430,7 +443,20 @@ export default {
 
       &__swiper {
         width: 50%;
+        position: relative;
      
+      }
+
+      &__swiper-btn-box {
+        display: flex;
+        position: absolute;
+        top: 270px;
+        left: 35px;
+        z-index: 1;
+      }
+
+      &__swiper-btn-box-btn {
+        margin-right: 10px;
       }
 
       &__text {

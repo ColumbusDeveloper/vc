@@ -15,7 +15,7 @@
             <swiper-slide  class="parallax-slide">
               <div class="parallax-slide-image">
               
-                <img src="../../assets/images/SwiperImgMaxSize.png" alt='img'>
+                <img src="../../assets/images/PB1.png" alt='img'>
                             
               </div>
             </swiper-slide>
@@ -24,7 +24,7 @@
             <swiper-slide  class="parallax-slide">
               <div class="parallax-slide-image">
               
-                <img src="../../assets/images/SwiperMaxImg_1.png" alt='img'>
+                <img src="../../assets/images/PB2.png" alt='img'>
                         
               </div>
             </swiper-slide>
@@ -33,7 +33,7 @@
             <swiper-slide  class="parallax-slide">
               <div class="parallax-slide-image">
               
-                <img src="../../assets/images/SwiperMaxImg_2.png" alt='img'>
+                <img src="../../assets/images/PB3.png" alt='img'>
                         
               </div>
             </swiper-slide>
@@ -42,7 +42,7 @@
             <swiper-slide  class="parallax-slide">
               <div class="parallax-slide-image">
               
-                <img src="../../assets/images/SwiperImgMaxSize.png" alt='img'>
+                <img src="../../assets/images/PB4.png" alt='img'>
                         
               </div>
             </swiper-slide>
@@ -74,7 +74,7 @@
               <swiper-slide  class="parallax-slide parallax-slide-min">
                 <div class="parallax-slide-image">
                 
-                  <img src="../../assets/images/SwiperImgMini_1.png" alt='img'>
+                  <img src="../../assets/images/PS1.png" alt='img'>
                           
                 </div>
               </swiper-slide>
@@ -83,7 +83,7 @@
               <swiper-slide  class="parallax-slide parallax-slide-min">
                 <div class="parallax-slide-image">
                 
-                  <img src="../../assets/images/SwiperImgMini_2.png" alt='img'>
+                  <img src="../../assets/images/PS2.png" alt='img'>
                           
                 </div>
               </swiper-slide>
@@ -92,7 +92,7 @@
               <swiper-slide  class="parallax-slide parallax-slide-min">
                 <div class="parallax-slide-image">
                 
-                  <img src="../../assets/images/SwiperImgMini_3.png" alt='img'>
+                  <img src="../../assets/images/PS3.png" alt='img'>
                           
                 </div>
               </swiper-slide>
@@ -100,7 +100,7 @@
               <swiper-slide  class="parallax-slide parallax-slide-min">
                 <div class="parallax-slide-image">
                 
-                  <img src="../../assets/images/SwiperImgMini_1.png" alt='img'>
+                  <img src="../../assets/images/PS4.png" alt='img'>
                           
                 </div>
               </swiper-slide>
