@@ -27,9 +27,19 @@
                                       <div class="col swiper-part">
 
                                         <div class="swiper-part__swiper">
-                                          <carpageswiper>
+
+                                          <carpageswiper
+                                          v-show="swiperexon"
+                                          >
 
                                           </carpageswiper>
+
+                                          <carpageswiperin
+                                          v-show="swiperinon"
+                                          >
+
+                                          </carpageswiperin>
+
                                         </div>
 
                                         <div class="swiper-part__text spt">
@@ -165,6 +175,7 @@
   import burgerbtn from '@/components/primitives/BurgerBtn.vue'
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
   import carpageswiper from '@/components/CatalogNEW/CarPageSwiper.vue'
+  import carpageswiperin from '@/components/CatalogNEW/CarPageSwiperIn.vue'
   import btnreqinfo from '@/components/primitives/BTN/btnBlueSlot.vue'
   
   
@@ -178,6 +189,7 @@ export default {
         burgerbtn,
         burgerlist,
         carpageswiper,
+        carpageswiperin,
         btnreqinfo,
       
 
@@ -190,7 +202,9 @@ export default {
           from:[],
           
           carpagedataid:this.$store.state.carpageid,
-          cars:this.$store.state.storecars
+          cars:this.$store.state.storecars,
+          swiperexon:true,
+          swiperinon:false,
 
           
 
