@@ -29,22 +29,28 @@
                                         <div class="swiper-part__swiper">
 
                                           <carpageswiper
-                                          v-show="swiperexon"
+                                          v-if="swiperexon"
                                           >
 
                                           </carpageswiper>
 
                                           <carpageswiperin
-                                          v-show="swiperinon"
+                                          v-if="swiperexon===false"
                                           >
 
                                           </carpageswiperin>
 
                                           <div class="swiper-part__swiper-btn-box">
-                                            <btnswiperex class="swiper-part__swiper-btn-box-btn">
+                                            <btnswiperex class="swiper-part__swiper-btn-box-btn"
+                                            
+                                            
+                                            >
                                               Exterior
                                             </btnswiperex>
-                                            <btnswiperin class="swiper-part__swiper-btn-box-btn">
+                                            <btnswiperin class="swiper-part__swiper-btn-box-btn"
+                                            
+                                            
+                                            >
                                               Interior
                                             </btnswiperin>
                                           </div>
@@ -216,9 +222,10 @@ export default {
           
           carpagedataid:this.$store.state.carpageid,
           cars:this.$store.state.storecars,
+          
           swiperexon:true,
-          swiperinon:false,
-
+         
+       
           
 
         }
@@ -230,10 +237,15 @@ export default {
 
     },
     watch: {
-      
+      btnstate (val) {
+        let a = val
+        this.test=a
+        
+      }
     },
 
     computed: {
+      
       model () {
         let a 
         this.cars.forEach(el=>{

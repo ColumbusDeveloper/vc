@@ -4,7 +4,6 @@
           <swiper
             class="parallax-slider"
             :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
-            
             grabCursor
             :modules="[Thumbs]" :thumbs="{ swiper: thumbsSwiper }"
               

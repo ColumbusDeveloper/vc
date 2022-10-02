@@ -4,13 +4,16 @@
             
             >
                 <div class="unclicked"
-                @click="btnclicked=!btnclicked"
-                :class="{clicked:btnclicked}"
+                @click="passstatetocarpage"
+                :class="{clicked:state}"
                 
                 >
 
                     <span class="btn__text">
                       <slot class="btn__slot"></slot>
+                      <!-- {{$store.state.swiperexon}} -->
+                      {{state}}
+                  
                     </span>
 
                 </div>
@@ -27,18 +30,36 @@
   export default {
     
     name: 'Btn-swiperIN',
+   
     data() {
         return {
           
-          btnclicked:false,
-          
+          swiperexon:false ,
+
+          state:false,
 
         }
     },
     methods:{
+      passstatetocarpage () {
+        
 
+        
+        this.swiperexon=!this.swiperexon
+        if (this.swiperexon) {
+          this.$store.state.swiperexon = false
+          this.state = !this.$store.state.swiperexon
+        }else if (!this.swiperexon) {
+          this.$store.state.swiperexon = true
+          this.state = !this.$store.state.swiperexon
+        }
+     
+    
+      }
     },
-
+    watch: {
+   
+    },
     
   }
 
