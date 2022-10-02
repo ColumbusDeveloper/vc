@@ -9,7 +9,7 @@
 
             
             <div class="ma-mo__global-search-header">
-                    <p class="ma-mo__global-search-header-stable" v-on:click="$router.push('/catalog/carpage'),delMainHeader" >Detailed search</p>
+                    <p class="ma-mo__global-search-header-stable" v-on:click="delMainHeader" >Detailed search</p>
                     <p class="ma-mo__global-search-header-changeable">Clear filters</p>
             </div>   
 
@@ -899,7 +899,9 @@
                 <div class="ma-mo__card-box ma-mo__card-box-calc" v-if="showcalculated">
                     <card 
                     v-for="car in calculatedcars" :key="car"
+                    v-on:click="$router.push('/catalog/carpage')" 
                     :car="car"
+                    
                     >
               
                     </card>
@@ -908,6 +910,7 @@
                 <div class="ma-mo__card-box ma-mo__card-box-main-screen" v-if="showcars">
                     <ca
                     v-for="car in cars" :key="car"
+                    v-on:click="$router.push('/catalog/carpage')" 
                     :car="car"
                     >
 
@@ -925,6 +928,7 @@
                 <div class="ma-mo__card-box ma-mo__card-box-main-screen" v-if="magtopform">
                     <camag
                     v-for="car in modelmagtopComputedFinalShow" :key="car"
+                    v-on:click="$router.push('/catalog/carpage')" 
                     :car="car"
                     >
 

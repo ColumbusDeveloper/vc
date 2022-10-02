@@ -1,134 +1,160 @@
 <template>
 
   
-  <div class="d-flex flex-column min-vh-100">
-    <div class="container">
-      <div class="row">
-          <div class="col header" @clearmagtopform="setMagtopformInventoryComponent">
-            <Headerone  class="center" :liclickedtextoff="navliclicktextoffstate"  />
-            <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
-            <transition name="menu">
-              <burgerlist v-if="iscross" class="burgerlist" :listate="navliclicktextoffstate" v-on:click="iscross=!iscross" v-on:navliclicktextoffevent="changenavliclicktextoffstate"  />
-            </transition>
-          </div>
-      </div>
-    </div>
-        
-    <main class="flex-fill">
-
-      <div class="container">
-        <div class="row">
-          <div class="col  banner">
-            <h2 class="banner__h2">Porsche Panamera 4S</h2>
-            <span class="banner__title">Watching now 8 people</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col swiper-part">
-
-            <div class="swiper-part__swiper">
-              <carpageswiper>
-
-              </carpageswiper>
-            </div>
-
-            <div class="swiper-part__text spt">
-
-              <div class="spt__top-part">
-
-                <div class="spt__top-part-item">
-
-                    <div class="spt__top-part-item-left">
-                      <div class="spt__top-part-item-left-info-box">
-                        <span class="spt__top-part-item-left-info-box-text">Price</span>
-                        <span class="spt__top-part-item-left-info-box-value_blue">{{price}} $</span>
-                      </div>
-                      <div class="spt__top-part-item-left-info-box">
-                        <span class="spt__top-part-item-left-info-box-text">Body</span>
-                        <span class="spt__top-part-item-left-info-box-value">{{body}}</span>
-                      </div>
-                      <div class="spt__top-part-item-left-info-box">
-                        <span class="spt__top-part-item-left-info-box-text">Transmission</span>
-                        <span class="spt__top-part-item-left-info-box-value">{{transmission}} </span>
-                      </div>
-                      
-                    </div>
-
-                    <div class="spt__top-part-item-right">
-
-                      <div class="spt__top-part-item-right-info-box">
-                        <span class="spt__top-part-item-right-info-box-text">Year</span>
-                        <span class="spt__top-part-item-right-info-box-value">{{year}}</span>
-                      </div>
-                      <div class="spt__top-part-item-right-info-box">
-                        <span class="spt__top-part-item-right-info-box-text">Kilometers</span>
-                        <span class="spt__top-part-item-right-info-box-value">{{kilometers}} </span>
-                      </div>
-
-                    </div>
-
-                </div>
-
-                <div class="spt__top-part-item">
-
-                    <div class="spt__top-part-item-left">
-                      <span class="spt__top-part-item-left-info-box-text">Detail</span>
-                      <span class="spt__top-part-item-left-info-box-text-semibold">Rear wheel drive</span>
-                      <span class="spt__top-part-item-left-info-box-text-semibold">6 cylinders</span>
-                      <span class="spt__top-part-item-left-info-box-text-semibold">11 l. per 100 km.</span>
-                      <span class="spt__top-part-item-left-info-box-text-semibold">Rear wheel drive</span>
-                    </div>
-
-                    <div class="spt__top-part-item-right">
-                      <span class="spt__top-part-item-right-info-box-text-semibold">2500-4000 rpm</span>
-                      <span class="spt__top-part-item-right-info-box-text-semibold">0-100 in 2.7 s.</span>
-                      <span class="spt__top-part-item-right-info-box-text-semibold">Power steering</span>
-                      <span class="spt__top-part-item-right-info-box-text-semibold">2500-4000 rpm</span>
-                    </div>
-
-                </div>
-
-              </div>
-
-              <div class="spt__bottom-part">
-                <span class="spt__bottom-part-title spt__top-part-item-left-info-box-text">Detail</span>
-                <div class="spt__bottom-part-content-box">
-                  <p class="spt__bottom-part-content-box-content">
-                    Porsche 911 - a sports car manufactured by the German company Porsche AG in the
-                     back of a two-door coupe or a convertible based on it, produced
-                      in different generations from 1964 to the present day.
-                      The 911 index was not originally planned for the timeless designation 
-                      of different generations of the same car, and was no more than one of 
-                      many similar in the through three-digit internal factory numbering 
-                      of all Porsche models assigned to a very specific 1964 model.
-                  </p>
-                </div>
-                <div class="spt__bottom-part-btn-box">
-                  <btnreqinfo>
-                    Request more information
-                  </btnreqinfo>
-                </div>
-              </div>
+        <div class="d-flex flex-column min-vh-100">
+                  <div class="container">
+                        <div class="row">
+                                <div class="col header" @clearmagtopform="setMagtopformInventoryComponent">
+                                      <Headerone  class="center" :liclickedtextoff="navliclicktextoffstate"  />
+                                      <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
+                                      <transition name="menu">
+                                        <burgerlist v-if="iscross" class="burgerlist" :listate="navliclicktextoffstate" v-on:click="iscross=!iscross" v-on:navliclicktextoffevent="changenavliclicktextoffstate"  />
+                                      </transition>
+                                </div>
+                        </div>
+                  </div>
               
-            </div>
+                  <main class="flex-fill">
 
-          </div>
+                    <div class="container">
+                                <div class="row">
+                                      <div class="col  banner">
+                                        <h2 class="banner__h2">{{model}}</h2>
+                                        <span class="banner__title">Watching now 8 people</span>
+                                      </div>
+                                </div>
+                                <div class="row">
+                                      <div class="col swiper-part">
+
+                                        <div class="swiper-part__swiper">
+                                          <carpageswiper>
+
+                                          </carpageswiper>
+                                        </div>
+
+                                        <div class="swiper-part__text spt">
+
+                                                          <div class="spt__top-part">
+
+                                                                    <div class="spt__top-part-item">
+
+                                                                              <div class="spt__top-part-item-title-box">
+                                                                                            <div class="spt__top-part-item-left-info-box">
+                                                                                              <span class="spt__top-part-item-left-info-box-text">Price</span>
+                                                                                              <span class="spt__top-part-item-left-info-box-value_blue">{{price}} $</span>
+                                                                                            </div>
+                                                                              </div>
+
+                                                                              <div class="spt__top-part-item-content-box">
+
+                                                                                          <div class="spt__top-part-item-left">
+
+                                                                                                  <div class="spt__top-part-item-left-info-box">
+                                                                                                    <span class="spt__top-part-item-left-info-box-text">Body</span>
+                                                                                                    <span class="spt__top-part-item-left-info-box-value">{{body}}</span>
+                                                                                                  </div>
+                                                                                                  <div class="spt__top-part-item-left-info-box">
+                                                                                                    <span class="spt__top-part-item-left-info-box-text">Transmission</span>
+                                                                                                    <span class="spt__top-part-item-left-info-box-value">{{transmission}} </span>
+                                                                                                  </div>
+                                                                                            
+                                                                                          </div>
+
+                                                                                          <div class="spt__top-part-item-right">
+
+                                                                                                  <div class="spt__top-part-item-right-info-box">
+                                                                                                    <span class="spt__top-part-item-right-info-box-text">Year</span>
+                                                                                                    <span class="spt__top-part-item-right-info-box-value">{{year}}</span>
+                                                                                                  </div>
+                                                                                                  <div class="spt__top-part-item-right-info-box">
+                                                                                                    <span class="spt__top-part-item-right-info-box-text">Kilometers</span>
+                                                                                                    <span class="spt__top-part-item-right-info-box-value">{{kilometers}} </span>
+                                                                                                  </div>
+
+                                                                                          </div>
+
+                                                                              </div>
+
+                                                                        
+
+                                                                    </div>
+
+                                                                    <hr class="spt__top-part-hr">
+
+                                                                    <div class="spt__top-part-item itm-top-bott">
+
+                                                                            <div class="spt__top-part-item-title-box bot">
+                                                                              <span class="spt__top-part-item-left-info-box-text">Detail</span>
+                                                                            </div>
+
+                                                                            <div class="spt__top-part-item-content-box">                                                                           
+
+                                                                              <div class="spt__top-part-item-left bot">                      
+                                                                                <span class="spt__top-part-item-left-info-box-text-semibold bot">Rear wheel drive</span>
+                                                                                <span class="spt__top-part-item-left-info-box-text-semibold bot">6 cylinders</span>
+                                                                                <span class="spt__top-part-item-left-info-box-text-semibold bot">11 l. per 100 km.</span>
+                                                                                <span class="spt__top-part-item-left-info-box-text-semibold bot">Rear wheel drive</span>
+                                                                              </div>
+
+                                                                              <div class="spt__top-part-item-right ">
+                                                                                <span class="spt__top-part-item-right-info-box-text-semibold bot">2500-4000 rpm</span>
+                                                                                <span class="spt__top-part-item-right-info-box-text-semibold bot">0-100 in 2.7 s.</span>
+                                                                                <span class="spt__top-part-item-right-info-box-text-semibold bot">Power steering</span>
+                                                                                <span class="spt__top-part-item-right-info-box-text-semibold bot">2500-4000 rpm</span>
+                                                                              </div>
+
+                                                                            </div> 
+
+                                                                    </div>
+                                                                    <hr>
+
+                                                                    
+
+                                                          </div>
+
+                                                        
+
+                                                          <div class="spt__bottom-part">
+
+                                                            <span class="spt__bottom-part-title spt__top-part-item-left-info-box-text">Description</span>
+
+                                                            <div class="spt__bottom-part-content-box">
+                                                              <p class="spt__bottom-part-content-box-content">
+                                                                Porsche 911 - a sports car manufactured by the German company Porsche AG in the
+                                                                back of a two-door coupe or a convertible based on it, produced
+                                                                  in different generations from 1964 to the present day.
+                                                                  The 911 index was not originally planned for the timeless designation 
+                                                                  of different generations of the same car, and was no more than one of 
+                                                                  many similar in the through three-digit internal factory numbering 
+                                                                  of all Porsche models assigned to a very specific 1964 model.
+                                                              </p>
+                                                            </div>
+
+                                                            <div class="spt__bottom-part-btn-box">
+                                                              <btnreqinfo>
+                                                                Request more information
+                                                              </btnreqinfo>
+                                                            </div>
+
+                                        </div>
+                                          
+                                      </div>
+
+                                  
+
+                                </div>
+                      
+                      </div>
+
+                    </div>
+                    
+                    
+                    
+                  </main>
+
+                <Footer class="center" />
 
         </div>
-        <div class="row">
-          <div class="col">
-            
-          </div>
-        </div>
-
-      </div>
-      
-      
-    </main>
-
-    <Footer class="center" />
-
-  </div>
 
 
 </template>
@@ -181,6 +207,17 @@ export default {
     },
 
     computed: {
+      model () {
+        let a 
+        this.cars.forEach(el=>{
+          let b = el.id
+          let c = el.model
+          if (b===this.carpagedataid) {
+            a = c
+          }
+        })
+        return a  
+      },
 
       price () {
         let a 
@@ -226,6 +263,7 @@ export default {
         })
         return a  
       },
+
       kilometers () {
         let a 
         this.cars.forEach(el=>{
@@ -249,114 +287,146 @@ export default {
 @import '../assets/varmix.scss';
 
 
- 
-  .spt {
+.spt {
 
-      &__top-part {
-        background-color: yellow;
-      }
-
-      &__top-part-item {
-        border-width:2px;
-        border-style: solid;
-        border-color: #000;
-        display: flex;
-      }
-
-      &__top-part-item-left {
-        background-color: aqua;
-        width: 50%;
-        border-width:2px;
-        border-style: solid;
-        border-color: #000;
-      }
-
-      &__top-part-item-left-info-box {
-      }
-
-      &__top-part-item-left-info-box-text {
-        display: block;
-      }
-
-      &__top-part-item-left-info-box-value {
-
-        &_blue {
-        }
-      }
-
-      &__top-part-item-right {
-        width: 50%;
-        align-self: flex-end;
-        display: block;
-        border-width:2px;
-        border-style: solid;
-        border-color: #000;
-      }
-
-      &__top-part-item-right-info-box {
-      }
-
-      &__top-part-item-right-info-box-text {
-        display: block;
-      }
-
-      &__top-part-item-right-info-box-value {
-      }
-
-      &__top-part-item-left-info-box-text-semibold {
-        display: block;
-      }
-
-      &__top-part-item-right-info-box-text-semibold {
-        display: block;
-      }
-
-      &__bottom-part {
-        background-color: red;
-      }
-
-      &__bottom-part-title {
-        display: block;
-      }
-
-      &__bottom-part-content-box {
-      }
-
-      &__bottom-part-content-box-content {
-      }
-
-      &__bottom-part-btn-box {
-      }
+  &__top-part {
+    
+    
+    display: flex;
+    flex-direction: column;
   }
+
+  &__top-part-item {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 175px;
+    // background-color: yellow;
+    padding-left: 50px;
+  }
+
+  &__top-part-hr {
+    padding-left: 50px;
+  }
+
+  .itm-top-bott {
+    justify-content: flex-end;
+    // background-color: red;
+  }
+
+  &__top-part-item-title-box {
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  &__top-part-item-left-info-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__top-part-item-left-info-box-text {
+  }
+
+  &__top-part-item-left-info-box-value {
+    @include    letterH4HeadingBurgerMenuTextNumbersDarkBlue  ;
+
+    &_blue {
+      color: $colorMainBlue;
+      font-family: $fontFamily700;
+      font-weight: 700;
+      font-size: 1.56rem;
+    }
+  }
+
+  &__top-part-item-content-box {
+    display: flex;
+    flex-direction: row;
+   
+  }
+
+  &__top-part-item-left {
+    width: 50%;
+  
+  }
+
+  &__top-part-item-right {
+    width: 50%;
+   
+  }
+
+  &__top-part-item-right-info-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__top-part-item-right-info-box-text {
+    color: $colorSmallLetterContentGray;
+    font-family: $fontFamily400;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  &__top-part-item-right-info-box-value {
+    @include    letterH4HeadingBurgerMenuTextNumbersDarkBlue  ;
+  }
+
+  &__top-part-item-left-info-box-text-semibold {
+    display: block;
+    @include    letterSemiboldDarkBlue  ;
+  }
+
+  &__top-part-item-right-info-box-text-semibold {
+    display: block;
+    @include    letterSemiboldDarkBlue  ;
+  }
+
+  &__bottom-part {
+    padding-left: 50px;
+  }
+
+  .bot:not(:last-child) {
+    margin-bottom: 7px;
+  }
+
+  &__bottom-part-title {
+  }
+
+  &__bottom-part-content-box {
+  }
+
+  &__bottom-part-content-box-content {
+    @include      letterContentSecondarySmallGrayClear;
+  }
+
+  &__bottom-part-btn-box {
+  }
+}
+
+
+ 
+  
 
 
 
   .swiper-part {
-    border-width:2px;
-    border-style: solid;
-    border-color: #000;
+    
     width: 100%;
     display: flex;
 
       &__swiper {
         width: 50%;
-        border-width:2px;
-        border-style: solid;
-        border-color: #000;
+     
       }
 
       &__text {
         width: 50%;
-        border-width:2px;
-        border-style: solid;
-        border-color: #000;
+     
       }
   }
 
   .banner {
-    border-width:2px;
-    border-style: solid;
-    border-color: #000;
+ 
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -364,11 +434,7 @@ export default {
     margin-top: 60px;
     margin-bottom: 60px;
 
-      &__h2 {
-      }
-
-      &__title {
-      }
+   
   }
 
 
