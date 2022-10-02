@@ -10,14 +10,7 @@
               
             
           >
-            <!-- <div class="parallax-slider-navigation">
-              <div class="nav-indicator prevArrow">
-                <i class="fa-solid fa-chevron-left"></i>
-              </div>
-              <div class="nav-indicator nextArrow">
-              <i class="fa-solid fa-chevron-right"></i>
-              </div>
-            </div> -->
+            
 
             <swiper-slide  class="parallax-slide">
               <div class="parallax-slide-image">
