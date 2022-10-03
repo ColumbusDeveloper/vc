@@ -11,42 +11,64 @@
           >
            
 
-            <swiper-slide  class="parallax-slide">
-              <div class="parallax-slide-image">
+            <swiper-slide  class="parallax-slide" 
+          
+            :style="{height:imgheightb+'px'}"
+            >
+              <div class="parallax-slide-image"
+              :style="{height:imgheightb+'px'}"
+              >
               
-                <img src="../../assets/images/PB1.png" alt='img'>
+                <img class="slideimg" src="../../assets/images/PB1.png" alt='img'>
                             
               </div>
             </swiper-slide>
 
 
-            <swiper-slide  class="parallax-slide">
-              <div class="parallax-slide-image">
+            <swiper-slide  class="parallax-slide" 
+         
+            :style="{height:imgheightb+'px'}"
+            >
+              <div class="parallax-slide-image"
+              :style="{height:imgheightb+'px'}"
+              >
               
-                <img src="../../assets/images/PB2.png" alt='img'>
+                <img class="slideimg" ref="heightb" src="../../assets/images/PB2.png" alt='img'>
                         
               </div>
             </swiper-slide>
 
 
-            <swiper-slide  class="parallax-slide">
-              <div class="parallax-slide-image">
+            <swiper-slide  class="parallax-slide" 
+          
+            :style="{height:imgheightb+'px'}"
+            >
+              <div class="parallax-slide-image"
+              :style="{height:imgheightb+'px'}"
+              >
               
-                <img src="../../assets/images/PB3.png" alt='img'>
+                <img class="slideimg" src="../../assets/images/PB3.png" alt='img'>
                         
               </div>
             </swiper-slide>
             
             
-            <swiper-slide  class="parallax-slide">
-              <div class="parallax-slide-image">
+            <swiper-slide  class="parallax-slide" 
+         
+            :style="{height:imgheightb+'px'}"
+            >
+              <div class="parallax-slide-image"
+              :style="{height:imgheightb+'px'}"
+              >
               
-                <img src="../../assets/images/PB4.png" alt='img'>
+                <img class="slideimg" src="../../assets/images/PB4.png" alt='img'>
                         
               </div>
             </swiper-slide>
 
           </swiper>
+
+       
 
           <swiper 
               class="parallax-slider swiper-min"
@@ -70,36 +92,52 @@
 
            
 
-              <swiper-slide  class="parallax-slide parallax-slide-min">
-                <div class="parallax-slide-image">
+              <swiper-slide  class="parallax-slide " 
+              :style="{height:imgheightsm +'px'}"
+              >
+                <div class="parallax-slide-image"
+                :style="{height:imgheightsm +'px'}"
+                >
                 
-                  <img src="../../assets/images/PS1.png" alt='img'>
+                  <img class="slideimg" ref="heightsm" src="../../assets/images/PS1.png" alt='img'>
                           
                 </div>
               </swiper-slide>
 
 
-              <swiper-slide  class="parallax-slide parallax-slide-min">
-                <div class="parallax-slide-image">
+              <swiper-slide  class="parallax-slide "
+              :style="{height:imgheightsm +'px'}"
+              >
+                <div class="parallax-slide-image"
+                :style="{height:imgheightsm +'px'}"
+                >
                 
-                  <img src="../../assets/images/PS2.png" alt='img'>
+                  <img class="slideimg" src="../../assets/images/PS2.png" alt='img'>
                           
                 </div>
               </swiper-slide>
 
 
-              <swiper-slide  class="parallax-slide parallax-slide-min">
-                <div class="parallax-slide-image">
+              <swiper-slide  class="parallax-slide " 
+              :style="{height:imgheightsm +'px'}"
+              >
+                <div class="parallax-slide-image"
+                :style="{height:imgheightsm +'px'}"
+                >
                 
-                  <img src="../../assets/images/PS3.png" alt='img'>
+                  <img class="slideimg" src="../../assets/images/PS3.png" alt='img'>
                           
                 </div>
               </swiper-slide>
 
-              <swiper-slide  class="parallax-slide parallax-slide-min">
-                <div class="parallax-slide-image">
+              <swiper-slide  class="parallax-slide " 
+              :style="{height:imgheightsm +'px'}"
+              >
+                <div class="parallax-slide-image"
+                :style="{height:imgheightsm +'px'}"
+                >
                 
-                  <img src="../../assets/images/PS4.png" alt='img'>
+                  <img class="slideimg" src="../../assets/images/PS4.png" alt='img'>
                           
                 </div>
               </swiper-slide>
@@ -126,7 +164,9 @@ SwiperCore.use([Navigation, Parallax,Thumbs]);
 export default {
   data() {
     return {
-      
+      imgheightb:366,
+      imgheightsm:90,
+      test:3,
     }
   },
   computed: {
@@ -138,7 +178,13 @@ export default {
    
   },
   methods: {
+    resizeHandler() {
+     
+      this.imgheightb = this.$refs.heightb.offsetHeight
+      this.imgheightsm = this.$refs.heightsm.offsetHeight    
+    },
     
+
   },
   setup() {
       const thumbsSwiper = ref(null);
@@ -151,6 +197,18 @@ export default {
         setThumbsSwiper,
       };
   },
+  created() {
+  
+      window.addEventListener("resize", this.resizeHandler)
+     
+      
+  },
+  unmounted() {
+      window.removeEventListener("resize", this.resizeHandler)
+  },
+
+  
+  
 };
 </script>
 
@@ -232,26 +290,15 @@ export default {
 
 
 .parallax-slide {
-  height: 320px !important;
+ 
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  @media (max-width:1200px) {
-     height: 320px !important;
+  @media (max-width:350px) {
+    height: 176px;
   }
-  @media (max-width:769px) {
-     height: 650px !important;
-  }
-  @media (max-width:576px) {
-     height: 578px !important;
-  }
-  @media (max-width:450px) {
-     height: 543px !important;
-  }
-  @media (max-width:372px) {
-     height: 511px !important;
-  }
+  
 }
 .parallax-slider-navigation {
   position: absolute;
@@ -289,6 +336,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  img {
+    @media (max-width:992px) {
+       width: 100%;
+    }
+  }
 }
 .nav-indicator {
   height: 40px;

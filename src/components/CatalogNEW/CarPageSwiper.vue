@@ -290,6 +290,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  img {
+    @media (max-width:992px) {
+       width: 100%;
+    }
+  }
 }
 .nav-indicator {
   height: 40px;
