@@ -41,18 +41,14 @@
                                           </carpageswiperin>
 
                                           <div class="swiper-part__swiper-btn-box">
-                                            <btnswiperex class="swiper-part__swiper-btn-box-btn"
-                                            
-                                            
-                                            >
-                                              Exterior
-                                            </btnswiperex>
-                                            <btnswiperin class="swiper-part__swiper-btn-box-btn"
-                                            
-                                            
-                                            >
-                                              Interior
-                                            </btnswiperin>
+                                            <btnswiperexin>
+                                              <template v-slot:btn_1>
+                                                  Exterior
+                                              </template>
+                                              <template v-slot:btn_2>
+                                                  Interior
+                                              </template>
+                                            </btnswiperexin>
                                           </div>
 
                                         </div>
@@ -192,8 +188,8 @@
   import carpageswiper from '@/components/CatalogNEW/CarPageSwiper.vue'
   import carpageswiperin from '@/components/CatalogNEW/CarPageSwiperIn.vue'
   import btnreqinfo from '@/components/primitives/BTN/btnBlueSlot.vue'
-  import btnswiperex from '@/components/primitives/BTN/btnSwiperClickableSlotEX .vue'
-  import btnswiperin from '@/components/primitives/BTN/btnSwiperClickableSlotIN  copy.vue'
+  import btnswiperexin from '@/components/primitives/BTN/btnSwiperClickableDoubleBtn .vue'
+ 
   
   
 
@@ -208,8 +204,8 @@ export default {
         carpageswiper,
         carpageswiperin,
         btnreqinfo,
-        btnswiperex,
-        btnswiperin,
+        btnswiperexin,
+        
       
 
       },
@@ -237,11 +233,8 @@ export default {
 
     },
     watch: {
-      btnstate (val) {
-        let a = val
-        this.test=a
-        
-      }
+      
+
     },
 
     computed: {

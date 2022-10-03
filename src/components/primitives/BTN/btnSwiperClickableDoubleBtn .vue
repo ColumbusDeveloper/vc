@@ -1,19 +1,25 @@
 <template>
    
-            <div class="col"
-            
-            >
-                <div class="unclicked"
-                @click="passstatetocarpage"
-                :class="{clicked:state}"
-                
+            <div class="col btn-box"
+            @click="changestatebtns"
+            >                
+                <div class="unclicked btn1"                   
+                :class="{clicked:clicked1}"               
                 >
 
                     <span class="btn__text">
-                      <slot class="btn__slot"></slot>
-                      <!-- {{$store.state.swiperexon}} -->
-                      {{state}}
-                  
+                      <slot name="btn_1" class="btn__slot"></slot>       
+                    </span>
+
+
+                </div>
+
+                <div class="unclicked"             
+                :class="{clicked:clicked2}"               
+                >
+
+                    <span class="btn__text">
+                      <slot name="btn_2" class="btn__slot"></slot>              
                     </span>
 
                 </div>
@@ -29,37 +35,37 @@
 
   export default {
     
-    name: 'Btn-swiperIN',
+    name: 'Btn-swiperEX',
    
     data() {
         return {
           
-          swiperexon:false ,
-
-          state:false,
+          swiperexon:true,
+          clicked1:true,
+          clicked2:false,
+          
 
         }
     },
     methods:{
-      passstatetocarpage () {
-        
-
-        
+      
+      changestatebtns () {
         this.swiperexon=!this.swiperexon
+
         if (this.swiperexon) {
-          this.$store.state.swiperexon = false
-          this.state = !this.$store.state.swiperexon
-        }else if (!this.swiperexon) {
-          this.$store.state.swiperexon = true
-          this.state = !this.$store.state.swiperexon
+          this.clicked1=true
+          this.clicked2=false
+        }else {
+          this.clicked1=false
+          this.clicked2=true
         }
-     
-    
       }
+      
     },
     watch: {
-   
+        
     },
+  
     
   }
 
@@ -104,6 +110,15 @@
     color: #41456B;
     cursor: pointer;
   }
+
+  .btn-box {
+    display: flex;
+    .btn1 {
+      margin-right: 10px;
+    }
+  }
+
+ 
 
   
 
