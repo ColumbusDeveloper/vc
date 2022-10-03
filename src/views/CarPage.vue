@@ -40,7 +40,9 @@
 
                                           </carpageswiperin>
 
-                                          <div class="swiper-part__swiper-btn-box">
+                                          <div class="swiper-part__swiper-btn-box"
+                                          @click="changeswiperexon"
+                                          >
                                             <btnswiperexin>
                                               <template v-slot:btn_1>
                                                   Exterior
@@ -228,7 +230,9 @@ export default {
       },
     methods: {
 
-      
+      changeswiperexon () {
+        this.swiperexon=this.$store.state.swipercarpageex
+      }
 
 
     },
@@ -309,6 +313,7 @@ export default {
       },
 
     },
+    
     
 }
 
@@ -445,6 +450,7 @@ export default {
     
     width: 100%;
     display: flex;
+    
 
       &__swiper {
         width: 50%;
@@ -458,6 +464,7 @@ export default {
         top: 270px;
         left: 35px;
         z-index: 1;
+        display: inline-block;
       }
 
       &__swiper-btn-box-btn {

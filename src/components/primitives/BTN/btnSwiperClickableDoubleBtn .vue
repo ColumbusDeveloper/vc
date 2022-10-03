@@ -8,7 +8,7 @@
                 >
 
                     <span class="btn__text">
-                      <slot name="btn_1" class="btn__slot"></slot>       
+                      <slot name="btn_1" class="btn__slot"></slot>     
                     </span>
 
 
@@ -59,6 +59,8 @@
           this.clicked1=false
           this.clicked2=true
         }
+
+        this.$store.state.swipercarpageex = this.swiperexon
       }
       
     },
