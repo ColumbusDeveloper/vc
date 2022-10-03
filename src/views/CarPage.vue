@@ -27,9 +27,30 @@
                                       <div class="col swiper-part">
 
                                         <div class="swiper-part__swiper">
-                                          <carpageswiper>
+
+                                          <carpageswiper
+                                          v-if="swiperexon"
+                                          >
 
                                           </carpageswiper>
+
+                                          <carpageswiperin
+                                          v-if="swiperexon===false"
+                                          >
+
+                                          </carpageswiperin>
+
+                                          <div class="swiper-part__swiper-btn-box">
+                                            <btnswiperexin>
+                                              <template v-slot:btn_1>
+                                                  Exterior
+                                              </template>
+                                              <template v-slot:btn_2>
+                                                  Interior
+                                              </template>
+                                            </btnswiperexin>
+                                          </div>
+
                                         </div>
 
                                         <div class="swiper-part__text spt">
@@ -165,7 +186,10 @@
   import burgerbtn from '@/components/primitives/BurgerBtn.vue'
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
   import carpageswiper from '@/components/CatalogNEW/CarPageSwiper.vue'
+  import carpageswiperin from '@/components/CatalogNEW/CarPageSwiperIn.vue'
   import btnreqinfo from '@/components/primitives/BTN/btnBlueSlot.vue'
+  import btnswiperexin from '@/components/primitives/BTN/btnSwiperClickableDoubleBtn .vue'
+ 
   
   
 
@@ -178,7 +202,10 @@ export default {
         burgerbtn,
         burgerlist,
         carpageswiper,
+        carpageswiperin,
         btnreqinfo,
+        btnswiperexin,
+        
       
 
       },
@@ -190,8 +217,11 @@ export default {
           from:[],
           
           carpagedataid:this.$store.state.carpageid,
-          cars:this.$store.state.storecars
-
+          cars:this.$store.state.storecars,
+          
+          swiperexon:true,
+         
+       
           
 
         }
@@ -204,9 +234,11 @@ export default {
     },
     watch: {
       
+
     },
 
     computed: {
+      
       model () {
         let a 
         this.cars.forEach(el=>{
@@ -416,7 +448,20 @@ export default {
 
       &__swiper {
         width: 50%;
+        position: relative;
      
+      }
+
+      &__swiper-btn-box {
+        display: flex;
+        position: absolute;
+        top: 270px;
+        left: 35px;
+        z-index: 1;
+      }
+
+      &__swiper-btn-box-btn {
+        margin-right: 10px;
       }
 
       &__text {
