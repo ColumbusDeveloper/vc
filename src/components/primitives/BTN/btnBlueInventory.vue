@@ -38,6 +38,9 @@
     width: 250px;
     height: 45px;
     white-space: nowrap;
+    @media (max-width:576px) {
+       width: 100%;
+    }
     &:hover {
         background-color: rgb(0, 162, 255);
     }

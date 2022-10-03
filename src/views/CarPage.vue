@@ -55,6 +55,12 @@
 
                                         </div>
 
+                                        <div class="swiper-part__btnblueapply">
+                                          <btnblueapply>
+
+                                          </btnblueapply>
+                                        </div>
+
                                         <div class="swiper-part__text spt">
 
                                                           <div class="spt__top-part">
@@ -191,7 +197,7 @@
   import carpageswiperin from '@/components/CatalogNEW/CarPageSwiperIn.vue'
   import btnreqinfo from '@/components/primitives/BTN/btnBlueSlot.vue'
   import btnswiperexin from '@/components/primitives/BTN/btnSwiperClickableDoubleBtn .vue'
- 
+  import btnblueapply from '@/components/primitives/BTN/btnBlueInventory.vue'
   
   
 
@@ -207,6 +213,7 @@ export default {
         carpageswiperin,
         btnreqinfo,
         btnswiperexin,
+        btnblueapply,
         
       
 
@@ -340,6 +347,9 @@ export default {
     height: 175px;
     // background-color: yellow;
     padding-left: 50px;
+    @media (max-width:370px) {
+       height: 220px;
+    }
   }
 
   &__top-part-hr {
@@ -450,11 +460,17 @@ export default {
     
     width: 100%;
     display: flex;
+    @media (max-width:992px) {
+       flex-direction: column;
+    }
     
 
       &__swiper {
         width: 50%;
         position: relative;
+        @media (max-width:992px) {
+          width: 100%;
+        }
      
       }
 
@@ -467,12 +483,22 @@ export default {
         display: inline-block;
       }
 
+      &__btnblueapply {
+        display: none;
+        @media (max-width:576px) {
+           display: block;
+        }
+      }
+
       &__swiper-btn-box-btn {
         margin-right: 10px;
       }
 
       &__text {
         width: 50%;
+        @media (max-width:992px) {
+          width: 100%;
+        }
      
       }
   }
@@ -485,6 +511,10 @@ export default {
     align-items: flex-start;
     margin-top: 60px;
     margin-bottom: 60px;
+    @media (max-width:768px) {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
 
    
   }
