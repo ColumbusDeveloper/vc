@@ -32,7 +32,7 @@
               :style="{height:imgheightb+'px'}"
               >
               
-                <img src="../../assets/images/SwiperMaxImg_1.png" alt='img'>
+                <img ref="heightb" src="../../assets/images/SwiperMaxImg_1.png" alt='img'>
                         
               </div>
             </swiper-slide>
@@ -87,20 +87,20 @@
 
            
 
-              <swiper-slide  class="parallax-slide parallax-slide-min"
+              <swiper-slide  class="parallax-slide "
               :style="{height:imgheightsm +'px'}"
               >
                 <div class="parallax-slide-image"
                 :style="{height:imgheightsm +'px'}"
                 >
                 
-                  <img src="../../assets/images/SwiperImgMini_1.png" alt='img'>
+                  <img  ref="heightsm"  src="../../assets/images/SwiperImgMini_1.png" alt='img'>
                           
                 </div>
               </swiper-slide>
 
 
-              <swiper-slide  class="parallax-slide parallax-slide-min"
+              <swiper-slide  class="parallax-slide"
               :style="{height:imgheightsm +'px'}"
               >
                 <div class="parallax-slide-image"
@@ -113,7 +113,7 @@
               </swiper-slide>
 
 
-              <swiper-slide  class="parallax-slide parallax-slide-min"
+              <swiper-slide  class="parallax-slide "
               :style="{height:imgheightsm +'px'}"
               >
                 <div class="parallax-slide-image"
@@ -125,7 +125,7 @@
                 </div>
               </swiper-slide>
 
-              <swiper-slide  class="parallax-slide parallax-slide-min"
+              <swiper-slide  class="parallax-slide "
               :style="{height:imgheightsm +'px'}"
               >
                 <div class="parallax-slide-image"
@@ -196,6 +196,7 @@ export default {
  
   
   },
+  
   unmounted() {
     window.removeEventListener("resize", this.resizeHandler)
   },

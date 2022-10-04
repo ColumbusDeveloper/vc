@@ -1,6 +1,8 @@
 
 <template>
-        <div class="swiperBlock">
+        <div class="swiperBlock"
+        
+        >
           <swiper
             class="parallax-slider swiperBlock__swp-in-top-item"
             :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
@@ -162,11 +164,12 @@ import { ref } from 'vue';
 SwiperCore.use([Navigation, Parallax,Thumbs]);
 
 export default {
+  
   data() {
     return {
       imgheightb:366,
       imgheightsm:90,
-      
+      start:0,
     }
   },
   computed: {
@@ -183,8 +186,15 @@ export default {
       this.imgheightb = this.$refs.heightb.offsetHeight
       this.imgheightsm = this.$refs.heightsm.offsetHeight    
     },
+    changevar (val)  {
+      
+      this.start = val
+    }
     
 
+  },
+  watch: {
+    
   },
   setup() {
       const thumbsSwiper = ref(null);
@@ -198,12 +208,15 @@ export default {
       };
   },
   created() {
+      
   
       window.addEventListener("resize", this.resizeHandler)
      
       
   },
+  
   unmounted() {
+     
       window.removeEventListener("resize", this.resizeHandler)
   },
 
