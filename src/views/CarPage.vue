@@ -467,6 +467,7 @@ export default {
 
       &__swiper {
         width: 50%;
+        height: fit-content;
         position: relative;
         @media (max-width:992px) {
           width: 100%;
@@ -479,8 +480,14 @@ export default {
         position: absolute;
         top: 270px;
         left: 35px;
+
         z-index: 1;
         display: inline-block;
+
+        @media (max-width:992px) {
+          top: 61%;
+          left: 3%;
+        }
       }
 
       &__btnblueapply {
