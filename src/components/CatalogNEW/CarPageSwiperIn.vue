@@ -1,8 +1,10 @@
 
 <template>
-        <div class="swiperBlock">
+        <div class="swiperBlock"
+        
+        >
           <swiper
-            class="parallax-slider"
+            class="parallax-slider swiperBlock__swp-in-top-item"
             :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
             grabCursor
             :modules="[Thumbs]" :thumbs="{ swiper: thumbsSwiper }"
@@ -71,7 +73,7 @@
        
 
           <swiper 
-              class="parallax-slider swiper-min"
+              class="parallax-slider swiper-min swiperBlock__swp-in-bottom-item"
               :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
               :slides-per-view="4"
               :space-between="5"
@@ -162,11 +164,12 @@ import { ref } from 'vue';
 SwiperCore.use([Navigation, Parallax,Thumbs]);
 
 export default {
+  
   data() {
     return {
       imgheightb:366,
       imgheightsm:90,
-      test:3,
+      start:0,
     }
   },
   computed: {
@@ -183,8 +186,15 @@ export default {
       this.imgheightb = this.$refs.heightb.offsetHeight
       this.imgheightsm = this.$refs.heightsm.offsetHeight    
     },
+    changevar (val)  {
+      
+      this.start = val
+    }
     
 
+  },
+  watch: {
+    
   },
   setup() {
       const thumbsSwiper = ref(null);
@@ -198,12 +208,15 @@ export default {
       };
   },
   created() {
+      
   
       window.addEventListener("resize", this.resizeHandler)
      
       
   },
+  
   unmounted() {
+     
       window.removeEventListener("resize", this.resizeHandler)
   },
 
@@ -223,7 +236,13 @@ export default {
 
 .swiperBlock {
       
+    &__swp-in-top-item {
+      margin-bottom: 5px;
+    }
 
+    &__swp-in-bottom-item {
+      margin-bottom: 5px;
+    }
   
 		&__itemSlide {
       display: flex;
@@ -295,9 +314,7 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  @media (max-width:350px) {
-    height: 176px;
-  }
+  
   
 }
 .parallax-slider-navigation {
@@ -311,18 +328,6 @@ export default {
   justify-content: space-between;
   height: 0;
   
-  @media (max-width:768px) {
-     top: 31%;
-  }
-  @media (max-width:576px) {
-     top: 31%;
-  }
-  @media (max-width:450px) {
-     top: 26%;
-  }
-  @media (max-width:372px) {
-     top: 22%;
-  }
 }
 .parallax-slide-image {
   height: 100%;

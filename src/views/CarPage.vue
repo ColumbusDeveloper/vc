@@ -24,26 +24,35 @@
                                       </div>
                                 </div>
                                 <div class="row">
-                                      <div class="col swiper-part">
+                                      <div class="col swiper-part"
+                                      @click="changeswiperex"
+                                      >
 
-                                        <div class="swiper-part__swiper">
+                                        <div class="swiper-part__swiper"
+                                        @click="changeswiperin"
+                                        >
 
                                           <carpageswiper
                                           v-if="swiperexon"
+                                          ref="swiperex"
                                           >
 
                                           </carpageswiper>
 
                                           <carpageswiperin
                                           v-if="swiperexon===false"
+                                          ref="swiperin"
                                           >
 
                                           </carpageswiperin>
 
                                           <div class="swiper-part__swiper-btn-box"
+                                          
                                           @click="changeswiperexon"
                                           >
-                                            <btnswiperexin>
+                                            <btnswiperexin
+                                            
+                                            >
                                               <template v-slot:btn_1>
                                                   Exterior
                                               </template>
@@ -239,9 +248,16 @@ export default {
 
       changeswiperexon () {
         this.swiperexon=this.$store.state.swipercarpageex
+      },
+      changeswiperin () {
+        this.$refs.swiperin.resizeHandler()
+      },
+      changeswiperex () {
+        this.$refs.swiperex.resizeHandler()
       }
 
 
+      
     },
     watch: {
       
@@ -350,6 +366,9 @@ export default {
     @media (max-width:370px) {
        height: 220px;
     }
+    @media (max-width:576px) {
+      padding-left: 0;
+    }
   }
 
   &__top-part-hr {
@@ -430,6 +449,9 @@ export default {
 
   &__bottom-part {
     padding-left: 50px;
+    @media (max-width:576px) {
+      padding-left: 0;
+    }
   }
 
   .bot:not(:last-child) {
@@ -467,6 +489,7 @@ export default {
 
       &__swiper {
         width: 50%;
+        height: fit-content;
         position: relative;
         @media (max-width:992px) {
           width: 100%;
@@ -479,8 +502,14 @@ export default {
         position: absolute;
         top: 270px;
         left: 35px;
+
         z-index: 1;
         display: inline-block;
+
+        @media (max-width:992px) {
+          top: 61%;
+          left: 3%;
+        }
       }
 
       &__btnblueapply {

@@ -7,6 +7,7 @@ const store = createStore({
         carpageid: 0,
         storecars:{},
         swipercarpageex:true,
+       
       }
     },
     
