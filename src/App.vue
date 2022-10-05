@@ -49,7 +49,8 @@
       setdataforcarpage (val) {
         
         this.dataforcarpage = val
-      }
+      },
+      
      
     },
     watch: {

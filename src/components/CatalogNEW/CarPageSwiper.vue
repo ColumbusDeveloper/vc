@@ -12,7 +12,7 @@
           >
            
 
-            <swiper-slide  class="parallax-slide"
+            <swiper-slide  class="parallax-slide exp"
             :style="{height:imgheightb+'px'}"
             >
               <div class="parallax-slide-image"
@@ -159,8 +159,9 @@ SwiperCore.use([Navigation, Parallax,Thumbs]);
 export default {
   data() {
     return {
-      imgheightb:366,
+      imgheightb:366,    
       imgheightsm:90,
+      width:0,
     }
   },
   computed: {
@@ -173,10 +174,11 @@ export default {
   },
   methods: {
     resizeHandler() {
-     
-     this.imgheightb = this.$refs.heightb.offsetHeight
-     this.imgheightsm = this.$refs.heightsm.offsetHeight    
+     this.width = this.$store.state.screenwidth
+     this.imgheightb = this.width/1.78
+     this.imgheightsm = this.width/7.2
    },
+   
 
   },
   setup() {
@@ -199,12 +201,21 @@ export default {
   
     window.addEventListener("resize", this.resizeHandler)
     window.addEventListener("hashchange", this.resizeHandler, false)
-  
+    window.addEventListener("onresize", this.resizeHandler)
+    window.addEventListener("onload", this.resizeHandler)
+    
+    
   },
+  mounted () {
+    this.width = this.$store.state.screenwidth/10
+  },
+  
   
   unmounted() {
     window.removeEventListener("resize", this.resizeHandler)
-    window.addEventListener("hashchange", this.resizeHandler, false)
+    window.removeEventListener("hashchange", this.resizeHandler, false)
+    window.removeEventListener("onresize", this.resizeHandler)
+    window.removeEventListener("onload", this.resizeHandler)
   },
 
 
@@ -218,10 +229,12 @@ export default {
  @import '../../assets/varmix.scss';
 
 
-  
+
 
 
 .swiperBlock {
+
+    
 
     &__swp-in-top-item {
       margin-bottom: 5px;
@@ -304,6 +317,9 @@ export default {
   overflow: hidden;
   
 }
+
+
+
 .parallax-slider-navigation {
   position: absolute;
   top: 50%;
@@ -348,9 +364,7 @@ export default {
   position: relative;
   transform: translateY(-50%);
 }
-.parallax-slide-min {
-  height: 100px !important;
-}
+
 
 </style>
 
