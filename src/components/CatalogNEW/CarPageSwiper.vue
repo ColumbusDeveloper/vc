@@ -188,6 +188,8 @@ export default {
         Thumbs,
         thumbsSwiper,
         setThumbsSwiper,
+
+        
       };
 
       
