@@ -190,10 +190,11 @@ export default {
         setThumbsSwiper,
       };
   },
+  
   created() {
   
-  window.addEventListener("resize", this.resizeHandler)
-  window.addEventListener("hashchange", this.resizeHandler, false)
+    window.addEventListener("resize", this.resizeHandler)
+    window.addEventListener("hashchange", this.resizeHandler, false)
   
   },
   
@@ -252,8 +253,7 @@ export default {
 		}
 
 		&__itemSlideText {
-       padding-left: 15px;
-       padding-right: 50px;
+       
        width: 60%;
        display: flex;
        flex-direction: column;
