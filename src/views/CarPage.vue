@@ -1,7 +1,7 @@
 <template>
 
   
-        <div class="d-flex flex-column min-vh-100">
+        <div class="d-flex flex-column min-vh-100" >
                   <div class="container">
                         <div class="row">
                                 <div class="col header" @clearmagtopform="setMagtopformInventoryComponent">
@@ -30,6 +30,7 @@
 
                                         <div class="swiper-part__swiper"
                                         @click="changeswiperin"
+                                        ref="swiperwidth"
                                         >
 
                                           <carpageswiper
@@ -51,7 +52,7 @@
                                           @click="changeswiperexon"
                                           >
                                             <btnswiperexin
-                                            
+                                            @click="setSWwidth"
                                             >
                                               <template v-slot:btn_1>
                                                   Exterior
@@ -237,9 +238,9 @@ export default {
           carpagedataid:this.$store.state.carpageid,
           cars:this.$store.state.storecars,
           
-          swiperexon:true,
+          swiperexon:this.$store.state.swipercarpageex,
          
-       
+          
           
 
         }
@@ -254,7 +255,10 @@ export default {
       },
       changeswiperex () {
         this.$refs.swiperex.resizeHandler()
-      }
+      },
+      setSWwidth () {
+           this.$store.state.screenwidth = this.$refs.swiperwidth.offsetWidth 
+      },
 
 
       
@@ -262,6 +266,23 @@ export default {
     watch: {
       
 
+    },
+    created() {
+  
+      window.addEventListener("resize", this.setSWwidth)
+      window.addEventListener("hashchange", this.setSWwidth, false)
+      window.addEventListener("onresize", this.setSWwidth)
+      window.addEventListener("onload", this.setSWwidth)
+      
+
+    },
+
+
+    unmounted() {
+      window.removeEventListener("resize", this.setSWwidth)
+      window.removeEventListener("hashchange", this.setSWwidth, false)
+      window.removeEventListener("onresize", this.setSWwidth)
+      window.removeEventListener("onload", this.setSWwidth)
     },
     
 

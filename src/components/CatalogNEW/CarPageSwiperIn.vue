@@ -73,7 +73,7 @@
        
 
           <swiper 
-              class="parallax-slider swiper-min swiperBlock__swp-in-bottom-item"
+              class="parallax-slider swiper-min swiperBlock__swp-in-bottom-item "
               :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
               :slides-per-view="4"
               :space-between="5"
@@ -169,7 +169,7 @@ export default {
     return {
       imgheightb:366,
       imgheightsm:90,
-      start:0,
+      width:0,
     }
   },
   computed: {
@@ -182,14 +182,10 @@ export default {
   },
   methods: {
     resizeHandler() {
-     
-      this.imgheightb = this.$refs.heightb.offsetHeight
-      this.imgheightsm = this.$refs.heightsm.offsetHeight    
+      this.width = this.$store.state.screenwidth
+      this.imgheightb = this.width/1.78
+      this.imgheightsm = this.width/7.2  
     },
-    changevar (val)  {
-      
-      this.start = val
-    }
     
 
   },
@@ -210,14 +206,27 @@ export default {
   created() {
       
   
+      
+
       window.addEventListener("resize", this.resizeHandler)
+      window.addEventListener("hashchange", this.resizeHandler, false)
+      window.addEventListener("onresize", this.resizeHandler)
+      window.addEventListener("onload", this.resizeHandler)
      
       
+  },
+  mounted () {
+    this.width = this.$store.state.screenwidth/10
   },
   
   unmounted() {
      
+      
+
       window.removeEventListener("resize", this.resizeHandler)
+      window.removeEventListener("hashchange", this.resizeHandler, false)
+      window.removeEventListener("onresize", this.resizeHandler)
+      window.removeEventListener("onload", this.resizeHandler)
   },
 
   
@@ -360,9 +369,7 @@ export default {
   position: relative;
   transform: translateY(-50%);
 }
-.parallax-slide-min {
-  height: 100px !important;
-}
+
 
 </style>
 
