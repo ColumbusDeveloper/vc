@@ -67,6 +67,12 @@
     watch: {
         
     },
+    unmounted () {
+          this.swiperexon=true
+          this.clicked1=true
+          this.clicked2=false
+          this.$store.state.swipercarpageex = true
+    }
   
     
   }

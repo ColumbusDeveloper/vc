@@ -94,7 +94,7 @@
 
            
 
-              <swiper-slide  class="parallax-slide " 
+              <swiper-slide  class="parallax-slide swiper-min" 
               :style="{height:imgheightsm +'px'}"
               >
                 <div class="parallax-slide-image"
@@ -107,7 +107,7 @@
               </swiper-slide>
 
 
-              <swiper-slide  class="parallax-slide "
+              <swiper-slide  class="parallax-slide swiper-min"
               :style="{height:imgheightsm +'px'}"
               >
                 <div class="parallax-slide-image"
@@ -120,7 +120,7 @@
               </swiper-slide>
 
 
-              <swiper-slide  class="parallax-slide " 
+              <swiper-slide  class="parallax-slide swiper-min" 
               :style="{height:imgheightsm +'px'}"
               >
                 <div class="parallax-slide-image"
@@ -132,7 +132,7 @@
                 </div>
               </swiper-slide>
 
-              <swiper-slide  class="parallax-slide " 
+              <swiper-slide  class="parallax-slide swiper-min" 
               :style="{height:imgheightsm +'px'}"
               >
                 <div class="parallax-slide-image"
@@ -167,8 +167,8 @@ export default {
   
   data() {
     return {
-      imgheightb:366,
-      imgheightsm:90,
+      imgheightb:0,
+      imgheightsm:0,
       width:0,
     }
   },
@@ -206,7 +206,7 @@ export default {
   created() {
       
   
-      
+      this.resizeHandler()
 
       window.addEventListener("resize", this.resizeHandler)
       window.addEventListener("hashchange", this.resizeHandler, false)
@@ -216,7 +216,7 @@ export default {
       
   },
   mounted () {
-    this.width = this.$store.state.screenwidth/10
+    this.width = this.$store.state.screenwidth
   },
   
   unmounted() {
@@ -323,8 +323,60 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  @media (max-width:2000px) {
+     height: 366px !important;
+  }
+  @media (max-width:1400px) {
+     height: 314px !important;
+  }
+  @media (max-width:1200px) {
+     height: 263px !important;
+  }
+  @media (max-width:992px) {
+     height: 391px !important;
+  }
+  @media (max-width:768px) {
+     height: 290px !important;
+  }
+  @media (max-width:560px) {
+     height: 301px !important;
+  }
+  @media (max-width:500px) {
+     height: 268px !important;
+  }
+  @media (max-width:450px) {
+     height: 240px !important;
+  }
+  @media (max-width:400px) {
+     height: 212px !important;
+  }
+  @media (max-width:350px) {
+     height: 184px !important;
+  }
   
-  
+}
+.swiper-min {
+  @media (max-width:2000px) {
+     height: 90px !important;
+  }
+  @media (max-width:768px) {
+     height: 72px !important;
+  }
+  @media (max-width:560px) {
+     height: 74px !important;
+  }
+  @media (max-width:500px) {
+     height: 66px !important;
+  }
+  @media (max-width:450px) {
+     height: 60px !important;
+  }
+  @media (max-width:400px) {
+     height: 53px !important;
+  }
+  @media (max-width:350px) {
+     height: 45px !important;
+  }
 }
 .parallax-slider-navigation {
   position: absolute;
