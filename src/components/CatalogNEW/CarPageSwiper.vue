@@ -193,12 +193,13 @@ export default {
   created() {
   
   window.addEventListener("resize", this.resizeHandler)
- 
+  window.addEventListener("hashchange", this.resizeHandler, false)
   
   },
   
   unmounted() {
     window.removeEventListener("resize", this.resizeHandler)
+    window.addEventListener("hashchange", this.resizeHandler, false)
   },
 
 
