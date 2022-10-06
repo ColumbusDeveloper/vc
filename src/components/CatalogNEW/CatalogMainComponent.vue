@@ -2797,7 +2797,7 @@
             border-width:2px;
             border-style: solid;
             border-color: #D7D7D7;
-        }
+        }   
 
         
         
@@ -3133,6 +3133,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-bottom: 30px;
         }
 
 		&__global-search-and-card-box {
@@ -3227,6 +3228,9 @@
             }
             @media (max-width:992px) {
                 width: 60%;
+                border-width:2px;
+                border-style: solid;
+                border-color: #D7D7D7;
             }
             @media (max-width:768px) {
                 width: 100%;
