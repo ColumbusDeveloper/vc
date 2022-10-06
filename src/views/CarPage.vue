@@ -55,10 +55,10 @@
                                             @click="setSWwidth"
                                             >
                                               <template v-slot:btn_1>
-                                                  Exterior
+                                                <p class="swiper-part__text">Exterior</p>                                               
                                               </template>
                                               <template v-slot:btn_2>
-                                                  Interior
+                                                <p class="swiper-part__text">Interior</p>                                               
                                               </template>
                                             </btnswiperexin>
                                           </div>
@@ -454,8 +454,8 @@ export default {
     flex-direction: column;
   }
 
-  &__top-part-item-left-info-box-text {
-  }
+  // &__top-part-item-left-info-box-text {
+  // }
 
   &__top-part-item-left-info-box-value {
     @include    letterH4HeadingBurgerMenuTextNumbersDarkBlue  ;
@@ -521,18 +521,18 @@ export default {
     margin-bottom: 7px;
   }
 
-  &__bottom-part-title {
-  }
+  // &__bottom-part-title {
+  // }
 
-  &__bottom-part-content-box {
-  }
+  // &__bottom-part-content-box {
+  // }
 
   &__bottom-part-content-box-content {
     @include      letterContentSecondarySmallGrayClear;
   }
 
-  &__bottom-part-btn-box {
-  }
+  // &__bottom-part-btn-box {
+  // }
 }
 
 
@@ -548,6 +548,15 @@ export default {
     @media (max-width:992px) {
        flex-direction: column;
     }
+
+      &__text {
+        font-family: $fontFamily700;
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+        
+      }
     
 
       &__swiper {

@@ -13,7 +13,7 @@
                     <p class="ma-mo__global-search-header-changeable">Clear filters</p>
             </div>   
 
-            <div class="ma-mo__detailed-search-box-calk-container " @click="setunduwarning">
+            <div class="ma-mo__detailed-search-box-calk-container " @click="setunduwarning" v-if="tabletcrosson===false">
                     <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container br"  :class="{activeinpbody:bodyform,activecross:bodyinpformcross}">
                         <div class="ma-mo__open-arrow-box arr-box ">
                             <p class="ma-mo__open-arrow-box-text arr-box-text" >
@@ -412,7 +412,10 @@
             
                  
         </div>
-        <div class="ma-mo__global-search-and-card-box">
+
+
+
+        <div class="ma-mo__global-search-and-card-box tablet">
                 <div class="ma-mo__global-search">
                     <div class="ma-mo__global-search-item-left">
                         <div class="ma-mo__global-search-item-left-search-vertical-trigger">
@@ -833,7 +836,7 @@
                             <p class="ma-mo__open-arrow-box-text">
                                 Kilometers
                             </p>
-                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarningkilo (),addToMakeModelCalc()">
+                            <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarningkilo(),addToMakeModelCalc()">
                                 <div class="ma-mo__open-arrow-box-arrows-arrow-Up"><i class="fa-solid fa-angle-up" v-if="kiloinpform"></i></div>
                                  <div class="ma-mo__open-arrow-box-arrows-arrow-Down"><i class="fa-solid fa-angle-down" v-if="kiloinpform===false"></i></div>
                             </div>
@@ -1226,6 +1229,14 @@
                     this.showcalculated=false
                     this.magtopform=false       
                 }
+
+                if(this.cars.length<14) {
+                    this.showcars=true
+                    this.showcalculated=false
+                    this.magtopform=false    
+                }
+
+
 
                 // if (!this.yeardbinpform && !this.pricedbinpform && !this.kiloinpform) {
                 //     this.showcars=true
@@ -2784,6 +2795,8 @@
     .ma-mo {
         display: flex;
 
+        
+
         .magtop {
             padding: 1px;
             border-radius: 2px;
@@ -2852,9 +2865,9 @@
                
             }
 
-            &__dropdown-textarrowbox-text {
+            // &__dropdown-textarrowbox-text {
 
-            }
+            // }
 
             &__dropdown-textarrowbox-text-span {
                 
@@ -2876,13 +2889,13 @@
                 }
             }
 
-            &__dropdown-textarrowbox-arrowbox-arrowup {
+            // &__dropdown-textarrowbox-arrowbox-arrowup {
 
-            }
+            // }
 
-            &__dropdown-textarrowbox-arrowbox-arrowdown {
+            // &__dropdown-textarrowbox-arrowbox-arrowdown {
 
-            }
+            // }
 
             &__dropdown-showbox {
                 
@@ -2915,9 +2928,9 @@
                 
             }
 
-            &__input {
+            // &__input {
                 
-            }
+            // }
 
             &__glass {
                 position: absolute;
@@ -2969,92 +2982,92 @@
 
 
 
-        .inp-box-type-inp {
+        // .inp-box-type-inp {
 
-            &__trucks {
-            }
+        //     &__trucks {
+        //     }
 
-            &__trucks-icon {
-            }
+        //     &__trucks-icon {
+        //     }
 
-            &__trucks-img {
-            }
+        //     &__trucks-img {
+        //     }
 
-            &__trucks-text {
-            }
+        //     &__trucks-text {
+        //     }
 
-            &__suv {
-            }
+        //     &__suv {
+        //     }
 
-            &__suv-icon {
-            }
+        //     &__suv-icon {
+        //     }
 
-            &__suv-img {
-            }
+        //     &__suv-img {
+        //     }
 
-            &__suv-text {
-            }
+        //     &__suv-text {
+        //     }
 
-            &__sedan {
-            }
+        //     &__sedan {
+        //     }
 
-            &__sedan-icon {
-            }
+        //     &__sedan-icon {
+        //     }
 
-            &__sedan-img {
-            }
+        //     &__sedan-img {
+        //     }
 
-            &__sedan-text {
-            }
+        //     &__sedan-text {
+        //     }
 
-            &__hatchback {
-            }
+        //     &__hatchback {
+        //     }
 
-            &__hatchback-icon {
-            }
+        //     &__hatchback-icon {
+        //     }
 
-            &__hatchback-img {
-            }
+        //     &__hatchback-img {
+        //     }
 
-            &__hatchback-text {
-            }
+        //     &__hatchback-text {
+        //     }
 
-            &__coupe {
-            }
+        //     &__coupe {
+        //     }
 
-            &__coupe-icon {
-            }
+        //     &__coupe-icon {
+        //     }
 
-            &__coupe-img {
-            }
+        //     &__coupe-img {
+        //     }
 
-            &__coupe-text {
-            }
+        //     &__coupe-text {
+        //     }
 
-            &__convertiable {
-            }
+        //     &__convertiable {
+        //     }
 
-            &__convertiable-icon {
-            }
+        //     &__convertiable-icon {
+        //     }
 
-            &__convertiable-img {
-            }
+        //     &__convertiable-img {
+        //     }
 
-            &__convertiable-text {
-            }
+        //     &__convertiable-text {
+        //     }
 
-            &__van {
-            }
+        //     &__van {
+        //     }
 
-            &__van-icon {
-            }
+        //     &__van-icon {
+        //     }
 
-            &__van-img {
-            }
+        //     &__van-img {
+        //     }
 
-            &__van-text {
-            }
-        }
+        //     &__van-text {
+        //     }
+        // }
         .tib {
             display: flex;
             align-items: center;
@@ -3081,16 +3094,16 @@
 
         .bodymake {
 
-            &__text {
+            // &__text {
                
-            }
+            // }
 
-            &__input-box {
-                position: relative;
-            }
+            // &__input-box {
+            //     position: relative;
+            // }
 
-            &__input-box-inp {
-            }
+            // &__input-box-inp {
+            // }
 
             &__input-box-glass {
                 position:absolute;
@@ -3102,15 +3115,15 @@
 
         .bodymodel {
 
-            &__text {
-            }
+            // &__text {
+            // }
 
             &__input-box {
                 position: relative;
             }
 
-            &__input-box-inp {
-            }
+            // &__input-box-inp {
+            // }
 
             &__input-box-glass {
                 position:absolute;
@@ -3371,8 +3384,8 @@
 
             
 
-            &__result {
-            }
+            // &__result {
+            // }
 
             &__result-item {
                 cursor: pointer;
