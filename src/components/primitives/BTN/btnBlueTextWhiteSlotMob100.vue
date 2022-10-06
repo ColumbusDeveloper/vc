@@ -28,15 +28,19 @@
   @import '../../../assets/varmix.scss';
 
   .btnBlue {
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-width:2px;
     border-style: solid;
     border-color: $colorMainBlue;
     background-color:$colorMainBlue;
     @include letterBtnWhiteText ;
     border-radius: 2px;
-    width: 200px;
+    width: fit-content;
     height: 45px;
+    padding-left: 5px;
+    padding-right: 5px;
     white-space: nowrap;
     @media (max-width:576px) {
        width: 100%;
@@ -48,10 +52,7 @@
 		&__text {
             word-spacing: 5px;
             text-transform:uppercase ;
-            position:absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
+            
 		}
 }
 

@@ -1,7 +1,7 @@
 <template>
 
   
-        <div class="d-flex flex-column min-vh-100" >
+        <div class="d-flex flex-column min-vh-100" @before-update="setSWwidth">
                   <div class="container">
                         <div class="row">
                                 <div class="col header" @clearmagtopform="setMagtopformInventoryComponent">
@@ -186,6 +186,25 @@
                       </div>
 
                     </div>
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col heading">
+                          <div class="heading__text-part">
+                            <h2>Calculate the installment plan for this car.</h2>
+                          </div>
+                          <div class="heading__empty-part"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="container">
+                      <div class="row">
+                        <inpblock class="inpblock">
+
+                        </inpblock>
+                      </div>
+                    </div>
                     
                     
                     
@@ -208,7 +227,7 @@
   import btnreqinfo from '@/components/primitives/BTN/btnBlueSlot.vue'
   import btnswiperexin from '@/components/primitives/BTN/btnSwiperClickableDoubleBtn .vue'
   import btnblueapply from '@/components/primitives/BTN/btnBlueInventory.vue'
-  
+  import inpblock from '@/components/CatalogNEW/ProginputblockCatalog.vue'
   
 
 export default {
@@ -224,6 +243,7 @@ export default {
         btnreqinfo,
         btnswiperexin,
         btnblueapply,
+        inpblock,
         
       
 
@@ -245,17 +265,20 @@ export default {
 
         }
       },
+      watch: {
+          '$store.state.screenwidth': {
+              handler() {
+                  this.setSWwidth ();
+              }            
+          }
+      },
+       
     methods: {
 
       changeswiperexon () {
         this.swiperexon=this.$store.state.swipercarpageex
       },
-      changeswiperin () {
-        this.$refs.swiperin.resizeHandler()
-      },
-      changeswiperex () {
-        this.$refs.swiperex.resizeHandler()
-      },
+    
       setSWwidth () {
            this.$store.state.screenwidth = this.$refs.swiperwidth.offsetWidth 
       },
@@ -263,12 +286,13 @@ export default {
 
       
     },
-    watch: {
-      
+   
 
-    },
-    created() {
-  
+    
+
+    created () {
+
+      
       window.addEventListener("resize", this.setSWwidth)
       window.addEventListener("hashchange", this.setSWwidth, false)
       window.addEventListener("onresize", this.setSWwidth)
@@ -276,7 +300,8 @@ export default {
       
 
     },
-
+    
+    
 
     unmounted() {
       window.removeEventListener("resize", this.setSWwidth)
@@ -367,6 +392,22 @@ export default {
 
 <style lang="scss">
 @import '../assets/varmix.scss';
+
+.inpblock{
+  margin-bottom: 70px;
+}
+
+.heading {
+  padding-top: 80px;
+  padding-bottom: 50px;
+  &__text-part {
+    width: 50%;
+  }
+
+  &__empty-part {
+    width: 50%;
+  }
+}
 
 
 .spt {
@@ -527,6 +568,11 @@ export default {
 
         z-index: 1;
         display: inline-block;
+
+        @media (max-width:1200px) {
+          top: 61%;
+          left: 3%;
+        }
 
         @media (max-width:992px) {
           top: 61%;
