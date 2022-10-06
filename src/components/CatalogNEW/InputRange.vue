@@ -115,6 +115,11 @@
        },
 
     },
+    mounted () {
+      this.startInput()
+      this.setSliderMax ()
+      this.sendDataToParent()
+    }
     
    
 
