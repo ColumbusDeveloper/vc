@@ -13,9 +13,9 @@
                     <p class="ma-mo__global-search-header-changeable">Clear filters</p>
             </div>   
 
-            <div class="ma-mo__detailed-search-box-calk-container" @click="setunduwarning">
-                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinpbody:bodyform,activecross:bodyinpformcross}">
-                        <div class="ma-mo__open-arrow-box arr-box">
+            <div class="ma-mo__detailed-search-box-calk-container " @click="setunduwarning">
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container br"  :class="{activeinpbody:bodyform,activecross:bodyinpformcross}">
+                        <div class="ma-mo__open-arrow-box arr-box ">
                             <p class="ma-mo__open-arrow-box-text arr-box-text" >
                                 Make,Model
                             </p>
@@ -76,8 +76,8 @@
                         
                     </div>
 
-                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinptype:typeform,activecross:typeinpformcross}">
-                        <div class="ma-mo__open-arrow-box arr-box">
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container br"  :class="{activeinptype:typeform,activecross:typeinpformcross}">
+                        <div class="ma-mo__open-arrow-box arr-box ">
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
                                 Body type
                             </p>
@@ -160,8 +160,8 @@
                         
                     </div>
 
-                    <div class="ma-mo__detailed-search-box-trans inp-container"  :class="{activeinptrans:transinpform}">
-                        <div class="ma-mo__open-arrow-box arr-box">
+                    <div class="ma-mo__detailed-search-box-trans inp-container br"  :class="{activeinptrans:transinpform}">
+                        <div class="ma-mo__open-arrow-box arr-box ">
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
                                 Transmission
                             </p>
@@ -208,8 +208,8 @@
                         
                     </div>
 
-                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container"  :class="{activeinpprice:pricedbinpform,activecross:priceinpformcross}">
-                        <div class="ma-mo__open-arrow-box arr-box">
+                    <div class="ma-mo__detailed-search-box-doubleinprange-price inp-container br"  :class="{activeinpprice:pricedbinpform,activecross:priceinpformcross}">
+                        <div class="ma-mo__open-arrow-box arr-box ">
                             <p class="ma-mo__open-arrow-box-text arr-box-text">
                                 Price
                             </p>
@@ -271,10 +271,10 @@
                         
                     </div>
 
-                    <div class="ma-mo__detailed-search-box-doubleinprange-year inp-container" :class="{activeinpyear:yeardbinpform,activecross:yearinpformcross}">
+                    <div class="ma-mo__detailed-search-box-doubleinprange-year inp-container br" :class="{activeinpyear:yeardbinpform,activecross:yearinpformcross}">
 
-                        <div class="ma-mo__open-arrow-box">
-                            <p class="ma-mo__open-arrow-box-text">
+                        <div class="ma-mo__open-arrow-box arr-box ">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text">
                                 Year
                             </p>
                             <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpYear(),setunduwarningyear (),addToMakeModelCalc()">
@@ -340,10 +340,10 @@
 
                     
 
-                    <div class="ma-mo__detailed-search-box-inprange inp-container" :class="{activeinpkilo:kiloinpform,activecross:kiloinpformcross}">  
+                    <div class="ma-mo__detailed-search-box-inprange inp-container br" :class="{activeinpkilo:kiloinpform,activecross:kiloinpformcross}">  
 
-                        <div class="ma-mo__open-arrow-box">
-                            <p class="ma-mo__open-arrow-box-text">
+                        <div class="ma-mo__open-arrow-box arr-box ">
+                            <p class="ma-mo__open-arrow-box-text arr-box-text">
                                 Kilometers
                             </p>
                             <div class="ma-mo__open-arrow-box-arrows" @click="getStartedInpKilo(),setunduwarningkilo (),addToMakeModelCalc()">
@@ -2783,9 +2783,33 @@
    
     .ma-mo {
         display: flex;
+
+        .magtop {
+            padding: 1px;
+            border-radius: 2px;
+        }
+
+        .inp-cont-box {
+            padding: 7px;
+        }
+
+        .br {
+            border-width:2px;
+            border-style: solid;
+            border-color: #D7D7D7;
+        }
+
         
         
-        
+        .arr-box {
+                
+            align-items: center;
+            
+        }
+
+        .arr-box-text {
+            margin-bottom: 0;
+        }
 
 
         .drophometopright {
@@ -2823,7 +2847,7 @@
                 
                 justify-content: flex-end;
                 position: relative;
-                height: 22px;
+                height: 31px;
                 
                
             }
