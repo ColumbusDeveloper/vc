@@ -6,8 +6,8 @@
     
     <div class="wrapper">
       
-      <input type="range" min="1"  step="1" class = "slider"
-      @input="startInput(),sendDataToParent()"
+      <input type="range" min="1"  step="1" id="slider"
+      @input="startInput(),this.setSliderMax (),sendDataToParent()"
       v-model="singleinputmodel"
       >
       <div class="progress" ref="head"></div>
@@ -63,13 +63,13 @@
       },   
 
       setSliderMax () {
-        let sliderOne = document.querySelector('.slider') 
+        let sliderOne = document.querySelector('#slider') 
         sliderOne.max = this.qtyOfKilometers //также устанавливается max инпута, как количество разных показателей километража, зарегистрированных авто
       },
 
       startInput() {//метод формирует сам инпут и закраску активной и пассивной его частей в динамике
-        let sliderOne = document.querySelector('.slider')     
-        let sliderMaxValue = document.querySelector('.slider').max
+        let sliderOne = document.querySelector('#slider')     
+        let sliderMaxValue = document.querySelector('#slider').max
         let percent1 = (sliderOne.value/sliderMaxValue) * 100-4//цифра после 100 устанавливается путем подбора
         let percent2 = (sliderOne.value/sliderMaxValue) * 100-4
         this.$refs.head.style.background = `linear-gradient(to right, #7481FF ${percent1}%, #7481FF ${percent2}%,#D7D7D7 ${percent2}%)` //полоска 
@@ -89,7 +89,8 @@
           return a-b
         })
         this.arrofkilometers = a
-   
+
+        this.arrofkilometers = [... new Set(this.arrofkilometers)]
         this.singleinputmodel = this.arrofkilometers.length
 
       }, 
@@ -114,12 +115,9 @@
        },
 
     },
-    mounted() {
-        
-        this.setSliderMax ()//сразу устанавливаем максимальный размер инпута
-        this.findStartPositionOfInput ()//устанавливаем инпут в максимальное положение
-        this.sendDataToParent()//сразу отправляем данные осостоянии инпута родительскому компоненту
-    }
+    
+   
+
   }
 </script>
 
