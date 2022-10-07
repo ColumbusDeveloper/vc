@@ -8,7 +8,7 @@ const store = createStore({
         storecars:{},
         screenwidth:0,
         swipercarpageex:true,
-        swipheight:699,
+        swipheight:0,
        
       }
     },
