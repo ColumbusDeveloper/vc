@@ -8,10 +8,17 @@ const store = createStore({
         storecars:{},
         screenwidth:0,
         swipercarpageex:true,
-        
+        swipheight:699,
        
       }
     },
+    mutations: {
+
+      setCarPageSwiperWidth (state,payload) {
+        state.swipheight = payload
+      }
+
+    }
     
 })
 

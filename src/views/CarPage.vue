@@ -260,7 +260,7 @@ export default {
           
           swiperexon:this.$store.state.swipercarpageex,
          
-          
+          storeheight:0,
           
 
         }
@@ -283,19 +283,27 @@ export default {
            this.$store.state.screenwidth = this.$refs.swiperwidth.offsetWidth 
       },
 
+      setCarPageSwiperWidth () {
+        let a = this.$refs.swiperwidth.offsetWidth
+        this.$store.commit('setCarPageSwiperWidth',a)
+        this.storeheight=this.$store.state.swipheight
+      }
+
 
       
     },
    
 
-    
+    mounted () {
+      this.setCarPageSwiperWidth () 
+    },
 
     created () {
 
       
-      window.addEventListener("resize", this.setSWwidth)
+      window.addEventListener("resize", this.setCarPageSwiperWidth)
       window.addEventListener("hashchange", this.setSWwidth, false)
-      window.addEventListener("onresize", this.setSWwidth)
+      window.addEventListener("onresize", this.setCarPageSwiperWidth)
       window.addEventListener("onload", this.setSWwidth)
       
 
@@ -304,9 +312,9 @@ export default {
     
 
     unmounted() {
-      window.removeEventListener("resize", this.setSWwidth)
+      window.removeEventListener("resize", this.setCarPageSwiperWidth)
       window.removeEventListener("hashchange", this.setSWwidth, false)
-      window.removeEventListener("onresize", this.setSWwidth)
+      window.removeEventListener("onresize", this.setCarPageSwiperWidth)
       window.removeEventListener("onload", this.setSWwidth)
     },
     
