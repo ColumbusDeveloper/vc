@@ -4,13 +4,24 @@
       
          <div class="menuListDisplay">
                   <ul class="nav">
-                    <li class="nav-item" v-for="(item,id) in burgerMenuList" :key="id"  v-on:click="navliclicktextoff=!navliclicktextoff,this.$emit('navliclicktextoffevent',this.navliclicktextoff)"  >
-                      <router-link :to="item.path" class="nav-link"  >
+                    <li class="nav-item" v-for="item in burgerMenuList" :key="item.menubtnid"  v-on:click="navliclicktextoff=!navliclicktextoff,this.$emit('navliclicktextoffevent',this.navliclicktextoff)"  >
+                      <router-link 
+                      
+                      :to="{path:item.path}" 
+                      @click="setPar(item.menubtnid)"
+                      
+                      class="nav-link"  >
+
                         {{item.name}}
                       </router-link>
                     </li>
-                    <li class="nav-item1" v-for="(item,id) in burgerMenuList1" :key="id" >
-                      <router-link :to="item.path" class="nav-link"  >
+                    <li class="nav-item1" v-for="item in burgerMenuList1" :key="item.menubtnid" >
+                      <router-link 
+                      
+                      :to="{path:item.path}" 
+                      @click="setPar(item.menubtnid)"
+                      
+                      class="nav-link"  >
                         {{item.name}}
                       </router-link>
                     </li>
@@ -53,69 +64,86 @@
 
         navliclicktextoff:this.listate,
 
+        menubtnclickedid:0,
+
         burgerMenuList: [
           {
             name: 'Home',
-            path: '/'
+            path: '/',
+            menubtnid:1
           },
           {
             name: 'Contact us',
-            path: '/contact'
+            path: '#',
+            menubtnid:2
           },
           {
             name: 'About VAC',
-            path: '/about'
+            path: '/about',
+            menubtnid:3
           },
           {
             name: 'Loan Rates',
-            path: '/loan'
+            path: '/loan',
+            menubtnid:4
           },
           {
             name: 'Video',
-            path: '/video'
+            path: '/video',
+            menubtnid:5
           },
           {
             name: 'Blog',
-            path: '/blog'
+            path: '/blog',
+            menubtnid:6
           },
           {
             name: 'Calculate',
-            path: '/calculate'
+            path: '/calculate',
+            menubtnid:7
           },
           
         ],
         burgerMenuList1: [
           {
             name: 'Home',
-            path: '/'
+            path: '/',
+            menubtnid:1
           },
           {
             name: 'Contact us',
-            path: '/contact'
+            path: '/contact',
+            menubtnid:2
           },
           {
             name: 'About VAC',
-            path: '/about'
+            path: '/about',
+            menubtnid:3
           },
           {
             name: 'Loan Rates',
-            path: '/loan'
+            path: '/loan',
+            menubtnid:4
           },
           {
             name: 'Video',
-            path: '/video'
+            path: '/video',
+            menubtnid:5
           },
           {
             name: 'Blog',
-            path: '/blog'
+            path: '/blog',
+            menubtnid:6
           },
           {
             name: 'Calculate',
-            path: '/calculate'
+            path: '/calculate',
+            menubtnid:7
           },
           {
             name: 'Inventory',
-            path: '/catalog'
+            path: '/catalog',
+            menubtnid:8
           }
         ],
 
@@ -128,6 +156,12 @@
         this.navliclicktextoff = newVal
       }
     },
+    methods: {
+      setPar (val) {
+        this.menubtnclickedid = val
+        this.$store.commit('setPar',this.menubtnclickedid)
+      }
+    }
     
 
 
@@ -149,6 +183,7 @@
     flex-direction: column;
     justify-content: space-between;
     // height: calc(100vh - #{$heightFooter});
+    height: 100vh;
     padding-top: 100px;
     padding-bottom: 50px;
     margin-top: -39px;
