@@ -10,6 +10,8 @@
               
             </router-view>
 
+
+
             
             
   </div>
@@ -26,7 +28,7 @@
 <script>
 
 
-
+  import contactmain from './components/Modals/ModalContactUstMain.vue'
 
 
 
