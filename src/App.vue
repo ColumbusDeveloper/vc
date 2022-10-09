@@ -8,9 +8,14 @@
             @click="setPar"
             >
               
+
             </router-view>
 
+            <contactmain
+            
+            >
 
+            </contactmain>
 
             
             
@@ -35,7 +40,7 @@
 
   export default {
     components: {
-      
+      contactmain,
     
     },
     data() {
