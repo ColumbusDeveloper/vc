@@ -6,7 +6,7 @@
 
           <div class="col header" @clearmagtopform="setMagtopformInventoryComponent">
             <Headerone  class="center" :liclickedtextoff="navliclicktextoffstate"  />
-            <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
+            <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross,getPar"  />
             <transition name="menu">
               <burgerlist v-if="iscross" class="burgerlist" :listate="navliclicktextoffstate" v-on:click="iscross=!iscross" v-on:navliclicktextoffevent="changenavliclicktextoffstate"  />
             </transition>
@@ -224,7 +224,7 @@
         iscross: false,
         navliclicktextoffstate:false,
 
-
+        menubtnclickedid:0,
 
          
         
@@ -233,13 +233,22 @@
     methods:{
         changenavliclicktextoffstate (newVal) {
           this.navliclicktextoffstate = newVal
-        }
+        },
+        getPar () {
+          this.menubtnclickedid = this.$store.getters.menubtnclickedid
+        },
     },
     watch: {
         iscross (newVal) {
           this.navliclicktextoffstate = newVal 
         }
     },
+    created () {
+      this.getPar ()
+    },
+    beforeUpdate () {
+      this.getPar ()
+    }
 
     
   }

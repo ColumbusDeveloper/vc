@@ -5,6 +5,7 @@
             <router-view
             @emittoapp = "setdataforcarpage"
             :dt="dataforcarpage"
+            @click="setPar"
             >
               
             </router-view>
@@ -38,7 +39,8 @@
     data() {
       return {
         
-        dataforcarpage:[]
+        dataforcarpage:[],
+        menubtnclickedid:Number,
 
         
 
@@ -50,6 +52,10 @@
         
         this.dataforcarpage = val
       },
+
+      setPar() {
+        this.menubtnclickedid = this.$store.getters.menubtnclickedid
+      }
       
      
     },
@@ -60,9 +66,14 @@
     computed: {
       
     },
+    update () {
+      this.setPar()
+    },
     created () {
      this.setdataforcarpage ()
-    }
+     this.setPar()
+    },
+
   }
 </script>
 
@@ -71,6 +82,10 @@
   @import './assets/varmix.scss';
 
   
-
+ .exp {
+  font-size: 100px;
+  position: absolute;
+  top:0;
+ }
   
 </style>
