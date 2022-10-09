@@ -9,7 +9,7 @@ const store = createStore({
         screenwidth:0,
         swipercarpageex:true,
         swipheight:0,
-        menubtnclickedid:0,
+        menubtnclickedid:5,
       }
     },
     
@@ -18,7 +18,7 @@ const store = createStore({
       setCarPageSwiperWidth (state,payload) {
         state.swipheight = payload
       },
-      setPar (state,payload) {
+      setParr (state,payload) {
         state.menubtnclickedid = payload
       }
 

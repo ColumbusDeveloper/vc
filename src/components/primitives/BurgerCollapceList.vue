@@ -8,7 +8,7 @@
                       <router-link 
                       
                       :to="{path:item.path}" 
-                      @click="setPar(item.menubtnid)"
+                      @click="setParr(item.menubtnid)"
                       
                       class="nav-link"  >
 
@@ -19,7 +19,7 @@
                       <router-link 
                       
                       :to="{path:item.path}" 
-                      @click="setPar(item.menubtnid)"
+                      @click="setParr(item.menubtnid)"
                       
                       class="nav-link"  >
                         {{item.name}}
@@ -157,9 +157,9 @@
       }
     },
     methods: {
-      setPar (val) {
+      setParr (val) {
         this.menubtnclickedid = val
-        this.$store.commit('setPar',this.menubtnclickedid)
+        this.$store.commit('setParr',this.menubtnclickedid)
       }
     }
     

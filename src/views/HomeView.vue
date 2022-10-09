@@ -224,7 +224,7 @@
         iscross: false,
         navliclicktextoffstate:false,
 
-        menubtnclickedid:0,
+       
 
          
         
@@ -234,21 +234,14 @@
         changenavliclicktextoffstate (newVal) {
           this.navliclicktextoffstate = newVal
         },
-        getPar () {
-          this.menubtnclickedid = this.$store.getters.menubtnclickedid
-        },
+       
     },
     watch: {
         iscross (newVal) {
           this.navliclicktextoffstate = newVal 
         }
     },
-    created () {
-      this.getPar ()
-    },
-    beforeUpdate () {
-      this.getPar ()
-    }
+   
 
     
   }
