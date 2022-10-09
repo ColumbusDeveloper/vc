@@ -12,12 +12,19 @@
             </router-view>
 
             <contactmain
-            
+            class="contactmain"
+            v-if="menubtnclickedid===2"
             >
 
             </contactmain>
 
-            
+            <div 
+            class="contactmain-mask"
+            @click="dellMask"
+            v-if="mascon"
+            >
+
+            </div>
             
   </div>
 
@@ -48,7 +55,7 @@
         
         dataforcarpage:[],
         menubtnclickedid:Number,
-
+        mascon:false,
         
 
       }
@@ -62,6 +69,17 @@
 
       setPar() {
         this.menubtnclickedid = this.$store.getters.menubtnclickedid
+        if (this.menubtnclickedid===2) {
+          this.mascon = true
+        }else {
+          this.mascon = false
+        }
+      },
+
+      dellMask () {
+        this.$store.state.menubtnclickedid = 0
+        this.menubtnclickedid = 0
+        this.mascon = false
       }
       
      
@@ -89,10 +107,21 @@
   @import './assets/varmix.scss';
 
   
- .exp {
-  font-size: 100px;
+ .contactmain {
+  
   position: absolute;
-  top:0;
+  top: 0;
+  z-index: 10;
+ }
+ .contactmain-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 9;
  }
   
 </style>
