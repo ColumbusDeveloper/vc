@@ -18,7 +18,7 @@
   <script>
   
   
-  import {ref, onMounted} from 'vue'
+  import {ref, onMounted} from '@vue/composition-api'
   import gsap from 'gsap';
   
   const container = ref(null);
