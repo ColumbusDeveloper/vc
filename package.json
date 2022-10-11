@@ -19,6 +19,7 @@
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.8.3",
     "cwiper": "^1.0.3",
+    "gsap": "^3.11.3",
     "swiper": "^6.8.4",
     "vue": "^3.2.37",
     "vue-router": "^4.0.3",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@types/animejs": "^3.1.5",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",

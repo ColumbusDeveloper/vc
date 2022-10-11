@@ -1,57 +1,68 @@
 <template>
-    <div class="anima">
-        <h1 class="anima__item">Hello, Anima!</h1>
 
+  
+    <div>
+              <h2 ref="container" >GSUP</h2>
+              
     </div>
-   
-   
+  
     
-
-</template>
-
-
-<script>
-
-
-    
-
-    
-
+          
+            
+              
+           
+       
+  
+  </template>
+  
+  <script>
+  
+  
+  import {ref, onMounted} from 'vue'
+  import gsap from 'gsap';
+  
+  const container = ref(null);
+  
     export default {
-        name: 'Anime-item',
+      name:'anima-comp',
+      components: {
+        
       
-        components: {
+      },
+      
+      onMounted(() => {
+        gsap.from(container.value, {
+            delay:0.5,
+            duration:1,
+            y:'+100',
+            autoAlpha:0,
+            ease:'back.out(1.7)',
+        })
+      }),
+      methods: {
        
-        },
-        data() {
-            return {
-
-                
-                
-                
-            }
-
-        },
-        methods: {
-
-            
-            
+        
+        
        
-        }
-
-
-
+      },
+      watch: {
+        
+      },
+  
+      computed: {
+        
+      },
+      
+      
+  
     }
-</script>
-
-<style lang="scss">
-    @import '@/assets/varmix.scss';
- 
- 
-
-
-
-
-
-
-</style>
+  </script>
+  
+  
+  <style lang="scss">
+    @import '../../assets/varmix.scss';
+  
+    
+   
+    
+  </style>

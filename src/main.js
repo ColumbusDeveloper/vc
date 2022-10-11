@@ -8,13 +8,15 @@ import './assets/varmix.scss'
 
 import store from './store'
 
-import animejs from './animejs'
+import anime from '../node_modules/animejs/lib/anime.es'
 
 
 
 
 
-createApp(App).use(router).use(store).use(animejs).mount('#app')
+
+
+createApp(App).use(router).use(store).use(anime).mount('#app')
 
 
 
