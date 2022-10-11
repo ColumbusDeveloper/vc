@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css'
-import CompositionApi from '@vue/composition-api';
+
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -9,14 +9,17 @@ import './assets/varmix.scss'
 import store from './store'
 
 
+import { gsap } from "gsap";
+import { PixiPlugin } from "gsap/PixiPlugin.js";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin.js";
+gsap.registerPlugin(PixiPlugin, MotionPathPlugin);
 
 
 
 
 
 
-
-createApp(App).use(router).use(store).use(CompositionApi).mount('#app')
+createApp(App).use(router).use(store).mount('#app')
 
 
 
