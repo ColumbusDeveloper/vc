@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css'
-
+import CompositionApi from '@vue/composition-api';
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -8,7 +8,6 @@ import './assets/varmix.scss'
 
 import store from './store'
 
-import anime from '../node_modules/animejs/lib/anime.es'
 
 
 
@@ -16,7 +15,8 @@ import anime from '../node_modules/animejs/lib/anime.es'
 
 
 
-createApp(App).use(router).use(store).use(anime).mount('#app')
+
+createApp(App).use(router).use(store).use(CompositionApi).mount('#app')
 
 
 
