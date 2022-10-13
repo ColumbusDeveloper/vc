@@ -12,7 +12,7 @@
             <button id="restart">restart()</button>
         </div>
 
-        <div>
+        <div class="swg-box">
           
           <svg class="text-box" width="205" height="47" viewBox="0 0 205 47" fill="none" xmlns="http://www.w3.org/2000/svg">
             
@@ -39,8 +39,12 @@
             </defs>
             <text class="text" x="50" y="55%">{{text}}</text>
           </svg>
+          
+
 
         </div>
+        
+
               
     </div>
   
@@ -144,6 +148,9 @@
       position: absolute;
       z-index: 10;
       top:20px;
+    }
+    .swg-box {
+      background-color: black;
     }
    
     
