@@ -26,9 +26,7 @@
 
             </div>
 
-            <expert>
-              
-            </expert>
+           
 
             
   </div>
@@ -47,7 +45,7 @@
 
   import contactmain from './components/Modals/ModalContactUstMain.vue'
 
-  import expert from './components/CATALOG/Expert.vue'
+
 
 
 
@@ -55,7 +53,7 @@
   export default {
     components: {
       contactmain,
-      expert,
+ 
     
     },
     data() {

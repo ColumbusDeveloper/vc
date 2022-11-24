@@ -402,7 +402,7 @@ export default {
 @import '../assets/varmix.scss';
 
 .inpblock{
-  margin-bottom: 70px;
+  margin-bottom: 70px;           
 }
 
 .heading {
