@@ -19,7 +19,7 @@
               :style="{height:imgheightb+'px'}"
               >
               
-                <img src="../../assets/images/SwiperImgMaxSize.png" alt='img'>
+                <img class="im" src="../../assets/images/SwiperImgMaxSize.png" alt='img'>
                             
               </div>
             </swiper-slide>

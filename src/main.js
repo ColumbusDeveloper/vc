@@ -9,6 +9,14 @@ import './assets/varmix.scss'
 import store from './store'
 
 
+import { gsap } from "gsap";
+import { PixiPlugin } from "gsap/PixiPlugin.js";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin.js";
+gsap.registerPlugin(PixiPlugin, MotionPathPlugin);
+
+
+
+
 
 
 createApp(App).use(router).use(store).mount('#app')

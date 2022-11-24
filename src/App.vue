@@ -25,6 +25,9 @@
             >
 
             </div>
+
+           
+
             
   </div>
 
@@ -45,9 +48,12 @@
 
 
 
+
+
   export default {
     components: {
       contactmain,
+ 
     
     },
     data() {
