@@ -6,20 +6,17 @@ import App from './App.vue'
 import router from './router'
 import './assets/varmix.scss'
 
+
 import store from './store'
 
 
-import { gsap } from "gsap";
-import { PixiPlugin } from "gsap/PixiPlugin.js";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin.js";
-gsap.registerPlugin(PixiPlugin, MotionPathPlugin);
 
 
+const app = createApp(App)
+app.use(router)
+app.use(store)
 
-
-
-
-createApp(App).use(router).use(store).mount('#app')
+app.mount('#app')
 
 
 

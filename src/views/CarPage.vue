@@ -2,10 +2,27 @@
 
   
         <div class="d-flex flex-column min-vh-100" @before-update="setSWwidth">
+          <contactmain
+            class="contactmain1"
+            :id="this.$store.state.carpageid"
+            v-if="menubtnclickedid===2"
+            >
+
+            </contactmain>
+
+            <div 
+            class="contactmain-mask"
+            @click="dellMask"
+            v-if="mascon"
+            >
+
+                  </div>
                   <div class="container">
                         <div class="row">
                                 <div class="col header" @clearmagtopform="setMagtopformInventoryComponent">
-                                      <Headerone  class="center" :liclickedtextoff="navliclicktextoffstate"  />
+                                      <Headerone  class="center" :liclickedtextoff="navliclicktextoffstate"  
+                                      @clickApply="this.menubtnclickedid=2, this.mascon = true"
+                                      />
                                       <burgerbtn v-bind:iscross="iscross" v-on:click="iscross=!iscross"  />
                                       <transition name="menu">
                                         <burgerlist v-if="iscross" class="burgerlist" :listate="navliclicktextoffstate" v-on:click="iscross=!iscross" v-on:navliclicktextoffevent="changenavliclicktextoffstate"  />
@@ -228,7 +245,7 @@
   import btnswiperexin from '@/components/primitives/BTN/btnSwiperClickableDoubleBtn .vue'
   import btnblueapply from '@/components/primitives/BTN/btnBlueInventory.vue'
   import inpblock from '@/components/CatalogNEW/ProginputblockCatalog.vue'
-  
+  import contactmain from '@/components/Modals/ModalContactUstMain.vue'
 
 export default {
       name: 'Car-page',
@@ -244,7 +261,7 @@ export default {
         btnswiperexin,
         btnblueapply,
         inpblock,
-        
+        contactmain,
       
 
       },
@@ -262,6 +279,8 @@ export default {
          
           storeheight:0,
           
+          menubtnclickedid:Number,
+          mascon:false,
 
         }
       },
@@ -287,15 +306,48 @@ export default {
         let a = this.$refs.swiperwidth.offsetWidth
         this.$store.commit('setCarPageSwiperWidth',a)
         this.storeheight=this.$store.state.swipheight
-      }
+      },
+
+      setPar() {
+        this.menubtnclickedid = this.$store.getters.menubtnclickedid
+        if (this.menubtnclickedid===2) {
+          this.mascon = true
+        }else {
+          this.mascon = false
+        }
+      },
+
+      dellMask () {
+        this.$store.state.menubtnclickedid = ''
+        this.menubtnclickedid = 0
+        this.mascon = false
+        this.$store.state.carpageid = ''
+      },
+      setdataforcarpage (val) {
+        
+        this.dataforcarpage = val
+      },
+
+      
+
+      
+    
+
+
+      
+
 
 
       
     },
    
-
+    
     mounted () {
       this.setCarPageSwiperWidth () 
+    },
+
+    update () {
+      this.setPar()
     },
 
     created () {
@@ -305,7 +357,9 @@ export default {
       window.addEventListener("hashchange", this.setSWwidth, false)
       window.addEventListener("onresize", this.setCarPageSwiperWidth)
       window.addEventListener("onload", this.setSWwidth)
-      
+
+      this.setdataforcarpage ()
+      this.setPar()
 
     },
     
@@ -656,6 +710,31 @@ export default {
       opacity: 0;
 
   }
+  .contactmain1 {
+  border-width:2px;
+  border-style: solid;
+  border-color: #000;
+  width: clamp(360px, 2vw, 570px);
+  height: clamp(640px, 2vw, 815px);
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 11;
+  @media (max-width:576px) {
+     width: 100%;
+  }
+ }
+ 
+ .contactmain-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 9;
+ }
 
 
 </style>
