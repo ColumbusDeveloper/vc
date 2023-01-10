@@ -3,6 +3,11 @@
 
                   
     <div class="modalmain">
+      <burgerCross
+      class="burger_Cross"
+      @click="closeForm"
+      :iscross="true"
+      ></burgerCross>
       <h1 
       v-show="step < 3"
       class="modalmain__title">{{ mess0 }}</h1>
@@ -14,9 +19,12 @@
         <input 
         v-show="step === 2"
         @keyup.enter="stepNext"
+        @input="checkTheList"
+        @click="formItem = false"
         type="text" 
+        class="modalmain__input"
         v-model="regForm.carname" 
-        placeholder="Enter make, make choice"
+        placeholder="Enter make, make choice!"
         @blur="v$.regForm.carname.$touch" 
         >
         <div 
@@ -25,17 +33,22 @@
         >
           <ul v-for="item in filteredcarname" :key="item.id">
             <li class="modalmain__choice-box-li"
-            @click="regForm.selectedcarID = item.id, regForm.carname = `${item.make} - ${item.model}`"
+            @click="regForm.selectedcarID = item.id, regForm.carname = `${item.make} - ${item.model}`, formItem = 'true'"
             >{{ item.make }}-{{ item.model }}</li>
           </ul>
         </div>
         
+        <div v-if="notInTheList">{{ mess5 }}</div>
+
         <div v-if="v$.regForm.carname.$error">{{ mess1 }}</div>
       
         <input 
         v-show="step < 3"
+        v-if="formItem"
         @keyup.enter="stepNext"
         type="text" 
+        autocomplete="off"
+        class="modalmain__input"
         v-model="regForm.name" 
         @blur="v$.regForm.name.$touch" 
         placeholder="Your Name">
@@ -43,8 +56,10 @@
 
         <input 
         v-show="step < 3"
+        v-if="formItem"
         @keyup.enter="stepNext"
         type="tel" 
+        class="modalmain__input"
         v-model="regForm.phone" 
         @blur="v$.regForm.phone.$touch" 
         placeholder="Phone Number">
@@ -52,8 +67,10 @@
 
         <input 
         v-show="step < 3"
+        v-if="formItem"
         @keyup.enter="stepNext"
         type="email"  
+        class="modalmain__input"
         v-model="regForm.email" 
         @blur="v$.regForm.email.$touch" 
         placeholder="Email Address">
@@ -70,17 +87,30 @@
         <p class="modalmain__subtitle">Our manager will contact you in the nearest time.</p>
       </div>
       
+      <div v-show="warning === true">{{ mess4 }}</div>
 
       <button
         type="button"
         v-show="step < 3"
-        :disabled="invalid"
+        v-if="formItem"
+        class="modalmain__button"
         @click="subForm"
         >
         CONTACT ME
       </button>
 
-      
+      <p class="modalmain__you-can">You can contact us yourself</p>
+
+      <div
+      class="modalmain__socials"
+      >
+        <a :href="item.mail" target="_blank"   
+        v-for="item in socials" :key="item.id"
+        class="modalmain__socials-item"
+        >
+          <img :src="require('../../assets/images/'+ item.img)" :alt="img" />
+        </a>
+      </div>
 
 
       </form>
@@ -102,6 +132,7 @@
 
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers, email } from '@vuelidate/validators'
+import burgerCross from '@/components/primitives/BurgerBtn.vue'
 
 const alpha = helpers.regex(/^[a-zA-Za-яёА-ЯЁ]*$/) //все буквы русского и латинского алфавмта
 
@@ -144,47 +175,81 @@ const cars = [
     name: 'Modal-HomeContactUsMain',
     props:['id'],
     components: {
-        
+      burgerCross,
 
     },
     data() {
       return {
         mess0:'We can`t wait to hear from you!',
-        mess1:'Fill in the input field correctly.',
+        mess1:'Fill in the input field above correctly.',
         mess3:'Application Successful!',
+        mess4:'Fill in all the fields of the form!',
+        mess5: 'Not in the list. Try another one!',
+        warning: false,
         carsArr: cars,
         step:1,
+        formItem: true,
+        notInTheList:false,
         regForm: {
           name:'',
           phone:'',
           email:'',
           carname:'',
           selectedcarID:null,
-        }
+        },
+        socials:[
+          {id:1, mail:"https://www.instagram.com/",img:"instagram.svg"},
+          {id:2, mail:"https://uk-ua.facebook.com/",img:"facebook.svg"},
+          {id:3, mail:"https://www.youtube.com/",img:"youtube.svg"},
+          {id:4, mail:"https://mail.google.com/mail/u/0/?tab=rm#inbox",img:"mail.svg"}
+        ]
+
         
       }
     },
 
     methods:{
       subForm () {
-        if (this.step === 1) {
+        if (this.step == 1 && !(this.regForm.name == '' || this.regForm.phone == '' || this.regForm.email == '')){
           this.step = 2
-        } else if (this.step === 2) {
+        } else if (this.step == 2 && !this.regForm.carname == '') {
           for (let input in this.regForm) {
             this.regForm[input] = ''
           }
           this.v$.$reset()
           this.step = 3
-        } 
+          this.warning = false
+        } else {
+          this.warning = true
+        }
+        
+        
+      },
+      closeForm () {
+        this.$emit('closeForm')
+      },
+      checkWarning () {
+        if (!this.regForm.name == '' && !this.regForm.phone == '' && !this.regForm.email == '') {
+          this.warning = false
+        }
       },
       stepNext () {
         if (!this.v$.regForm.name.$invalid && !this.v$.regForm.phone.$invalid && !this.v$.regForm.email.$invalid ) {
           this.step = 2
         }
       },
-      back () {
-        this.step--
+      checkTheList () {
+          if (this.filteredcarname.length == 0 && !this.regForm.carname == '') {
+            this.notInTheList = true
+          } else if (this.filteredcarname.length > 0 && !this.regForm.carname == '') {
+            this.notInTheList = false
+          } else if (this.filteredcarname.length == 0 && this.regForm.carname == '') {
+            this.notInTheList = false
+          }
+          
+        
       }
+     
     },
     
     computed: {
@@ -201,6 +266,9 @@ const cars = [
         })
 
       }
+    },
+    updated () {
+      this.checkWarning ()
     },
     created () {
         const a = this.$store.state.carpageid
@@ -241,7 +309,7 @@ const cars = [
     background-color: #fff;
 
     &__choice-box {
-      max-height: 100px;
+      max-height: 200px;
       overflow: auto;
     }
     &__choice-box-li {
@@ -257,10 +325,39 @@ const cars = [
     }
     &__title {
       @include   letterH4HeadingBurgerMenuTextNumbersDarkBlue    ;
+      margin-bottom: 80px;
     }
     &__success {
       @include   letterH4HeadingBurgerMenuTextNumbersDarkBlue    ;
     }
+    &__input {
+      width: 100%;
+      margin-bottom: 11px;
+    }
+    &__button {
+      width: 100%;
+      margin-top: 20px;
+      background-color: #7481FF;
+      color: #fff;
+      border: 0;
+      padding: 7px 0px;
+    }
+    &__you-can {
+      @include    letterSemiboldDarkBlue  ;
+      margin-top: 60px;
+    }
+    &__socials {
+      display: flex;
+    }
+    &__socials-item {
+      margin-right: 10px;
+    }
+    
+  }
+  .burger_Cross {
+    margin-left: 24px;
+    margin-top: -72px;
+    margin-bottom: 43px;
   }
         
  

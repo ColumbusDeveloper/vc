@@ -14,6 +14,7 @@
             <contactmain
             class="contactmain1"
             v-if="menubtnclickedid===2"
+            @closeForm="dellMask"
             >
 
             </contactmain>
