@@ -26,6 +26,7 @@
         v-model="regForm.carname" 
         placeholder="Enter make, make choice!"
         @blur="v$.regForm.carname.$touch" 
+        @focus="this.warning = false"
         >
         <div 
         v-if="step === 2"
@@ -94,7 +95,7 @@
         v-show="step < 3"
         v-if="formItem"
         class="modalmain__button"
-        @click="subForm"
+        @click="subForm()"
         >
         CONTACT ME
       </button>
@@ -223,13 +224,14 @@ const cars = [
           this.warning = true
         }
         
+      
         
       },
       closeForm () {
         this.$emit('closeForm')
       },
       checkWarning () {
-        if (!this.regForm.name == '' && !this.regForm.phone == '' && !this.regForm.email == '') {
+        if (!this.regForm.name == '' && !this.regForm.phone == '' && !this.regForm.email == '' && this.step == 1) {
           this.warning = false
         }
       },

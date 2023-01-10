@@ -6,6 +6,7 @@
             class="contactmain1"
             :id="this.$store.state.carpageid"
             v-if="menubtnclickedid===2"
+            @closeForm="dellMask"
             >
 
             </contactmain>

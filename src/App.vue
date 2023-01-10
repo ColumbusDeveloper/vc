@@ -118,9 +118,6 @@
     position: relative;
   }
  .contactmain1 {
-  border-width:2px;
-  border-style: solid;
-  border-color: #000;
   width: clamp(360px, 2vw, 570px);
   height: clamp(640px, 2vw, 815px);
   position: absolute;
