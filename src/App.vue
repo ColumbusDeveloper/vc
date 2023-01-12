@@ -1,7 +1,7 @@
 <template>
 
   
-  <div>
+  <div class="app">
             <router-view
             @emittoapp = "setdataforcarpage"
             :dt="dataforcarpage"
@@ -12,8 +12,9 @@
             </router-view>
 
             <contactmain
-            class="contactmain"
+            class="contactmain1"
             v-if="menubtnclickedid===2"
+            @closeForm="dellMask"
             >
 
             </contactmain>
@@ -83,9 +84,10 @@
       },
 
       dellMask () {
-        this.$store.state.menubtnclickedid = 0
+        this.$store.state.menubtnclickedid = ''
         this.menubtnclickedid = 0
         this.mascon = false
+        this.$store.state.carpageid = ''
       }
       
      
@@ -112,13 +114,21 @@
 <style lang="scss">
   @import './assets/varmix.scss';
 
-  
- .contactmain {
-  
+  .app {
+    position: relative;
+  }
+ .contactmain1 {
+  width: clamp(360px, 2vw, 570px);
+  height: clamp(640px, 2vw, 815px);
   position: absolute;
   top: 0;
-  z-index: 10;
+  right: 0;
+  z-index: 11;
+  @media (max-width:576px) {
+     width: 100%;
+  }
  }
+ 
  .contactmain-mask {
   position: absolute;
   top: 0;

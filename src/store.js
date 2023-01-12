@@ -4,12 +4,12 @@ import { createStore } from 'vuex'
 const store = createStore({
     state () {
       return {
-        carpageid: 0,
-        storecars:{},
+        carpageid: null,
+        storecars:[],
         screenwidth:0,
         swipercarpageex:true,
         swipheight:0,
-        menubtnclickedid:5,
+        menubtnclickedid: 5,
       }
     },
     
@@ -27,6 +27,9 @@ const store = createStore({
     getters: {
       menubtnclickedid (state) {
         return state.menubtnclickedid
+      },
+      appliedCar (state) {
+        return state.carpageid
       }
     }
     

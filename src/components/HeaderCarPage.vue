@@ -13,7 +13,7 @@
                   <div class="topLineRightPart ">
                     <btnwhite v-on:click="$router.push('/catalog'),btnclicked=!btnclicked" :class="{Off:btnclicked}" class="btnFirstLeft"/>
                  
-                    <btnblue  class="btnRightEdge"/>
+                    <btnblue @click="click"  class="btnRightEdge"/>
                    
                   </div>
                 </div>
@@ -90,6 +90,9 @@ export default {
     compositbtntrulitru () {
       return this.is = this.liclicked * this.btnclicked
     },
+    click () {
+      this.$emit('clickApply')
+    }
     
   },
 

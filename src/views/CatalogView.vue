@@ -20,9 +20,9 @@
                 :catalogpropscars="cars"
                 @emitToPage="getEmitToPage"
                 ></catalog>
-
               </div>
-          </div>   
+          </div>  
+      
         </div> 
       </main>
       <Footer class="center" />
@@ -97,7 +97,7 @@ export default {
     Footer,
     burgerbtn,
     burgerlist,
-   
+
   },
   watch:{
       iscross (newVal) {
@@ -131,6 +131,7 @@ export default {
           
           this.emittoapp ()
           this.setCars ()
+          this.$store.state.storecars = this.cars
   }
    
      
