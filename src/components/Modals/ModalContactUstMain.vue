@@ -24,7 +24,7 @@
         type="text" 
         class="modalmain__input"
         v-model="regForm.carname" 
-        placeholder="Enter make, make choice!"
+        placeholder="Enter car make, choose model!"
         @blur="v$.regForm.carname.$touch" 
         @focus="this.warning = false"
         >
