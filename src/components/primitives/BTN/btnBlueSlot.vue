@@ -35,20 +35,24 @@
     border-style: solid;
     border-color: $colorMainBlue;
     background-color:$colorMainBlue;
-    @include letterBtnWhiteText ;
+    font-family: $fontFamily700;
+    font-weight: 800;
+    color: #fff;
     border-radius: 2px;
-    width: fit-content;
     height: 45px;
     white-space: nowrap;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    
     &:hover {
         background-color: rgb(0, 162, 255);
     }
 
 		&__text {
             text-transform:uppercase ;
-            
+            font-size: 16px;
             word-spacing: 5px;
 		}
 }

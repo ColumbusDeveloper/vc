@@ -88,6 +88,7 @@
         this.menubtnclickedid = 0
         this.mascon = false
         this.$store.state.carpageid = ''
+        this.$router.push('/')
       }
       
      

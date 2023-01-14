@@ -15,7 +15,13 @@
         
     <main class="flex-fill">
     
-      <div>About</div>
+      <AboutVac />
+      <Divided 
+       img="about_kia"
+       typetext="false"
+       imgposition="left"
+       
+      />
 
     </main>
 
@@ -33,6 +39,8 @@
   import Footer from '@/components/Footer.vue'
   import burgerbtn from '@/components/primitives/BurgerBtn.vue'
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
+  import AboutVac from '@/components/ABOUT/AboutVac.vue'
+  import Divided from '@/components/ABOUT/Divided.vue'
 
   export default {
             components: {
@@ -40,7 +48,8 @@
               Footer,
               burgerbtn,
               burgerlist,
-
+              AboutVac,
+              Divided,
             },
             data() {
               return {
