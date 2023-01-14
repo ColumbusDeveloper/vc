@@ -19,8 +19,8 @@
       <Divided 
        img="about_kia"
        typetext="false"
-       imgposition="left"
-       
+       imgposition="right"
+       compName="BtnTextMission"
       />
 
     </main>
