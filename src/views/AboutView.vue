@@ -24,10 +24,22 @@
       />
       
       <Divided 
-       img="about_kia"
        typetext="true"
        compNameLeft="TitleContentLeft"
-       compNameRight="TitleContentRight"
+       compNameRight="TriangleContentRight"
+      />
+
+      <Divided 
+       img="Nissan"
+       typetext="false"
+       imgposition="left"
+       compName="TitleContent"
+      />
+
+      <Divided 
+       typetext="true"
+       compNameLeft="TitleContentGetACarLeft"
+       compNameRight="BtnTextFlatRight"
       />
 
     </main>

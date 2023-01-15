@@ -56,7 +56,7 @@
   </script>
   
   
-  <style lang="scss">
+  <style scoped lang="scss">
     @import '../../assets/varmix.scss';
   
     .about {
@@ -68,22 +68,21 @@
         justify-content: space-between;
       }
       &__title-content-title {
-        margin-bottom: 40px;
+        @include   letterH2_Dark_Blue   ;
+        margin-bottom: 35px;
         @media (max-width:576px) {
-          margin-bottom: 30px;
+          margin-bottom: 25px;
         }
       }
       &__title-content-content_1 {
-        margin-bottom: 45px;
+        margin-bottom: 35px;
         @media (max-width:576px) {
-          margin-bottom: 30px;
+          margin-bottom: 25px;
         }
       }
       &__title-content-content_2 {
-        margin-bottom: 45px;
-        @media (max-width:576px) {
-          margin-bottom: 30px;
-        }
+        margin-bottom: 0px;
+        padding-bottom: 0px;
       }
       
     }

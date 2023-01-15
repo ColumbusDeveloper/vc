@@ -22,6 +22,7 @@
   import Btn from '@/components/primitives/BTN/btnBlueSlot.vue'
     export default {
       name:'btn-text',
+      inheritAttrs: false,
       props: {
           buttontext: {
             type: String,
@@ -70,37 +71,15 @@
       &__btn-text-wrapper {
         width: 100%;
         height: 100%;
-        padding: 60px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        position: relative;
-        border-width:4px;
-        border-style: solid;
-        border-color: rgba(0, 0, 0, 0.09);
-        @media (max-width:768px) {
-          padding: 40px;
-        }
-        @media (max-width:576px) {
-          padding: 20px;
-        }
-        &::after {
-          content: "";
-          display: block;
-          width: 100%;
-          height: 1%;
-          position: absolute;
-          left: 0; 
-          bottom: 0;
-          background: transparent;
-          box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.21);
-          -webkit-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.21);
-          -moz-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.21);
-         
-        }
+        
       }
       &__btn-text-title {
-        @include   letterH2_Dark_Blue  ;
+        padding-top: 7px;
+        @include   letterH4HeadingBurgerMenuTextNumbersDarkBlue  ;
+        line-height: 2rem;
         margin-bottom: 40px;
         @media (max-width:576px) {
           margin-bottom: 30px;
