@@ -22,6 +22,13 @@
        imgposition="right"
        compName="BtnTextMission"
       />
+      
+      <Divided 
+       img="about_kia"
+       typetext="true"
+       compNameLeft="TitleContentLeft"
+       compNameRight="TitleContentRight"
+      />
 
     </main>
 
@@ -87,13 +94,7 @@
 <style lang="scss" scoped>
   @import '../assets/varmix.scss';
 
-  .main {
-    height: 100px;
-    width: 100px;
-    border-width:2px;
-    border-style: solid;
-    border-color: #000;
-  }
+  
   .wrapper {
     max-width: 1440px;
 
