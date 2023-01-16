@@ -4,9 +4,6 @@
     <div class="about__btn-text-wrapper">
 
       <h2 class="about__btn-text-title"><slot name="title"></slot></h2>
-      <p class="about__btn-text-content">
-        <slot name="content"></slot>
-      </p>
       <Btn
       class="about__btn-text-btn"
       >
@@ -69,7 +66,7 @@
     .about {
       &__btn-text-wrapper {
         width: 100%;
-        height: 100%;
+        height: 94%;
         padding: 60px;
         display: flex;
         flex-direction: column;
@@ -78,7 +75,7 @@
         border-width:4px;
         border-style: solid;
         border-color: rgba(0, 0, 0, 0.09);
-        @media (max-width:992px) {
+        @media (max-width:768px) {
           padding: 40px;
         }
         @media (max-width:576px) {
@@ -100,18 +97,10 @@
         }
       }
       &__btn-text-title {
-        @include   letterH2_Dark_Blue  ;
+        @include   H3_dark  ;
         margin-bottom: 40px;
-        @media (max-width:576px) {
-          margin-bottom: 30px;
-        }
       }
-      &__btn-text-content {
-        margin-bottom: 45px;
-        @media (max-width:576px) {
-          margin-bottom: 30px;
-        }
-      }
+     
       &__btn-text-btn {
         height: fit-content;
         max-width: 200px;

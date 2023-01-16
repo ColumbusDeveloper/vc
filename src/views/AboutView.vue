@@ -17,6 +17,7 @@
     
       <AboutVac />
       <Divided 
+       class="about-page__item"
        img="about_kia"
        typetext="false"
        imgposition="right"
@@ -24,12 +25,14 @@
       />
       
       <Divided 
+       class="about-page__item"
        typetext="true"
        compNameLeft="TitleContentLeft"
        compNameRight="TriangleContentRight"
       />
 
       <Divided 
+       class="about-page__item"
        img="Nissan"
        typetext="false"
        imgposition="left"
@@ -37,9 +40,17 @@
       />
 
       <Divided 
+       class="about-page__item"
        typetext="true"
        compNameLeft="TitleContentGetACarLeft"
        compNameRight="BtnTextFlatRight"
+      />
+
+      <Divided 
+       class="about-page__item about-page__item-tablet-dell"
+       typetext="true"
+       compNameLeft="BtnTextContactLeft"
+       compNameRight="TitleContentOurRight"
       />
 
     </main>
@@ -129,6 +140,19 @@
     opacity: 0;
 
     }
+  .about-page {
+    &__item {
+      margin-bottom: 115px;
+      @media (max-width:768px) {
+         margin-bottom: 0;
+      }
+    }
+    &__item-tablet-dell {
+      @media (max-width:768px) {
+         display: none;
+      }
+    }
+  }
   
 
 </style>

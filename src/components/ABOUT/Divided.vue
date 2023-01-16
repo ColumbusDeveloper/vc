@@ -93,6 +93,31 @@
                 </template>
               </BtnTextFlat>
 
+              <BtnTextContact
+              buttontext="Contact Us Now"
+              v-if="compNameLeft === 'BtnTextContactLeft'"
+              >
+                <template v-slot:title>
+                  Contact us today and speak with one of our qualified agents
+                </template>
+              </BtnTextContact>
+
+              <TitleContent
+              v-if="compNameLeft === 'TitleContentOurLeft'"
+              >
+                <template v-slot:title>
+                  Our qualified agents
+                </template>
+                <template v-slot:content_1>
+                  The true secret to success of VAC isn`t our streamlined purchasing and financing processes. The real reason VAC is the easiest and best way to buy a car in Canada is because of our outstanding Qualified Agents.
+                </template>
+                <template v-slot:content_2>
+                  Our team provides you with the best customer experience in the automotive industry. You work with a dedicated representative throughout the process. They are able to answer any questions you have about any of our vehicles or the financing. Are you interested in seeing pictures or videos of a car? Your qualified agent will send them to you.
+                </template>
+              </TitleContent>
+
+              
+
 
             </div>
           </div>
@@ -187,6 +212,22 @@
                 </template>
               </BtnTextFlat>
 
+              <TitleContent
+              v-if="compNameRight === 'TitleContentOurRight'"
+              >
+                <template v-slot:title>
+                  Our qualified agents
+                </template>
+                <template v-slot:content_1>
+                  The true secret to success of VAC isn`t our streamlined purchasing and financing processes. The real reason VAC is the easiest and best way to buy a car in Canada is because of our outstanding Qualified Agents.
+                </template>
+                <template v-slot:content_2>
+                  Our team provides you with the best customer experience in the automotive industry. You work with a dedicated representative throughout the process. They are able to answer any questions you have about any of our vehicles or the financing. Are you interested in seeing pictures or videos of a car? Your qualified agent will send them to you.
+                </template>
+              </TitleContent>
+
+      
+
 
             </div>
           </div>
@@ -207,6 +248,7 @@
 
     import BtnText from '@/components/ABOUT/BtnText.vue'
     import BtnTextFlat from '@/components/ABOUT/BtnTextFlat.vue'
+    import BtnTextContact from '@/components/ABOUT/BtnTextContact.vue'
     import TitleContent from '@/components/ABOUT/TitleContent.vue'
     import TriangleContent from '@/components/ABOUT/TriangleContent.vue'
 
@@ -242,6 +284,7 @@
                 'TitleContent',
                 'TitleContentGetACarLeft',
                 'BtnTextFlatLeft',
+                'BtnTextContactLeft',
               ].includes(value)
             },
           },
@@ -254,6 +297,7 @@
                 'TriangleContentRight',
                 'TitleContentGetACarRight',
                 'BtnTextFlatRight',
+                'BtnTextContactRight',
               ].includes(value)
             },
           },
@@ -265,6 +309,7 @@
         TitleContent,
         TriangleContent,
         BtnTextFlat,
+        BtnTextContact,
       },
         data() {
                 return {
@@ -331,9 +376,17 @@
       &__divided-img-container {
         position: relative;
         height: clamp(245px, 52vw, 408px);
+        @media (max-width:768px) {
+           padding-top: 20px;
+           padding-bottom: 20px;
+        }
       }
       &__divided-text-box {
         height: 100%;
+        @media (max-width:768px) {
+           padding-top: 20px;
+           padding-bottom: 20px;
+        }
       }
       &__divided-text-box-content {
         height: 100%;
@@ -348,6 +401,7 @@
           top: 50%;
           left: 50%;
           transform: translate(-50%,-50%);
+          
         }
       }
       
@@ -355,7 +409,7 @@
     }
     .imgboxheight {
       @media (max-width:768px) {
-        height: clamp(245px, 52vw, 408px);
+        height: clamp(245px, 39vw, 408px);
       }
       
     }

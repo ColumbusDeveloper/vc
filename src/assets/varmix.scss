@@ -132,6 +132,13 @@ $adaptiveTextRegularLineHeight:0.02;
    
 };
 
+@mixin H3_dark {
+    color: $colorTitleBurgerBlueDark;
+    font-weight: 700;
+    font-family: $fontFamily700;
+    font-size: 30px;
+};
+
 @mixin letterContentSecondarySmallGray {
     color: $colorSmallLetterContentGray;
     font-weight: 400;

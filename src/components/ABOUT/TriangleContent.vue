@@ -76,8 +76,10 @@
       &__triangle-content-wrapper {
         width: 100%;
         height: 100%;
+        padding-left: 20px;
         display: flex;
         flex-direction: column;
+        justify-content: center;
       }
       &__triangle-content-item {
         display: flex;
@@ -97,6 +99,9 @@
         @include   letterContentSecondarySmallGrayClear   ;
         @media (max-width:1200px) {
           width: 100%;
+        }
+        @media (max-width:768px) {
+          width: 80%;
         }
       }
 
