@@ -15,7 +15,10 @@
         
     <main class="flex-fill">
     
-      <AboutVac />
+      <AboutVac
+      class="about-page__about-vac-comp"
+      />
+
       <Divided 
        class="about-page__item"
        img="about_kia"
@@ -53,6 +56,21 @@
        compNameRight="TitleContentOurRight"
       />
 
+      <div class="container about-page__item  about-page__swiper-wrapper">
+        <CarouselSwiper
+        class="about-page__swiper"
+        ></CarouselSwiper>
+      </div>
+
+      <DividedFlat 
+       class="about-page__item"
+       img="about_team"
+       typetext="false"
+       imgposition="right"
+       compName="TitleContentTeam"
+      />
+      
+
     </main>
 
     <Footer class="center" />
@@ -71,6 +89,8 @@
   import burgerlist from '@/components/primitives/BurgerCollapceList.vue'
   import AboutVac from '@/components/ABOUT/AboutVac.vue'
   import Divided from '@/components/ABOUT/Divided.vue'
+  import CarouselSwiper from '@/components/HOME/CarouselSwiper.vue'
+  import DividedFlat from '@/components/ABOUT/DividedFlat.vue'
 
   export default {
             components: {
@@ -80,6 +100,8 @@
               burgerlist,
               AboutVac,
               Divided,
+              CarouselSwiper,
+              DividedFlat,
             },
             data() {
               return {
@@ -141,10 +163,13 @@
 
     }
   .about-page {
+    &__about-vac-comp {
+      margin-bottom: 40px;
+    }
     &__item {
       margin-bottom: 115px;
       @media (max-width:768px) {
-         margin-bottom: 0;
+         margin-bottom: 80px;
       }
     }
     &__item-tablet-dell {
@@ -152,6 +177,36 @@
          display: none;
       }
     }
+    &__swiper-wrapper {
+      position: relative;
+      
+      &::after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 1%;
+          position: absolute;
+          left: 0; 
+          bottom: 17%;
+          background: transparent;
+          box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.21);
+          -webkit-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.21);
+          -moz-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.21);
+         @media (max-width:1399px) {
+          bottom: 22%;
+         }
+         @media (max-width:1200px) {
+          bottom: 10%;
+         }
+         @media (max-width:991px) {
+          bottom: 14%;
+         }
+         @media (max-width:768px) {
+            bottom: -4%;
+         }
+        }
+    }
+   
   }
   
 
