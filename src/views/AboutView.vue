@@ -69,6 +69,16 @@
        imgposition="right"
        compName="TitleContentTeam"
       />
+
+      <DividedFlat 
+       class="about-page__item"
+       img="about_bottom"
+       typetext="false"
+       imgposition="left"
+       compName="NumberTextComp"
+       :img90="true"
+       :reverse="true"
+      />
       
 
     </main>

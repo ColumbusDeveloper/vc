@@ -1,7 +1,9 @@
 <template>
 
   
-    <div class="container about__divided-flat-wrapper">
+    <div class="container about__divided-flat-wrapper"
+    :class="{reverse:reverse === true}"
+    >
       <div class="about__divided-flat-wrapper-left about__divided-flat-wrapper-item"
       
       >
@@ -12,6 +14,7 @@
             <img :src="image" alt="img" 
               v-if="imgplace === true && typetext === 'false'"
               class="about__divided-flat-img"
+              :class="{img90:img90 === true}"
               />
           </div>
           
@@ -43,6 +46,18 @@
                 Buying a car has never been easier. You pick out the car you want on our website. You work with one of our Qualified Agents to secure financing. Then we bring the car to you—all before you sign anything. You test drive the vehicle, and if you like it, you sign the loan documents right there and the car is yours. 
               </template>
             </TitleContentTeam>
+
+            <NumberTextComp
+            
+            v-if="compName === 'NumberTextComp'"
+            >
+              <template v-slot:title>
+                Main features
+              </template>
+              <template v-slot:content>
+                We are your one stop shop. We believe that vehicle shopping should be a fun and painless process and with years of experience, we make it just that. 
+              </template>
+            </NumberTextComp>
               
 
               
@@ -73,6 +88,7 @@
           <img :src="image" alt="img" 
             v-if="imgplace === false && typetext === 'false'"
             class="about__divided-flat-img"
+            :class="{img90:img90 === true}"
             />
         </div>
         <div
@@ -104,7 +120,17 @@
               </template>
             </TitleContentTeam>
 
-              
+            <NumberTextComp
+            
+            v-if="compName === 'NumberTextComp'"
+            >
+              <template v-slot:title>
+                Main features
+              </template>
+              <template v-slot:content>
+                We are your one stop shop. We believe that vehicle shopping should be a fun and painless process and with years of experience, we make it just that.
+              </template>
+            </NumberTextComp>
               
 
               
@@ -134,11 +160,18 @@
   <script>
 
     import TitleContentTeam from '@/components/ABOUT/TitleContentTeam.vue'
+    import NumberTextComp from '@/components/ABOUT/NumberTextComp.vue'
 
     export default {
       name:'about-divided-flat',  
       props: {
           img: {
+            type: String,
+          },
+          img90:{
+            type: String,
+          },
+          reverse:{
             type: String,
           },
           imgposition: {
@@ -153,7 +186,8 @@
             default: '',
             validator(value) {
               return [
-                'BtnText',
+                'TitleContentTeam',
+                'NumberTextComp',
               ].includes(value)
             },
           },
@@ -164,6 +198,7 @@
       },
       components: {
         TitleContentTeam,
+        NumberTextComp,
       },
         data() {
                 return {
@@ -260,6 +295,17 @@
       }
       
       
+    }
+    .img90 {
+      width: 90%;
+      @media (max-width:768px) {
+         width: 100%;
+      }
+    }
+    .reverse {
+      @media (max-width:768px) {
+         flex-direction: column-reverse;
+      }
     }
     
 
