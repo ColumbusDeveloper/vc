@@ -79,6 +79,12 @@
        :img90="true"
        :reverse="true"
       />
+
+      <LetBlock class="container about-page__item"></LetBlock>
+
+      <div class="container about-page__item about-page__item-inputs">
+        <ProgBlock></ProgBlock>
+      </div>
       
 
     </main>
@@ -101,6 +107,8 @@
   import Divided from '@/components/ABOUT/Divided.vue'
   import CarouselSwiper from '@/components/HOME/CarouselSwiper.vue'
   import DividedFlat from '@/components/ABOUT/DividedFlat.vue'
+  import LetBlock from '@/components/HOME/LetP.vue'
+  import ProgBlock from '@/components/HOME/ProginputblockH.vue'
 
   export default {
             components: {
@@ -112,6 +120,8 @@
               Divided,
               CarouselSwiper,
               DividedFlat,
+              LetBlock,
+              ProgBlock,
             },
             data() {
               return {
@@ -215,6 +225,10 @@
             bottom: -4%;
          }
         }
+    }
+    &__item-inputs {
+      padding-right: 60px;
+      padding-left: 60px;
     }
    
   }

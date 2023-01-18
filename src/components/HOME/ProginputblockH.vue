@@ -5,7 +5,7 @@
                         <div class="progressblock__inputblock-btnblock-item">
                           <btnblue 
 
-                       
+                          class="btn"
                           v-bind:proginputprise="priceinput"
                           v-bind:proginputmonth="monthinput"
                           v-on:changeInpPrBtnBlue="changePoPr"
@@ -20,6 +20,7 @@
                           v-bind:proginputmonth="monthinput"
                           v-on:changeInpPr="changeAvPr"
                           v-on:changeInpMon="changeAvMon"
+                          class="btn"
                           >{{btwhitetextaverage}}</btnwhite>
                         </div>
 
@@ -29,7 +30,7 @@
                           v-bind:proginputmonth="monthinput"
                           v-on:changeInpPrG="changeGoPr"
                           v-on:changeInpMonG="changeGoMon"
-                          
+                          class="btn"
                           
                           >{{btnwhitegood}}</btnwhite>
                         </div>
@@ -91,7 +92,9 @@
                           </div>
                       
                           <div class="progressblock__textnumblock-btnblock">
-                              <btnbluemob100>REQUEST A CAR</btnbluemob100>
+                              <btnbluemob100
+                              class="btn btn-rec"
+                              >REQUEST A CAR</btnbluemob100>
                           </div>
 
                     </div>
@@ -486,6 +489,14 @@ export default {
 
     
 }
+
+.btn {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+
 
 
   

@@ -1,11 +1,11 @@
 <template>
                 <div class="let ">
                     <div class="let__headh2 ">
-                        <headh2text>Let’s figure out how much you can afford</headh2text>
+                        <headh2text>Let`s figure out how much you can afford</headh2text>
                     </div>
 
                     <div class="let__regular ">
-                        <textregular>Before you start shopping, let’s figure out how much you can afford. Move the sliders to see how the loan duration and the total loan amount affect your monthly payments.</textregular>  
+                        <textregular>Before you start shopping, let`s figure out how much you can afford. Move the sliders to see how the loan duration and the total loan amount affect your monthly payments.</textregular>  
                     </div>
                 </div>
 </template>
@@ -51,6 +51,7 @@
     
 .let {
     display: flex;
+    gap: 40px;
     @media (min-width:150px) {
        flex-direction: column;
     }

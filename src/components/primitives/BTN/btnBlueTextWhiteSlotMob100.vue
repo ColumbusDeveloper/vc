@@ -39,8 +39,8 @@
     border-radius: 2px;
     width: fit-content;
     height: 45px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
     white-space: nowrap;
     @media (max-width:576px) {
        width: 100%;
