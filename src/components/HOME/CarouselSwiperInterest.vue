@@ -134,10 +134,13 @@ import SwiperCore, { Navigation, Parallax } from "swiper";
 // swiper vue
 import { Swiper, SwiperSlide } from "swiper/vue";
 // import swiper css
-import "swiper/swiper.scss";
+// import "swiper/swiper.scss";
 // import css for components
 // navigation
-import "swiper/components/navigation/navigation.scss";
+// import "swiper/components/navigation/navigation.scss";
+import 'swiper/css/navigation';
+import 'swiper/scss';
+import 'swiper/scss/navigation';
 // font awesome icons
 
 SwiperCore.use([Navigation, Parallax]);

@@ -155,9 +155,11 @@ import SwiperCore, { Navigation, Parallax,Thumbs } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 
-import "swiper/swiper.scss";
+// import "swiper/swiper.scss";
+import 'swiper/scss';
 
-import "swiper/components/navigation/navigation.scss";
+// import "swiper/components/navigation/navigation.scss";
+import 'swiper/scss/navigation';
 
 import { ref } from 'vue';
 
