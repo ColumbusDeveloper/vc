@@ -36,7 +36,6 @@
     border-style: solid;
     border-color: white;
     border-radius: 5px;
-    padding: 5px;
     &:hover {
     box-shadow:  0px 0px 15px $colorMainBlue;
   

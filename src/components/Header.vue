@@ -198,6 +198,10 @@ export default {
     }
   }
 
+  .container {
+    padding-left: 0;
+  }
+
   
 
   

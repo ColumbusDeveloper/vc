@@ -74,8 +74,8 @@
           }
         }
         &__about-vac-text {
-          margin-left: 4%;
           color: #fff;
+          font-family: 'Gilroy-Black';
           font-weight: 700;
           font-size: 60px;
           line-height: 65px;
